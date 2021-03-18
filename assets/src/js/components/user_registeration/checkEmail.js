@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import Form from "../../reusable-components/form";
+import Form from "../reusable-components/form";
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 

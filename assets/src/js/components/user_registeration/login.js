@@ -2,14 +2,14 @@ import React, {Fragment} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {socialLogin, login} from '../../actions/authentication';
-import TextField from '../../reusable-components/outlined-textfield';
-import Form from '../../reusable-components/form';
+import TextField from '../reusable-components/outlined-textfield';
+import Form from '../reusable-components/form';
 import GoogleLoginCustom from './googleLogin'
 import Joi from 'joi-browser';
 import {Button} from "@material-ui/core";
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import LinkedInPage from '../../components/user_registeration/linkedinLogin'
-import Textfield from "../../reusable-components/material-io/textfield";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import LinkedInPage from "./linkedinLogin";
+import Textfield from "../reusable-components/material-io/textfield";
 
 class Login extends Form {
 

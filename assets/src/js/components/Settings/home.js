@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {addProfilePicture} from "../../actions/authentication";
-// import StaticSettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
+import StaticSettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
 import {Link} from "react-router-dom";
 import ContentFooter from "../Footers/content-footer";
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
+import MessageSnackbar from "../reusable-components/messageSnackbar";
 
 
 class Home extends Component {

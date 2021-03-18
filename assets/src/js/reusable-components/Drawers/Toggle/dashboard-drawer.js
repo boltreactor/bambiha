@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Drawer, {DrawerContent, DrawerHeader} from "@material/react-drawer";
 import {withRouter, Link, NavLink} from "react-router-dom";
 import {connect} from "react-redux";
-import {toggleDrawers} from "../../../actions/profile";
+import {toggleDrawers} from "../../../../actions/profile";
 
 class DashboardDrawer extends Component {
 

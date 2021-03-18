@@ -2,11 +2,11 @@ import React, {Fragment} from 'react';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {facebookLogin, googleLogin, login} from '../../actions/authentication'
-import TextField from "../../reusable-components/outlined-textfield";
-import Form from "../../reusable-components/form";
+import TextField from "../reusable-components/outlined-textfield";
+import Form from "../reusable-components/form";
 import Joi from 'joi-browser';
 import {Button} from "@material-ui/core";
-import Textfield from "../../reusable-components/material-io/textfield";
+import Textfield from "../reusable-components/material-io/textfield";
 
 
 

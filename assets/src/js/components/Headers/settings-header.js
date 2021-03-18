@@ -3,10 +3,9 @@ import {Link, withRouter, NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser, toggleDrawers} from "../../actions/profile";
 import {addProfilePicture} from "../../actions/authentication";
-import SettingsDrawer from "../../reusable-components/Drawers/Toggle/settings-drawer";
-import DashboardDrawer from "../../reusable-components/Drawers/Toggle/dashboard-drawer";
-import HomeDrawer from "../../reusable-components/Drawers/Toggle/home-drawer";
-import AccountDrawer from "../../reusable-components/Drawers/Toggle/account-drawer";
+
+import DashboardDrawer from "../reusable-components/Drawers/Toggle/dashboard-drawer";
+import AccountDrawer from "../reusable-components/Drawers/Toggle/account-drawer";
 
 class SettingsHeader extends Component {
 
