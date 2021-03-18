@@ -11,7 +11,7 @@ const Card = (props) => {
     const elements = useElements();
 
     const handleSubmit = (event) => {
-        debugger
+
         event.preventDefault();
         if (!stripe || !elements) {
             // Stripe.js has not loaded yet. Make sure to disable

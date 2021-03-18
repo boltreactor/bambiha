@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {toggleDrawers} from "../../actions/profile";
-import LandingDrawer from "../../reusable-components/Drawers/Toggle/landing-drawer";
+import LandingDrawer from "../reusable-components/Drawers/Toggle/landing-drawer";
 import {connect} from "react-redux";
 
 

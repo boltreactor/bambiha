@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
-import DashboardDrawer from "../../reusable-components/Drawers/Toggle/dashboard-drawer";
-import HomeDrawer from "../../reusable-components/Drawers/Toggle/home-drawer";
-import SettingsDrawer from "../../reusable-components/Drawers/Toggle/settings-drawer";
 import {addProfilePicture} from "../../actions/authentication";
 import {getUser, toggleDrawers} from "../../actions/profile";
 import SettingsHeader from "./settings-header";
-
+import SettingsDrawer from "../reusable-components/Drawers/Toggle/settings-drawer";
+import DashboardDrawer from "../reusable-components/Drawers/Toggle/dashboard-drawer";
+import HomeDrawer from "../reusable-components/Drawers/Toggle/home-drawer";
 
 class LoggedInHeader extends Component {
 

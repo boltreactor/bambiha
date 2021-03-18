@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import SettingsHeader from "../../Headers/settings-header";
-import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
-import Payments from "../../Payments/payments";
+import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
+
 import {Link, withRouter} from "react-router-dom";
 import {deleteCard, getCards, getBanks, deleteBank} from "../../../actions/payment";
 import {connect} from "react-redux";

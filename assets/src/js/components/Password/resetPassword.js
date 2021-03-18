@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import TextField from "../../reusable-components/outlined-textfield";
+import TextField from "../reusable-components/outlined-textfield";
 import {connect} from 'react-redux';
 import {resetPassword} from "../../actions/authentication";
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
-import Form from "../../reusable-components/form";
+import MessageSnackbar from "../reusable-components/messageSnackbar";
+import Form from "../reusable-components/form";
 import Joi from 'joi-browser';
-import Textfield from "../../reusable-components/material-io/textfield";
+import Textfield from "../reusable-components/material-io/textfield";
 
 class ResetPassword extends Form {
     state = {

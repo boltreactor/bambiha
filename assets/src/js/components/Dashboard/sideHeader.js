@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link, withRouter} from 'react-router-dom';
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
+// import MessageSnackbar from "../../reusable-components/messageSnackbar";
 
 class SideHeader extends Component {
   state = {}

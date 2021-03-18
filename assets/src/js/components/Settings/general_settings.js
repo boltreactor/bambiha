@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
+import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
 import SmartFooter from "../Footers/smart-footer";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import "@material/react-switch/dist/switch.css";
-import Switch from "../../reusable-components/material-io/switch";
+import Switch from "../reusable-components/material-io/switch";
 import {addNotificationSettings, getNotificationSettings, setNotificationSettings} from "../../actions/profile";
 import notifications from "./notifications";
 
@@ -23,7 +23,7 @@ class GeneralSettings extends Component {
 
     handleChange = (event) => {
         event.preventDefault()
-        let settings
+        let settings;
         if (event.currentTarget.name === "messages_email" || event.currentTarget.name === "reminders_email" || event.currentTarget.name === "promotion_email") {
             if (event.currentTarget.checked === true) {
                 settings = {
@@ -31,7 +31,8 @@ class GeneralSettings extends Component {
                     'unsubscribe': false,
                     [event.currentTarget.name]: !this.props.settings[event.currentTarget.name]
                 }
-            } else {
+            }
+            else {
                 settings = {
                     ...this.props.settings,
                     [event.currentTarget.name]: !this.props.settings[event.currentTarget.name]

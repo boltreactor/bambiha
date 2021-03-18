@@ -4,15 +4,15 @@ import {socialLogin, clearAuthErrors, signup} from "../../actions/authentication
 import {Link, Redirect} from "react-router-dom";
 
 import Joi from 'joi-browser';
-import Form from "../../reusable-components/form";
-import Textfield from "../../reusable-components/material-io/textfield";
+import Form from "../reusable-components/form";
+import Textfield from "../reusable-components/material-io/textfield";
 import {Button} from "@material-ui/core";
 
 import Footer from "../Footers/footer";
 import GoogleLoginCustom from "./googleLogin";
 // import {LinkedIn} from 'react-linkedin-login-oauth2';
 import FacebookLogin from 'react-facebook-login';
-import LinkedInPage from '../../components/user_registeration/linkedinLogin'
+import LinkedInPage from "./linkedinLogin";
 
 
 class Signup extends Form {

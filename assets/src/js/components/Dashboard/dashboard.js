@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Link, NavLink, withRouter} from 'react-router-dom';
 import {addProfile, getUser, setUserInfo} from "../../actions/profile";
 import {addProfilePicture, addCoverPicture} from "../../actions/authentication";
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
+import MessageSnackbar from "../reusable-components/messageSnackbar";
 import SideHeader from "./sideHeader";
 
 class Dashboard extends Component {
