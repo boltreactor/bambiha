@@ -3,7 +3,6 @@ import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawe
 import SmartFooter from "../Footers/smart-footer";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import "@material/react-switch/dist/switch.css";
 import Switch from "../reusable-components/material-io/switch";
 import {addNotificationSettings, getNotificationSettings, setNotificationSettings} from "../../actions/profile";
 import notifications from "./notifications";

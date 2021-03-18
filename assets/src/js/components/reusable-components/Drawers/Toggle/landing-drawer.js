@@ -3,7 +3,7 @@ import Drawer, {DrawerContent, DrawerHeader} from "@material/react-drawer";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {toggleDrawers} from "../../../actions/profile";
+import {toggleDrawers} from "../../../../actions/profile";
 import SettingsDrawer from "./settings-drawer";
 import DashboardDrawer from "./dashboard-drawer";
 import HomeDrawer from "./home-drawer";
