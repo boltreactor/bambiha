@@ -86,14 +86,6 @@ export default function (state = initialState, action) {
         toggleDrawer: action.toggleDrawer
       }
     }
-    case  MAP_ERROR_MESSAGE: {
-      return {
-        ...state,
-        mapError: action.mapError
-      }
-    }
-
-
     case NOTIFICATIONS_SETTINGS: {
       return {
         ...state,

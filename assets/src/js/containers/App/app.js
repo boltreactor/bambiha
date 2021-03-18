@@ -3,8 +3,8 @@ import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {flogin, glogin, setLoginStatus} from "../../actions/authentication";
 import {getUser, setUserInfo} from "../../actions/profile";
-import {LinkedInPopUp} from 'react-linkedin-login-oauth2';
-import LinkedInPage from '../../components/user_registeration/linkedinLogin'
+// import {LinkedInPopUp} from 'react-linkedin-login-oauth2';
+// import LinkedInPage from '../../components/user_registeration/linkedinLogin'
 import Notifications from "../../components/Settings/notifications";
 
 import Home from '../../components/Landing/home';
@@ -51,8 +51,8 @@ class App extends Component {
       <Fragment>
         <Header loginStatus={this.props.loginStatus}/>
         <Switch>
-          <Route path="/linkedin" exact component={LinkedInPopUp}/>
-          <Route path="/linked" exact component={LinkedInPage}/>
+          {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
+          {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
           <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
           <ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>
           <Route path='/signup' render={(props) => <Signup {...props}/>}/>
