@@ -1,7 +1,7 @@
 import {
   MESSAGE, NOTIFICATIONS_SETTINGS,
   SNACKBAR
-} from "../../actions/types";
+} from "../actions/types";
 
 
 // export const showSnackBar = (msg_content) => dispatch => {

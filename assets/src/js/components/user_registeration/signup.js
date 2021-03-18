@@ -4,8 +4,8 @@ import {socialLogin, clearAuthErrors, signup} from "../../actions/authentication
 import {Link, Redirect} from "react-router-dom";
 
 import Joi from 'joi-browser';
-import Form from "../reusable-components/form";
-import Textfield from "../reusable-components/material-io/textfield";
+import Form from "../../reusable-components/form";
+import Textfield from "../../reusable-components/material-io/textfield";
 import {Button} from "@material-ui/core";
 
 import Footer from "../Footers/footer";

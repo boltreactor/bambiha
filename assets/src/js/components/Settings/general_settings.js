@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
+import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
 import SmartFooter from "../Footers/smart-footer";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import Switch from "../reusable-components/material-io/switch";
+import Switch from "../../reusable-components/material-io/switch";
 import {addNotificationSettings, getNotificationSettings, setNotificationSettings} from "../../actions/profile";
 import notifications from "./notifications";
 

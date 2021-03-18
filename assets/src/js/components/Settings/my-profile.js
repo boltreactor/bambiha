@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
+import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
 import SmartFooter from "../Footers/smart-footer";
 import {getUser, addProfile, setUserInfo} from "../../actions/profile";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {addProfilePicture, newPassword} from "../../actions/authentication";
-import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
-import SimpleTextfield from "../reusable-components/simple-textfield";
-import Form from "../reusable-components/form";
+import NoLabelTextfield from "../../reusable-components/material-io/no-label-textfield";
+import SimpleTextfield from "../../reusable-components/simple-textfield";
+import Form from "../../reusable-components/form";
 import Joi from "joi-browser";
 
 class MyProfile extends Form {

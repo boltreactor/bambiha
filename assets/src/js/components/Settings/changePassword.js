@@ -1,13 +1,13 @@
 import React from 'react';
-import SimpleTextfield from "../reusable-components/simple-textfield";
-import Form from "../reusable-components/form";
+import SimpleTextfield from "../../reusable-components/simple-textfield";
+import Form from "../../reusable-components/form";
 import Joi from "joi-browser";
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {changePassword, setChangePass} from "../../actions/authentication";
 import {getUser} from "../../actions/profile";
-import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
-import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
+import NoLabelTextfield from "../../reusable-components/material-io/no-label-textfield";
+import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
 import SmartFooter from "../Footers/smart-footer";
 
 
