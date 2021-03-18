@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'assets/src/js/index'),
@@ -34,6 +35,18 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -42,14 +55,18 @@ module.exports = {
             },
         ],
     },
-    optimization: {
-        minimize: true,
-    },
+    // optimization: {
+    //     minimize: true,
+    // },
     plugins: [
+        new MiniCssExtractPlugin({
+            linkType: 'text/css',
+            filename: '[name].css',
+        }),
         new webpack.DefinePlugin({
             "process.env": {
                 // This has effect on the react lib size
-                NODE_ENV: JSON.stringify("production"),
+                NODE_ENV: JSON.stringify("dev"),
             },
         }),
         new CleanWebpackPlugin(),
