@@ -1,0 +1,5 @@
+.idea
+webpack-stats.json
+/assets/dist/
+/node_modules/
+/venv/
