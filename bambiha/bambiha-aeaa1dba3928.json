@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bambiha-305107",
+  "private_key_id": "aeaa1dba39282c5fe8d44bacf59d8a4ce4a9157e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4J3XXDwDiiVca\nD6BF/bCa5+oS7gQf9H8ol2Ng769rzaqDOuq7tv1uiZDXuEPmsagBRi+vRbGlJcMm\nIAgSl8oPV0w2COtxY30yfP2hpyNlDXfH/j65zPYxD9xwoiMi2l3zVRNTjGckKEPg\nka4SGuWI+YuF1dld4s8QmmXeEyVj99q0t2upCdJdkHDLoVC33TV19IwtPgYH/YRu\nwOLIdgKj3WQVvGedoM99BvCxzOjJAnyjfcpZhDaSEhePRLffa/5EJlT6F/Bm92Y/\npfCo9P7gWJDbsEw3UMIshshwxBFGe2Utf8rPtvKeCmgFKbkrEhw55PCyg7SwgJVH\n1f20d/axAgMBAAECggEARAeb0ktCHe3zpfaA1GpgHBGxmLWiA3YMpZ+rgEt7R/1t\n0NXqklcK75NVVUPGncoikPnvMrYx5pr5KTPrF4dIh3tN9aY86CIDRawD/HxkqHed\nuN2VKYlsp3o/CsLy7PSzgWl73sD+904CqUrX/es+wWfCobn692KK8QzAthXnmbJ8\n/+MhyDP15ZvyAz/wWgh150UfveKLM6MRnNs64+1Hh2+zY/+7KcPiVC7qBgshzDG8\nnBGzTub77kNhHPwbEtDMwrqMbCn6tsuDU+25UffUSZFW0b9Z9z2CiwJopWhGqfMb\ndpgON2pAW9xMIip4AZVzwrftvLu/RFxfubogqXu1YwKBgQDrbUddguE/GWMlYIAM\nsM06YYdgHl5Pv6wQagMtYHY/eZFitXXCPeHD4srh2H1FgE8xaeNCgk6EG80/24GJ\nBDVtB6uZQ2UO8Rpa2Ah5Ja02ixFs8TyvaiWNLbDnFjXhj2bmXXoZvc66pssyc3Lh\neGn/h8qiLajahaWdj+BHnhkOQwKBgQDIPymH207zx3F8C7+VLskNM3ig+qtcEFj3\n902iCzH6eEhOa7357wh0LC8U5G7mvKShQFCWpfrRZ2ogpzQeAfEFlgxBWvHOswlX\nu7V/rdwp6mlDd64wlkDcAqiQaDD5+zs+kuj4OOIHrGs73cmJEy0Ig3mcJqhBiBr0\ncIovq6Tp+wKBgF+2adEmqJSSqbBEb0q5hnY5uGPndMhPUJDLyMbl9K0Rq33J8Dos\nFmEhDwKKlUNwSsH4HqCngWxMMUHI5/zgbSgKekUxFSDh/Kj6M1etbaJDH65+1QEr\n0mB3Nvh8GyO8vUTitAVLGYTg0rOMJCRuZAmzFzqf/Yn5078fAzualu0pAoGBAMYR\nc8rlqhqHVEEWfdHaDRP5rX/NcmIF6XqcKzX1TOIqx5qKB8eIIByI96j6qpegUFcP\nfqcEVit61walXG+yC+0ylbyvcC67+KnHCafZGMR9ENGjN7DnbhAwsPrllEwvrFIg\njj+4RBrC+O6mWgoz5X9eTJOfyR3IuqC+EHFGnkCxAoGBAKQ3vH5Jr0UW1eGlFTAW\nmai0RyyX94DccNLcoVr2QFOzhOQChn19bsYNjAsjRahcstKH1wjlej2OO5dwJlv9\n1P6QgWKmSsHFiOMAweZmC4S0UC2NEo5aZtxO5LkjidN0NBFrzPPa4tDhp2JwaNRl\nLoDNDaRI86Ntq3RJYWQ010NH\n-----END PRIVATE KEY-----\n",
+  "client_email": "estore@bambiha-305107.iam.gserviceaccount.com",
+  "client_id": "100210674350286282704",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/estore%40bambiha-305107.iam.gserviceaccount.com"
+}

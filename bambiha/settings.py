@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'webpack_loader',
 ]
 
+import datetime
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=10)
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +116,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+from google.oauth2 import service_account
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    "bambiha/bambiha-aeaa1dba3928.json"
+)
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "bambiha/bambiha-aeaa1dba3928.json"
+
+# SESSION_ENGINE = "django.contrib.sessions.backends.file"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
