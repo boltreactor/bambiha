@@ -32,6 +32,13 @@ import ProductsBillings from "../../components/Settings/Product-Billings/product
 import AddPayment from "../../components/Settings/Product-Billings/addPayment";
 import AddPayout from "../../components/Settings/Product-Billings/addPayout";
 import AddVat from "../../components/Settings/Product-Billings/addVAT";
+import AdminHome from "../../admin/admin_home";
+import ManageCategory from "../../admin/manage_categories";
+import ManageOrders from "../../admin/manage_orders";
+import ManageProducts from "../../admin/manage_products";
+import ManageUsers from "../../admin/manage_users";
+import NewCategory from "../../admin/new_category";
+import NewProduct from "../../admin/new_product";
 
 
 class App extends Component {
@@ -49,6 +56,13 @@ class App extends Component {
             <Fragment>
                 <Header loginStatus={this.props.loginStatus}/>
                 <Switch>
+                    <Route path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
+                    <Route path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
+                    <Route path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
+                    <Route path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <Route path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
+                    <Route path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
+                    <Route path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
                     <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
