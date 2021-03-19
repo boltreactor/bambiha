@@ -24,7 +24,7 @@ SECRET_KEY = 'k9bh4d7ub!&@e4naofmelyt^6ibq4&hhc45*^^gdb#k)qz4kt+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -121,13 +121,13 @@ USE_TZ = True
 
 from google.oauth2 import service_account
 
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    "bambiha/bambiha-aeaa1dba3928.json"
-)
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     "bambiha/bambiha-aeaa1dba3928.json"
+# )
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "bambiha/bambiha-aeaa1dba3928.json"
 
-# SESSION_ENGINE = "django.contrib.sessions.backends.file"
+SESSION_ENGINE = "django.contrib.sessions.backends.file"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -138,8 +138,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets/dist'),
     os.path.join(BASE_DIR, 'assets/src/css'),
-    # os.path.join(BASE_DIR, 'assets/src/images'),
-    # os.path.join(BASE_DIR, 'assets/src/scripts'),
+    os.path.join(BASE_DIR, 'assets/src/images'),
+    os.path.join(BASE_DIR, 'assets/src/scripts'),
 )
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -147,3 +147,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     }
 }
+
+SENDGRID_API_KEY = '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'
+STRIPE_PRIVATE_KEY = 'sk_test_9gedTQtoMFGGdM5qnI0NC4GX'
