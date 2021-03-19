@@ -18,7 +18,7 @@ class NotFound extends PureComponent {
                                             <div className="header">
                                                 <h2 className="logo mdc-typography--title">
                                                     <a href="/">
-                                                        KompassEra
+                                                        Base App
                                                     </a>
                                                 </h2>
                                                 <p>

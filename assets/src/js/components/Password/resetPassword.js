@@ -37,7 +37,7 @@ class ResetPassword extends Form {
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <a href="#" className="link-mute"><h5>KOMPASSERA</h5></a>
+                                <a href="#" className="link-mute"><h5>Base App</h5></a>
                             </header>
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">

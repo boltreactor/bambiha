@@ -294,7 +294,7 @@ class Notifications extends Component {
                                                                                             pricing notices,
                                                                                             and other reminders related
                                                                                             to your activities on
-                                                                                            KompassEra.
+                                                                                            Base App.
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -345,7 +345,7 @@ class Notifications extends Component {
                                                                                             Receive coupons, promotions,
                                                                                             surveys, product updates,
                                                                                             and inspiration from
-                                                                                            KompassEra and KompassEra's
+                                                                                            Base App and Base App's
                                                                                             partners.
                                                                                         </div>
                                                                                     </div>
@@ -510,7 +510,7 @@ class Notifications extends Component {
                                                                                         className="mdc-typography--caption">
                                                                                         Get notifications in this
                                                                                         browser on your computer, even
-                                                                                        if you're not using KompassEra.
+                                                                                        if you're not using Base App.
                                                                                         {/* To manage your push notification settings, use the WedKompass app. */}
                                                                                     </div>
                                                                                 </div>
@@ -548,10 +548,10 @@ class Notifications extends Component {
                                                                                         This includes recommendations,
                                                                                         study inspiration, deals,
                                                                                         things to do in your home city,
-                                                                                        how KompassEra works, invites
+                                                                                        how Base App works, invites
                                                                                         and referrals,
                                                                                         surveys and research studies,
-                                                                                        KompassEra for events updates,
+                                                                                        Base App for events updates,
                                                                                         subject teaching tips,
                                                                                         event hosting tips, and
                                                                                         promotions.

@@ -27,8 +27,9 @@ rsa==4.7.1
 six==1.15.0
 sqlparse==0.4.1
 urllib3==1.26.3
+stripe==2.56.0
 
 PyJWT~=1.7.1
 djangorestframework-jwt~=1.11.0
 djangorestframework==3.11.0
-djangorestframework==3.11.0
+

@@ -9,7 +9,7 @@ def get_token(user):
         'username': user.email,
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'country': user.country,
+        # 'country': user.country,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=10)
     }
     token = jwt.encode(payload, "secret", algorithm="HS256")
@@ -22,9 +22,9 @@ def make_ndb_return_data_json_serializable(data):
     record = {}
     # Populate the new dict with JSON serializiable values
     for key in result:
-        if key == 'date_of_birth':
-            record[key] = result[key].isoformat()
-            continue
+        # if key == 'date_of_birth':
+        #     record[key] = result[key].isoformat()
+        #     continue
         if isinstance(result[key], datetime.datetime):
             record[key] = result[key].isoformat()
             continue
