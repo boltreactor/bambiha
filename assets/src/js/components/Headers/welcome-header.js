@@ -10,7 +10,7 @@ class WelcomeHeader extends Component {
                 <div className="mdc-top-app-bar__row container container--large">
                     <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                         <Link to="/" className="mdc-top-app-bar__title">
-                            <span>Kompass</span><span>Era</span>
+                            <span>BAMBIHA</span>
                             <span style={{
                                 color: '#9aa0a6',
                                 fontSize: '9px',

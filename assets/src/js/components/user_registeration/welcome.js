@@ -55,14 +55,14 @@ class Welcome extends Form {
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>KOMPASSERA</h5></Link>
+                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
                                 <div className="mb4 mt3">
                                     <h4>Welcome back</h4>
                                     <p>It looks like you already have an account using <span className="fw6"
-                                                                                             style={{color: 'var(--primary)'}}>green@kompassera.com</span>
+                                                                                             style={{color: 'var(--primary)'}}>green@bambiha.com</span>
                                     </p>
                                 </div>
                                 <div className="mb4 col">
@@ -104,7 +104,7 @@ class Welcome extends Form {
                             </div>
                             {/* */}
                             <div className="mv2" style={{fontSize: '.875rem'}}>
-                                <p>Need a new Kompassera account?
+                                <p>Need a new Bambiha account?
                                     <Link title="Sign up" to="/signup"> Create an account</Link></p>
                             </div>
                             {/* */}

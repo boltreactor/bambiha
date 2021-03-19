@@ -173,7 +173,7 @@ class ProductsBillings extends Component {
                                                         <div>
                                                             <h3 className="bold">Payout method</h3>
                                                             <p style={{maxWidth: '640px'}}>
-                                                                KOMPASSERA releases payouts about 24 hours after a
+                                                                BAMBIHA releases payouts about 24 hours after a
                                                                 student’s
                                                                 scheduled lesson time. The time it takes for the funds
                                                                 to appear
@@ -250,7 +250,7 @@ class ProductsBillings extends Component {
                                                             <h3 className="bold">VAT</h3>
                                                             <p style={{maxWidth: '640px'}}>
                                                                 If you are registered for VAT, you may not be charged
-                                                                VAT on KOMPASSERA service fees.
+                                                                VAT on BAMBIHA service fees.
                                                             </p>
                                                         </div>
                                                     </div>

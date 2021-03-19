@@ -38,7 +38,7 @@ class SettingsHeader extends Component {
                                 }}>menu
                             </button>
                             <Link to="/dashboard" className="mdc-top-app-bar__title"><span
-                                className="tracked-m tracked-l">KOMPASSERA</span></Link>
+                                className="tracked-m tracked-l">BAMBIHA</span></Link>
                         </section>
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
                                  role="toolbar">
@@ -77,7 +77,7 @@ class SettingsHeader extends Component {
                                     <div className="mdc-menu-surface--anchor">
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
                                             <div className="content" style={{width: '15.25rem'}}>
-                                                <h4 className="dropdown-header dropdown-menu-item text-secondary">KompassEra
+                                                <h4 className="dropdown-header dropdown-menu-item text-secondary">Bambiha
                                                 </h4>
                                                 <div className="dropdown-divider"/>
                                                 <Link

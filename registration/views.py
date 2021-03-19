@@ -178,7 +178,7 @@ def forgot(request):
     if verification:
         link = "http://" + request.get_host() + "/new-password/" + user.verification_key
         message = Mail(
-            from_email='developers@kompassera.com',
+            from_email='developers@bambiha.com',
             to_emails=request.data['email'],
             subject="Reset link has been sent to your email address",
             html_content='<strong>Reset password using this link ' + link + '</strong>')

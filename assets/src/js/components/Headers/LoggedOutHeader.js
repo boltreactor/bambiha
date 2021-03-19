@@ -39,7 +39,7 @@ class LoggedOutHeader extends Component {
                                 }}>menu
                             </button>
                             <Link to="/" className="mdc-top-app-bar__title">
-                                <span>Kompass</span><span>Era</span>
+                                <span>BAMBIHA</span>
                                 {/*<span style={{color: '#9aa0a6', fontSize: '9px', fontWeight: 300, marginTop: '36px'}}>BETA</span>*/}
                             </Link>
                         </section>

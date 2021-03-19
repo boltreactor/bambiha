@@ -17,7 +17,7 @@ class DashboardDrawer extends Component {
                             <div className="flex">
                                 <div className="flex-grow-1">
                                     <a href="#" className="mdc-drawer__title">
-                                        <span className="tracked-l tracked-m">KOMPASSERA</span>
+                                        <span className="tracked-l tracked-m">BAMBIHA</span>
                                     </a>
                                 </div>
                                 <div className="mt1">

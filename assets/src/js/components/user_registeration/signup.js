@@ -136,7 +136,7 @@ class Signup extends Form {
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>KOMPASSERA</h5></Link>
+                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">

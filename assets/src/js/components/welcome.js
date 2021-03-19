@@ -19,7 +19,7 @@ class Welcome extends Component {
                                 <div className="col s12">
                                     <div className="welcome" style={{textAlign: 'center'}}>
                                         <img src="/static/welcome.jpg" alt=""/>
-                                        <h1>Thank you for joining KompassEra</h1>
+                                        <h1>Thank you for joining Bambiha</h1>
                                         <p>Please spend two minutes to answer the following survey. This will help
                                             parents and community managers on our platform find your listing.</p>
                                         <Link className="link--mute" to="/settings">

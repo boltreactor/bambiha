@@ -8,7 +8,7 @@ class FooterLaunch extends Component {
             <footer style={{backgroundColor: '#6a6a6a', borderTop: '1px solid #6a6a6a'}}>
                 <div className="container">
                     <div style={{paddingTop: '72px', paddingBottom: '24px'}}>
-                        <h1 style={{fontWeight: 600, color: '#fff'}}>KompassEra</h1>
+                        <h1 style={{fontWeight: 600, color: '#fff'}}>Bambiha</h1>
                     </div>
                     <div style={{
                         fontSize: '17px',
@@ -17,7 +17,7 @@ class FooterLaunch extends Component {
                         lineHeight: '36px',
                         maxWidth: '400px'
                     }}>
-                        KompassEra is the fastest, easiest, and most safest way to connect.
+                        Bambiha is estore.
                     </div>
                     <div className="social-media-footer" style={{paddingTop: '24px', paddingBottom: '16px'}}>
                         <div className="display-flex flex--wrap" style={{alignItems: 'center'}}>
@@ -68,7 +68,7 @@ class FooterLaunch extends Component {
                         color: '#c8c8c8',
                         lineHeight: '36px'
                     }}>
-                        © All rights reserved to Bolt Reactor | KompassEra
+                        © All rights reserved to Bolt Reactor | Bambiha
                     </div>
                 </div>
             </footer>

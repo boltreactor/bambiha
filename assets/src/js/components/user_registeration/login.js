@@ -89,7 +89,7 @@ class Login extends Form {
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>KOMPASSERA</h5></Link>
+                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
@@ -205,7 +205,7 @@ class Login extends Form {
                             </div>
                             {/* */}
                             <div className="mv2" style={{fontSize: '.875rem'}}>
-                                <p>Need a Kompassera account?
+                                <p>Need a Bambiha account?
                                     <Link title="Sign up" to="/signup"> Create an account</Link></p>
                             </div>
                             {/* */}
