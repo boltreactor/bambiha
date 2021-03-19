@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import Footer from "./Footers/estore-footer";
 
 class Product extends Component {
     render() {
@@ -319,6 +320,7 @@ class Product extends Component {
             <div className="mv5" />
           </section>
         </div>
+              <Footer/>
       </div>
         );
     }

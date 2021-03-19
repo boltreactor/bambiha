@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import Footer from "./Footers/estore-footer";
 
 class Cart extends Component {
     render() {
@@ -187,6 +188,7 @@ class Cart extends Component {
             </div>
           </div>
         </div>
+                <Footer/>
       </div>
         );
     }

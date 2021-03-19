@@ -13,7 +13,7 @@ class TopAppBarAdmin extends Component {
         <div className="mdc-top-app-bar__row space-around__">
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button hide-lg js-trigger-mdc-drawer" aria-label="Open navigation menu">menu</button>
-            <Link to="/e-store/home" className="mdc-top-app-bar__title">
+            <Link to="/" className="mdc-top-app-bar__title">
               <span className="tracked-m tracked-l">BAMBIHA</span>
               <span style={{fontSize: '12px', color: '#0258ff'}}>Admin Panel</span>
             </Link>
@@ -31,7 +31,7 @@ class TopAppBarAdmin extends Component {
                       </p>
                     </div>
                     <div className="mb1">
-                      <h6 className="white" style={{fontSize: '.86562rem'}}>Help &amp; Support</h6>
+                      <h6 className="white" style={{fontSize: '.86562rem'}}>Help & Support</h6>
                       <p className="white pa0 ma0" style={{fontSize: '.825rem'}}>
                         Email us at help@bambiha.com
                       </p>
@@ -77,7 +77,7 @@ class TopAppBarAdmin extends Component {
                         <i className="material-icons-outlined v-mid">person</i>
                         My Account
                       </Link>
-                      <Link className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute" to="/e-store">
+                      <Link className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute" to="/">
                         <i className="material-icons v-mid">logout</i>
                         Log out
                       </Link>

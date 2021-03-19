@@ -22,7 +22,7 @@ class Footer extends Component {
                 <h2 className="bold">Get Help</h2>
                 <ul>
                   <li><Link to="#">Order Status</Link></li>
-                  <li><Link to="#">Shipping &amp; Delivery</Link></li>
+                  <li><Link to="#">Shipping & Delivery</Link></li>
                   <li><Link to="#">Returns</Link></li>
                   <li><Link to="#">Payment Options</Link></li>
                   <li><Link to="#">Gift Card Balance</Link></li>
@@ -119,7 +119,7 @@ class Footer extends Component {
             <div className="col s12 m4 tr-m tr-l">
               <div className="mdc-typography--label2 mv2">
                 <Link to="#" className="mr2 link-mute silver hover-light-silver">Legal</Link>
-                <Link to="#" className="link-mute silver hover-light-silver">Terms &amp; Conditions</Link>
+                <Link to="#" className="link-mute silver hover-light-silver">Terms & Conditions</Link>
               </div>
             </div>
           </div>

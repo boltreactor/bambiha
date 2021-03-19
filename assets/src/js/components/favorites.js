@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DashboardDrawer from "../reusable-components/Drawers/Static/dashboard-drawer";
 import {Link} from "react-router-dom";
+import SmartFooter from "./Footers/estore-smart-footer";
 
 class Favorites extends Component {
        state = {
@@ -368,6 +369,7 @@ class Favorites extends Component {
                         </main>
                     </div>
                 </div>
+                <SmartFooter/>
             </div>
         );
     }
