@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link, withRouter} from "react-router-dom";
 import Drawer, {DrawerContent, DrawerHeader} from "@material/react-drawer";
 import {connect} from "react-redux";
-import {toggleDrawers} from "../../../../actions/profile";
+import {toggleDrawers} from "../../../actions/profile";
 
 
 class SettingsDrawer extends Component {

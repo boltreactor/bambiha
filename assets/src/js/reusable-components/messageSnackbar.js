@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
-import {removeSnackbar} from "../../actions/profile";
+import {removeSnackbar} from "../actions/profile";
 import {connect} from 'react-redux';
 
 

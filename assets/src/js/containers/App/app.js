@@ -54,7 +54,7 @@ class App extends Component {
           {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
           {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
           <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
-          <ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>
+          {/*<ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>*/}
           <Route path='/signup' render={(props) => <Signup {...props}/>}/>
           <Route exact path='/' render={(props) => <Home {...props}/>}/>
           <Route path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>

@@ -1,14 +1,14 @@
 import React, {Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import SimpleTextfield from "../reusable-components/simple-textfield";
+import SimpleTextfield from "../../reusable-components/simple-textfield";
 import {addProfilePicture} from "../../actions/authentication";
 import {addProfile, getUser, setUserInfo} from "../../actions/profile";
 import Joi from "joi-browser";
-import Form from "../reusable-components/form";
-import SettingsDrawer from "../reusable-components/Drawers/Static/settings-drawer";
-import Calender from "../reusable-components/datepicker";
-import Select from "../reusable-components/select";
+import Form from "../../reusable-components/form";
+import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
+import Calender from "../../reusable-components/datepicker";
+import Select from "../../reusable-components/select";
 import {TextareaAutosize} from '@material-ui/core';
 
 

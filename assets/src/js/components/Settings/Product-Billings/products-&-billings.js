@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SettingsHeader from "../../Headers/settings-header";
-import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
+import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
 
 import {Link, withRouter} from "react-router-dom";
 import {deleteCard, getCards, getBanks, deleteBank} from "../../../actions/payment";

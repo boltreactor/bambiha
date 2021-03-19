@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
-import TextField from "../reusable-components/outlined-textfield";
+import TextField from "../../reusable-components/outlined-textfield";
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import {resendEmail} from "../../actions/authentication";
-import Form from "../reusable-components/form";
+import Form from "../../reusable-components/form";
 import Joi from 'joi-browser';
 
 class ResendEmail extends Form {

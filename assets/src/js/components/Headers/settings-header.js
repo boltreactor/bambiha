@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {getUser, toggleDrawers} from "../../actions/profile";
 import {addProfilePicture} from "../../actions/authentication";
 
-import DashboardDrawer from "../reusable-components/Drawers/Toggle/dashboard-drawer";
-import AccountDrawer from "../reusable-components/Drawers/Toggle/account-drawer";
+import DashboardDrawer from "../../reusable-components/Drawers/Toggle/dashboard-drawer";
+import AccountDrawer from "../../reusable-components/Drawers/Toggle/account-drawer";
 
 class SettingsHeader extends Component {
 
