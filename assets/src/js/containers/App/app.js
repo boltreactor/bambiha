@@ -32,7 +32,15 @@ import ProductsBillings from "../../components/Settings/Product-Billings/product
 import AddPayment from "../../components/Settings/Product-Billings/addPayment";
 import AddPayout from "../../components/Settings/Product-Billings/addPayout";
 import AddVat from "../../components/Settings/Product-Billings/addVAT";
-
+import Product from "../../components/product";
+import ProductDetail from "../../components/product-detail";
+import Index from "../../components";
+import Store from "../../components/store";
+import Cart from "../../components/cart"
+import Orders from "../../components/orders";
+import {Favorite} from "@material-ui/icons";
+import Favorites from "../../components/favorites";
+import HelpSupport from "../../components/Help&Support";
 
 class App extends Component {
 
@@ -85,6 +93,14 @@ class App extends Component {
                     <ProtectedRoute exact path='/settings/notifications'
                                     render={(props) => <Notifications{...props}/>}/>
                     <ProtectedRoute exact path='/dashboard' render={(props) => <Dashboard {...props}/>}/>
+                    <ProtectedRoute exact path='/cart' render={(props) => <Cart {...props}/>}/>
+                    <ProtectedRoute exact path='/product' render={(props) => <Product {...props}/>}/>
+                    <ProtectedRoute exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
+                    <ProtectedRoute exact path='/store' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
+                    <ProtectedRoute exact path='/orders' render={(props) => <Orders{...props}/>}/>
+                    <ProtectedRoute exact path='/favorites' render={(props) => <Favorites{...props}/>}/>
+                    <ProtectedRoute exact path='/help&Support' render={(props) => <HelpSupport{...props}/>}/>
                     <Route path='/not-found' component={NotFound}/>
                     <Redirect to='/not-found'/>
                 </Switch>

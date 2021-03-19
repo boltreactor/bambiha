@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter, Link} from 'react-router-dom';
 
 class SmartFooter extends Component {
     render() {
@@ -8,14 +9,14 @@ class SmartFooter extends Component {
           <div className="flex-grow-1">
             <span className="hide-sm">Powered by Bolt Reactor</span>
             <span className="separator hide-sm">|</span>
-            <span><a href="#">Terms of Service</a></span>
+            <span><Link to="#">Terms of Service</Link></span>
             <span className="separator">|</span>
-            <span><a href="#">Privacy Policy</a></span>
+            <span><Link to="#">Privacy Policy</Link></span>
           </div>
           <div>
-            <span><a href="#">FAQ</a></span>
+            <span><Link to="#">FAQ</Link></span>
             <span className="separator">|</span>
-            <span><a href="#">Feedback</a></span>
+            <span><Link to="#">Feedback</Link></span>
           </div>
         </div>
       </footer>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
-
 import {Link, withRouter} from "react-router-dom";
 import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT} from "../../../actions/payment";
 import {connect} from "react-redux";
@@ -85,18 +84,18 @@ class ProductsBillings extends Component {
                                 </header>
                                 <div className="tab-wrapper">
                                     <header className="tab-header">
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
                                            aria-selected={this.state.Payments}>
                                             Payments
-                                        </a>
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                        </Link>
+                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
                                            aria-selected={this.state.Payouts}>
                                             Payouts
-                                        </a>
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                        </Link>
+                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
                                            aria-selected={this.state.Taxes}>
                                             Taxes
-                                        </a>
+                                        </Link>
                                     </header>
                                     <div className="tab-content">
                                         <div className={this.state.Payments ? "tab-no-data" : "tab-no-data hide"}>

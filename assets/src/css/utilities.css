@@ -2119,6 +2119,10 @@ img {
     background-color: inherit
 }
 
+.bg-sky-blue {
+    background-color: rgba(29,124,248,.05);
+}
+
 .hover-black:focus, .hover-black:hover {
     color: #000
 }

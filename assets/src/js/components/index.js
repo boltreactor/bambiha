@@ -1,20 +1,10 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
-import {withRouter, Link} from "react-router-dom";
-import {getUser} from "../../actions/profile";
+import React, {Component} from 'react';
+import {withRouter, Link} from 'react-router-dom';
 
-
-class Home extends Component {
-
-  componentDidMount() {
-    if (this.props.loginStatus) {
-      this.props.getUser();
-    }
-  }
-
-  render() {
-    return (
-            <div className="page">
+class Index extends Component {
+    render() {
+        return (
+             <div className="page">
         <div className="page__content">
           {/* Banner */}
           <section className="banner">
@@ -199,8 +189,8 @@ class Home extends Component {
           </section>
         </div>
       </div>
-    );
-  }
+        );
+    }
 }
 
-export default withRouter(connect(null, {getUser})((Home)));
+export default Index;
