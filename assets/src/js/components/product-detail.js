@@ -19,42 +19,17 @@ class ProductDetail extends Component {
           <div className="row">
             <div className="col s12 mb3">
               <div className="img-wrapper l">
+                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
               </div>
             </div>
             <div className="col s12 mb3">
               <div className="img-wrapper l">
+                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
               </div>
             </div>
             <div className="col s12 mb3">
               <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
+                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
               </div>
             </div>
           </div>

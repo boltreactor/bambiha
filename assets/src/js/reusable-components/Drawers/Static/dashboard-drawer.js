@@ -26,7 +26,7 @@ class DashboardDrawer extends Component {
                     </NavLink>
                   </li>
                   <li className="item">
-                    <NavLink className="db text-decoration-none" exact activeClassName="item-active"  to="/store">
+                    <NavLink className="db text-decoration-none" exact activeClassName="item-active"  to="/">
                       <i className="material-icons-outlined v-mid mr2">add_shopping_cart</i>
                       <span>Continue Shopping</span>
                     </NavLink>

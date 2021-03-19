@@ -67,7 +67,7 @@ class Favorites extends Component {
                                         {/*    <div className="flex mb3">*/}
                                         {/*      <div className="mr2 mb3">*/}
                                         {/*        <Link to="#" className="link-mute">*/}
-                                        {/*          <img src="/assets/images/static/img-noise.png" alt="" />*/}
+                                        {/*          <img src="/static/img-noise.png" alt="" />*/}
                                         {/*        </Link>*/}
                                         {/*      </div>*/}
                                         {/*      <div className="flex-grow-1 pa2">*/}
@@ -188,7 +188,7 @@ class Favorites extends Component {
                                                 <div className="content tc">
                                                     <div className="pa3">
                                                         <div className="mv3">
-                                                            <img src="/assets/images/static/trial-contact-hub.png"
+                                                            <img src="/static/trial-contact-hub.png"
                                                                  alt=""/>
                                                         </div>
                                                         <div className="mv3">
@@ -224,7 +224,7 @@ class Favorites extends Component {
                                                 <div className="content tc">
                                                     <div className="pa3">
                                                         <div className="mv3">
-                                                            <img src="/assets/images/static/trial-payments.png" alt=""/>
+                                                            <img src="/static/trial-payments.png" alt=""/>
                                                         </div>
                                                         <div className="mv3">
                                                             <h3 className="bold">
@@ -260,7 +260,7 @@ class Favorites extends Component {
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
                                                         <div className="mh3">
-                                                            <img src="/assets/images/static/calendar-check-1%201.svg"
+                                                            <img src="/static/calendar-check-1%201.svg"
                                                                  alt="" style={{width: '64px'}}/>
                                                         </div>
                                                         <div className="flex-grow-1" style={{minHeight: '136px'}}>
@@ -281,7 +281,7 @@ class Favorites extends Component {
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
                                                         <div className="mh3">
-                                                            <img src="/assets/images/static/pc-monitor@2x.svg" alt=""
+                                                            <img src="/static/pc-monitor@2x.svg" alt=""
                                                                  style={{width: '64px'}}/>
                                                         </div>
                                                         <div className="flex-grow-1" style={{minHeight: '136px'}}>
@@ -303,7 +303,7 @@ class Favorites extends Component {
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
                                                         <div className="mh3">
-                                                            <img src="/assets/images/static/cup-1-1.svg" alt=""
+                                                            <img src="/static/cup-1-1.svg" alt=""
                                                                  style={{width: '64px'}}/>
                                                         </div>
                                                         <div className="flex-grow-1" style={{minHeight: '136px'}}>
@@ -325,7 +325,7 @@ class Favorites extends Component {
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
                                                         <div className="mh3">
-                                                            <img src="/assets/images/static/bubble-rounded-2-1.svg"
+                                                            <img src="/static/bubble-rounded-2-1.svg"
                                                                  alt="" style={{width: '64px'}}/>
                                                         </div>
                                                         <div className="flex-grow-1" style={{minHeight: '136px'}}>
@@ -347,7 +347,7 @@ class Favorites extends Component {
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
                                                         <div className="mh3">
-                                                            <img src="/assets/images/static/placement.svg" alt=""
+                                                            <img src="/static/placement.svg" alt=""
                                                                  style={{width: '64px'}}/>
                                                         </div>
                                                         <div className="flex-grow-1" style={{minHeight: '136px'}}>

@@ -79,8 +79,8 @@ class App extends Component {
                     {/*<ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>*/}
                     <Route path='/signup' render={(props) => <Signup {...props}/>}/>
                     <Route exact path='/' render={(props) => <Home {...props}/>}/>
-                    <Route path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>
-                    <Route path='/login' render={(props) => <Login {...props}/>}/>
+                    <Route exact path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>
+                    <Route exact path='/login' render={(props) => <Login {...props}/>}/>
                     <Route path='/reset-password' render={(props) => <ResetPassword {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/change-password'
                                     render={(props) => <ChangePassword {...props}/>}/>
@@ -113,6 +113,11 @@ class App extends Component {
                     <ProtectedRoute exact path='/product' render={(props) => <Product {...props}/>}/>
                     <ProtectedRoute exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
                     <ProtectedRoute exact path='/store' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/women' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/men' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/kids' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/custom' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/sale' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/orders' render={(props) => <Orders{...props}/>}/>
                     <ProtectedRoute exact path='/favorites' render={(props) => <Favorites{...props}/>}/>

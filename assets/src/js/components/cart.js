@@ -14,7 +14,7 @@ class Cart extends Component {
                   <div className="banner-wrapper gray my-page pa2">
                     <div className="flex items-center">
                       <div className="flex-grow-1">
-                        <h5 className="bold">Free Shipping &amp; 60-Day Free Returns</h5>
+                        <h5 className="bold">Free Shipping & 60-Day Free Returns</h5>
                         <div className="mt1">
                           <Link to="#" className="link-mute link-dark">
                             <h5 className="bold">Join Now</h5>
@@ -34,7 +34,7 @@ class Cart extends Component {
                     <div className="flex mb3">
                       <div className="mr2 mb3">
                         <Link to="#" className="link-mute">
-                          <img src="/assets/images/static/img-noise.png" alt="" />
+                          <img src="/static/show-1.jpeg" alt="" />
                         </Link>
                       </div>
                       <div className="flex-grow-1 pa2">
@@ -96,7 +96,7 @@ class Cart extends Component {
                     <div className="flex mb3">
                       <div className="mr2 mb3">
                         <Link to="#" className="link-mute">
-                          <img src="/assets/images/static/img-noise.png" alt="" />
+                          <img src="/static/show-1.jpeg" alt="" />
                         </Link>
                       </div>
                       <div className="flex-grow-1 pa2">
@@ -153,7 +153,7 @@ class Cart extends Component {
                   </div>
                   <div className="flex items-center">
                     <div className="flex-grow-1">
-                      <p style={{fontSize: '15px'}}>Estimated Shipping &amp; Handling</p>
+                      <p style={{fontSize: '15px'}}>Estimated Shipping & Handling</p>
                     </div>
                     <div className="ml2">
                       <h6>$0.00</h6>

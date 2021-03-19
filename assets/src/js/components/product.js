@@ -41,48 +41,56 @@ class Product extends Component {
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
@@ -111,70 +119,70 @@ class Product extends Component {
                         <Link to="#" className="link-mute dib relative active">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/show-1.jpeg" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
                         <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/assets/images/static/img-noise.png" className="color-images" alt="" />
+                              <img src="/static/img-noise.png" className="color-images" alt="" />
                             </div>
                           </div>
                         </Link>
@@ -289,18 +297,21 @@ class Product extends Component {
               <div className="col s12 m12 l4 mb3">
                 <Link to="/product" className="link-mute">
                   <div className="img-wrapper">
+                    <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt="" />
                   </div>
                 </Link>
               </div>
               <div className="col s12 m12 l4 mb3">
                 <Link to="/product" className="link-mute">
                   <div className="img-wrapper">
+                    <img className="w-100 h-100" src="/static/dumy-pics3.jpg" alt="" />
                   </div>
                 </Link>
               </div>
               <div className="col s12 m12 l4 mb3">
                 <Link to="/product" className="link-mute">
                   <div className="img-wrapper">
+                    <img className="w-100 h-100" src="/static/dumy-pics4.jpg" alt="" />
                   </div>
                 </Link>
               </div>

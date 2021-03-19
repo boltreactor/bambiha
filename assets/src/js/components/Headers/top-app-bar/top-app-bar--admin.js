@@ -44,7 +44,7 @@ class TopAppBarAdmin extends Component {
               <div className="default-dropdown">
                 <div style={{height: '32px', width: '32px'}}>
                   {/*
-            <img class="img-avatar" src="/assets/images/static/user_avatar.svg" alt="">
+            <img class="img-avatar" src="/static/user_avatar.svg" alt="">
             */}
                   <img className="img-avatar" src="/static/images/img-david.jpg" alt="" />
                 </div>

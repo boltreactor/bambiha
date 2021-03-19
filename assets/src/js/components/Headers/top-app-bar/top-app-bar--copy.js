@@ -139,7 +139,7 @@ class TopAppBarCopy extends Component {
                 <div style={{height: '32px', width: '32px'}}>
                   <img className="img-avatar" src="/static/images/user_avatar.svg" alt="" />
                   {/*
-            <img class="img-avatar" src="/assets/images/static/img-david.jpg" alt="">
+            <img class="img-avatar" src="/static/img-david.jpg" alt="">
             */}
                 </div>
                 <div className="mdc-menu-surface--anchor">
@@ -168,7 +168,7 @@ class TopAppBarCopy extends Component {
               <div className="default-dropdown">
                 <div style={{height: '32px', width: '32px'}}>
                   {/*
-            <img class="img-avatar" src="/assets/images/static/user_avatar.svg" alt="">
+            <img class="img-avatar" src="/static/user_avatar.svg" alt="">
             */}
                   <img className="img-avatar" src="/static/images/img-david.jpg" alt="" />
                 </div>
