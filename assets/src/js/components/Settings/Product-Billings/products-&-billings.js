@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import SettingsHeader from "../../Headers/settings-header";
 import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
-import Payments from "../../Payments/payments";
+
 import {Link, withRouter} from "react-router-dom";
-import {deleteCard, getCards, getBanks, deleteBank, getVAT, deleteVAT} from "../../../actions/payment";
+import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT} from "../../../actions/payment";
 import {connect} from "react-redux";
 
 class ProductsBillings extends Component {
@@ -28,9 +27,9 @@ class ProductsBillings extends Component {
         this.props.deleteVAT(vat.id);
     }
 
-    handleEditVAT(event, vat){
+    handleEditVAT(event, vat) {
         event.preventDefault();
-        this.props.history.push('/edit-vat/'+vat.id)
+        this.props.history.push('/edit-vat/' + vat.id)
     }
 
     state = {
@@ -314,22 +313,6 @@ class ProductsBillings extends Component {
                                                         </Link>
                                                     </div>
                                                 </div>}
-
-                                            {/*<div className="tc">*/}
-                                            {/*    <header className="mt3">*/}
-                                            {/*        <h3 className="bold">Taxes</h3>*/}
-                                            {/*    </header>*/}
-                                            {/*    <p>*/}
-                                            {/*        If you are registered for VAT, enter your VAT ID Number.*/}
-                                            {/*    </p>*/}
-                                            {/*    <div className="mv3">*/}
-                                            {/*        <Link to="/create-vat">*/}
-                                            {/*            <button className="btn btn-primary btn-lg">*/}
-                                            {/*                Add VAT ID Number*/}
-                                            {/*            </button>*/}
-                                            {/*        </Link>*/}
-                                            {/*    </div>*/}
-                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
