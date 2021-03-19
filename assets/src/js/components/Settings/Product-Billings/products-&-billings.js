@@ -243,7 +243,7 @@ class ProductsBillings extends Component {
                                         {/* Taxes */}
                                         <div className={this.state.Taxes ? "tab-no-data" : "tab-no-data hide"}>
 
-                                            {this.props.user_vat ?
+                                            {this.props.user_vat && this.props.user_vat.length > 0 ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
