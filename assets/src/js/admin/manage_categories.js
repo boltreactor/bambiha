@@ -1,8 +1,24 @@
 import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
 import Navigation from "./navigation";
+import SmartFooter from "../components/Footers/smart-footer";
 
 class ManageCategory extends Component {
+
+    state = {
+        Categories: true,
+        HelpSupport: false
+    }
+
+    handleTab = (e) => {
+        let name = e.target.text
+        debugger
+        if (name === "Categories") {
+            this.setState({Categories: true, HelpSupport: false})
+        } else {
+            this.setState({Categories: false, HelpSupport: true})
+        }
+    }
 
     render() {
         return (
@@ -33,20 +49,25 @@ class ManageCategory extends Component {
                                     <div className="tab-wrapper">
                                         {/* */}
                                         <header className="tab-header">
-                                            <Link to="#" className="tab-item link-mute" aria-selected="true">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.Categories}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Categories
                                             </Link>
-                                            <Link to="#" className="tab-item link-mute" aria-selected="false">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.HelpSupport}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Help & Support
                                             </Link>
                                         </header>
                                         {/* */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold">Categories Management</h3>
+                                                <h3 className="bold"> {this.state.Categories === true ? "Categories Management" : "Help & Support"}</h3>
                                             </div>
                                             {/* Call to action - Favourites */}
-                                            <div className="tab-no-data">
+                                            <div
+                                                className={this.state.Categories === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
                                                         <h3 className="bold">Categories</h3>
@@ -64,6 +85,25 @@ class ManageCategory extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div
+                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                                <div className="tc">
+                                                    <header className="mt3 my-page">
+                                                        <h3 className="bold">Help &amp; Support</h3>
+                                                    </header>
+                                                    <p>
+                                                        24/7 chat support — message us at anytime!
+                                                    </p>
+                                                    <div className="mv3">
+                                                        <a href="tel:00923165953458" className="link-mute">
+                                                            <button className="btn btn-primary btn-lg">
+                                                                <i className="material-icons-outlined">phone</i> Contact
+                                                                Us
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +111,7 @@ class ManageCategory extends Component {
                         </div>
                     </div>
                 </div>
-
+                <SmartFooter/>
             </Fragment>
         );
     }

@@ -31,7 +31,7 @@ class TopAppBarAdmin extends Component {
                       </p>
                     </div>
                     <div className="mb1">
-                      <h6 className="white" style={{fontSize: '.86562rem'}}>Help &amp; Support</h6>
+                      <h6 className="white" style={{fontSize: '.86562rem'}}>Help & Support</h6>
                       <p className="white pa0 ma0" style={{fontSize: '.825rem'}}>
                         Email us at help@bambiha.com
                       </p>

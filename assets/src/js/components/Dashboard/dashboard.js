@@ -59,7 +59,7 @@ class Dashboard extends Component {
                       Orders
                     </Link>
                     <Link href="#" className="tab-item link-mute" aria-selected="false">
-                      Help &amp; Support
+                      Help & Support
                     </Link>
                   </header>
                   {/* */}
@@ -299,7 +299,7 @@ class Dashboard extends Component {
                                 Women
                               </h4>
                               <p>
-                                Take control of your digital reputation &amp; online reviews.
+                                Take control of your digital reputation & online reviews.
                               </p>
                             </div>
                           </div>

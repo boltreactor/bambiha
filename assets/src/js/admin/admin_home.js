@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react"
 import Navigation from "./navigation";
+import SmartFooter from "../components/Footers/smart-footer";
 
 class AdminHome extends Component {
     render() {
@@ -211,7 +212,7 @@ class AdminHome extends Component {
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
-                                                                    Help &amp; Support
+                                                                    Help & Support
                                                                 </h4>
                                                                 <p>
                                                                     Show us your own unique designs with #bambihabyyou
@@ -228,6 +229,7 @@ class AdminHome extends Component {
                         </div>
                     </div>
                 </div>
+                <SmartFooter/>
             </Fragment>
         );
     }

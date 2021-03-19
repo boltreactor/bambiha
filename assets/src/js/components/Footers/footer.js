@@ -70,7 +70,7 @@ class Footer extends Component {
                                      style={{marginBottom: '16px', marginLeft: '12px', color: '#8b8b8b'}}>Discover
                                 </div>
                                 <ul>
-                                    <li><Link to="#">Trust &amp; Safety</Link></li>
+                                    <li><Link to="#">Trust & Safety</Link></li>
                                     <li><Link to="#">Enterprise</Link></li>
                                     <li><Link to="#">Customer Stories</Link></li>
                                     <li><Link to="#">Pricing</Link></li>
