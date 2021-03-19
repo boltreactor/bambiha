@@ -44,7 +44,7 @@ class TopAppBarCopy extends Component {
         <div className="mdc-top-app-bar__row contain-full-bleed links--muted ">
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button dn-l js-trigger-mdc-drawer" aria-label="Open navigation menu">menu</button>
-            <Link to="/e-store" className="mdc-top-app-bar__title"><span className="tracked">BAMBIHA</span></Link>
+            <Link to="/" className="mdc-top-app-bar__title"><span className="tracked">BAMBIHA</span></Link>
           </section>
           <section className="mdc-top-app-bar__section app-shop mdc-top-app-bar__section--align-center" role="toolbar">
             <Link to="/new" className="show-lg link-mute">
