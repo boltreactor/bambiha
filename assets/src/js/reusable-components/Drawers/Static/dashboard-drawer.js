@@ -31,12 +31,12 @@ class DashboardDrawer extends Component {
                       <span>Continue Shopping</span>
                     </NavLink>
                   </li>
-                  <li className="item">
-                    <NavLink className="db text-decoration-none" exact activeClassName="item-active"  to='/help&Support'>
-                      <i className="material-icons-outlined v-mid mr2">live_help</i>
-                      <span>Help & Support</span>
-                    </NavLink>
-                  </li>
+                  {/*<li className="item">*/}
+                  {/*  <NavLink className="db text-decoration-none" exact activeClassName="item-active"  to='/help&Support'>*/}
+                  {/*    <i className="material-icons-outlined v-mid mr2">live_help</i>*/}
+                  {/*    <span>Help & Support</span>*/}
+                  {/*  </NavLink>*/}
+                  {/*</li>*/}
                 </ul>
               </div>
             </aside>

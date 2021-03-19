@@ -115,6 +115,7 @@ class App extends Component {
                     <ProtectedRoute exact path='/store' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/women' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/men' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/new' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/kids' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/custom' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/sale' render={(props) => <Store {...props}/>}/>

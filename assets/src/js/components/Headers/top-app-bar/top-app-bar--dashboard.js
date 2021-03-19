@@ -63,13 +63,13 @@ class TopAppBarDashboard extends Component {
                                         {/*
             <img class="img-avatar" src="/assets/images/static/user_avatar.svg" alt="">
             */}
-                                        <img className="img-avatar" src="/static/images/img-david.jpg" alt=""/>
+                                        <img className="img-avatar" src="/static/david-venturi.jpg" alt=""/>
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
                                             <div className="content" style={{width: '15.25rem'}}>
                                                 <h4 className="dropdown-header dropdown-menu-item text-secondary"
-                                                    Link="#!">Bolt Reactor</h4>
+                                                ><Link to="#!">Bolt Reactor</Link></h4>
                                                 <div className="dropdown-divider"/>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"

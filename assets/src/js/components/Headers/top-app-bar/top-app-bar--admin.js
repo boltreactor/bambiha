@@ -46,7 +46,7 @@ class TopAppBarAdmin extends Component {
                   {/*
             <img class="img-avatar" src="/static/user_avatar.svg" alt="">
             */}
-                  <img className="img-avatar" src="/static/images/img-david.jpg" alt="" />
+                  <img className="img-avatar" src="/static/david-venturi.jpg" alt="" />
                 </div>
                 <div className="mdc-menu-surface--anchor">
                   <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
