@@ -3,9 +3,7 @@ import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-dr
 import SmartFooter from "../Footers/smart-footer";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
-import Switch from "../../reusable-components/material-io/switch";
 import {addNotificationSettings, getNotificationSettings, setNotificationSettings} from "../../actions/profile";
-import notifications from "./notifications";
 
 class GeneralSettings extends Component {
 

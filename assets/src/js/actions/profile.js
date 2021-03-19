@@ -1,19 +1,6 @@
 import axios from "axios";
 import {loadProgressBar} from 'axios-progress-bar';
-import {
-    TOGGLE_DRAWER,
-    SET_PROFILE,
-    NOTIFICATIONS_SETTINGS,
-    SET_USER,
-    ALL_CHATS,
-    ALL_CHATS_FOR_NEW,
-    SNACKBAR,
-    MAP_ERROR_MESSAGE,
-    IMAGES,
-    ID_FOR_IMAGES
-    , IMAGES_VIEW, STATE_IMAGES, LOGIN_SUCCESS,
-} from "./types";
-import types from "react-quill";
+import {IMAGES, NOTIFICATIONS_SETTINGS, SET_PROFILE, SET_USER, SNACKBAR, TOGGLE_DRAWER,} from "./types";
 
 const qs = require('query-string');
 loadProgressBar();

@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import SettingsHeader from "../../Headers/settings-header";
 import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
-
+import Payments from "../../Payments/payments";
 import {Link, withRouter} from "react-router-dom";
-import {deleteCard, getCards, getBanks, deleteBank} from "../../../actions/payment";
+import {deleteCard, getCards, getBanks, deleteBank, getVAT, deleteVAT} from "../../../actions/payment";
 import {connect} from "react-redux";
 
 class ProductsBillings extends Component {
     componentDidMount() {
-
         this.props.getBanks();
         this.props.getCards();
+        this.props.getVAT();
     }
 
     handleDeleteCard(event, card) {
@@ -18,10 +18,19 @@ class ProductsBillings extends Component {
         this.props.deleteCard(card.id);
     }
 
-    handleDeleteBank(event, bank){
+    handleDeleteBank(event, bank) {
         event.preventDefault();
-        debugger
         this.props.deleteBank(bank.account, bank.id);
+    }
+
+    handleDeleteVAT(event, vat) {
+        event.preventDefault();
+        this.props.deleteVAT(vat.id);
+    }
+
+    handleEditVAT(event, vat){
+        event.preventDefault();
+        this.props.history.push('/edit-vat/'+vat.id)
     }
 
     state = {
@@ -30,7 +39,6 @@ class ProductsBillings extends Component {
         Taxes: false
     }
     handleTab = (e) => {
-        debugger
         let name = e.target.text
         this.setState({[name]: !this.state[name]})
         if (name === "Payments") {
@@ -176,7 +184,7 @@ class ProductsBillings extends Component {
                                                     </div>
                                                     <div className="payment-methods flex flex-wrap">
                                                         {(this.props.user_banks).map(bank => <div key={bank.id}
-                                                            className="mb3 mr3-m mr3-l w-100 w-60-m w-40-l">
+                                                                                                  className="mb3 mr3-m mr3-l w-100 w-60-m w-40-l">
                                                             <div
                                                                 className="custom-tooltip border border--light border--rounded pa2 relative">
                                                                 <div className="flex relative">
@@ -193,7 +201,9 @@ class ProductsBillings extends Component {
                                                                             <span>••••</span>
                                                                             <span>{bank.last4}</span>
                                                                         </h4>
-                                                                        <p className="mv0 xs">{bank.account_holder_name} <span> ({bank.account_holder_type})</span></p>
+                                                                        <p className="mv0 xs">{bank.account_holder_name}
+                                                                            <span> ({bank.account_holder_type})</span>
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                                 <div className="flex">
@@ -201,7 +211,8 @@ class ProductsBillings extends Component {
                                                                     <div>
                                                                         <div className="mr2 mt3 mb3">
                                                                             <button
-                                                                                className="btn fxs btn-outline-primary" onClick={event => this.handleDeleteBank(event, bank)}
+                                                                                className="btn fxs btn-outline-primary"
+                                                                                onClick={event => this.handleDeleteBank(event, bank)}
                                                                                 style={{borderColor: '#dbe3eb'}}>
                                                                                 REMOVE
                                                                             </button>
@@ -232,21 +243,93 @@ class ProductsBillings extends Component {
                                         </div>
                                         {/* Taxes */}
                                         <div className={this.state.Taxes ? "tab-no-data" : "tab-no-data hide"}>
-                                            <div className="tc">
-                                                <header className="mt3">
-                                                    <h3 className="bold">Taxes</h3>
-                                                </header>
-                                                <p>
-                                                    If you are registered for VAT, enter your VAT ID Number.
-                                                </p>
-                                                <div className="mv3">
-                                                    <Link to="/create-vat">
-                                                        <button className="btn btn-primary btn-lg">
-                                                            Add VAT ID Number
-                                                        </button>
-                                                    </Link>
-                                                </div>
-                                            </div>
+
+                                            {this.props.user_vat ?
+                                                <div>
+                                                    <div className="flex items-center flex-wrap mb4">
+                                                        <div>
+                                                            <h3 className="bold">VAT</h3>
+                                                            <p style={{maxWidth: '640px'}}>
+                                                                If you are registered for VAT, you may not be charged
+                                                                VAT on KOMPASSERA service fees.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="payment-methods flex flex-wrap">
+                                                        {(this.props.user_vat).map(vat => <div key={vat.id}
+                                                                                               className="mb3 mr3-m mr3-l w-100 w-60-m w-40-l">
+                                                            <div
+                                                                className="custom-tooltip border border--light border--rounded pa2 relative">
+                                                                <div className="flex relative">
+                                                                    <div className="ml2 mt3 mr2">
+                                                                        {/*<span className="material-icons-outlined"*/}
+                                                                        {/*      style={{*/}
+                                                                        {/*          color: 'var(--primary)',*/}
+                                                                        {/*          fontSize: '36px'*/}
+                                                                        {/*      }}>account_balance</span>*/}
+                                                                    </div>
+                                                                    <div className="flex-grow-1 mt3 mr3 ml2">
+                                                                        <h4 className="bold">
+                                                                            <span>{vat.name_reg}</span>
+                                                                        </h4>
+                                                                        <div className="mv0 xs">{vat.city}</div>
+                                                                        <div className="mv0 xs">{vat.country}</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex">
+                                                                    <div className="flex-grow-1"/>
+                                                                    <div>
+                                                                        <div className="mr2 mt3 mb3">
+                                                                            <button
+                                                                                className="btn fxs btn-outline-primary mr2"
+                                                                                onClick={event => this.handleEditVAT(event, vat)}
+                                                                                style={{borderColor: '#dbe3eb'}}>
+                                                                                EDIT
+                                                                            </button>
+                                                                            <button
+                                                                                className="btn fxs btn-outline-primary"
+                                                                                onClick={event => this.handleDeleteVAT(event, vat)}
+                                                                                style={{borderColor: '#dbe3eb'}}>
+                                                                                REMOVE
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>)}
+                                                    </div>
+                                                </div> :
+                                                <div className="tc">
+                                                    <header className="mt3">
+                                                        <h3 className="bold">Taxes</h3>
+                                                    </header>
+                                                    <p>
+                                                        If you are registered for VAT, enter your VAT ID Number.
+                                                    </p>
+                                                    <div className="mv3">
+                                                        <Link to="/create-vat">
+                                                            <button className="btn btn-primary btn-lg">
+                                                                Add VAT ID Number
+                                                            </button>
+                                                        </Link>
+                                                    </div>
+                                                </div>}
+
+                                            {/*<div className="tc">*/}
+                                            {/*    <header className="mt3">*/}
+                                            {/*        <h3 className="bold">Taxes</h3>*/}
+                                            {/*    </header>*/}
+                                            {/*    <p>*/}
+                                            {/*        If you are registered for VAT, enter your VAT ID Number.*/}
+                                            {/*    </p>*/}
+                                            {/*    <div className="mv3">*/}
+                                            {/*        <Link to="/create-vat">*/}
+                                            {/*            <button className="btn btn-primary btn-lg">*/}
+                                            {/*                Add VAT ID Number*/}
+                                            {/*            </button>*/}
+                                            {/*        </Link>*/}
+                                            {/*    </div>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -261,8 +344,16 @@ class ProductsBillings extends Component {
 
 const mapStateToProps = state => ({
     user_cards: state.payment.user_cards,
-    user_banks: state.payment.user_banks
+    user_banks: state.payment.user_banks,
+    user_vat: state.payment.user_vat
 });
 
 
-export default withRouter(connect(mapStateToProps, {getCards, deleteCard, getBanks, deleteBank})(ProductsBillings));
+export default withRouter(connect(mapStateToProps, {
+    getCards,
+    deleteCard,
+    getBanks,
+    deleteBank,
+    getVAT,
+    deleteVAT
+})(ProductsBillings));

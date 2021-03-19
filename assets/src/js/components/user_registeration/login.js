@@ -13,23 +13,23 @@ import Textfield from "../../reusable-components/material-io/textfield";
 
 class Login extends Form {
 
-  responseFacebook = (response) => {
-    this.props.socialLogin({
-      'platform': 'facebook',
-      'name': response.name,
-      'image': response.picture.data.url,
-      'id': response.id,
-      'email': response.email
-    }, this.props)
-  }
-  state = {
-    isHidden: true,
-    data: {
-      email: "", password: ""
-    },
-    errors: {},
-    email_for_error: ""
-  };
+    responseFacebook = (response) => {
+        this.props.socialLogin({
+            'platform': 'facebook',
+            'name': response.name,
+            'image': response.picture.data.url,
+            'id': response.id,
+            'email': response.email
+        }, this.props)
+    }
+    state = {
+        isHidden: true,
+        data: {
+            email: "", password: ""
+        },
+        errors: {},
+        email_for_error: ""
+    };
 
     componentDidMount() {
         // this.state.email_for_error=false
@@ -97,7 +97,7 @@ class Login extends Form {
                                 <div className="mb4 mt3">
                                     <h4>Sign in to your account</h4>
                                 </div>
-                                {/* */}
+                                {/* Google Login */}
                                 <div className="mb4">
                                     <GoogleLoginCustom {...this.props} text={'LOG IN WITH GOOGLE'}/>
                                     {/*<button type="button" onClick={this.googleLogin}*/}
@@ -107,16 +107,19 @@ class Login extends Form {
                                     {/* </button>*/}
 
 
-                </div>
-                <div className="mb4">
-                  <LinkedInPage {...this.props}/>
-                </div>
-                <div className="mb4">
-                  <FacebookLogin
-                    appId="214759983644946"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    render={renderProps => (
+                                </div>
+                                {/* Linked in Login */}
+                                {/*<div className="mb4">*/}
+                                {/*    <LinkedInPage {...this.props}/>*/}
+                                {/*</div>*/}
+
+                                {/* Facebook Login */}
+                                <div className="mb4">
+                                    <FacebookLogin
+                                        appId="214759983644946"
+                                        autoLoad={false}
+                                        fields="name,email,picture"
+                                        render={renderProps => (
                                             <button type="button" onClick={renderProps.onClick}
                                                     className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">
                                                 <img className="v-mid mr2" alt="" src="/static/facebook-login.svg"/>
@@ -125,7 +128,7 @@ class Login extends Form {
 
                                         )}
                                         callback={this.responseFacebook}/>
-                </div>
+                                </div>
 
                                 {/* */}
                                 <div className="mb4 relative auth_divider">
@@ -145,206 +148,93 @@ class Login extends Form {
                                             error={this.state.errors.email}
                                             autoFocus={true}/>
 
-                    {/* */}
-                    <Textfield
-                      name="password"
-                      label="Password"
-                      type={isHidden ? 'password' : 'text'}
-                      onChange={this.handleChange}
-                      error={this.state.errors.password}
-                      value={this.state.data.password}
-                      onClick={this.onIconClick}
-                      isHidden={isHidden}
-                      changeHidden={this.changeHidden}
-                    />
+                                        {/* */}
+                                        <Textfield
+                                            name="password"
+                                            label="Password"
+                                            type={isHidden ? 'password' : 'text'}
+                                            onChange={this.handleChange}
+                                            error={this.state.errors.password}
+                                            value={this.state.data.password}
+                                            onClick={this.onIconClick}
+                                            isHidden={isHidden}
+                                            changeHidden={this.changeHidden}
+                                        />
 
-                    {/*<div className="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon w-100" data-mdc-auto-init="MDCTextField">*/}
-                    {/*  <i className="material-icons-outlined mdc-text-field__icon">visibility</i>*/}
-                    {/*  <input className="mdc-text-field__input" type="password" id="text-field-hero-input" />*/}
-                    {/*  <div className="mdc-notched-outline">*/}
-                    {/*    <div className="mdc-notched-outline__leading" />*/}
-                    {/*    <div className="mdc-notched-outline__notch">*/}
-                    {/*      <label htmlFor="text-field-hero-input" className="mdc-floating-label">Password</label>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="mdc-notched-outline__trailing" />*/}
-                    {/*  </div>*/}
-                    {/*</div>*/}
-                    {/*<div className="mdc-text-field-helper-line">*/}
-                    {/*  <div className="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true" />*/}
-                    {/*</div>*/}
+                                        {/*<div className="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon w-100" data-mdc-auto-init="MDCTextField">*/}
+                                        {/*  <i className="material-icons-outlined mdc-text-field__icon">visibility</i>*/}
+                                        {/*  <input className="mdc-text-field__input" type="password" id="text-field-hero-input" />*/}
+                                        {/*  <div className="mdc-notched-outline">*/}
+                                        {/*    <div className="mdc-notched-outline__leading" />*/}
+                                        {/*    <div className="mdc-notched-outline__notch">*/}
+                                        {/*      <label htmlFor="text-field-hero-input" className="mdc-floating-label">Password</label>*/}
+                                        {/*    </div>*/}
+                                        {/*    <div className="mdc-notched-outline__trailing" />*/}
+                                        {/*  </div>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="mdc-text-field-helper-line">*/}
+                                        {/*  <div className="mdc-text-field-helper-text" id="my-helper-id" aria-hidden="true" />*/}
+                                        {/*</div>*/}
 
 
-                    {/* */}
-                    <div className="mv1">
-                      <div className="flex">
-                        <div className="flex-grow-1"/>
-                        <div>
-                          <Link to="/reset-password">Forgot your password?</Link>
+                                        {/* */}
+                                        <div className="mv1">
+                                            <div className="flex">
+                                                <div className="flex-grow-1"/>
+                                                <div>
+                                                    <Link to="/reset-password">Forgot your password?</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* */}
+                                        <div className="mv2 pt3">
+                                            <button className="btn btn-xl btn-primary btn-block text-white btn-shadow"
+                                                    onClick={this.handleSubmit}>SIGN IN
+                                            </button>
+                                        </div>
+                                    </form>
+                                    {this.props.error && this.state.email_for_error &&
+                                    <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
+                                        <div className="ui-alert__icon">
+                                            <i className="material-icons-outlined">error_outline</i>
+                                        </div>
+                                        <div className="ui-alert__message">{this.props.error}.
+                                        </div>
+                                    </div>}
+                                </div>
+                            </div>
+                            {/* */}
+                            <div className="mv2" style={{fontSize: '.875rem'}}>
+                                <p>Need a Kompassera account?
+                                    <Link title="Sign up" to="/signup"> Create an account</Link></p>
+                            </div>
+                            {/* */}
+                            <div className="pv2 mb4">
+                                <div className="flex items-center justify-center">
+                                    ©
+                                    <span className="mr2" style={{fontSize: '.875rem'}}>2021</span>
+                                    <span className="dot"/>
+                                    <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}}
+                                          title="Terms of Service"
+                                          to="/terms-of-service" target="_blank">Terms of Service</Link>
+                                    <span className="dot"/>
+                                    <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}}
+                                          title="Terms of Service"
+                                          to="/privacy-policy" target="_blank">Privacy Policy</Link>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                    {/* */}
-                    <div className="mv2 pt3">
-                      <button className="btn btn-xl btn-primary btn-block text-white btn-shadow"
-                              onClick={this.handleSubmit}>SIGN IN
-                      </button>
-                    </div>
-                  </form>
-                  {this.props.error && this.state.email_for_error &&
-                  <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
-                    <div className="ui-alert__icon">
-                      <i className="material-icons-outlined">error_outline</i>
-                    </div>
-                    <div className="ui-alert__message">{this.props.error}.
-                    </div>
-                  </div>}
                 </div>
-              </div>
-              {/* */}
-              <div className="mv2" style={{fontSize: '.875rem'}}>
-                <p>Need a Kompassera account?
-                  <Link title="Sign up" to="/signup"> Create an account</Link></p>
-              </div>
-              {/* */}
-              <div className="pv2 mb4">
-                <div className="flex items-center justify-center">
-                  ©
-                  <span className="mr2" style={{fontSize: '.875rem'}}>2021</span>
-                  <span className="dot"/>
-                  <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}} title="Terms of Service"
-                        to="/terms-of-service" target="_blank">Terms of Service</Link>
-                  <span className="dot"/>
-                  <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}} title="Terms of Service"
-                        to="/privacy-policy" target="_blank">Privacy Policy</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/*    Old Design*/}
-        {/*  */}
-        {/* <main className="page page--grid">*/}
-        {/*   <div className="page__wrapper">*/}
-        {/*     <div id="alerts" style={{maxWidth: '504px', margin: '16px auto'}}/>*/}
-        {/*     <div id="global-status-container" style={{maxWidth: '504px', margin: '16px auto'}}/>*/}
-        {/*     <div className="row">*/}
-        {/*       <div className="col s12 m12">*/}
-        {/*         <div className="canvas-register clearfix">*/}
-        {/*           <div className="brand">*/}
-        {/*             <div className="row">*/}
-        {/*               <div className="col s12">*/}
-        {/*                 <div className="header">*/}
-        {/*                   <h2 className="logo mdc-typography--title">*/}
-        {/*                     <Link to="/">*/}
-        {/*                       KompassEra*/}
-        {/*                     </Link>*/}
-        {/*                   </h2>*/}
-        {/*                   <p>*/}
-        {/*                     Find the perfect teacher for your children, plus more*/}
-        {/*                   </p>*/}
-        {/*                 </div>*/}
-        {/*               </div>*/}
-        {/*             </div>*/}
-        {/*           </div>*/}
-        {/*           <div className="social-login">*/}
-        {/*             <div className="row">*/}
-        {/*               <div className="col s4">*/}
-        {/*                 <FacebookLogin*/}
-        {/*                     appId="214759983644946"*/}
-        {/*                     autoLoad={false}*/}
-        {/*                     fields="name,email,picture"*/}
-        {/*                     callback={this.responseFacebook}/>*/}
-        {/*               </div>*/}
-        {/*               <div className="col s4">*/}
-        {/*                   <LinkedInPage {...this.props}/>*/}
-        {/*               </div>*/}
-        {/*               <div className="col s4">*/}
-        {/*                 <div className="google">*/}
-        {/**/}
-        {/*                   <GoogleLoginCustom {...this.props} text={'Login'}/>*/}
-        {/*                 </div>*/}
-        {/*               </div>*/}
-        {/*             </div>*/}
-        {/*           </div>*/}
-        {/*           <div className="divider"/>*/}
-        {/*           <form className="form-register" onSubmit={this.handleSubmit}>*/}
-        {/*             <div className={"mb2"}>*/}
-        {/*               <TextField*/}
-        {/*                 name="email"*/}
-        {/*                 label="Email"*/}
-        {/*                 type="email"*/}
-        {/*                 onChange={this.handleChange}*/}
-        {/*                 error={this.state.errors.email}*/}
-        {/*                 value={this.state.data.email}/>*/}
-        {/*             </div>*/}
-        {/**/}
-        {/*             <TextField*/}
-        {/*               name="password"*/}
-        {/*               label="Password"*/}
-        {/*               type={isHidden ? 'password' : 'text'}*/}
-        {/*               onChange={this.handleChange}*/}
-        {/*               error={this.state.errors.password}*/}
-        {/*               onClick={this.onIconClick}*/}
-        {/*               isHidden={isHidden}*/}
-        {/*               value={this.state.data.password}/>*/}
-        {/**/}
-        {/*           </form>*/}
-        {/*           {this.props.error && this.state.email_for_error &&*/}
-        {/*           <div className="ui-paper ui-alert ui-alert--error my2" role="alert">*/}
-        {/*             <div className="ui-alert__icon">*/}
-        {/*               <i className="material-icons-outlined">error_outline</i>*/}
-        {/*             </div>*/}
-        {/*             <div className="ui-alert__message">{this.props.error}.*/}
-        {/*             </div>*/}
-        {/*           </div>}*/}
-        {/*           <div className="my2 text-center">*/}
-        {/*             <button className="mdc-button mdc-button--unelevated mdc-button--large"*/}
-        {/*                     disabled={this.validateUser()} onClick={this.handleSubmit}*/}
-        {/*                     style={{minWidth: '84px', fontSize: '17px'}}><span*/}
-        {/*               className="mdc-button__ripple"/> Log In*/}
-        {/*             </button>*/}
-        {/*           </div>*/}
-        {/**/}
-        {/**/}
-        {/*           <div className="my3">*/}
-        {/*             <div*/}
-        {/*               style={{*/}
-        {/*                 fontSize: '15px',*/}
-        {/*                 fontWeight: 500,*/}
-        {/*                 textAlign: 'center',*/}
-        {/*                 color: '#666'*/}
-        {/*               }}>*/}
-        {/*               Don't have an account? <span> </span>*/}
-        {/*               <Link to="/signup">*/}
-        {/*                 Register*/}
-        {/*               </Link>*/}
-        {/*             </div>*/}
-        {/*             <div*/}
-        {/*               style={{*/}
-        {/*                 fontSize: '15px',*/}
-        {/*                 fontWeight: 500,*/}
-        {/*                 textAlign: 'center',*/}
-        {/*                color: '#666'*/}
-        {/*               }}>*/}
-        {/*               <Link to="/reset-password">*/}
-        {/*                 Forgot your password?*/}
-        {/*               </Link>*/}
-        {/*             </div>*/}
-        {/*           </div>*/}
-        {/*         </div>*/}
-        {/*       </div>*/}
-        {/*     </div>*/}
-        {/*   </div>*/}
-        {/* </main>*/}
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-  loginStatus: state.authentication.loginStatus,
-  error: state.authentication.error
+    loginStatus: state.authentication.loginStatus,
+    error: state.authentication.error
 
 });
 

@@ -1,9 +1,15 @@
 import axios from "axios";
 import {loadProgressBar} from 'axios-progress-bar';
 import {
-    LOGIN_SUCCESS, LOGIN_FAILED, TOGGLE_DRAWER,
-    SIGNUP, REDIRECT_TO_LOGIN, VERIFICATION, PROFILE,
-    LOGOUT, SET_USER, MESSAGE, ERROR, MAP_ERROR_MESSAGE, IMAGES_VIEW, CHANGE_PASSWORD_MSG
+    CHANGE_PASSWORD_MSG,
+    ERROR,
+    LOGIN_FAILED,
+    LOGIN_SUCCESS,
+    LOGOUT,
+    MESSAGE,
+    SET_USER,
+    SIGNUP,
+    VERIFICATION
 } from "./types";
 
 const qs = require('query-string');
@@ -218,12 +224,12 @@ export const changePassword = (re_new_password, new_password, current_password, 
                 }
             }
         ).catch(err => {
-                dispatch({
-                        type: ERROR,
-                        error_current: err.response.data.message,
-                        error: ""
-                    }
-                )
+            dispatch({
+                    type: ERROR,
+                    error_current: err.response.data.message,
+                    error: ""
+                }
+            )
 
         }
     )
@@ -352,64 +358,64 @@ export const createLinkedInLogin = (user, props) => dispatch => {
 };
 
 
-export const googleLogin = () => dispatch => {
-    axios.get(`/auth/socials/o/google-oauth2/?redirect_uri=${window.location.origin}/`, {headers: Header})
-        .then(res => {
-            window.open(res.data.authorization_url);
-        });
-};
+// export const googleLogin = () => dispatch => {
+//     axios.get(`/auth/socials/o/google-oauth2/?redirect_uri=${window.location.origin}/`, {headers: Header})
+//         .then(res => {
+//             window.open(res.data.authorization_url);
+//         });
+// };
 
-export const glogin = (code, state, props) => dispatch => {
-    Header["Content-Type"] = 'application/x-www-form-urlencoded';
-    axios.post('/auth/socials/o/google-oauth2/', qs.stringify({code: code, state: state}), {headers: Header})
-        .then(res => {
-            localStorage.setItem("loginStatus", true)
-            localStorage.setItem("token", res.data.access);
-            dispatch({
-                type: LOGIN_SUCCESS,
-                loginStatus: true
-            });
-            props.history.push('/');
-            dispatch({
-                type: MESSAGE,
-                message: false
-            });
-
-            Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-            Header["Content-Type"] = 'application/x-www-form-urlencoded';
-            axios.put('/auth/users/me/', qs.stringify({username: res.data.user, account_type: 1}), {headers: Header})
-                .then(res => {
-                    dispatch(getUser())
-                });
-        });
-}
-
-
-export const facebookLogin = () => dispatch => {
-    axios.get('/auth/socials/o/facebook/?redirect_uri=http://localhost:8000/', {headers: Header})
-        .then(res => {
-            window.open(res.data.authorization_url);
-        });
-};
-export const flogin = (code, state, props) => dispatch => {
-    Header["Content-Type"] = 'application/x-www-form-urlencoded';
-    axios.post('/auth/socials/o/facebook/', qs.stringify({code: code, state: state}), {headers: Header})
-        .then(res => {
-            localStorage.setItem("token", res.data.access);
-            dispatch({
-                type: LOGIN_SUCCESS,
-                loginStatus: true
-            });
-            props.history.push('/');
-            dispatch({
-                type: MESSAGE,
-                message: false
-            });
-            Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-            Header["Content-Type"] = 'application/x-www-form-urlencoded';
-            axios.put('/auth/users/me/', qs.stringify({
-                username: res.data.user,
-                account_type: 2
-            }), {headers: Header})
-        });
-};
+// export const glogin = (code, state, props) => dispatch => {
+//     Header["Content-Type"] = 'application/x-www-form-urlencoded';
+//     axios.post('/auth/socials/o/google-oauth2/', qs.stringify({code: code, state: state}), {headers: Header})
+//         .then(res => {
+//             localStorage.setItem("loginStatus", true)
+//             localStorage.setItem("token", res.data.access);
+//             dispatch({
+//                 type: LOGIN_SUCCESS,
+//                 loginStatus: true
+//             });
+//             props.history.push('/');
+//             dispatch({
+//                 type: MESSAGE,
+//                 message: false
+//             });
+//
+//             Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+//             Header["Content-Type"] = 'application/x-www-form-urlencoded';
+//             axios.put('/auth/users/me/', qs.stringify({username: res.data.user, account_type: 1}), {headers: Header})
+//                 .then(res => {
+//                     dispatch(getUser())
+//                 });
+//         });
+// }
+//
+//
+// export const facebookLogin = () => dispatch => {
+//     axios.get('/auth/socials/o/facebook/?redirect_uri=http://localhost:8000/', {headers: Header})
+//         .then(res => {
+//             window.open(res.data.authorization_url);
+//         });
+// };
+// export const flogin = (code, state, props) => dispatch => {
+//     Header["Content-Type"] = 'application/x-www-form-urlencoded';
+//     axios.post('/auth/socials/o/facebook/', qs.stringify({code: code, state: state}), {headers: Header})
+//         .then(res => {
+//             localStorage.setItem("token", res.data.access);
+//             dispatch({
+//                 type: LOGIN_SUCCESS,
+//                 loginStatus: true
+//             });
+//             props.history.push('/');
+//             dispatch({
+//                 type: MESSAGE,
+//                 message: false
+//             });
+//             Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+//             Header["Content-Type"] = 'application/x-www-form-urlencoded';
+//             axios.put('/auth/users/me/', qs.stringify({
+//                 username: res.data.user,
+//                 account_type: 2
+//             }), {headers: Header})
+//         });
+// };

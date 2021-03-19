@@ -1,9 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Link, NavLink, withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {addProfile, getUser, setUserInfo} from "../../actions/profile";
-import {addProfilePicture, addCoverPicture} from "../../actions/authentication";
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
+import {addCoverPicture, addProfilePicture} from "../../actions/authentication";
 import SideHeader from "./sideHeader";
 
 class Dashboard extends Component {

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {CardElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {addCard} from "../../../actions/payment";
 
@@ -162,6 +162,6 @@ class AddPayment extends Component {
 }
 
 const mapStateToProps = state => ({
-  card: state.payment.card,
+    card: state.payment.card,
 });
 export default withRouter(connect(mapStateToProps, {addCard})(AddPayment));

@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import SettingsDrawer from "../../reusable-components/Drawers/Static/settings-drawer";
 import SmartFooter from "../Footers/smart-footer";
-import {getUser, addProfile, setUserInfo} from "../../actions/profile";
+import {addProfile, getUser, setUserInfo} from "../../actions/profile";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {addProfilePicture, newPassword} from "../../actions/authentication";
+import {addProfilePicture} from "../../actions/authentication";
 import NoLabelTextfield from "../../reusable-components/material-io/no-label-textfield";
-import SimpleTextfield from "../../reusable-components/simple-textfield";
 import Form from "../../reusable-components/form";
 import Joi from "joi-browser";
 
@@ -59,7 +58,7 @@ class MyProfile extends Form {
                         return {
                             message: "Phone is required"
                         }
-                     case "string.base":
+                    case "string.base":
                         return {
                             message: "Phone is required"
                         }
@@ -88,7 +87,7 @@ class MyProfile extends Form {
 
     };
     handleSubmitProfile = (event) => {
-          event.preventDefault();
+        event.preventDefault();
         const errors = this.validateUserProfile();
         this.setState({errors: errors || {}});
         if (errors) return;
@@ -169,51 +168,51 @@ class MyProfile extends Form {
                                             </div>
                                             <div className="col s12 m6 pull-6">
                                                 <div className="w-90-l">
-                                                     <div className="mb3">
-                                                    <NoLabelTextfield placeholder="Enter your first name"
-                                                                      label="FIRST NAME"
-                                                                      type="text"
-                                                                      onChange={this.handleChangeUser}
-                                                                      name="first_name"
-                                                                      value={this.props.user && this.props.user.first_name ? this.props.user.first_name : ""}
-                                                                      error={this.state.errors.first_name}
-                                                                      />
-                                                     </div>
-                                                     <div className="mb3">
-                                                    <NoLabelTextfield placeholder="Enter your last name"
-                                                                      label="LAST NAME"
-                                                                      type="text"
-                                                                      onChange={this.handleChangeUser}
-                                                                      name="last_name"
-                                                                      value={this.props.user && this.props.user.last_name ? this.props.user.last_name : ""}
-                                                                      error={this.state.errors.last_name}
-                                                                      />
-                                                     </div>
                                                     <div className="mb3">
-                                                    <NoLabelTextfield placeholder="Enter your email ID"
-                                                                      label="EMAIL"
-                                                                      type="text"
-                                                                      name="email"
-                                                                      onChange={this.handleChangeUser}
-                                                                      value={this.props.user && this.props.user.email}
-                                                                      error={this.state.errors.email}
-                                                                      />
-</div>
+                                                        <NoLabelTextfield placeholder="Enter your first name"
+                                                                          label="FIRST NAME"
+                                                                          type="text"
+                                                                          onChange={this.handleChangeUser}
+                                                                          name="first_name"
+                                                                          value={this.props.user && this.props.user.first_name ? this.props.user.first_name : ""}
+                                                                          error={this.state.errors.first_name}
+                                                        />
+                                                    </div>
                                                     <div className="mb3">
-                                                    <NoLabelTextfield placeholder="Enter your phone number"
-                                                                      label="PHONE"
-                                                                      type="tel"
-                                                                      name="phone"
-                                                                      onChange={this.handleChangeUser}
-                                                                      value={this.props.user && this.props.user.phone}
-                                                                      error={this.state.errors.phone}
+                                                        <NoLabelTextfield placeholder="Enter your last name"
+                                                                          label="LAST NAME"
+                                                                          type="text"
+                                                                          onChange={this.handleChangeUser}
+                                                                          name="last_name"
+                                                                          value={this.props.user && this.props.user.last_name ? this.props.user.last_name : ""}
+                                                                          error={this.state.errors.last_name}
+                                                        />
+                                                    </div>
+                                                    <div className="mb3">
+                                                        <NoLabelTextfield placeholder="Enter your email ID"
+                                                                          label="EMAIL"
+                                                                          type="text"
+                                                                          name="email"
+                                                                          onChange={this.handleChangeUser}
+                                                                          value={this.props.user && this.props.user.email}
+                                                                          error={this.state.errors.email}
+                                                        />
+                                                    </div>
+                                                    <div className="mb3">
+                                                        <NoLabelTextfield placeholder="Enter your phone number"
+                                                                          label="PHONE"
+                                                                          type="tel"
+                                                                          name="phone"
+                                                                          onChange={this.handleChangeUser}
+                                                                          value={this.props.user && this.props.user.phone}
+                                                                          error={this.state.errors.phone}
 
-                                                    />
+                                                        />
                                                     </div>
                                                     <div className="mt4 mb3">
                                                         <button className="btn btn-primary btn-lg"
                                                                 disabled={Object.keys(this.state.errors).length > 0 ? true : ""}
-                                                                onClick={(e)=>this.handleSubmitProfile(e)}>
+                                                                onClick={(e) => this.handleSubmitProfile(e)}>
                                                             UPDATE
                                                         </button>
                                                     </div>

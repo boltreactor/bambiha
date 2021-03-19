@@ -55,4 +55,4 @@ class GoogleLoginCustom extends Component {
 
 const mapStateToProps = state => ({});
 
-export default connect(mapStateToProps, {login, socialLogin})(GoogleLoginCustom);
+export default connect(mapStateToProps, {socialLogin})(GoogleLoginCustom);

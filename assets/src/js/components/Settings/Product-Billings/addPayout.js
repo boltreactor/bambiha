@@ -1,11 +1,9 @@
 import React, {Component, useState} from 'react';
 import {Elements, useElements, useStripe} from "@stripe/react-stripe-js";
-import {Link, withRouter} from "react-router-dom";
-import SimpleTextfield from "../../../reusable-components/simple-textfield";
+import {withRouter} from "react-router-dom";
 import {loadStripe} from "@stripe/stripe-js";
 import {connect} from "react-redux";
 import {addBank, getBalance, getBanks} from "../../../actions/payment";
-import OutlinedTextfield from "../../../reusable-components/outlined-textfield";
 import NoLabelTextfield from "../../../reusable-components/material-io/no-label-textfield";
 
 const AddBankAccount = (props) => {

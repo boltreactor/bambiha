@@ -1,8 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import LoggedInHeader from "./loggedInHeader";
 import LoggedOutHeader from "./LoggedOutHeader";
 import {withRouter} from 'react-router-dom';
-import WelcomeHeader from "./welcome-header";
 import SettingsHeader from "./settings-header";
 
 

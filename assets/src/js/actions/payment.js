@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_CARD, DELETE_BANK, DELETE_CARD, GET_BALANCE, GET_BANKS, GET_CARDS, VAT, PAYMENT_INTENT} from "./types";
+import {ADD_CARD, DELETE_BANK, DELETE_CARD, GET_BALANCE, GET_BANKS, GET_CARDS, PAYMENT_INTENT, VAT} from "./types";
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -162,7 +162,6 @@ export const getVAT = () => dispatch => {
             });
         });
 }
-
 
 
 export const deleteVAT = (id) => dispatch => {

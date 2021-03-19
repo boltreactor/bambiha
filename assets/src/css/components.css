@@ -3603,7 +3603,7 @@ ul.store-categories a:hover {
 }
 
 .tab-content .tab-no-data {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     justify-content: center;
     height: 100%;

@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import FooterLaunch from "../Footers/footer-launch";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {getUser} from "../../actions/profile";
 
 

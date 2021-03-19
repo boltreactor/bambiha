@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter, NavLink} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser, toggleDrawers} from "../../actions/profile";
 import {addProfilePicture} from "../../actions/authentication";
@@ -72,13 +72,13 @@ class SettingsHeader extends Component {
                                         {this.props.user && this.props.user.profile_image ?
                                             <img className="img-avatar" src={this.props.user.profile_image}
                                                  alt=""/> : <img className="img-avatar" src={"/static/user_avatar.svg"}
-                                                 alt=""/> }
+                                                                 alt=""/>}
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
                                             <div className="content" style={{width: '15.25rem'}}>
                                                 <h4 className="dropdown-header dropdown-menu-item text-secondary">KompassEra
-                                                    </h4>
+                                                </h4>
                                                 <div className="dropdown-divider"/>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
@@ -125,4 +125,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default withRouter(connect(mapStateToProps, {getUser, toggleDrawers,addProfilePicture})(SettingsHeader));
+export default withRouter(connect(mapStateToProps, {getUser, toggleDrawers, addProfilePicture})(SettingsHeader));

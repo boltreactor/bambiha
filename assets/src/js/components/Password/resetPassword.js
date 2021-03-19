@@ -1,9 +1,7 @@
-import React, {Component, Fragment} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import TextField from "../../reusable-components/outlined-textfield";
+import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {resetPassword} from "../../actions/authentication";
-import MessageSnackbar from "../../reusable-components/messageSnackbar";
 import Form from "../../reusable-components/form";
 import Joi from 'joi-browser';
 import Textfield from "../../reusable-components/material-io/textfield";
@@ -87,74 +85,6 @@ class ResetPassword extends Form {
                         </div>
                     </div>
                 </div>
-                {/*<main className="page page--grid">*/}
-                {/*    <div className="page__wrapper">*/}
-                {/*        {this.props.message &&*/}
-                {/*        <MessageSnackbar show={true} msg={this.props.snackMsg}/>}*/}
-                {/*        <div id="alerts" style={{maxWidth: '504px', margin: '16px auto'}}/>*/}
-                {/*        <div id="global-status-container" style={{maxWidth: '504px', margin: '16px auto'}}/>*/}
-                {/*        <div className="row">*/}
-                {/*            <div className="col s12 m12">*/}
-                {/*                <div className="canvas-register clearfix">*/}
-                {/*                    <div className="brand">*/}
-                {/*                        <div className="row">*/}
-                {/*                            <div className="col s12">*/}
-                {/*                                <div className="header">*/}
-                {/*                                    <h2 className="logo mdc-typography--title">*/}
-                {/*                                        <a href="/">*/}
-                {/*                                            KompassEra*/}
-                {/*                                        </a>*/}
-                {/*                                    </h2>*/}
-                {/*                                    <p>*/}
-                {/*                                        Forgot your password?*/}
-                {/*                                    </p>*/}
-                {/*                                </div>*/}
-                {/*                            </div>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                    <form className="form-register">*/}
-                {/*                        /!* *!/*/}
-                {/*                        <TextField name="email" label="Email" type="email" onChange={this.handleChange}*/}
-                {/*                                   error={this.state.errors.email || this.props.error ? this.props.error_reset : null}/>*/}
-
-                {/*                    </form>*/}
-                {/*                    <div className="my2 text-center">*/}
-                {/*                        <button className="mdc-button mdc-button--unelevated mdc-button--large"*/}
-                {/*                                style={{minWidth: '100%', fontSize: '17px'}} disabled={this.validate()}*/}
-                {/*                                onClick={this.handleSubmit}><span*/}
-                {/*                            className="mdc-button__ripple"/> Send me reset password instructions*/}
-                {/*                        </button>*/}
-                {/*                    </div>*/}
-                {/*                    <div className="my3">*/}
-                {/*                        {!this.props.loginStatus &&*/}
-                {/*                        <div style={{*/}
-                {/*                            fontSize: '15px',*/}
-                {/*                            fontWeight: 500,*/}
-                {/*                            textAlign: 'left',*/}
-                {/*                            color: '#666',*/}
-                {/*                            lineHeight: '24px'*/}
-                {/*                        }}>*/}
-                {/*                            <Link to="/login">*/}
-                {/*                                Sign in*/}
-                {/*                            </Link>*/}
-                {/*                        </div>}*/}
-                {/*                        <div style={{*/}
-                {/*                            fontSize: '15px',*/}
-                {/*                            fontWeight: 500,*/}
-                {/*                            textAlign: 'left',*/}
-                {/*                            color: '#666',*/}
-                {/*                            lineHeight: '24px'*/}
-                {/*                        }}>*/}
-                {/*                            <Link to="/signup">*/}
-                {/*                                Register*/}
-                {/*                            </Link>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</main>*/}
             </div>
 
         );

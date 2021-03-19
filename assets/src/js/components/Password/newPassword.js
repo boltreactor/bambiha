@@ -1,6 +1,5 @@
-import React, {Fragment} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import TextField from "../../reusable-components/outlined-textfield";
+import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {newPassword} from "../../actions/authentication";
 // import MessageSnackbar from "../../reusable-components/messageSnackbar";
