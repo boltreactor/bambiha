@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import Footer from "./Footers/estore-footer";
 
 class Index extends Component {
     render() {
@@ -188,6 +189,7 @@ class Index extends Component {
             </div>
           </section>
         </div>
+               <Footer/>
       </div>
         );
     }

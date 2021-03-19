@@ -5,6 +5,7 @@ import {addProfile, getUser, setUserInfo} from "../../actions/profile";
 import {addCoverPicture, addProfilePicture} from "../../actions/authentication";
 import SideHeader from "./sideHeader";
 import DashboardDrawer from "../../reusable-components/Drawers/Static/dashboard-drawer";
+import SmartFooter from "../Footers/estore-smart-footer";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -350,6 +351,7 @@ class Dashboard extends Component {
             </main>
           </div>
         </div>
+           <SmartFooter/>
       </div>
     );
   }

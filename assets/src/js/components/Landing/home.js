@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Link} from "react-router-dom";
+import Footer from "../Footers/estore-footer";
 import {getUser} from "../../actions/profile";
 
 
@@ -198,6 +199,7 @@ class Home extends Component {
             </div>
           </section>
         </div>
+              <Footer/>
       </div>
     );
   }

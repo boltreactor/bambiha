@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import DashboardDrawer from "../reusable-components/Drawers/Static/dashboard-drawer";
+import SmartFooter from "./Footers/estore-smart-footer";
 
 class Orders extends Component {
     state = {
@@ -325,6 +326,7 @@ class Orders extends Component {
                         </main>
                     </div>
                 </div>
+                <SmartFooter/>
             </div>
         );
     }
