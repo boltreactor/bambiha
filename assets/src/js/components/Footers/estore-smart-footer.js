@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
 
-class EstoreSmartFooter extends Component {
+class SmartFooter extends Component {
     render() {
         return (
             <div>
@@ -25,4 +25,4 @@ class EstoreSmartFooter extends Component {
         );
     }
 }
-export default withRouter(EstoreSmartFooter);
+export default withRouter(SmartFooter);

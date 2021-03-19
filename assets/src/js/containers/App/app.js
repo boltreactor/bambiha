@@ -32,7 +32,7 @@ import ProductsBillings from "../../components/Settings/Product-Billings/product
 import AddPayment from "../../components/Settings/Product-Billings/addPayment";
 import AddPayout from "../../components/Settings/Product-Billings/addPayout";
 import AddVat from "../../components/Settings/Product-Billings/addVAT";
-import Tester from "../../components/tester";
+
 
 
 class App extends Component {
@@ -52,7 +52,6 @@ class App extends Component {
                 <Switch>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
-                    <Route path='/tester' render={(props) => <Tester {...props}/>}/>
                     <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
                     {/*<ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>*/}
                     <Route path='/signup' render={(props) => <Signup {...props}/>}/>
