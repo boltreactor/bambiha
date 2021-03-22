@@ -1,8 +1,17 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {getUser} from "../../../actions/profile";
 
 
 class TopAppBarIndex extends Component {
+
+    componentDidMount() {
+        if (localStorage.getItem("token")) {
+            this.props.getUser();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -16,7 +25,7 @@ class TopAppBarIndex extends Component {
                                 className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button dn-l js-trigger-mdc-drawer"
                                 aria-label="Open navigation menu">menu
                             </button>
-                            <Link to="/e-store" className="mdc-top-app-bar__title"><span
+                            <Link to="/" className="mdc-top-app-bar__title"><span
                                 className="tracked">BAMBIHA</span></Link>
                         </section>
                         <section className="mdc-top-app-bar__section app-shop mdc-top-app-bar__section--align-center"
@@ -101,7 +110,9 @@ class TopAppBarIndex extends Component {
                             <div className="mr3">
                                 <div className="default-dropdown">
                                     <div style={{height: '32px', width: '32px'}}>
-                                        <img className="img-avatar" src="/static/images/user_avatar.svg" alt=""/>
+                                        <img className="img-avatar"
+                                             src={this.props.user && this.props.user.profile_image ? this.props.user.profile_image : "/static/user_avatar.svg"}
+                                             alt=""/>
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
@@ -111,13 +122,13 @@ class TopAppBarIndex extends Component {
                                                 <div className="dropdown-divider"/>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
-                                                    to="/log-in">
+                                                    to="/login">
                                                     <i className="material-icons v-mid">account_box</i>
                                                     Sign In
                                                 </Link>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
-                                                    to="/sign-up">
+                                                    to="/signup">
                                                     <i className="material-icons v-mid">how_to_reg</i>
                                                     Sign Up
                                                 </Link>
@@ -125,7 +136,7 @@ class TopAppBarIndex extends Component {
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
                                                     to="#">
                                                     <i className="material-icons-outlined v-mid">miscellaneous_services</i>
-                                                    Help &amp; Support
+                                                    Help & Support
                                                 </Link>
                                             </div>
                                         </div>
@@ -140,4 +151,8 @@ class TopAppBarIndex extends Component {
     }
 }
 
-export default withRouter(TopAppBarIndex);
+const mapStateToProps = state => ({
+    user: state.user.user
+});
+
+export default withRouter(connect(mapStateToProps, {getUser})(TopAppBarIndex))

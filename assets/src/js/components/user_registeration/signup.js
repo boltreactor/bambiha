@@ -131,12 +131,12 @@ class Signup extends Form {
         return (
             <div>
 
-                <div className="page">
+                <div className="page ap-skin-blue">
                     <div className="page__content">
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
+                                <Link to="/" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
@@ -146,16 +146,18 @@ class Signup extends Form {
                                 <div className="mb4">
                                     <GoogleLoginCustom {...this.props} text={'SIGN UP WITH GOOGLE'}/>
                                 </div>
-                                <div className="mb4">
-                                    <LinkedInPage {...this.props}/>
-                                </div>
-                                <div className="mb4">
-                                    <FacebookLogin
-                                        appId="214759983644946"
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        callback={this.responseFacebook}/>
-                                </div>
+                                {/* Linked In */}
+                                {/*<div className="mb4">*/}
+                                {/*    <LinkedInPage {...this.props}/>*/}
+                                {/*</div>*/}
+                                {/* Facebook */}
+                                {/*<div className="mb4">*/}
+                                {/*    <FacebookLogin*/}
+                                {/*        appId="214759983644946"*/}
+                                {/*        autoLoad={false}*/}
+                                {/*        fields="name,email,picture"*/}
+                                {/*        callback={this.responseFacebook}/>*/}
+                                {/*</div>*/}
                                 <div className="mb4 relative auth_divider">
                   <span className="auth_divider-text relative"
                         style={{paddingLeft: '.63rem', paddingRight: '.63rem'}}>or</span>

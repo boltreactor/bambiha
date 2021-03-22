@@ -2120,7 +2120,7 @@ img {
 }
 
 .bg-sky-blue {
-    background-color: rgba(29,124,248,.05);
+    background-color: rgba(29, 124, 248, .05);
 }
 
 .hover-black:focus, .hover-black:hover {
@@ -9099,7 +9099,7 @@ input:checked + .slider {
 }
 
 input:checked {
-  background-color: #0258ff;
+    background-color: #0258ff;
 }
 
 input:focus + .slider {

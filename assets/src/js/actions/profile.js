@@ -69,7 +69,8 @@ export const addProfile = (profile, props, component) => dispatch => {
             //   show: true
             // })
         });
-    props.history.goBack()
+    if (component !== "editProfile")
+        props.history.goBack()
     // if(component==='editProfile') {
     //     props.history.push('/settings')
     // }

@@ -50,7 +50,6 @@ import NewCategory from "../../admin/new_category";
 import NewProduct from "../../admin/new_product";
 
 
-
 class App extends Component {
 
     componentDidMount() {
@@ -66,13 +65,13 @@ class App extends Component {
             <Fragment>
                 <Header loginStatus={this.props.loginStatus}/>
                 <Switch>
-                    <Route path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
-                    <Route path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
-                    <Route path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
-                    <Route path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
-                    <Route path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
-                    <Route path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
-                    <Route path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
+                    <ProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
+                    <ProtectedRoute path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
+                    <ProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
+                    <ProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <ProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
+                    <ProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
+                    <ProtectedRoute path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
                     <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
@@ -108,18 +107,18 @@ class App extends Component {
                     <Route exact path='/settings' render={(props) => <SettingHome{...props}/>}/>
                     <ProtectedRoute exact path='/settings/notifications'
                                     render={(props) => <Notifications{...props}/>}/>
+                    <Route exact path='/product' render={(props) => <Product {...props}/>}/>
+                    <Route exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
+                    <Route exact path='/store' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/women' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/men' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/new' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/kids' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/custom' render={(props) => <Store {...props}/>}/>
+                    <Route exact path='/sale' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/dashboard' render={(props) => <Dashboard {...props}/>}/>
                     <ProtectedRoute exact path='/cart' render={(props) => <Cart {...props}/>}/>
-                    <ProtectedRoute exact path='/product' render={(props) => <Product {...props}/>}/>
-                    <ProtectedRoute exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
-                    <ProtectedRoute exact path='/store' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/women' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/men' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/new' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/kids' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/custom' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/sale' render={(props) => <Store {...props}/>}/>
-                    <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/orders' render={(props) => <Orders{...props}/>}/>
                     <ProtectedRoute exact path='/favorites' render={(props) => <Favorites{...props}/>}/>
                     <ProtectedRoute exact path='/help&Support' render={(props) => <HelpSupport{...props}/>}/>

@@ -1,7 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {addProfile, getUser, setUserInfo} from "../../../actions/profile";
+import {addProfilePicture} from "../../../actions/authentication";
 
 class TopAppBarDashboard extends Component {
+    componentDidMount() {
+        if (localStorage.getItem("token")) {
+            this.props.getUser();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -63,7 +72,9 @@ class TopAppBarDashboard extends Component {
                                         {/*
             <img class="img-avatar" src="/assets/images/static/user_avatar.svg" alt="">
             */}
-                                        <img className="img-avatar" src="/static/david-venturi.jpg" alt=""/>
+                                        <img className="img-avatar"
+                                             src={this.props.user && this.props.user.profile_image ? this.props.user.profile_image : "/static/user_avatar.svg"}
+                                             alt=""/>
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
@@ -91,7 +102,7 @@ class TopAppBarDashboard extends Component {
                                                 </Link>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
-                                                    to="/">
+                                                    to="/logout">
                                                     <i className="material-icons v-mid">logout</i>
                                                     Log out
                                                 </Link>
@@ -108,4 +119,8 @@ class TopAppBarDashboard extends Component {
     }
 }
 
-export default withRouter(TopAppBarDashboard);
+const mapStateToProps = state => ({
+    user: state.user.user
+});
+
+export default withRouter(connect(mapStateToProps, {getUser})(TopAppBarDashboard))
