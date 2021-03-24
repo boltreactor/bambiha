@@ -137,9 +137,9 @@ class TopAppBarCopy extends Component {
             <div className="mr3">
               <div className="default-dropdown">
                 <div style={{height: '32px', width: '32px'}}>
-                  <img className="img-avatar" src="/static/images/user_avatar.svg" alt="" />
+                  <img className="img-avatar" src={this.props.user && this.props.user.profile_image ? this.props.user.profile_image : "/static/user_avatar.svg"} alt="" />
                   {/*
-            <img class="img-avatar" src="/assets/images/static/img-david.jpg" alt="">
+            <img class="img-avatar" src="/static/david-venturi.jpg" alt="">
             */}
                 </div>
                 <div className="mdc-menu-surface--anchor">
@@ -168,9 +168,9 @@ class TopAppBarCopy extends Component {
               <div className="default-dropdown">
                 <div style={{height: '32px', width: '32px'}}>
                   {/*
-            <img class="img-avatar" src="/assets/images/static/user_avatar.svg" alt="">
+            <img class="img-avatar" src="/static/user_avatar.svg" alt="">
             */}
-                  <img className="img-avatar" src="/static/images/img-david.jpg" alt="" />
+                  <img className="img-avatar" src="/static/" alt="" />
                 </div>
                 <div className="mdc-menu-surface--anchor">
                   <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
@@ -195,7 +195,7 @@ class TopAppBarCopy extends Component {
                   Services
                 </a>
                 */}
-                      <Link className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute" to="#">
+                      <Link className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute" to="/logout">
                         <i className="material-icons v-mid">logout</i>
                         Log out
                       </Link>

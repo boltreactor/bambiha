@@ -6,6 +6,8 @@ import LoggedInHeader from "./loggedInHeader";
 import TopAppBarAdmin from "./top-app-bar/top-app-bar--admin";
 import TopAppBar from "./top-app-bar/top-app-bar";
 import TopAppBarDashboard from "./top-app-bar/top-app-bar--dashboard";
+import TopAppBarIndex from "./top-app-bar/top-app-bar--index";
+import TopAppBarHome from "./top-app-bar/top-app-bar--home";
 
 
 class Header extends Component {
@@ -15,10 +17,18 @@ class Header extends Component {
         return (
             <Fragment>
 
-                {this.props.loginStatus && window.location.pathname.startsWith("/admin") ? <TopAppBarAdmin/> :
-                    this.props.loginStatus && window.location.pathname.startsWith("/dashboard") ? <TopAppBarDashboard/>:
-                    this.props.loginStatus && window.location.pathname.startsWith("/orders") ? <TopAppBarDashboard/>:
-                    this.props.loginStatus && window.location.pathname.startsWith("/favorites") ? <TopAppBarDashboard/>: <TopAppBar/>}
+                {this.props.loginStatus ?
+                    window.location.pathname.startsWith("/admin") ? <TopAppBarAdmin/> :
+                        window.location.pathname.startsWith("/account-settings") ? <TopAppBarDashboard/> :
+                            window.location.pathname.startsWith("/dashboard") ? <TopAppBarDashboard/> :
+                                window.location.pathname.startsWith("/orders") ? <TopAppBarDashboard/> :
+                                    window.location.pathname.startsWith("/favorites") ? <TopAppBarDashboard/> :
+                                        <TopAppBarHome/> :
+                    !this.props.loginStatus ?
+                        window.location.pathname.startsWith("/login") ? null :
+                            window.location.pathname.startsWith("/signup") ? null :
+                                <TopAppBarIndex/>
+                        : null}
 
 
                 {/*{this.props.loginStatus && window.location.pathname !== '/welcome' ?*/}

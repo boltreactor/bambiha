@@ -1,123 +1,98 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import StoreDrawer from "../reusable-components/Drawers/Static/store-drawer";
 
 class Store extends Component {
     render() {
         return (
-             <div className="page">
+               <div className="page">
         <div className="page__content">
           <div className="main-wrapper">
-            {/* */}
-            <aside className="side-menu-panel hide-scrollbar">
-              <div className="ph3">
-                <h4 className="mv3 pt5">New Release (123)</h4>
-                <ul className="store-categories">
-                  <Link to="#" className="link-mute">
-                    <li>Shoes</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Sports Bags</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Tracksuits</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Socks</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Base layer</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Pants</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Tights</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Jumpsuits</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Surf &amp; Swimwear</li>
-                  </Link>
-                  <Link to="#" className="link-mute">
-                    <li>Accessories &amp; Equipment</li>
-                  </Link>
-                </ul>
-              </div>
-            </aside>
-            {/* */}
+            <StoreDrawer/>
             <main className="main" style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
               <div className="container l">
                 <div className="row mt6">
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/show-2.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/shorts.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/t-shirt.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/kid.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/kid.jpeg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/dumy-pics1.jpg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/dumy-pics2.jpg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/dumy-pics4.jpg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/dumy-pics5.jpg" alt="" />
                       </div>
                     </Link>
                   </div>
                   <div className="col s12 m6 l4 mb3">
                     <Link to="/product" className="link-mute">
                       <div className="img-wrapper s">
+                        <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt="" />
                       </div>
                     </Link>
                   </div>
