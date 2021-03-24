@@ -27,3 +27,4 @@ export const DELETE_BANK = "DELETE_BANK";
 export const PAYMENT_INTENT = "PAYMENT_INTENT";
 export const VAT = "VAT";
 export const CURRENT_LISTING = "CURRENT_LISTING";
+export const PRODUCTS = "PRODUCTS";

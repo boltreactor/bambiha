@@ -12,7 +12,7 @@ class Orders extends Component {
     }
     handleTab = (e) => {
         let name = e.target.text
-        debugger
+
         if (name === "Orders") {
             this.setState({Orders: true, HelpSupport: false})
         } else {

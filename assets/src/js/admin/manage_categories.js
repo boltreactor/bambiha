@@ -12,7 +12,7 @@ class ManageCategory extends Component {
 
     handleTab = (e) => {
         let name = e.target.text
-        debugger
+
         if (name === "Categories") {
             this.setState({Categories: true, HelpSupport: false})
         } else {

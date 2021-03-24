@@ -12,7 +12,7 @@ class ManageProducts extends Component {
 
     handleTab = (e) => {
         let name = e.target.text
-        debugger
+
         if (name === "Products") {
             this.setState({Products: true, HelpSupport: false})
         } else {

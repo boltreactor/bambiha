@@ -12,7 +12,7 @@ class Favorites extends Component {
     }
     handleTab = (e) => {
         let name = e.target.text
-        debugger
+
         if (name === "Favorites") {
             this.setState({Favorites: true, HelpSupport: false})
         } else {

@@ -31,7 +31,7 @@ const CheckoutForm = () => {
         });
         // // Create Token
         // const token = await stripe.createToken(cardElement);
-        // debugger
+        //
 
         // Create source
         const source_token = await stripe.createSource(cardElement, {

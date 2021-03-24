@@ -85,7 +85,7 @@ class ChangePassword extends Form {
     };
 
     render() {
-        debugger
+
         const {isHidden} = this.state;
         const {message, error_new, error_current} = this.props;
         return (

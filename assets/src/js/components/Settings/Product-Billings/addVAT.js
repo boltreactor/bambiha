@@ -53,7 +53,7 @@ class AddVat extends Form {
         else delete errors[input.name];
         console.log("errorMessage", errorMessage)
         console.log("error", errors)
-        debugger
+
         this.setState({errors}, () => {
             if (Object.keys(this.state.errors).length > 0) {
                 console.log(this.state.errors)
