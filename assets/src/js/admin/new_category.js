@@ -1,7 +1,22 @@
 import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
+import {addCategory} from "../actions/admin";
+import {connect} from 'react-redux';
+import OutlinedTextfield from "../reusable-components/outlined-textfield";
 
 class NewCategory extends Component {
+    state = {
+        category: ""
+    }
+
+    handleNameChange = ({currentTarget: input}) => {
+        this.setState({category: input.value})
+    }
+
+    addToCategory = () => {
+        const category = this.state.category
+        this.props.addCategory(category)
+    }
 
     render() {
         return (
@@ -17,32 +32,39 @@ class NewCategory extends Component {
                                 </p>
                             </header>
                             <div className="mv4">
-                                <div className="mb4">
-                                    <label className="label-text bold">Category name <i className="material-icons red"
-                                                                                        style={{fontSize: '7px'}}>star</i>
-                                        {/*
-        <span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-          ! Required
-        </span>
-        <span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-          Passwords do not match
-        </span>
-        */}
-                                    </label>
-                                    <div
-                                        className="mdc-text-field w-100 s mdc-text-field--outlined mdc-text-field--no-label"
-                                        data-mdc-auto-init="MDCTextField">
-                                            <span className="mdc-notched-outline">
-                                              <span className="mdc-notched-outline__leading"/>
-                                              <span className="mdc-notched-outline__trailing"/>
-                                            </span>
-                                        <input className="mdc-text-field__input" type="text" aria-label="Label"
-                                               placeholder="Category Name"/>
-                                    </div>
-                                </div>
+        {/*                        <div className="mb4">*/}
+        {/*                            <label className="label-text bold">Category name <i className="material-icons red"*/}
+        {/*                                                                                style={{fontSize: '7px'}}>star</i>*/}
+        {/*                                /!**/}
+        {/*<span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">*/}
+        {/*  ! Required*/}
+        {/*</span>*/}
+        {/*<span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">*/}
+        {/*  Passwords do not match*/}
+        {/*</span>*/}
+        {/**!/*/}
+        {/*                            </label>*/}
+        {/*                            /!*<div*!/*/}
+        {/*                            /!*    className="mdc-text-field w-100 s mdc-text-field--outlined mdc-text-field--no-label"*!/*/}
+        {/*                            /!*    data-mdc-auto-init="MDCTextField">*!/*/}
+        {/*                            /!*        <span className="mdc-notched-outline">*!/*/}
+        {/*                            /!*          <span className="mdc-notched-outline__leading"/>*!/*/}
+        {/*                            /!*          <span className="mdc-notched-outline__trailing"/>*!/*/}
+        {/*                            /!*        </span>*!/*/}
+        {/*                            /!*    <OutlinedTextfield value="Category Name" onChange={this.handleNameChange}/>*!/*/}
+        {/*                            /!*    /!*<input className="mdc-text-field__input" type="text" aria-label="Label"*!/*!/*/}
+        {/*                            /!*    /!*       placeholder="Category Name" onChange={this.handleNameChange}/>*!/*!/*/}
+        {/*                            /!*</div>*!/*/}
+        {/*                        </div>*/}
+                                <OutlinedTextfield
+                                    type="text"
+                                    name="Category Name"
+                                    label="Category name"
+                                    onChange={this.handleNameChange}/>
+
                                 <div className="mt4 mb4">
                                     <Link to="/admin/categories" className="link-mute">
-                                        <button className="btn btn-primary btn-lg">
+                                        <button className="btn btn-primary btn-lg" onClick={this.addToCategory}>
                                             <i className="v-mid material-icons mr1"
                                                style={{fontSize: '18px'}}>lock</i> Add
                                         </button>
@@ -63,4 +85,4 @@ class NewCategory extends Component {
     }
 }
 
-export default NewCategory;
+export default connect(null, {addCategory})(NewCategory);

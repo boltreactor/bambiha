@@ -42,9 +42,9 @@ class OutlinedTextfield extends Component {
             //     </div>
             // </Fragment>
         <TextField
-            className={classes}
+            // className={classes}
             fullWidth
-            size="large"
+            size="medium"
             error={!!error}
             name={name}
             label={label}
@@ -66,11 +66,11 @@ class OutlinedTextfield extends Component {
           //   },
           //   inputMode: "numeric"
           // }}
-            InputProps={name.includes("password") ? {
-                endAdornment: <InputAdornment  onClick={onClick} position="end"> {isHidden ?<VisibilityOffOutlined   style={{ color: "#7f838a"}} /> :
-                 <VisibilityOutlined  fontSize= '15' style={{ color: '#7f838a'}}/>}</InputAdornment>
-
-            } : null}
+          //   InputProps={name.includes("password") ? {
+          //       endAdornment: <InputAdornment  onClick={onClick} position="end"> {isHidden ?<VisibilityOffOutlined   style={{ color: "#7f838a"}} /> :
+          //        <VisibilityOutlined  fontSize= '15' style={{ color: '#7f838a'}}/>}</InputAdornment>
+          //
+          //   } : null}
         />
     )
         ;
