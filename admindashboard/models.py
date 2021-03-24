@@ -116,7 +116,7 @@ class Products(ndb.Model):
 
     @classmethod
     def get_product(cls, request):
-        return ndb.Key(urlsafe=request.POST.get('product_key')).get()
+        return ndb.Key(urlsafe=request.query_params.get('product_key')).get()
 
     @classmethod
     def delete_product(cls, request):

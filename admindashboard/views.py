@@ -90,6 +90,7 @@ def EditProduct(request):
             'status': status.HTTP_200_OK, 'message': "Product updated", 'product': to_json_ndb(product)
         }, status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def GetProduct(request):
     product = Products.get_product(request)
