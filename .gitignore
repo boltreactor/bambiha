@@ -1,4 +1,5 @@
 .idea
+bambihaenv
 webpack-stats.json
 /assets/dist/
 /node_modules/
