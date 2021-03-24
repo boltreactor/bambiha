@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter, Link} from 'react-router-dom';
 
 class ContentFooter extends Component {
     render() {
@@ -10,9 +11,9 @@ class ContentFooter extends Component {
                         Only you can see your settings.
                         {/* You might also want to review your settings for Maps, Search, or whichever services you use most. */}
                         We keeps your data private, safe, and secure.
-                        <a href="#">
+                        <Link to="#">
                             Learn more
-                        </a>
+                        </Link>
                     </div>
                     <div style={{marginLeft: '16px'}}>
                         <i className="material-icons-outlined"

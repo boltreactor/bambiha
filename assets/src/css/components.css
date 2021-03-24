@@ -1854,7 +1854,7 @@ a {
 
 .blue-cta a:before {
     content: "";
-    background-image: url(/assets/images/static/arrow-right.svg);
+    background-image: url(/static/arrow-right.svg);
     width: 12.8px;
     height: 12px;
     position: absolute;
@@ -2588,7 +2588,13 @@ h4.accordion__tab:before {
 .my-page h3,
 .my-page h4,
 .my-page h5,
-.my-page h6 {
+.my-page h6,
+h1.adaptive,
+h2.adaptive,
+h3.adaptive,
+h4.adaptive,
+h5.adaptive,
+h6.adaptive {
     margin-top: 0;
     margin-bottom: .0315rem;
 }
@@ -2604,7 +2610,13 @@ h4.accordion__tab:before {
 .my-page h3,
 .my-page h4,
 .my-page h5,
-.my-page h6 {
+.my-page h6,
+h1.adaptive,
+h2.adaptive,
+h3.adaptive,
+h4.adaptive,
+h5.adaptive,
+h6.adaptive {
     margin-bottom: .0315rem;
     font-family: var(--font-family-montserrat);
     font-weight: 400;
@@ -2614,49 +2626,59 @@ h4.accordion__tab:before {
 
 .my-page .h1,
 .my-page h1,
+h1.adaptive,
 .title {
     font-size: 2.1875rem;
 }
 
-.my-page h1 {
+.my-page h1,
+h1.adaptive {
     font-size: 1.25rem;
 }
 
-.my-page h2 {
+.my-page h2,
+h2.adaptive {
     font-size: 1.25rem;
 }
 
-.my-page h3 {
+.my-page h3,
+h3.adaptive {
     font-size: 1.125rem;
     line-height: 1.5;
 }
 
-.my-page h4 {
+.my-page h4,
+h4.adaptive {
     font-size: 1rem;
 }
 
-.my-page h5 {
+.my-page h5,
+h5.adaptive {
     font-size: .8125rem;
 }
 
-.my-page h6 {
+.my-page h6,
+h6.adaptive {
     font-size: .75rem;
 }
 
 @media (min-width: 600px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 1.625rem;
     }
 }
 
 @media (min-width: 768px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 1.875rem;
     }
 }
 
 @media (min-width: 1024px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 2rem;
     }
 }
@@ -3603,7 +3625,7 @@ ul.store-categories a:hover {
 }
 
 .tab-content .tab-no-data {
-    /*display: flex;*/
+    display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;

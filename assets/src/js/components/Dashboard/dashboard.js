@@ -4,6 +4,8 @@ import {Link, withRouter} from 'react-router-dom';
 import {addProfile, getUser, setUserInfo} from "../../actions/profile";
 import {addCoverPicture, addProfilePicture} from "../../actions/authentication";
 import SideHeader from "./sideHeader";
+import DashboardDrawer from "../../reusable-components/Drawers/Static/dashboard-drawer";
+import SmartFooter from "../Footers/estore-smart-footer";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,52 +31,55 @@ class Dashboard extends Component {
 
   render() {
     return (
-           <div className="page my-page">
+         <div className="page my-page">
         <div className="page__content">
-
+          {/* */}
           <div className="main-wrapper">
-
-            <SideHeader activeClass="home" />
-
+            {/* */}
+           <DashboardDrawer/>
+            {/* No data placeholder */}
             <main className="main" style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
-
               <div className="container l mb7">
-
+                {/* */}
                 <header className="mb4 db">
                   <h1 className="bold">My Products</h1>
                 </header>
-
+                {/* */}
                 <div className="content">
-
+                  {/* */}
                   <div className="row">
                     <div className="col s12 m6">
                       <div className="shadow border rounded-sm db mb5">
                         <header className="pa3 flex items-center border-bottom">
                           <div className="flex-grow-1">
-                            <h2 className="bold">Contact Hub</h2>
+                            <h2 className="bold">Weekly Purchase Stats</h2>
                           </div>
-                          <div className="widget-label rounded-xs fw7">
-                            FREE
-                          </div>
+                          {/*
+                      <div class="widget-label rounded-xs fw7">
+                        FREE
+                      </div>
+                      */}
                         </header>
                         <div className="content tc">
                           <div className="pa3">
                             <div className="mv3">
-                              <img src="/static/trial-contact-hub.png" alt="" />
+                              <img style={{borderRadius: '8px'}} src="/static/sales.png" alt="" />
                             </div>
                             <div className="mv3">
                               <h3 className="bold">
-                                Stay connected to your customer base using our cloud-based Contact Hub
+                                Stay connected to your daily and weekly purchases using our sales analytics.
                               </h3>
                             </div>
-                            <div className="blue-cta mv3">
-                              <Link to="tel:00923165953458">
-                                TALK TO SALES
-                              </Link>
-                            </div>
-                            <div className="mv3">
-                              <div className="caption" style={{fontSize: '.75rem'}}>(+92)316-5953-458</div>
-                            </div>
+                            {/*
+                        <div class="blue-cta mv3">
+                          <a href="tel:00923165953458">
+                            TALK TO SALES
+                          </a>
+                        </div>
+                        <div class="mv3">
+                          <div class="caption" style="font-size: .75rem">(+92)316-5953-458</div>
+                        </div>
+                        */}
                           </div>
                         </div>
                       </div>
@@ -83,39 +88,43 @@ class Dashboard extends Component {
                       <div className="shadow border rounded-sm db mb5">
                         <header className="pa3 flex items-center border-bottom">
                           <div className="flex-grow-1">
-                            <h2 className="bold">Payments</h2>
+                            <h2 className="bold">Notifications</h2>
                           </div>
-                          <div className="widget-label rounded-xs fw7">
-                            FREE
-                          </div>
+                          {/*
+                      <div class="widget-label rounded-xs fw7">
+                        FREE
+                      </div>
+                      */}
                         </header>
                         <div className="content tc">
                           <div className="pa3">
                             <div className="mv3">
-                              <img src="/static/trial-payments.png" alt="" />
+                              <img src="/static/notifications.png" alt="" />
                             </div>
                             <div className="mv3">
                               <h3 className="bold">
-                                Allow your customers to pay you instantly online, on mobile, or through text messaging
+                                All your purchase, delivery and disputes Notifications will be shown here.
                               </h3>
                             </div>
-                            <div className="blue-cta mv3">
-                              <Link to="tel:00923165953458">
-                                TALK TO SALES
-                              </Link>
-                            </div>
-                            <div className="mv3">
-                              <div className="caption" style={{fontSize: '.75rem'}}>(+92)316-5953-458</div>
-                            </div>
+                            {/*
+                        <div class="blue-cta mv3">
+                          <a href="tel:00923165953458">
+                            TALK TO SALES
+                          </a>
+                        </div>
+                        <div class="mv3">
+                          <div class="caption" style="font-size: .75rem">(+92)316-5953-458</div>
+                        </div>
+                        */}
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
+                  {/* */}
                   <div className="row">
                     <div className="col s12">
-                      <h1 className="bold pb4">Learn More about Products</h1>
+                      <h1 className="bold pb4">Learn More about BAMBIHA</h1>
                     </div>
                   </div>
                   <div className="row">
@@ -124,14 +133,14 @@ class Dashboard extends Component {
                         <div className="shadow-0 rounded-sm db mb5 pa3">
                           <div className="flex">
                             <div className="mh3">
-                              <img src="/static/calendar-check-1 1.svg" alt="" style={{width: '64px'}} />
+                              <i className="material-icons-outlined" style={{color: '#0258ff', fontSize: '36px'}}>accessibility_new</i>
                             </div>
                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                               <h4 className="bold mb3">
-                                Booking
+                                New Release
                               </h4>
                               <p>
-                                Provide a modern and easy way for customers to book your services.
+                                Shop all our new arrivals #bringthefuturetolight
                               </p>
                             </div>
                           </div>
@@ -143,14 +152,14 @@ class Dashboard extends Component {
                         <div className="shadow-0 rounded-sm db mb5 pa3">
                           <div className="flex">
                             <div className="mh3">
-                              <img src="/static/pc-monitor@2x.svg" alt="" style={{width: '64px'}} />
+                              <i className="material-icons-outlined" style={{color: '#0258ff', fontSize: '36px'}}>person</i>
                             </div>
                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                               <h4 className="bold mb3">
-                                Sites
+                                Men
                               </h4>
                               <p>
-                                Convert more customers using a powerful website platform.
+                                Explore all our men arrivals and collection
                               </p>
                             </div>
                           </div>
@@ -162,14 +171,14 @@ class Dashboard extends Component {
                         <div className="shadow-0 rounded-sm db mb5 pa3">
                           <div className="flex">
                             <div className="mh3">
-                              <img src="/static/cup-1-1.svg" alt="" style={{width: '64px'}} />
+                              <i className="material-icons-outlined" style={{color: '#0258ff', fontSize: '36px'}}>face</i>
                             </div>
                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                               <h4 className="bold mb3">
-                                Reviews
+                                Women
                               </h4>
                               <p>
-                                Take control of your digital reputation &amp; online reviews.
+                                New styles in tonal colors, perfect for adding spring energy to your style
                               </p>
                             </div>
                           </div>
@@ -181,14 +190,14 @@ class Dashboard extends Component {
                         <div className="shadow-0 rounded-sm db mb5 pa3">
                           <div className="flex">
                             <div className="mh3">
-                              <img src="/static/bubble-rounded-2-1.svg" alt="" style={{width: '64px'}} />
+                              <i className="material-icons-outlined" style={{color: '#0258ff', fontSize: '36px'}}>child_care</i>
                             </div>
                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                               <h4 className="bold mb3">
-                                Messenger
+                                Kids
                               </h4>
                               <p>
-                                Easily connect with your customer base through business messaging.
+                                Here’s your one-stop resource for kid-focused everything you need.
                               </p>
                             </div>
                           </div>
@@ -200,14 +209,14 @@ class Dashboard extends Component {
                         <div className="shadow-0 rounded-sm db mb5 pa3">
                           <div className="flex">
                             <div className="mh3">
-                              <img src="/static/placement.svg" alt="" style={{width: '64px'}} />
+                              <i className="material-icons-outlined" style={{color: '#0258ff', fontSize: '36px'}}>tune</i>
                             </div>
                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                               <h4 className="bold mb3">
-                                Placement
+                                Custom
                               </h4>
                               <p>
-                                Automatically control where &amp; how your business appears online.
+                                Show us your own unique designs with #bambihabyyou
                               </p>
                             </div>
                           </div>
@@ -220,6 +229,7 @@ class Dashboard extends Component {
             </main>
           </div>
         </div>
+           <SmartFooter/>
       </div>
     );
   }
