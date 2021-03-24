@@ -1,6 +1,6 @@
 import axios from "axios";
 import {loadProgressBar} from 'axios-progress-bar';
-import {IMAGES, NOTIFICATIONS_SETTINGS, SET_PROFILE, SET_USER, SNACKBAR, TOGGLE_DRAWER,} from "./types";
+import {IMAGES, NOTIFICATIONS_SETTINGS, SET_PROFILE, SET_USER, SNACKBAR, TOGGLE_DRAWER} from "./types";
 
 const qs = require('query-string');
 loadProgressBar();
@@ -186,6 +186,4 @@ export const addSocialConnection = (user) => dispatch => {
             });
         });
 };
-
-
 

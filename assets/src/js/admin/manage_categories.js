@@ -1,8 +1,17 @@
 import React, {Component, Fragment} from "react";
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
+import {getAllCategories} from "../actions/admin";
+import {connect} from 'react-redux';
+
 
 class ManageCategory extends Component {
+
+    componentDidMount() {
+     this.props.getAllCategories();
+    }
+
+
 
     render() {
         return (
@@ -46,10 +55,12 @@ class ManageCategory extends Component {
                                                 <h3 className="bold">Categories Management</h3>
                                             </div>
                                             {/* Call to action - Favourites */}
-                                            <div className="tab-no-data">
-                                                <div className="tc">
+
+                                             <div  className="tab-no-data">
+                                                 {this.props.categories && this.props.categories.map((category, index) => {
+                                                 return <div key={category.id} className="tc">
                                                     <header className="mt3 my-page">
-                                                        <h3 className="bold">Categories</h3>
+                                                        <h3 className="bold">{category.name}</h3>
                                                     </header>
                                                     <p>
                                                         Categories management made easy. <br/>
@@ -62,7 +73,9 @@ class ManageCategory extends Component {
                 </button>
                 */}
                                                     </div>
+                                                     <hr/>
                                                 </div>
+                                                 })}
                                             </div>
                                         </div>
                                     </div>
@@ -77,4 +90,8 @@ class ManageCategory extends Component {
     }
 }
 
-export default ManageCategory;
+const mapStateToProps = (state) => ({
+   categories : state.admin.categories
+})
+
+export default withRouter(connect(mapStateToProps,{getAllCategories})(ManageCategory));
