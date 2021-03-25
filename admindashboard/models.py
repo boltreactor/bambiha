@@ -23,7 +23,6 @@ class Category(ndb.Model):
         cat = Category.query(Category.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
         return cat
 
-
     @classmethod
     def get_category(cls, request):
         return ndb.Key(urlsafe=request.query_params.get('category_key')).get()

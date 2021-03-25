@@ -57,7 +57,7 @@ class SettingsHeader extends Component {
                                             </div>
                                             <div className="mb1">
                                                 <h6 className="white"
-                                                    style={{fontSize: '.86562rem'}}>Help &amp; Support</h6>
+                                                    style={{fontSize: '.86562rem'}}>Help & Support</h6>
                                                 <p className="white pa0 ma0" style={{fontSize: '.825rem'}}>
                                                     Email us at help@boltreactor.com
                                                 </p>
@@ -71,7 +71,7 @@ class SettingsHeader extends Component {
                                     <div style={{height: '32px', width: '32px'}}>
                                         {this.props.user && this.props.user.profile_image ?
                                             <img className="img-avatar" src={this.props.user.profile_image}
-                                                 alt=""/> : <img className="img-avatar" src={"/static/user_avatar.svg"}
+                                                 alt=""/> : <img className="img-avatar" src={"/static/images/user_avatar.svg"}
                                                                  alt=""/>}
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
