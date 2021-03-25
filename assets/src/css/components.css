@@ -1836,6 +1836,11 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     padding-right: 49px;
 }
 
+.blue-cta.contrast a {
+    background: #fff;
+    color: #0258ff;
+}
+
 a {
     text-decoration: none;
     outline: 0;
@@ -1854,7 +1859,7 @@ a {
 
 .blue-cta a:before {
     content: "";
-    background-image: url(/static/arrow-right.svg);
+    background-image: url(/assets/images/static/arrow-right.svg);
     width: 12.8px;
     height: 12px;
     position: absolute;
@@ -2941,6 +2946,7 @@ h6.adaptive {
         padding-top: 10rem;
         padding-bottom: 5rem;
     }
+
     .hero.space-top-sm {
         padding-top: 7rem;
     }
@@ -3265,7 +3271,7 @@ aside.notify {
     text-align: center;
 }
 
-/* e-store */
+/* app--estore */
 .mdc-top-app-bar__section.app-shop button {
     padding-left: 16px;
     padding-right: 16px;
@@ -3966,4 +3972,59 @@ ul.store-categories a:hover {
     font-family: 'Montserrat', sans-serif;
     color: #fff;
     font-weight: 500;
+}
+
+/* Error Emoji */
+.error-emoji {
+    color: #dadce0;
+    font: 150px/1.25 "Montserrat", "Helvetica Neue", sans-serif;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 720px) {
+    .error-emoji {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 460px) {
+    .error-emoji {
+        font-size: 62px;
+    }
+}
+
+/* Custom MDC Datatable */
+.custom-datatable .mdc-data-table {
+    box-shadow: 0 1px 3px rgba(206, 211, 218, .2) !important;
+    border: .0625rem solid #dbe3eb !important;
+    width: 100% !important;
+}
+
+.custom-datatable .mdc-data-table__row {
+    border-top-color: #dbe3eb !important;
+}
+
+.custom-datatable .mdc-data-table__content .mdc-data-table__row:first-child {
+    border-top-color: transparent !important;
+}
+
+.custom-datatable .mdc-data-table__header-row {
+    background-color: #edf1f5 !important;
+}
+
+.custom-datatable .mdc-data-table__row--selected {
+    background-color: #fff !important;
+}
+
+.custom-datatable .mdc-data-table__row:not(.mdc-data-table__row--selected):hover {
+    background-color: #fbfdff !important;
+}
+
+.custom-datatable .mdc-data-table__header-cell {
+    font-family: var(--font-family-montserrat) !important;
+    font-weight: 700;
+}
+
+.custom-datatable .mdc-data-table__cell {
+    font-family: var(--font-family-montserrat) !important;
 }

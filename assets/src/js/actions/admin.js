@@ -30,7 +30,10 @@ export const addCategory = (category) => dispatch => {
 };
 export const editCategory = (id, category) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    axios.post(`/admin/addcategory/`, category, {headers: Header})
+    let bodyFormData = new FormData();
+    bodyFormData.append('category_key', id);
+    bodyFormData.append('category', category);
+    axios.post(`/admin/addcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             dispatch({
                 type: EDIT_CATEGORY,
@@ -38,5 +41,4 @@ export const editCategory = (id, category) => dispatch => {
                 id: res.data.category.id
             })
         })
-
 };
