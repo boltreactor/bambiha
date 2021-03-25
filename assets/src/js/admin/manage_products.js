@@ -5,6 +5,7 @@ import SmartFooter from "../components/Footers/smart-footer";
 import {getAllProducts} from "../actions/admin";
 import {connect} from "react-redux";
 import Table from "../reusable-components/table";
+import ProductsTable from "./products-table";
 
 class ManageProducts extends Component {
 
@@ -71,34 +72,38 @@ class ManageProducts extends Component {
                                         {/* */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold"> {this.state.Products === true ? "Products Management" : "Help & Support"}</h3>
+                                                <h3 className="bold"> {this.state.Products === true ? products.length>0?<div>
+                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span></div>:"Products Management" : "Help & Support"}</h3>
                                             </div>
-                                            {/* Call to action - Favourites */}
                                             <div
                                                 className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
-                                                    <header className="mt3 my-page">
+                                                    {!products.length>0 ? <div><header className="mt3 my-page">
                                                         <h3 className="bold">Products</h3>
                                                     </header>
-
                                                     <p>
                                                         Products management made easy. <br/>
                                                         All products at the store will be shown here.
                                                     </p>
-                                                    {products !== undefined &&
+                                                    </div>:
 
-                                                    <Table
-                                                        headers={['Sr.', 'Image', 'Title', 'Description', 'Category', 'Quantity', 'Price', 'Dated']}
-                                                        data={products}
-                                                    />
-                                                    }
+                                                   <ProductsTable headers={['Product Title', 'Price', 'Quantity', 'Category', 'Description', 'Images']}
+                                                                  data={products} onEdit={this.editProduct}/>}
+
+                                                    {/*{products !== undefined &&*/}
+
+                                                    {/*<Table*/}
+                                                    {/*    headers={['Sr.', 'Image', 'Title', 'Description', 'Category', 'Quantity', 'Price', 'Dated']}*/}
+                                                    {/*    data={products}*/}
+                                                    {/*/>*/}
+                                                    {/*}*/}
                                                 </div>
                                             </div>
                                             <div
                                                 className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
-                                                        <h3 className="bold">Help &amp; Support</h3>
+                                                        <h3 className="bold">Help & Support</h3>
                                                     </header>
                                                     <p>
                                                         24/7 chat support — message us at anytime!

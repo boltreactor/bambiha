@@ -81,8 +81,10 @@ class SelectText extends Component {
                         }) ||
                         name === "checkout_currency" && options.map((status, id) => {
                             return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
-                        })
-                        }
+                        }) ||
+                            name === "category" && options.map((status, id) => {
+                            return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
+                        })}
 
                     </Select>
                     {error && <div className="mdc-text-field-helper-line">

@@ -8,6 +8,7 @@ import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 import {addProduct} from "../actions/admin";
 import {connect} from "react-redux";
+import Select from "../reusable-components/select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -30,7 +31,7 @@ class NewProduct extends Form {
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
         const data = {...this.state.data}
-        data["images"] = this.state.data.filter(i => i !== image);
+        data["images"] = this.state.data.images.filter(i => i !== image);
         this.setState({data})
     };
 
@@ -39,6 +40,21 @@ class NewProduct extends Form {
 
         this.hiddenFileInput.current.click();
     }
+    handleCategoryChange = (event) => {
+        event.preventDefault();
+        debugger
+        const errors = {...this.state.errors};
+        const obj = {["gender"]: event.target.value};
+        const schema = {["gender"]: this.schema["gender"]};
+        const {error} = Joi.validate(obj, schema);
+        if (error) errors["gender"] = error.details[0].message;
+        else delete errors["gender"];
+        this.setState({errors});
+        // const user = {...this.props.user, gender: event.target.value};
+        // this.props.setUserInfo(user)
+    };
+
+
     doSubmit = () => {
 
         let fd = new FormData();
@@ -91,20 +107,26 @@ class NewProduct extends Form {
                 }
             })
         }),
-        quantity: Joi.number().required().error(errors => {
+        quantity: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-
                 switch (error.type) {
-                    case "number.base":
-                        return {message: "Quantity is required"};
+                    case "any.required":
+                        return {message: "Price is required"};
+                    case "any.empty":
+                        return {message: "Price is required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
-        }), price: Joi.number().required().error(errors => {
+        }), price: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-
                 switch (error.type) {
-                    case "number.base":
+                    case "any.required":
                         return {message: "Price is required"};
+                    case "any.empty":
+                        return {message: "Price is required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
         }),
@@ -130,31 +152,44 @@ class NewProduct extends Form {
                                         <NoLabelTextfield name="title" label="Product Title"
                                                           value={this.state.data.title}
                                                           placeholder="Enter product title"
-                                                          onChange={this.handleChange}/>
+                                                          onChange={this.handleChange}
+                                                          error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="category" label="Product Category"
-                                                          value={this.state.data.category}
-                                                          placeholder="Select product category"
-                                                          onChange={this.handleChange}/>
+                                        <Select
+                                            id="category"
+                                            type="text"
+                                            name="category"
+                                            onChange={this.handleCategoryChange}
+                                            value={this.state.data.category}
+                                            error={this.state.errors.category}
+                                        />
+                                        {/*<NoLabelTextfield name="category" label="Product Category"*/}
+                                        {/*                  value={this.state.data.category}*/}
+                                        {/*                  placeholder="Select product category"*/}
+                                        {/*                  onChange={this.handleChange}*/}
+                                        {/*                  error={this.state.errors.category}/>*/}
                                     </div>
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
                                                           value={this.state.data.desc}
                                                           placeholder="Enter product description"
-                                                          onChange={this.handleChange}/>
+                                                          onChange={this.handleChange}
+                                                          error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="quantity" label="Product Quantity"
                                                           value={this.state.data.quantity}
                                                           placeholder="Enter product quantity"
-                                                          onChange={this.handleChange}/>
+                                                          onChange={this.handleChange}
+                                                          error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="price" label="Price"
                                                           value={this.state.data.price}
                                                           placeholder="Enter product price"
-                                                          onChange={this.handleChange}/>
+                                                          onChange={this.handleChange}
+                                                          error={this.state.errors.price}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <div className="mv3">
@@ -198,11 +233,11 @@ class NewProduct extends Form {
                                     </div>
                                     <div className="col s12 mt3 mb3">
 
-                                            <button className="btn btn-primary btn-lg" disabled={this.validateProduct()}
-                                                     onClick={event => this.handleSubmitProduct(event)}
-                                            >
-                                                ADD
-                                            </button>
+                                        <button className="btn btn-primary btn-lg" disabled={this.validateProduct()}
+                                                onClick={event => this.handleSubmitProduct(event)}
+                                        >
+                                            ADD
+                                        </button>
 
                                         <Link to="/admin/products" className="link-mute">
                                             <button className="btn btn-outline-primary btn-lg ml3">

@@ -1,6 +1,8 @@
 import {PRODUCTS} from "../actions/types";
 
-export const initialState = {}
+export const initialState = {
+    products:[]
+}
 
 export default function (state = initialState, action) {
     switch (action.type) {
