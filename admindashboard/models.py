@@ -20,11 +20,12 @@ class Category(ndb.Model):
     @classmethod
     def get_categories(cls, request):
         ancestor_key = ndb.Key("Category", "category")
-        return cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
+        cat = Category.query(Category.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
+        return cat
 
     @classmethod
     def get_category(cls, request):
-        return ndb.Key(urlsafe=request.POST.get('category_key')).get()
+        return ndb.Key(urlsafe=request.query_params.get('category_key')).get()
 
     @classmethod
     def edit_category(cls, request):
@@ -94,6 +95,7 @@ class Products(ndb.Model):
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
 
+
         files = request.FILES.getlist('images')
         if files:
             product.images = []
@@ -114,7 +116,7 @@ class Products(ndb.Model):
 
     @classmethod
     def get_product(cls, request):
-        return ndb.Key(urlsafe=request.POST.get('product_key')).get()
+        return ndb.Key(urlsafe=request.query_params.get('product_key')).get()
 
     @classmethod
     def delete_product(cls, request):

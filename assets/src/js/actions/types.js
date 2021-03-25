@@ -29,3 +29,7 @@ export const VAT = "VAT";
 export const CURRENT_LISTING = "CURRENT_LISTING";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
+export const ALL_CATEGORIES = "ALL_CATEGORIES";
+export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_PRODUCT = "GET_PRODUCT";
+export const DEL_PRODUCT = "DEL_PRODUCT";

@@ -71,7 +71,7 @@ class SettingsHeader extends Component {
                                     <div style={{height: '32px', width: '32px'}}>
                                         {this.props.user && this.props.user.profile_image ?
                                             <img className="img-avatar" src={this.props.user.profile_image}
-                                                 alt=""/> : <img className="img-avatar" src={"/static/user_avatar.svg"}
+                                                 alt=""/> : <img className="img-avatar" src={"/static/images/user_avatar.svg"}
                                                                  alt=""/>}
                                     </div>
                                     <div className="mdc-menu-surface--anchor">
