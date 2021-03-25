@@ -12,15 +12,15 @@ class Category(ndb.Model):
     def add_category(cls, request):
         ancestor_key = ndb.Key("Category", "category")
         category = Category(parent=ancestor_key,
-                    name=request.POST.get('category'),
-                    user_key=request.session.get('user'))
+                            name=request.POST.get('category'),
+                            user_key=request.session.get('user'))
         category.put()
         return category
 
     @classmethod
     def get_categories(cls, request):
         ancestor_key = ndb.Key("Category", "category")
-        return cls.query(cls.user_key==request.session.get('user'), ancestor=ancestor_key).fetch()
+        return Category.query(Category.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
 
     @classmethod
     def get_category(cls, request):
@@ -35,7 +35,7 @@ class Category(ndb.Model):
 
     @classmethod
     def delete_category(cls, request):
-        category = ndb.Key(urlsafe=request.POST.get('category_key')).get()
+        category = ndb.Key(urlsafe=request.query_params.get('category_key')).get()
         if category:
             category.key.delete()
             return True
@@ -56,12 +56,12 @@ class Products(ndb.Model):
     def add_product(cls, request):
         ancestor_key = ndb.Key("Product", "product")
         product = Products(parent=ancestor_key,
-                    title=request.POST.get('title'),
-                    description=request.POST.get('description'),
-                            category_key=request.POST.get('category_key'),
-                            quantity=int(request.POST.get('quantity')),
-                            price=int(request.POST.get('price')),
-                            user_key= request.session.get('user'))
+                           title=request.POST.get('title'),
+                           description=request.POST.get('description'),
+                           category_key=request.POST.get('category_key'),
+                           quantity=int(request.POST.get('quantity')),
+                           price=int(request.POST.get('price')),
+                           user_key=request.session.get('user'))
         product.put()
 
         files = request.FILES.getlist('images')
@@ -83,7 +83,7 @@ class Products(ndb.Model):
     @classmethod
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
-        return cls.query(cls.user_key==request.session.get('user'), ancestor=ancestor_key).fetch()
+        return cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
 
     @classmethod
     def edit_product(cls, request):
@@ -93,7 +93,6 @@ class Products(ndb.Model):
         product.category_key = request.POST.get('category_key')
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
-
 
         files = request.FILES.getlist('images')
         if files:

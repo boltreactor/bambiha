@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from "react";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
+import {deleteCategory} from "../actions/admin";
+import {connect} from "react-redux";
 
 class ManageCategory extends Component {
 
@@ -18,6 +20,10 @@ class ManageCategory extends Component {
         } else {
             this.setState({Categories: false, HelpSupport: true})
         }
+    }
+
+    componentDidMount() {
+        // this.props.deleteCategory("ag5iYW1iaWhhLTMwNTEwN3IrCxIIQ2F0ZWdvcnkiCGNhdGVnb3J5DAsSCENhdGVnb3J5GICAgJil0IYJDA")
     }
 
     render() {
@@ -117,4 +123,4 @@ class ManageCategory extends Component {
     }
 }
 
-export default ManageCategory;
+export default (connect(null, {deleteCategory})(ManageCategory));

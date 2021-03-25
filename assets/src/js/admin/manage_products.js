@@ -1,7 +1,10 @@
 import React, {Component, Fragment} from "react";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
+import {getAllProducts} from "../actions/admin";
+import {connect} from "react-redux";
+import Table from "../reusable-components/table";
 
 class ManageProducts extends Component {
 
@@ -20,7 +23,12 @@ class ManageProducts extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.getAllProducts()
+    }
+
     render() {
+        const {products} = this.props;
         return (
             <Fragment>
                 <div className="page my-page">
@@ -72,17 +80,18 @@ class ManageProducts extends Component {
                                                     <header className="mt3 my-page">
                                                         <h3 className="bold">Products</h3>
                                                     </header>
+
                                                     <p>
                                                         Products management made easy. <br/>
                                                         All products at the store will be shown here.
                                                     </p>
-                                                    <div className="mv3">
-                                                        {/*
-                <button class="btn btn-primary btn-lg">
-                  <i class="material-icons-outlined">shopping_cart</i> Continue Shopping
-                </button>
-                */}
-                                                    </div>
+                                                    {products !== undefined &&
+
+                                                    <Table
+                                                        headers={['Sr.', 'Image', 'Title', 'Description', 'Category', 'Quantity', 'Price', 'Dated']}
+                                                        data={products}
+                                                    />
+                                                    }
                                                 </div>
                                             </div>
                                             <div
@@ -117,4 +126,7 @@ class ManageProducts extends Component {
     }
 }
 
-export default ManageProducts;
+const mapStateToProps = state => ({
+    products: state.admin.products
+})
+export default withRouter(connect(mapStateToProps, {getAllProducts})(ManageProducts));
