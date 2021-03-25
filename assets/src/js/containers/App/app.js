@@ -68,6 +68,7 @@ class App extends Component {
                     <ProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
                     <ProtectedRoute path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
                     <ProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
+                    <ProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
                     <ProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
                     <ProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
                     <ProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>

@@ -1,12 +1,14 @@
 import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
-import {addCategory} from "../actions/admin";
+import {addCategory, getAllCategories} from "../actions/admin";
 import {connect} from 'react-redux';
 import OutlinedTextfield from "../reusable-components/outlined-textfield";
 
 class NewCategory extends Component {
     state = {
-        category: ""
+        category: "",
+        categoryId: "",
+        toEdit: {}
     }
 
     handleNameChange = ({currentTarget: input}) => {
@@ -16,6 +18,18 @@ class NewCategory extends Component {
     addToCategory = () => {
         const category = this.state.category
         this.props.addCategory(category)
+    }
+
+    componentDidMount() {
+        const categoryId = this.props.match.params.id
+        this.setState({categoryId})
+        this.props.getAllCategories()
+        const obj = this.props.categories.filter(category => (
+            this.props.match.params.id === category.id
+        ))
+        debugger
+        console.log(obj[0])
+        this.setState({toEdit: obj[0]})
     }
 
     render() {
@@ -32,34 +46,11 @@ class NewCategory extends Component {
                                 </p>
                             </header>
                             <div className="mv4">
-        {/*                        <div className="mb4">*/}
-        {/*                            <label className="label-text bold">Category name <i className="material-icons red"*/}
-        {/*                                                                                style={{fontSize: '7px'}}>star</i>*/}
-        {/*                                /!**/}
-        {/*<span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">*/}
-        {/*  ! Required*/}
-        {/*</span>*/}
-        {/*<span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">*/}
-        {/*  Passwords do not match*/}
-        {/*</span>*/}
-        {/**!/*/}
-        {/*                            </label>*/}
-        {/*                            /!*<div*!/*/}
-        {/*                            /!*    className="mdc-text-field w-100 s mdc-text-field--outlined mdc-text-field--no-label"*!/*/}
-        {/*                            /!*    data-mdc-auto-init="MDCTextField">*!/*/}
-        {/*                            /!*        <span className="mdc-notched-outline">*!/*/}
-        {/*                            /!*          <span className="mdc-notched-outline__leading"/>*!/*/}
-        {/*                            /!*          <span className="mdc-notched-outline__trailing"/>*!/*/}
-        {/*                            /!*        </span>*!/*/}
-        {/*                            /!*    <OutlinedTextfield value="Category Name" onChange={this.handleNameChange}/>*!/*/}
-        {/*                            /!*    /!*<input className="mdc-text-field__input" type="text" aria-label="Label"*!/*!/*/}
-        {/*                            /!*    /!*       placeholder="Category Name" onChange={this.handleNameChange}/>*!/*!/*/}
-        {/*                            /!*</div>*!/*/}
-        {/*                        </div>*/}
                                 <OutlinedTextfield
                                     type="text"
                                     name="Category Name"
                                     label="Category name"
+                                    value={this.state.toEdit && this.state.toEdit.name || ''}
                                     onChange={this.handleNameChange}/>
 
                                 <div className="mt4 mb4">
@@ -85,4 +76,8 @@ class NewCategory extends Component {
     }
 }
 
-export default connect(null, {addCategory})(NewCategory);
+const mapStateToProps = (state) => ({
+    categories: state.admin.categories
+})
+
+export default connect(mapStateToProps, {addCategory, getAllCategories})(NewCategory);

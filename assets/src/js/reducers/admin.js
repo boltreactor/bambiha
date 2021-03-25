@@ -18,9 +18,7 @@ export const initialState = {
     notification_settings: null,
     msg: null,
     show: false,
-    name: "",
-    id: ""
-
+    category:{}
 };
 
 export default function (state = initialState, action) {
@@ -28,15 +26,15 @@ export default function (state = initialState, action) {
         case ADD_CATEGORY: {
             return {
                 ...state,
-                name: action.name,
-                id: action.id
+                category: action.category,
+                categories: action.categories
             }
         }
         case EDIT_CATEGORY: {
             return {
                 ...state,
-                name: action.name,
-                id: action.id
+                category: action.category,
+                categories: action.categories
             }
         }
         case ALL_CATEGORIES: {
@@ -49,7 +47,7 @@ export default function (state = initialState, action) {
         case GET_CATEGORY: {
             return {
                 ...state,
-                categories: action.categories
+                category: action.category
             }
         }
 

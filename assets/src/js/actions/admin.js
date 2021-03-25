@@ -23,8 +23,7 @@ export const addCategory = (category) => dispatch => {
         .then(res => {
             dispatch({
                 type: ADD_CATEGORY,
-                name: res.data.category.name,
-                id: res.data.category.id
+                category: res.data.category,
             })
         })
 
@@ -38,8 +37,7 @@ export const editCategory = (id, category) => dispatch => {
         .then(res => {
             dispatch({
                 type: EDIT_CATEGORY,
-                name: res.data.category.name,
-                id: res.data.category.id
+                category: res.data.category,
             })
         })
 };
@@ -68,7 +66,7 @@ export const getCategory = (id) => dispatch => {
         .then(res => {
             dispatch({
                 type: GET_CATEGORY,
-                categories: res.data.category
+                category: res.data.category
             });
         });
 };
