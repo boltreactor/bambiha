@@ -84,7 +84,8 @@ class Products(ndb.Model):
     @classmethod
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
-        return cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
+        products = Products.query(Products.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
+        return products
 
     @classmethod
     def edit_product(cls, request):
