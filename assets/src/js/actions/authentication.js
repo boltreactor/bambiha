@@ -187,7 +187,7 @@ export const newPassword = (token, new_password, re_new_password, props) => disp
 
 export const changePassword = (re_new_password, new_password, current_password, email) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    debugger
+
     axios.post('/auth/set_password/', {re_new_password, new_password, current_password}, {headers: Header})
         .then(res => {
 

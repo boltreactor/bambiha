@@ -20,14 +20,6 @@ class NewCategory extends Component {
                                 <div className="mb4">
                                     <label className="label-text bold">Category name <i className="material-icons red"
                                                                                         style={{fontSize: '7px'}}>star</i>
-                                        {/*
-        <span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-          ! Required
-        </span>
-        <span class="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-          Passwords do not match
-        </span>
-        */}
                                     </label>
                                     <div
                                         className="mdc-text-field w-100 s mdc-text-field--outlined mdc-text-field--no-label"

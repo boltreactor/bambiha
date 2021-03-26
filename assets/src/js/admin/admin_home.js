@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react"
 import Navigation from "./navigation";
+import SmartFooter from "../components/Footers/smart-footer";
 
 class AdminHome extends Component {
     render() {
@@ -39,7 +40,7 @@ class AdminHome extends Component {
                                                         <div className="pa3">
                                                             <div className="mv3">
                                                                 <img style={{borderRadius: '8px'}}
-                                                                     src="/assets/images/static/sales.png" alt=""/>
+                                                                     src="/static/sales.png" alt=""/>
                                                             </div>
                                                             <div className="mv3">
                                                                 <h3 className="bold">
@@ -74,7 +75,7 @@ class AdminHome extends Component {
                                                     <div className="content tc">
                                                         <div className="pa3">
                                                             <div className="mv3">
-                                                                <img src="/assets/images/static/notifications.png"
+                                                                <img src="/static/notifications.png"
                                                                      alt=""/>
                                                             </div>
                                                             <div className="mv3">
@@ -114,7 +115,7 @@ class AdminHome extends Component {
                                                                     color: '#0258ff',
                                                                     fontSize: '36px'
                                                                 }}>people</i>
-                                                                {/*<img src="/assets/images/static/users.svg" alt="" style="width: 64px">*/}
+                                                                {/*<img src="/static/users.svg" alt="" style="width: 64px">*/}
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
@@ -138,7 +139,7 @@ class AdminHome extends Component {
                                                                     color: '#0258ff',
                                                                     fontSize: '36px'
                                                                 }}>shopping_bag</i>
-                                                                {/*<img src="/assets/images/static/card.svg" alt="" style="width: 64px">*/}
+                                                                {/*<img src="/static/card.svg" alt="" style="width: 64px">*/}
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
@@ -211,7 +212,7 @@ class AdminHome extends Component {
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
-                                                                    Help &amp; Support
+                                                                    Help & Support
                                                                 </h4>
                                                                 <p>
                                                                     Show us your own unique designs with #bambihabyyou
@@ -228,6 +229,7 @@ class AdminHome extends Component {
                         </div>
                     </div>
                 </div>
+                <SmartFooter/>
             </Fragment>
         );
     }

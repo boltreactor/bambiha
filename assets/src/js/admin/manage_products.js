@@ -1,10 +1,35 @@
 import React, {Component, Fragment} from "react";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
+import SmartFooter from "../components/Footers/smart-footer";
+import {getAllProducts} from "../actions/admin";
+import {connect} from "react-redux";
+import Table from "../reusable-components/table";
+import ProductsTable from "./products-table";
 
 class ManageProducts extends Component {
 
+    state = {
+        Products: true,
+        HelpSupport: false
+    }
+
+    handleTab = (e) => {
+        let name = e.target.text
+
+        if (name === "Products") {
+            this.setState({Products: true, HelpSupport: false})
+        } else {
+            this.setState({Products: false, HelpSupport: true})
+        }
+    }
+
+    componentDidMount() {
+        this.props.getAllProducts()
+    }
+
     render() {
+        const {products} = this.props;
         return (
             <Fragment>
                 <div className="page my-page">
@@ -33,34 +58,63 @@ class ManageProducts extends Component {
                                     <div className="tab-wrapper">
                                         {/* */}
                                         <header className="tab-header">
-                                            <Link to="#" className="tab-item link-mute" aria-selected="true">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.Products}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Products
                                             </Link>
-                                            <Link to="#" className="tab-item link-mute" aria-selected="false">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.HelpSupport}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Help & Support
                                             </Link>
                                         </header>
                                         {/* */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold">Products Management</h3>
+                                                <h3 className="bold"> {this.state.Products === true ? products.length>0?<div>
+                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span></div>:"Products Management" : "Help & Support"}</h3>
                                             </div>
-                                            {/* Call to action - Favourites */}
-                                            <div className="tab-no-data">
+                                            <div
+                                                className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
-                                                    <header className="mt3 my-page">
+                                                    {!products.length>0 ? <div><header className="mt3 my-page">
                                                         <h3 className="bold">Products</h3>
                                                     </header>
                                                     <p>
                                                         Products management made easy. <br/>
                                                         All products at the store will be shown here.
                                                     </p>
+                                                    </div>:
+
+                                                   <ProductsTable headers={['Product Title', 'Price', 'Quantity', 'Category', 'Description', 'Images']}
+                                                                  data={products} onEdit={this.editProduct}/>}
+
+                                                    {/*{products !== undefined &&*/}
+
+                                                    {/*<Table*/}
+                                                    {/*    headers={['Sr.', 'Image', 'Title', 'Description', 'Category', 'Quantity', 'Price', 'Dated']}*/}
+                                                    {/*    data={products}*/}
+                                                    {/*/>*/}
+                                                    {/*}*/}
+                                                </div>
+                                            </div>
+                                            <div
+                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                                <div className="tc">
+                                                    <header className="mt3 my-page">
+                                                        <h3 className="bold">Help & Support</h3>
+                                                    </header>
+                                                    <p>
+                                                        24/7 chat support — message us at anytime!
+                                                    </p>
                                                     <div className="mv3">
-                                                        {/*
-                <button class="btn btn-primary btn-lg">
-                  <i class="material-icons-outlined">shopping_cart</i> Continue Shopping
-                </button>
-                */}
+                                                        <a href="tel:00923165953458" className="link-mute">
+                                                            <button className="btn btn-primary btn-lg">
+                                                                <i className="material-icons-outlined">phone</i> Contact
+                                                                Us
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,9 +125,13 @@ class ManageProducts extends Component {
                         </div>
                     </div>
                 </div>
+                <SmartFooter/>
             </Fragment>
         );
     }
 }
 
-export default ManageProducts;
+const mapStateToProps = state => ({
+    products: state.admin.products
+})
+export default withRouter(connect(mapStateToProps, {getAllProducts})(ManageProducts));

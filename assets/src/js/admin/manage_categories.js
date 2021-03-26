@@ -1,11 +1,29 @@
 import React, {Component, Fragment} from "react";
-import {Link,withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
-import {getAllCategories} from "../actions/admin";
-import {connect} from 'react-redux';
+import SmartFooter from "../components/Footers/smart-footer";
+import {getAllCategories } from "../actions/admin";
+import {connect} from "react-redux";
 
 
 class ManageCategory extends Component {
+
+    state = {
+        Categories: true,
+        HelpSupport: false
+    }
+
+    handleTab = (e) => {
+        let name = e.target.text
+
+        if (name === "Categories") {
+            this.setState({Categories: true, HelpSupport: false})
+        } else {
+            this.setState({Categories: false, HelpSupport: true})
+        }
+    }
+
+
 
     componentDidMount() {
      this.props.getAllCategories();
@@ -206,7 +224,7 @@ class ManageCategory extends Component {
                         </div>
                     </div>
                 </div>
-
+                <SmartFooter/>
             </Fragment>
         );
     }

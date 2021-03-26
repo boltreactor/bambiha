@@ -1,4 +1,5 @@
 from django.urls import path
+
 from admindashboard.views import AddCategory, EditCategory, GetCategory, DeleteCategory, AllCategories, AddProduct, \
     EditProduct
 from admindashboard.views import GetProduct, DeleteProduct, AllProducts
@@ -15,4 +16,5 @@ urlpatterns = [
     path('getproduct/', ndb_context_middleware(auth_middleware(GetProduct))),
     path('deleteproduct/', ndb_context_middleware(auth_middleware(DeleteProduct))),
     path('allproducts/', ndb_context_middleware(auth_middleware(AllProducts))),
+
 ]

@@ -31,3 +31,4 @@ export const CATEGORIES = "CATEGORIES";
 export const CATEGORY = "CATEGORY";
 export const PRODUCT = "PRODUCT";
 export const DEL_PRODUCT = "DEL_PRODUCT";
+export const PRODUCTS = "PRODUCTS";

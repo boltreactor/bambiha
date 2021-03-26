@@ -36,7 +36,7 @@ class Category(ndb.Model):
 
     @classmethod
     def delete_category(cls, request):
-        category = ndb.Key(urlsafe=request.POST.get('category_key')).get()
+        category = ndb.Key(urlsafe=request.query_params.get('category_key')).get()
         if category:
             category.key.delete()
             return True
