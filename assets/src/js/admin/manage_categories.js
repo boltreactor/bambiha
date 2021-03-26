@@ -4,14 +4,29 @@ import Navigation from "./navigation";
 import {getAllCategories} from "../actions/admin";
 import {connect} from 'react-redux';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+import CustomTable from "../reusable-components/custom-table";
+import SmartFooter from "../components/Footers/smart-footer";
 
 class ManageCategory extends Component {
     state = {
         id: null,
+        Categories: true,
+        HelpSupport: false
     }
 
     componentDidMount() {
         this.props.getAllCategories();
+
+    }
+
+    handleTab = (e) => {
+        let name = e.target.text
+
+        if (name === "Categories") {
+            this.setState({Categories: true, HelpSupport: false})
+        } else {
+            this.setState({Categories: false, HelpSupport: true})
+        }
     }
 
     handleRadioButton = (event) => {
@@ -41,6 +56,8 @@ class ManageCategory extends Component {
     // }
 
     render() {
+        const headers = [{name: 'Category name'}, {name: 'Date'}];
+        const {categories} = this.props;
         return (
             <Fragment>
                 <div className="page my-page">
@@ -80,70 +97,55 @@ class ManageCategory extends Component {
                                         {/* Categories */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold">Categories <span>5</span></h3>
+                                                <h3 className="bold">{this.state.Categories === true ? categories.length > 0 ?
+                                                    <div>
+                                                        Categories<span className="ml2"
+                                                                        style={{color: '#0258ff'}}>15</span>
+                                                    </div>
+                                                    : "Catagories Management" : "Help & Support"}</h3>
                                             </div>
-                                            {/* Table */}
-                                            <div className="custom-datatable overflow-x-auto overflow-y-hidden">
-                                                <div className="mdc-data-table hide-scrollbar"
-                                                     data-mdc-auto-init="MDCDataTable">
-                                                    <div className="mdc-data-table__table-container">
-                                                        <table className="mdc-data-table__table"
-                                                               aria-label="Dessert calories">
-                                                            <thead>
-                                                            <tr className="mdc-data-table__header-row">
-                                                                <th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"
-                                                                    role="columnheader" scope="col">
-                                                                </th>
-                                                                <th className="mdc-data-table__header-cell"
-                                                                    role="columnheader" scope="col">Category name
-                                                                </th>
-                                                                <th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
-                                                                    role="columnheader" scope="col">Date
-                                                                </th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody className="mdc-data-table__content">
-                                                            {this.props.categories && this.props.categories.map((category, index) => {
-                                                                return <tr key={category.id} data-row-id="u0"
-                                                                           className="mdc-data-table__row transparent">
-                                                                    <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
-                                                                        <RadioGroup
-                                                                            value={this.state.id}
-                                                                            onChange={this.handleRadioButton}
-                                                                        >
-                                                                            <FormControlLabel value={category.id}
-                                                                                              control={<Radio/>}
-                                                                            />
-                                                                        </RadioGroup>
-                                                                    </td>
-                                                                    <th className="mdc-data-table__cell tl" scope="row"
-                                                                        id="u0">{category.name}
-                                                                    </th>
-                                                                    <td className="mdc-data-table__cell mdc-data-table__cell--numeric">25-03-2021</td>
-                                                                </tr>
-                                                            })}
 
-                                                            </tbody>
-                                                        </table>
+                                            {/*{/ Table /}*/}
+                                            {this.state.Categories &&
+                                            <div>
+                                                <div className="tc">
+                                                    {!categories.length > 0 ? <div>
+                                                        <header className="mt3 my-page">
+                                                            <h3 className="bold">Products</h3>
+                                                        </header>
+                                                        <p>
+                                                            Products management made easy. <br/>
+                                                            All products at the store will be shown here.
+                                                        </p>
+                                                    </div> : <CustomTable headers={headers}
+                                                                          data={categories} onEdit={this.onEdit}
+                                                                          onChange={this.handleRadioButton}
+                                                                          id={this.state.id}/>}
+
+
+                                                </div>
+                                            </div>}
+
+
+                                            <div
+                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                                <div className="tc">
+                                                    <header className="mt3 my-page">
+                                                        <h3 className="bold">Help & Support</h3>
+                                                    </header>
+                                                    <p>
+                                                        24/7 chat support — message us at anytime!
+                                                    </p>
+                                                    <div className="mv3">
+                                                        <Link to="tel:00923165953458" className="link-mute">
+                                                            <button className="btn btn-primary btn-lg">
+                                                                <i className="material-icons-outlined">phone</i> Contact
+                                                                Us
+                                                            </button>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div className="tr mv3">
-                                                <button className="btn btn-outline-primary btn-sm mr3"
-                                                        onClick={(e) => this.onEdit(e)}>
-                                                    <i className="material-icons-outlined"
-                                                       style={{fontSize: '16px'}}
-                                                    >edit</i>
-                                                    Edit
-                                                </button>
-                                                <button className="btn btn-outline-danger btn-sm">
-                                                    <i className="material-icons-outlined"
-                                                       style={{fontSize: '16px', color: 'var(--danger)'}}>delete</i>
-                                                    DELETE
-                                                </button>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +153,7 @@ class ManageCategory extends Component {
                         </div>
                     </div>
                 </div>
-
+                <SmartFooter/>
             </Fragment>
         );
     }

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
-
+import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 class CustomTable extends Component {
 
     state = {
-        class : "mdc-data-table__header-cell"
+        class: "mdc-data-table__header-cell"
 
     }
 
 
     handleClass = (name, e) => {
-       e.preventDefault();
+        e.preventDefault();
         if (name === "Price" || "Quantity" || "Date") {
             this.setState({class: "mdc-data-table__header-cell mdc-data-table__header-cell--numeric"})
         } else {
@@ -29,35 +29,15 @@ class CustomTable extends Component {
                             <table className="mdc-data-table__table"
                                    aria-label="Dessert calories">
                                 <thead>
-                                    <tr  className="mdc-data-table__header-row">
+                                <tr className="mdc-data-table__header-row">
                                     <th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"
                                         role="columnheader" scope="col">
-                                        {/*<div*/}
-                                        {/*    className="mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected">*/}
-                                        {/*    <input type="checkbox"*/}
-                                        {/*           className="mdc-checkbox__native-control"*/}
-                                        {/*           aria-label="Toggle all rows"/>*/}
-                                        {/*    <div*/}
-                                        {/*        className="mdc-checkbox__background">*/}
-                                        {/*        <svg*/}
-                                        {/*            className="mdc-checkbox__checkmark"*/}
-                                        {/*            viewBox="0 0 24 24">*/}
-                                        {/*            <path*/}
-                                        {/*                className="mdc-checkbox__checkmark-path"*/}
-                                        {/*                fill="none"*/}
-                                        {/*                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>*/}
-                                        {/*        </svg>*/}
-                                        {/*        <div*/}
-                                        {/*            className="mdc-checkbox__mixedmark"/>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="mdc-checkbox__ripple"/>*/}
-                                        {/*</div>*/}
                                     </th>
-                                       {this.props.headers.map((h, index) =>{
-                                         return  <th key={index} className="mdc-data-table__header-cell"
-                                        role="columnheader" scope="col">{h.name}
-                                    </th>
-                                            })}
+                                    {this.props.headers.map((h, index) => {
+                                        return <th key={index} className="mdc-data-table__header-cell"
+                                                   role="columnheader" scope="col">{h.name}
+                                        </th>
+                                    })}
                                     {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"*/}
                                     {/*    role="columnheader" scope="col">Price*/}
                                     {/*</th>*/}
@@ -77,65 +57,53 @@ class CustomTable extends Component {
 
                                 </thead>
                                 <tbody className="mdc-data-table__content">
-                                {this.props.data.map(item=>{
+                                {this.props.data.map(item => {
                                     return <tr key={item.id} data-row-id="u0"
-                                    className="mdc-data-table__row transparent">
-                                    <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
-                                        <div
-                                            className="mdc-checkbox mdc-data-table__row-checkbox">
-                                            <input type="checkbox"
-                                                   className="mdc-checkbox__native-control"
-                                                   aria-labelledby="u0"/>
-                                            <div
-                                                className="mdc-checkbox__background">
-                                                <svg
-                                                    className="mdc-checkbox__checkmark"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        className="mdc-checkbox__checkmark-path"
-                                                        fill="none"
-                                                        d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                                </svg>
-                                                <div
-                                                    className="mdc-checkbox__mixedmark"/>
-                                            </div>
-                                            <div className="mdc-checkbox__ripple"/>
-                                        </div>
-                                    </td>
-                                    {item.name &&
+                                               className="mdc-data-table__row transparent">
+                                        <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
+                                            <RadioGroup
+                                                value={this.props.id}
+                                                onChange={this.props.onChange}
+                                            >
+                                                <FormControlLabel value={item.id}
+                                                                  control={<Radio/>}
+                                                />
+                                            </RadioGroup>
+                                        </td>
+                                        {item.name &&
                                         <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.name}
-                                    </th>}
+                                            scope="row" id="u0">{item.name}
+                                        </th>}
 
-                                    {item.name &&
-                                        <td className="mdc-data-table__cell" scope="row"
+                                        {item.name &&
+                                        <td className="mdc-data-table__cell tl" scope="row"
                                             id="u0">25-03-2021</td>}
 
-                                    {item.title &&
-                                       <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.title}
-                                       </th>}
+                                        {item.title &&
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0">{item.title}
+                                        </th>}
 
-                                    {item.price &&
-                                       <td className="mdc-data-table__cell mdc-data-table__cell--numeric">PKR
-                                        {item.price}
-                                       </td>}
+                                        {item.price &&
+                                        <td className="mdc-data-table__cell tl">PKR
+                                            {item.price}
+                                        </td>}
 
-                                    {item.quantity &&
-                                       <td className="mdc-data-table__cell ">{item.quantity}
-                                          </td>}
+                                        {item.quantity &&
+                                        <td className="mdc-data-table__cell">{item.quantity}
+                                        </td>}
 
-                                    {item.title &&
-                                    <td className="mdc-data-table__cell">category</td>}
+                                        {item.title &&
+                                        <td className="mdc-data-table__cell tl">category</td>}
 
-                                    {item.description &&
-                                       <td className="mdc-data-table__cell">{item.description}
-                                          </td>}
+                                        {item.description &&
+                                        <td className="mdc-data-table__cell tl">{item.description}
+                                        </td>}
 
-                                   {item.description &&
-                                       <td className="mdc-data-table__cell">{item.images.length}</td>}
-                                </tr>
-                                    })}
+                                        {item.images &&
+                                        <td className="mdc-data-table__cell">{item.images.length}</td>}
+                                    </tr>
+                                })}
                                 </tbody>
                             </table>
                         </div>
@@ -162,4 +130,5 @@ class CustomTable extends Component {
         );
     }
 }
-export default withRouter (CustomTable);
+
+export default withRouter(CustomTable);
