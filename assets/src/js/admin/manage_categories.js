@@ -82,7 +82,7 @@ class ManageCategory extends Component {
                                     <div className="tab-content">
                                         <div className="mb4">
                                             <h3 className="bold">{this.state.Categories === true ? categories.length>0? <div>
-                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span>
+                                                    Categories<span className="ml2" style={{color: '#0258ff'}}>15</span>
                                                 </div>
                                                     :"Catagories Management" : "Help & Support"}</h3>
                                             </div>
