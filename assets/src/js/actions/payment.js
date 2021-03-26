@@ -14,7 +14,7 @@ export const addCard = (card_token) => dispatch => {
     bodyFormData.append('card_token', card_token);
     axios.post(`/payment/add-method/`, bodyFormData, {headers: Header})
         .then(res => {
-            debugger
+
             dispatch({
                 type: ADD_CARD,
                 card: res.data.user

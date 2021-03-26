@@ -7,7 +7,7 @@ class Switch extends Component {
     }
     onChange = (event) => {
         event.preventDefault();
-        debugger
+
         if (this.state.classes === "mdc-switch mdc-switch--checked") {
             this.setState({classes: "mdc-switch"})
         } else {

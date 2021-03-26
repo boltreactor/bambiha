@@ -12,7 +12,7 @@ class ManageUsers extends Component {
 
     handleTab = (e) => {
         let name = e.target.text
-        debugger
+
         if (name === "Users") {
             this.setState({Users: true, HelpSupport: false})
         } else {

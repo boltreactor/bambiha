@@ -1,33 +1,26 @@
-import {
-    CATEGORY,
-    CATEGORIES, PRODUCT, DEL_PRODUCT,
-} from '../actions/types';
 import React from 'react';
+import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY} from "../actions/types";
 
 export const initialState = {
-    user: {
-        first_name: "",
-        last_name: "",
-        phone: "",
-        email: "",
-    },
-    categories: [],
-    products: [],
-    loginStatus: false,
-    notification_settings: null,
-    msg: null,
-    show: false,
-    category:{}
+  user: {
+    first_name: "",
+    last_name: "",
+    phone: "",
+    email: "",
+  },
+  categories: [],
+  category: {},
+  products: [],
+  product: {},
+  loginStatus: false,
+  notification_settings: null,
+  msg: null,
+  show: false
+
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case CATEGORY: {
-            return {
-                ...state,
-                category: action.category,
-            }
-        }
         case CATEGORIES: {
             return {
                 ...state,
@@ -35,14 +28,28 @@ export default function (state = initialState, action) {
             }
         }
 
+        case CATEGORY: {
+            return {
+                ...state,
+                category: action.category
+            }
+        }
+
         case PRODUCT: {
+            return {
+                ...state,
+                product: action.product
+            }
+        }
+
+        case DEL_PRODUCT: {
             return {
                 ...state,
                 products: action.products
             }
         }
 
-        case DEL_PRODUCT: {
+        case PRODUCTS: {
             return {
                 ...state,
                 products: action.products
@@ -54,3 +61,4 @@ export default function (state = initialState, action) {
 
     }
 }
+

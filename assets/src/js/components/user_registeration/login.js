@@ -68,7 +68,7 @@ class Login extends Form {
     };
 
     changeHidden = (event) => {
-        debugger
+
         event.preventDefault()
         this.setState({isHidden: !this.state.isHidden})
     }
