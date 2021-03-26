@@ -108,7 +108,7 @@ class CustomTable extends Component {
                                     </th>}
 
                                     {item.name &&
-                                        <td className="mdc-data-table__cell" scope="row"
+                                        <td className="mdc-data-table__cell tl" scope="row"
                                             id="u0">25-03-2021</td>}
 
                                     {item.title &&
@@ -117,22 +117,22 @@ class CustomTable extends Component {
                                        </th>}
 
                                     {item.price &&
-                                       <td className="mdc-data-table__cell mdc-data-table__cell--numeric">PKR
+                                       <td className="mdc-data-table__cell tl">PKR
                                         {item.price}
                                        </td>}
 
                                     {item.quantity &&
-                                       <td className="mdc-data-table__cell ">{item.quantity}
+                                       <td className="mdc-data-table__cell">{item.quantity}
                                           </td>}
 
                                     {item.title &&
-                                    <td className="mdc-data-table__cell">category</td>}
+                                    <td className="mdc-data-table__cell tl">category</td>}
 
                                     {item.description &&
-                                       <td className="mdc-data-table__cell">{item.description}
+                                       <td className="mdc-data-table__cell tl">{item.description}
                                           </td>}
 
-                                   {item.description &&
+                                   {item.images &&
                                        <td className="mdc-data-table__cell">{item.images.length}</td>}
                                 </tr>
                                     })}
