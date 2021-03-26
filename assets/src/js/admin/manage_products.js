@@ -5,7 +5,7 @@ import SmartFooter from "../components/Footers/smart-footer";
 import {getAllProducts} from "../actions/admin";
 import {connect} from "react-redux";
 import Table from "../reusable-components/table";
-import ProductsTable from "./products-table";
+import CustomTable from "../reusable-components/custom-table";
 
 class ManageProducts extends Component {
 
@@ -29,6 +29,9 @@ class ManageProducts extends Component {
     }
 
     render() {
+        const headers = [{name: 'Product Title'}, {name: 'Price'}, {name: 'Quantity'},
+            {name: 'Category'}, {name: 'Description'}, {name: 'Images'}];
+
         const {products} = this.props;
         return (
             <Fragment>
@@ -69,14 +72,20 @@ class ManageProducts extends Component {
                                                 Help & Support
                                             </Link>
                                         </header>
-                                        {/* */}
+                                        {/*Products */}
                                         <div className="tab-content">
                                             <div className="mb4">
                                                 <h3 className="bold"> {this.state.Products === true ? products.length>0?<div>
-                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span></div>:"Products Management" : "Help & Support"}</h3>
+                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span>
+                                                </div>
+                                                    :"Products Management" : "Help & Support"}</h3>
                                             </div>
-                                            <div
-                                                className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>
+
+                                            {/* Table */}
+
+                                            {/*<div className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>*/}
+                                            {this.state.Products &&
+                                                <div>
                                                 <div className="tc">
                                                     {!products.length>0 ? <div><header className="mt3 my-page">
                                                         <h3 className="bold">Products</h3>
@@ -87,20 +96,14 @@ class ManageProducts extends Component {
                                                     </p>
                                                     </div>:
 
-                                                   <ProductsTable headers={['Product Title', 'Price', 'Quantity', 'Category', 'Description', 'Images']}
+                                                   <CustomTable headers={headers}
                                                                   data={products} onEdit={this.editProduct}/>}
 
-                                                    {/*{products !== undefined &&*/}
 
-                                                    {/*<Table*/}
-                                                    {/*    headers={['Sr.', 'Image', 'Title', 'Description', 'Category', 'Quantity', 'Price', 'Dated']}*/}
-                                                    {/*    data={products}*/}
-                                                    {/*/>*/}
-                                                    {/*}*/}
                                                 </div>
-                                            </div>
-                                            <div
-                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                            </div>}
+
+                                            <div className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
                                                         <h3 className="bold">Help & Support</h3>
@@ -109,12 +112,12 @@ class ManageProducts extends Component {
                                                         24/7 chat support — message us at anytime!
                                                     </p>
                                                     <div className="mv3">
-                                                        <a href="tel:00923165953458" className="link-mute">
+                                                        <Link to="tel:00923165953458" className="link-mute">
                                                             <button className="btn btn-primary btn-lg">
                                                                 <i className="material-icons-outlined">phone</i> Contact
                                                                 Us
                                                             </button>
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>

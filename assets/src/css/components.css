@@ -4028,3 +4028,8 @@ ul.store-categories a:hover {
 .custom-datatable .mdc-data-table__cell {
     font-family: var(--font-family-montserrat) !important;
 }
+
+.custom-datatable .mdc-data-table__row.disabled,
+.custom-datatable .mdc-data-table__row.disabled:hover {
+    background-color: #e6e6e6 !important;
+}
