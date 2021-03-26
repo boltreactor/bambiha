@@ -1,9 +1,8 @@
 import axios from "axios";
 import {loadProgressBar} from 'axios-progress-bar';
 import {
-    ADD_CATEGORY,
-    EDIT_CATEGORY,
-    ALL_CATEGORIES, GET_CATEGORY, GET_PRODUCT, DEL_PRODUCT
+    CATEGORY,
+    CATEGORIES, PRODUCT, DEL_PRODUCT
 } from "./types";
 
 const qs = require('query-string');
@@ -15,30 +14,24 @@ const Header = {
     'Accept': 'application/json, text/plain'
 };
 
-export const addCategory = (category) => dispatch => {
+export const addCategory = (category, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category', category);
     axios.post(`/admin/addcategory/`, bodyFormData, {headers: Header})
         .then(res => {
-            dispatch({
-                type: ADD_CATEGORY,
-                category: res.data.category,
-            })
+            props.history.push("/admin/categories")
         })
 
 };
-export const editCategory = (id, category) => dispatch => {
+export const editCategory = (id, category,props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
-    axios.post(`/admin/addcategory/`, bodyFormData, {headers: Header})
+    axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
-            dispatch({
-                type: EDIT_CATEGORY,
-                category: res.data.category,
-            })
+            props.history.push("/admin/categories")
         })
 };
 
@@ -48,7 +41,7 @@ export const getAllCategories = () => dispatch => {
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
-                type: ALL_CATEGORIES,
+                type: CATEGORIES,
                 categories: res.data.category
             });
         });
@@ -65,7 +58,7 @@ export const getCategory = (id) => dispatch => {
     axios.get('/admin/getcategory/', config)
         .then(res => {
             dispatch({
-                type: GET_CATEGORY,
+                type: CATEGORY,
                 category: res.data.category
             });
         });
@@ -82,7 +75,7 @@ export const getProduct = (id) => dispatch => {
     axios.get('/admin/getproduct/', config)
         .then(res => {
             dispatch({
-                type: GET_PRODUCT,
+                type: PRODUCT,
                 products: res.data.product
             });
         });

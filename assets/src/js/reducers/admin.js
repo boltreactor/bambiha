@@ -1,7 +1,6 @@
 import {
-    ADD_CATEGORY,
-    EDIT_CATEGORY,
-    ALL_CATEGORIES, GET_PRODUCT, DEL_PRODUCT, GET_CATEGORY
+    CATEGORY,
+    CATEGORIES, PRODUCT, DEL_PRODUCT,
 } from '../actions/types';
 import React from 'react';
 
@@ -23,35 +22,20 @@ export const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ADD_CATEGORY: {
+        case CATEGORY: {
             return {
                 ...state,
                 category: action.category,
-                categories: action.categories
             }
         }
-        case EDIT_CATEGORY: {
-            return {
-                ...state,
-                category: action.category,
-                categories: action.categories
-            }
-        }
-        case ALL_CATEGORIES: {
+        case CATEGORIES: {
             return {
                 ...state,
                 categories: action.categories
             }
         }
 
-        case GET_CATEGORY: {
-            return {
-                ...state,
-                category: action.category
-            }
-        }
-
-        case GET_PRODUCT: {
+        case PRODUCT: {
             return {
                 ...state,
                 products: action.products

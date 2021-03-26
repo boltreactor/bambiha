@@ -1,15 +1,19 @@
 import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
-import {addCategory, getAllCategories} from "../actions/admin";
+import {addCategory,  editCategory, getCategory} from "../actions/admin";
 import {connect} from 'react-redux';
-import OutlinedTextfield from "../reusable-components/outlined-textfield";
+import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 
 class NewCategory extends Component {
-    state = {
-        category: "",
-        categoryId: "",
-        toEdit: {}
+    constructor(props) {
+        super(props);
+        this.props.getCategory(this.props.match.params.id)
+        this.state = {
+            category: "",
+            categoryId: this.props.match.params.id,
+        }
     }
+
 
     handleNameChange = ({currentTarget: input}) => {
         this.setState({category: input.value})
@@ -17,20 +21,29 @@ class NewCategory extends Component {
 
     addToCategory = () => {
         const category = this.state.category
-        this.props.addCategory(category)
+        const id = this.props.match.params.id
+        id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, this.props)
     }
 
-    componentDidMount() {
-        const categoryId = this.props.match.params.id
-        this.setState({categoryId})
-        this.props.getAllCategories()
-        const obj = this.props.categories.filter(category => (
-            this.props.match.params.id === category.id
-        ))
-        debugger
-        console.log(obj[0])
-        this.setState({toEdit: obj[0]})
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.props.match.params.id && nextProps.category && this.setState({category: nextProps.category.name})
     }
+
+    // componentDidMount() {
+    //     const categoryId = this.props.match.params.id
+    //     this.setState({categoryId})
+    //     this.props.getCategory(categoryId)
+    //     this.props.getAllCategories()
+    //     const categories=[...this.props.categories]
+    //     console.log(categories)
+    //     this.setState({categories})
+    //     const obj = this.props.categories.filter(category => (
+    //         this.props.match.params.id === category.id
+    //     ))
+    //     console.log(this.props.category)
+    //     const category = this.props.category
+    //     category !== undefined && this.setState({category: category.name})
+    // }
 
     render() {
         return (
@@ -46,20 +59,18 @@ class NewCategory extends Component {
                                 </p>
                             </header>
                             <div className="mv4">
-                                <OutlinedTextfield
+                                <NoLabelTextfield
                                     type="text"
                                     name="Category Name"
                                     label="Category name"
-                                    value={this.state.toEdit && this.state.toEdit.name || ''}
-                                    onChange={this.handleNameChange}/>
+                                    onChange={this.handleNameChange}
+                                    value={this.state.category ? this.state.category : ''}/>
 
                                 <div className="mt4 mb4">
-                                    <Link to="/admin/categories" className="link-mute">
-                                        <button className="btn btn-primary btn-lg" onClick={this.addToCategory}>
-                                            <i className="v-mid material-icons mr1"
-                                               style={{fontSize: '18px'}}>lock</i> Add
-                                        </button>
-                                    </Link>
+                                    <button className="btn btn-primary btn-lg" onClick={this.addToCategory}>
+                                        <i className="v-mid material-icons mr1"
+                                           style={{fontSize: '18px'}}>lock</i> Add
+                                    </button>
                                     <Link to="/admin/categories" className="link-mute">
                                         <button className="btn btn-outline-primary btn-lg ml3">
                                             CANCEL
@@ -77,7 +88,7 @@ class NewCategory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    categories: state.admin.categories
+    category: state.admin.category
 })
 
-export default connect(mapStateToProps, {addCategory, getAllCategories})(NewCategory);
+export default connect(mapStateToProps, {addCategory, editCategory, getCategory})(NewCategory);
