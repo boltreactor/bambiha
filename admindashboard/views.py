@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Category, Products
+from userdashboard.models import Order, OrderItems
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -108,3 +109,31 @@ def DeleteProduct(request):
     return Response({
         'status': status.HTTP_200_OK, 'message': "Product not found",
     }, status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def ViewOrders(self, request):
+        orders = Order.get_orders(request)
+
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Product Added", 'orders': orders
+        }, status.HTTP_200_OK)
+
+@api_view(['GET'])
+def ViewOrderItems(request):
+        items = OrderItems.get_order_items(request)
+
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Order Items", 'orders': items
+        }, status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def UpdateOrder(request):
+        Order.update_status(request)
+
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Order Updated"
+        }, status.HTTP_200_OK)
+
