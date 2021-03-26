@@ -1,6 +1,6 @@
 import axios from "axios";
 import {loadProgressBar} from 'axios-progress-bar';
-import {ALL_CATEGORIES, GET_CATEGORY, GET_PRODUCT, DEL_PRODUCT} from "./types";
+import {CATEGORIES, CATEGORY, PRODUCT, DEL_PRODUCT} from "./types";
 
 const qs = require('query-string');
 loadProgressBar();
@@ -18,7 +18,7 @@ export const getAllCategories = () => dispatch => {
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
-                type: ALL_CATEGORIES,
+                type: CATEGORIES,
                 categories: res.data.category
             });
         });
@@ -35,8 +35,8 @@ export const getCategory = (id) => dispatch => {
     axios.get('/admin/getcategory/', config)
         .then(res => {
             dispatch({
-                type: GET_CATEGORY,
-                categories: res.data.category
+                type: CATEGORY,
+                category: res.data.category
             });
         });
 };
@@ -52,8 +52,8 @@ export const getProduct = (id) => dispatch => {
     axios.get('/admin/getproduct/', config)
         .then(res => {
             dispatch({
-                type: GET_PRODUCT,
-                products: res.data.product
+                type: PRODUCT,
+                product: res.data.product
             });
         });
 };
@@ -68,9 +68,9 @@ export const delProduct = (id) => dispatch => {
     }
     axios.get('/admin/deleteproduct/', config)
         .then(res => {
-            dispatch({
-                type: DEL_PRODUCT,
-                products: res.data.product
-            });
+            // dispatch({
+            //     type: DEL_PRODUCT
+            //
+            // });
         });
 };

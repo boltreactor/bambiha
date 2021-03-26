@@ -120,7 +120,7 @@ class Products(ndb.Model):
 
     @classmethod
     def delete_product(cls, request):
-        product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
+        product = ndb.Key(urlsafe=request.query_params.get('product_key')).get()
         if product:
             product.key.delete()
             return True

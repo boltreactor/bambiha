@@ -1,5 +1,5 @@
 import React from 'react';
-import {ALL_CATEGORIES, GET_PRODUCT, DEL_PRODUCT, GET_CATEGORY} from "../actions/types";
+import {CATEGORIES, PRODUCT, DEL_PRODUCT, CATEGORY} from "../actions/types";
 
 export const initialState = {
   user: {
@@ -9,7 +9,9 @@ export const initialState = {
     email: "",
   },
   categories: [],
+  category: {},
   products: [],
+  product: {},
   loginStatus: false,
   notification_settings: null,
   msg: null,
@@ -19,24 +21,24 @@ export const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ALL_CATEGORIES: {
+    case CATEGORIES: {
       return {
         ...state,
         categories: action.categories
       }
     }
 
-    case GET_CATEGORY: {
+    case CATEGORY: {
       return {
         ...state,
-        categories: action.categories
+        category: action.category
       }
     }
 
-    case GET_PRODUCT: {
+    case PRODUCT: {
       return {
         ...state,
-        products: action.products
+        product: action.product
       }
     }
 
