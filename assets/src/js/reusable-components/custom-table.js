@@ -74,9 +74,6 @@ class CustomTable extends Component {
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}
                                         </th>}
-
-                                        {item.name &&
-                                        <td className="mdc-data-table__cell tl" scope="row"
                                     {item.order_key &&
                                         <th className="mdc-data-table__cell tl"
                                         scope="row" id="u0">{item.order_key}
@@ -118,14 +115,7 @@ class CustomTable extends Component {
 
                                         {item.images &&
                                         <td className="mdc-data-table__cell">{item.images.length}</td>}
-                                    </tr>
-                                })}
-                                    {/*{item.status &&*/}
-                                    {/*    <td className="mdc-data-table__cell tl">delivered</td>}*/}
 
-                                   {item.images  &&
-                                       <td className="mdc-data-table__cell tl" scope="row"
-                                            id="u0">{item.images.length}</td>}
                                 </tr>
                                     })}
                                 </tbody>
