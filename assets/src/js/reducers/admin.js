@@ -1,21 +1,22 @@
 import React from 'react';
-import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY} from "../actions/types";
+import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY, ORDERS} from "../actions/types";
 
 export const initialState = {
-  user: {
-    first_name: "",
-    last_name: "",
-    phone: "",
-    email: "",
-  },
-  categories: [],
-  category: {},
-  products: [],
-  product: {},
-  loginStatus: false,
-  notification_settings: null,
-  msg: null,
-  show: false
+    user: {
+        first_name: "",
+        last_name: "",
+        phone: "",
+        email: "",
+    },
+    categories: [],
+    category: {},
+    products: [],
+    product: {},
+    orders: [],
+    loginStatus: false,
+    notification_settings: null,
+    msg: null,
+    show: false
 
 };
 
@@ -53,6 +54,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 products: action.products
+            }
+        }
+        case ORDERS: {
+            return {
+                ...state,
+                orders: action.orders
             }
         }
 

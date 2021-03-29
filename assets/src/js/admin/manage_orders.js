@@ -1,13 +1,21 @@
 import React, {Component, Fragment} from "react";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
+import {getAllOrders} from "../actions/admin";
+import {connect} from "react-redux";
+import CustomTable from "../reusable-components/custom-table";
 
 class ManageOrders extends Component {
 
     state = {
         Orders: true,
         HelpSupport: false
+    }
+
+    componentDidMount() {
+        this.props.getAllOrders()
+
     }
 
     handleTab = (e) => {
@@ -21,6 +29,8 @@ class ManageOrders extends Component {
     }
 
     render() {
+        const headers = [{name: 'Order name'}, {name: 'Date'}];
+        const {orders} = this.props;
         return (
             <Fragment>
                 <div className="page my-page">
@@ -61,33 +71,40 @@ class ManageOrders extends Component {
                                         {/* */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold"> {this.state.Orders === true ? "Orders Management" : "Help & Support"}</h3>
-                                            </div>
-                                            {/* Call to action - Favourites */}
-                                            <div
-                                                className={this.state.Orders === true ? "tab-no-data" : "tab-no-data hide"}>
-                                                <div className="tc">
-                                                    <header className="mt3 my-page">
-                                                        <h3 className="bold">Users</h3>
-                                                    </header>
-                                                    <p>
-                                                        Orders management made easy. <br/>
-                                                        All orders at the store will be shown here.
-                                                    </p>
-                                                    <div className="mv3">
-                                                        {/*
-                                                            <button class="btn btn-primary btn-lg">
-                                                              <i class="material-icons-outlined">shopping_cart</i> Continue Shopping
-                                                            </button>
-                                                            */}
+                                                <h3 className="bold">{this.state.Orders === true ? orders.length > 0 ?
+                                                    <div>
+                                                        Orders
+                                                        {/*<span className="ml2"*/}
+                                                        {/*                style={{color: '#0258ff'}}></span>*/}
                                                     </div>
-                                                </div>
+                                                    : "Orders Management" : "Help & Support"}</h3>
                                             </div>
+                                            {/*{/ Table /}*/}
+                                            {this.state.Orders &&
+                                            <div>
+                                                <div className="tc">
+                                                    {!orders.length > 0 ? <div>
+                                                        <header className="mt3 my-page">
+                                                            <h3 className="bold">Orders</h3>
+                                                        </header>
+                                                        <p>
+                                                            Products management made easy. <br/>
+                                                            All products at the store will be shown here.
+                                                        </p>
+                                                    </div> : <CustomTable headers={headers}
+                                                                          data={orders}
+                                                        // onEdit={this.onEdit}
+                                                        // onChange={this.handleRadioButton}
+                                                                          id={this.state.id}/>}
+
+
+                                                </div>
+                                            </div>}
                                             <div
                                                 className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
-                                                        <h3 className="bold">Help &amp; Support</h3>
+                                                        <h3 className="bold">Help & Support</h3>
                                                     </header>
                                                     <p>
                                                         24/7 chat support — message us at anytime!
@@ -116,4 +133,8 @@ class ManageOrders extends Component {
     }
 }
 
-export default ManageOrders;
+const mapStateToProps = (state) => ({
+    orders: state.admin.orders
+})
+
+export default withRouter(connect(mapStateToProps, {getAllOrders})(ManageOrders));

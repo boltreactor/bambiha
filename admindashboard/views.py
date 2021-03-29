@@ -113,11 +113,11 @@ def DeleteProduct(request):
 
 
 @api_view(['GET'])
-def ViewOrders(self, request):
+def ViewOrders(request):
         orders = Order.get_orders(request)
 
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Product Added", 'orders': orders
+            'status': status.HTTP_200_OK, 'message': "Orders by users loaded!", 'orders': orders
         }, status.HTTP_200_OK)
 
 @api_view(['GET'])

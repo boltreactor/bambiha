@@ -176,7 +176,6 @@ export const getNotificationSettings = () => dispatch => {
 
 
 };
-
 export const addSocialConnection = (user) => dispatch => {
     axios.post('/auth/add-social-connection/', user, {headers: Header})
         .then(res => {
@@ -187,4 +186,3 @@ export const addSocialConnection = (user) => dispatch => {
             });
         });
 };
-
