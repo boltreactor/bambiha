@@ -1,5 +1,5 @@
 import React from 'react';
-import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY} from "../actions/types";
+import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY, ADMIN_ORDERS} from "../actions/types";
 
 export const initialState = {
   user: {
@@ -8,6 +8,7 @@ export const initialState = {
     phone: "",
     email: "",
   },
+  admin_orders: [],
   categories: [],
   category: {},
   products: [],
@@ -53,6 +54,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 products: action.products
+            }
+        }
+
+        case ADMIN_ORDERS:{
+            return {
+                ...state,
+                admin_orders: action.admin_orders
             }
         }
 

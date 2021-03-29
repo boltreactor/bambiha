@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
+import {viewCart} from "../actions/user";
+import {connect} from "react-redux";
 
 class Cart extends Component {
-    render() {
+
+    componentDidMount() {
+       this.props.viewCart();
+    }
+
+
+
+  render() {
         return (
               <div className="page">
         <div className="page__content">
@@ -32,20 +41,23 @@ class Cart extends Component {
                 <div className="cart-or-bag mv4">
                   <h3 className="mb3">Bag</h3>
                   <div className="cart-item ma0">
-                    <div className="flex mb3">
+
+                    {/*action call*/}
+                    {this.props.cart && this.props.cart.map((item, index) => {
+                      return <div key={index} className="flex mb3">
                       <div className="mr2 mb3">
                         <Link to="#" className="link-mute">
-                          <img src="/static/show-1.jpeg" alt="" />
+                          <img src={item.image ? item.image : "/static/show-1.jpeg"} alt="" />
                         </Link>
                       </div>
                       <div className="flex-grow-1 pa2">
                         <div className="description">
                           <div className="flex flex-wrap mb2">
                             <div className="flex-grow-1 mr2">
-                              <h4>Nike Air Max 270</h4>
+                              <h4>{item.title}</h4>
                             </div>
                             <div>
-                              <h6>$150</h6>
+                              <h6>{item.price}</h6>
                             </div>
                           </div>
                           <p className="ma0" style={{fontSize: '16px'}}>
@@ -83,7 +95,7 @@ class Cart extends Component {
                           <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
                         </div>
                       </div>
-                    </div>
+                    </div>})}
                     <div className="mv3">
                       <h6>Shipping</h6>
                       <p style={{color: '#082244', fontSize: '16px', paddingBottom: '16px'}}>Arrives by <span>Wed,</span> <span>March 10, 2021</span></p>
@@ -141,15 +153,16 @@ class Cart extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col s12 m4 l4">
+               <div  className="col s12 m4 l4">
                 <div className="ml4-m ml4-l">
                   <h3 className="mb3">Summary</h3>
                   <div className="flex items-center">
+
                     <div className="flex-grow-1">
                       <p style={{fontSize: '15px'}}>Subtotal</p>
                     </div>
                     <div className="ml2">
-                      <h6>$150</h6>
+                      <h6>{this.props.cart.reduce((accumulator, current) => accumulator + current.price, 0)}</h6>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -174,7 +187,7 @@ class Cart extends Component {
                       <h6>Total</h6>
                     </div>
                     <div className="ml2">
-                      <h6>$150</h6>
+                      <h6>{this.props.cart.reduce((accumulator, current) => accumulator + current.price, 0)}</h6>
                     </div>
                   </div>
                   <div className="mv2" style={{borderBottom: '1px solid #e5e5e5'}} />
@@ -194,4 +207,8 @@ class Cart extends Component {
     }
 }
 
-export default Cart;
+const mapStateToProps = (state) => ({
+   cart : state.user.cart
+})
+
+export default withRouter(connect(mapStateToProps,{viewCart})(Cart));

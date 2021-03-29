@@ -22,5 +22,6 @@ urlpatterns = [
     path('auth/', include('registration.urls')),
     path('payment/', include('payment_methods.urls')),
     path('admin/', include('admindashboard.urls')),
+    path('user/', include('userdashboard.urls')),
     re_path('', TemplateView.as_view(template_name='frontend/index.html')),
 ]

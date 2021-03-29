@@ -1,5 +1,5 @@
 import axios from "axios";
-import {PRODUCTS, PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT} from "./types";
+import {PRODUCTS, PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 const qs = require('query-string');
 loadProgressBar();
@@ -144,7 +144,6 @@ export const getAllProducts = () => dispatch => {
 };
 
 export const deleteCategory = (category_key) => dispatch => {
-    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/deletecategory/', {
         headers: Header, params: {
@@ -153,5 +152,16 @@ export const deleteCategory = (category_key) => dispatch => {
     })
         .then(res => {
             console.log(res)
+        });
+};
+
+export const viewAdminOrders = () => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/admin/vieworders/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: ADMIN_ORDERS,
+                admin_orders: res.data.orders,
+            });
         });
 };
