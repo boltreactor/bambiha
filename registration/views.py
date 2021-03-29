@@ -93,6 +93,16 @@ def all_users(request):
         return Response(serialized_results)
 
 
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def account_status(request):
+    user = User.manage_status(request)
+
+    return Response({
+        'status': status.HTTP_200_OK, 'message': 'Account status updated', 'token': to_json_ndb(user)
+    })
+
+
 @api_view(['GET', 'POST'])
 def social_login(request):
     if request.method == 'POST':
