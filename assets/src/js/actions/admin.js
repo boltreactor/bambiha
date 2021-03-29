@@ -71,7 +71,7 @@ export const getProduct = (id) => dispatch => {
         .then(res => {
             dispatch({
                 type: PRODUCT,
-                products: res.data.product
+                product: res.data.product
             });
         });
 };
@@ -164,7 +164,6 @@ export const getAllProducts = () => dispatch => {
 };
 
 export const deleteCategory = (category_key) => dispatch => {
-    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/deletecategory/', {
         headers: Header, params: {

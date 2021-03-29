@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import DashboardDrawer from "../reusable-components/Drawers/Static/dashboard-drawer";
 import SmartFooter from "./Footers/estore-smart-footer";
+import {connect} from "react-redux";
+import {getAllCategories} from "../actions/admin";
+import CustomTable from "../reusable-components/custom-table";
+import {viewOrders} from "../actions/user";
 
 class Orders extends Component {
     state = {
@@ -20,7 +24,20 @@ class Orders extends Component {
         }
     }
 
+
+    componentDidMount() {
+     this.props.viewOrders();
+    }
+
+    onEdit = (e) => {
+        e.preventDefault();
+    }
+
+
     render() {
+        const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
+        const {orders} = this.props;
+
         return (
             <div className="page">
                 <div className="page__content">
@@ -51,62 +68,41 @@ class Orders extends Component {
                                         </Link>
                                     </header>
 
+                                     {/* Orders */}
                                     <div className="tab-content">
                                         <div className="mb4">
-                                            <h3 className="bold"> {this.state.Orders===true ? "Orders": "Help & Support"}</h3>
+                                            <h3 className="bold"> {this.state.Orders===true ?
+                                                "Orders": "Help & Support"}</h3>
                                         </div>
-                                        {/* Orders list */}
-                                        {/*<div className="cart-or-bag mv4">*/}
-                                        {/*  <div className="cart-item ma0">*/}
-                                        {/*    <div className="flex mb3">*/}
-                                        {/*      <div className="mr2 mb3">*/}
-                                        {/*        <Link to="#" className="link-mute">*/}
-                                        {/*          <img src="/static/img-noise.png" alt="" />*/}
-                                        {/*        </Link>*/}
-                                        {/*      </div>*/}
-                                        {/*      <div className="flex-grow-1 pa2">*/}
-                                        {/*        <div className="description">*/}
-                                        {/*          <div className="flex flex-wrap mb2">*/}
-                                        {/*            <div className="flex-grow-1 mr2">*/}
-                                        {/*              <h4>Nike Air Max 270</h4>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div>*/}
-                                        {/*              <h6>$150</h6>*/}
-                                        {/*            </div>*/}
-                                        {/*          </div>*/}
-                                        {/*          <p className="ma0" style={{fontSize: '16px'}}>*/}
-                                        {/*            Men's Shoe*/}
-                                        {/*          </p>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="actions">*/}
-                                        {/*          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>*/}
-                                        {/*          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>*/}
-                                        {/*        </div>*/}
-                                        {/*      </div>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="mv3">*/}
-                                        {/*      <h6>Shipping</h6>*/}
-                                        {/*      <p style={{color: '#082244', fontSize: '16px', paddingBottom: '16px'}}>Arrives by <span>Wed,</span> <span>March 10, 2021</span></p>*/}
-                                        {/*    </div>*/}
-                                        {/*  </div>*/}
-                                        {/*</div>*/}
-                                        {/* Call to action - My orders */}
-                                        <div className={this.state.Orders===true ? "tab-no-data": "tab-no-data hide"}>
+
+                                        {/* Table-- My orders */}
+
+                                        {this.state.Orders &&
+                                        <div>
+                                        {/*<div className={this.state.Orders===true ? "tab-no-data": "tab-no-data hide"}>*/}
                                             <div className="tc">
-                                                <header className="mt3 my-page">
-                                                    <h3 className="bold">My orders</h3>
-                                                </header>
-                                                <p>
-                                                    You don't have any orders yet
-                                                </p>
-                                                <div className="mv3">
-                                                    <button className="btn btn-primary btn-lg">
-                                                        <i className="material-icons-outlined">shopping_cart</i> Continue
-                                                        Shopping
-                                                    </button>
-                                                </div>
+                                                 {!orders.length>0 ?
+                                                 <div>
+                                                        <header className="mt3 my-page">
+                                                          <h3 className="bold">My orders</h3>
+                                                        </header>
+                                                        <p>
+                                                           You don't have any orders yet
+                                                        </p>
+                                                 </div>:
+
+                                                     <CustomTable headers={headers}
+                                                                  data={orders} onEdit={this.onEdit}/>}
+
+                                                {/*<div className="mv3">*/}
+                                                {/*    <button className="btn btn-primary btn-lg">*/}
+                                                {/*        <i className="material-icons-outlined">shopping_cart</i> Continue*/}
+                                                {/*        Shopping*/}
+                                                {/*    </button>*/}
+                                                {/*</div>*/}
                                             </div>
-                                        </div>
+                                        </div>}
+
                                         <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
                                             <div className="tc">
                                                 <header className="mt3 my-page">
@@ -116,11 +112,11 @@ class Orders extends Component {
                                                     24/7 chat support — message us at anytime!
                                                 </p>
                                                 <div className="mv3">
-                                                    <a href="tel:00923165953458" className="link-mute">
+                                                    <Link to="tel:00923165953458" className="link-mute">
                                                         <button className="btn btn-primary btn-lg">
                                                             <i className="material-icons-outlined">phone</i> Contact Us
                                                         </button>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,7 +124,8 @@ class Orders extends Component {
                                 </div>
                             </div>
                         </main>
-                        {/* No data placeholder */}
+
+                        {/*/!* No data placeholder *!/*/}
                         <main className="main hide"
                               style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
                             <div className="container l mb7">
@@ -213,7 +210,7 @@ class Orders extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col s12 m4">
-                                            <Link href="https://www.boltreactor.com/booking" target="_blank"
+                                            <Link to="https://www.boltreactor.com/booking" target="_blank"
                                                   className="link-mute">
                                                 <div className="shadow-0 rounded-sm db mb5 pa3">
                                                     <div className="flex">
@@ -332,4 +329,8 @@ class Orders extends Component {
     }
 }
 
-export default Orders;
+const mapStateToProps = (state) => ({
+   orders : state.user.orders
+})
+
+export default withRouter(connect(mapStateToProps,{viewOrders})(Orders));

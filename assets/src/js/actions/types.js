@@ -33,4 +33,6 @@ export const PRODUCT = "PRODUCT";
 export const DEL_PRODUCT = "DEL_PRODUCT";
 export const PRODUCTS = "PRODUCTS";
 export const ORDERS = "ORDERS";
+export const CART = "CART";
+export const ORDERS = "ORDERS";
 

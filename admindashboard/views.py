@@ -120,6 +120,7 @@ def ViewOrders(request):
             'status': status.HTTP_200_OK, 'message': "Orders by users loaded!", 'orders': orders
         }, status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def ViewOrderItems(request):
         items = OrderItems.get_order_items(request)
