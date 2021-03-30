@@ -1,5 +1,5 @@
 import axios from "axios";
-import {PRODUCTS, PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ORDERS} from "./types";
+import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 const qs = require('query-string');
 loadProgressBar();
@@ -70,7 +70,7 @@ export const getProduct = (id) => dispatch => {
     axios.get('/admin/getproduct/', config)
         .then(res => {
             dispatch({
-                type: PRODUCT,
+                type: ADMIN_PRODUCT,
                 product: res.data.product
             });
         });
@@ -157,7 +157,7 @@ export const getAllProducts = () => dispatch => {
     axios.get('/admin/allproducts/', {headers: Header})
         .then(res => {
             dispatch({
-                type: PRODUCTS,
+                type: ADMIN_PRODUCTS,
                 products: res.data.products,
             });
         });
@@ -180,7 +180,7 @@ export const getAllOrders = () => dispatch => {
         .then(res => {
             debugger
             dispatch({
-                type: ORDERS,
+                type: ADMIN_ORDERS,
                 orders: res.data.orders,
             });
         });

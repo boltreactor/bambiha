@@ -1,5 +1,5 @@
 import React from 'react';
-import {CATEGORIES, PRODUCT, PRODUCTS, DEL_PRODUCT, CATEGORY, ORDERS} from "../actions/types";
+import {CATEGORIES, ADMIN_PRODUCT, ADMIN_PRODUCTS, DEL_PRODUCT, CATEGORY, ADMIN_ORDERS} from "../actions/types";
 
 export const initialState = {
     user: {
@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
             }
         }
 
-        case PRODUCT: {
+        case ADMIN_PRODUCT: {
             return {
                 ...state,
                 product: action.product
@@ -50,13 +50,13 @@ export default function (state = initialState, action) {
             }
         }
 
-        case PRODUCTS: {
+        case ADMIN_PRODUCTS: {
             return {
                 ...state,
                 products: action.products
             }
         }
-        case ORDERS: {
+        case ADMIN_ORDERS: {
             return {
                 ...state,
                 orders: action.orders

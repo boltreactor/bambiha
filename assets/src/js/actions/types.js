@@ -29,10 +29,10 @@ export const VAT = "VAT";
 export const CURRENT_LISTING = "CURRENT_LISTING";
 export const CATEGORIES = "CATEGORIES";
 export const CATEGORY = "CATEGORY";
-export const PRODUCT = "PRODUCT";
+export const ADMIN_PRODUCT = "ADMIN_PRODUCT";
 export const DEL_PRODUCT = "DEL_PRODUCT";
-export const PRODUCTS = "PRODUCTS";
-export const ORDERS = "ORDERS";
+export const ADMIN_PRODUCTS = "ADMIN_PRODUCTS";
+export const ADMIN_ORDERS = "ADMIN_ORDERS";
 export const CART = "CART";
-export const ORDERS = "ORDERS";
+export const USER_ORDERS = "USER_ORDERS";
 

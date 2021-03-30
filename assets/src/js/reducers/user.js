@@ -13,7 +13,7 @@ import {
   IMAGES_VIEW,
   CURRENT_LISTING,
     CART,
-    ORDERS
+    USER_ORDERS
   // STATE_IMAGES,
 } from '../actions/types';
 import React from 'react';
@@ -115,7 +115,7 @@ export default function (state = initialState, action) {
        cart: action.cart
       }
     }
-    case ORDERS: {
+    case USER_ORDERS: {
       return {
         ...state,
        orders: action.orders

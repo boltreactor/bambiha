@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CART, ORDERS} from "./types";
+import {CART, USER_ORDERS} from "./types";
 import {loadProgressBar} from "axios-progress-bar";
 const qs = require('query-string');
 loadProgressBar();
@@ -56,7 +56,7 @@ export const viewOrders = () => dispatch => {
     axios.get('/user/vieworders/', {headers: Header})
         .then(res => {
             dispatch({
-                type: ORDERS,
+                type: USER_ORDERS,
                 orders: res.data.orders,
             });
         });
