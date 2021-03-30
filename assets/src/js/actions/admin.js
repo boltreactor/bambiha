@@ -158,7 +158,7 @@ export const getAllProducts = () => dispatch => {
         .then(res => {
             dispatch({
                 type: PRODUCTS,
-                products: res.data.products,
+                products: res.data.products!== undefined &&res.data.products
             });
         });
 };

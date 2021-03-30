@@ -17,7 +17,7 @@ class NewProduct extends Form {
             errors: {},
             data: {
                 title: "",
-                category: "",
+                category_key: "",
                 desc: "",
                 quantity: "",
                 price: "",
@@ -44,11 +44,15 @@ class NewProduct extends Form {
         event.preventDefault();
         debugger
         const errors = {...this.state.errors};
-        const obj = {["gender"]: event.target.value};
-        const schema = {["gender"]: this.schema["gender"]};
+        name = event.target.name
+        const obj = {[name]: event.target.value};
+        const schema = {[name]: this.schema[name]};
         const {error} = Joi.validate(obj, schema);
-        if (error) errors["gender"] = error.details[0].message;
-        else delete errors["gender"];
+        if (error) errors[name] = error.details[0].message;
+        else delete errors[name];
+        const data = {...this.state.data};
+        data[event.target.name] = event.target.value;
+        this.setState({data, errors})
         this.setState({errors});
         // const user = {...this.props.user, gender: event.target.value};
         // this.props.setUserInfo(user)
@@ -58,7 +62,7 @@ class NewProduct extends Form {
     doSubmit = () => {
 
         let fd = new FormData();
-
+        let category_key=this.state.data.category_key
         for (let i = 0; i < this.state.data.images.length; i++) {
             fd.append("images", this.state.data.images[i], this.state.data.images[i].name);
         }
@@ -66,7 +70,12 @@ class NewProduct extends Form {
         fd.append("description", this.state.data.desc);
         fd.append("quantity", this.state.data.quantity);
         fd.append("price", this.state.data.price);
-        fd.append("category_key", "ag5iYW1iaWhhLTMwNTEwN3IrCxIIQ2F0ZWdvcnkiCGNhdGVnb3J5DAsSCENhdGVnb3J5GICAgJiHlpgJDA");
+        fd.append("category_key",`${this.props.categories.find(function (category) {
+        return category.name === category_key;
+      }).id}`);
+        console.log(this.props.categories.find(function (category) {
+        return category.name === category_key;
+      }).id)
         this.props.addProduct(fd, this.props)
     }
 
@@ -89,7 +98,7 @@ class NewProduct extends Form {
                 }
             })
         }),
-        category: Joi.string().required().error(errors => {
+        category_key: Joi.string().required().error(errors => {
             return errors.map(error => {
 
                 switch (error.type) {
@@ -133,6 +142,19 @@ class NewProduct extends Form {
         images: Joi.allow("").optional()
     };
 
+    getCategoriesList = () => {
+        var dict = [];
+        debugger
+        for (var i = 0; i < this.props.categories.length; i++) {
+            dict.push({
+                "value": this.props.categories[i].name,
+                "key": this.props.categories[i].id
+            });
+        }
+        return dict
+    }
+
+
     render() {
         return (
             <Fragment>
@@ -157,12 +179,13 @@ class NewProduct extends Form {
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <Select
-                                            id="category"
+                                            id="category_key"
                                             type="text"
-                                            name="category"
+                                            name="category_key"
+                                            options={this.getCategoriesList()}
                                             onChange={this.handleCategoryChange}
-                                            value={this.state.data.category}
-                                            error={this.state.errors.category}
+                                            value={this.state.data.category_key}
+                                            error={this.state.errors.category_key}
                                         />
                                         {/*<NoLabelTextfield name="category" label="Product Category"*/}
                                         {/*                  value={this.state.data.category}*/}
@@ -256,7 +279,9 @@ class NewProduct extends Form {
     }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    categories: state.admin.categories
+});
 
 
 export default withRouter(connect(mapStateToProps, {

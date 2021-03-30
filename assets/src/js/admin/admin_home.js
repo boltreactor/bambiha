@@ -1,8 +1,15 @@
 import React, {Component, Fragment} from "react"
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
+import {addProduct, getAllCategories} from "../actions/admin"
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 class AdminHome extends Component {
+    componentDidMount() {
+        this.props.getAllCategories()
+    }
+
     render() {
         return (
             <Fragment>
@@ -235,4 +242,5 @@ class AdminHome extends Component {
     }
 }
 
-export default AdminHome;
+export default withRouter(connect(null, {getAllCategories
+})(AdminHome));
