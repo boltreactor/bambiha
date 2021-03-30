@@ -7,6 +7,8 @@ import boto3
 class Category(ndb.Model):
     user_key = ndb.StringProperty()
     name = ndb.StringProperty()
+    status = ndb.IntegerProperty(default=1)
+    date = ndb.DateTimeProperty(auto_now=True)
 
     @classmethod
     def add_category(cls, request):
@@ -30,6 +32,7 @@ class Category(ndb.Model):
     def edit_category(cls, request):
         category = ndb.Key(urlsafe=request.POST.get('category_key')).get()
         category.name = request.POST.get('category')
+        category.status = int(request.POST.get('status'))
         category.put()
         return category
 
@@ -51,6 +54,10 @@ class Products(ndb.Model):
     price = ndb.IntegerProperty()
     images = ndb.StringProperty(repeated=True)
     date = ndb.DateTimeProperty(auto_now=True)
+
+    @classmethod
+    def get_with_key(cls, key):
+        return ndb.Key(urlsafe=key).get()
 
     @classmethod
     def add_product(cls, request):
@@ -83,7 +90,21 @@ class Products(ndb.Model):
     @classmethod
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
-        return cls.query(cls.user_key==request.session.get('user'), ancestor=ancestor_key).fetch()
+        all_products = []
+        products = cls.query(cls.user_key==request.session.get('user'), ancestor=ancestor_key).fetch()
+        for p in products:
+            all_products.append({
+                "category": cls.get_with_key(p.category_key).name,
+                "date": p.date,
+                "description": p.description,
+                "images": p.images,
+                "price": p.price,
+                "quantity": p.quantity,
+                "title": p.title,
+                "id": p.key.urlsafe()
+            })
+        return all_products
+
 
     @classmethod
     def edit_product(cls, request):
