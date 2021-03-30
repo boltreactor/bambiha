@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Cart, Order, OrderItems
+from .models import Cart, Order, OrderItems, Favorites
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -41,4 +41,21 @@ def ViewOrders(request):
         orders = Order.get_user_orders(request)
         return Response({
             'status': status.HTTP_200_OK, 'message': "Order placed", 'orders': orders
+        }, status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def FavUnfav(request):
+        Favorites.fav_unfav(request)
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Favorites Updated"
+        }, status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def GetFavorites(request):
+        favorites = Favorites.get_favorites(request)
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Favorites", 'favorites': favorites
         }, status.HTTP_200_OK)

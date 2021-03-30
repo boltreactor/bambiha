@@ -84,6 +84,7 @@ class User(ndb.Model):
     user_type = ndb.IntegerProperty(default=1)  # 2 google, 3 fb ,4 linkedin
     google_connection_email = ndb.StringProperty()
     facebook_connection_email = ndb.StringProperty()
+    account_status = ndb.BooleanProperty(default=True)
 
     @classmethod
     def add_user(cls, request):
@@ -114,6 +115,13 @@ class User(ndb.Model):
     def get_user(cls, key):
         if ndb.Key(urlsafe=key):
             return ndb.Key(urlsafe=key).get()
+
+    @classmethod
+    def manage_status(cls, request):
+        user = cls.get_user(request.POST.get('user_key'))
+        user.account_status = bool(int(request.POST.get('status')))
+        user.put()
+        return user
 
     @classmethod
     def update_profile(cls, request):
@@ -166,7 +174,12 @@ class User(ndb.Model):
         if user:
             password = check_password(request.data['password'], user.password)
             if password:
-                request.session['user'] = user.key.urlsafe().decode()
+                if user.account_status:
+                    request.session['user'] = user.key.urlsafe().decode()
+                else:
+                    message = "You account is blocked by Admin"
+                    status = http_status.HTTP_406_NOT_ACCEPTABLE
+                    return message, status, user
             elif user.user_type == 2:
 
                 message = "You are signed with Google. Please do sign in with Gmail."

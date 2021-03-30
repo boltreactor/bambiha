@@ -45,6 +45,7 @@ class Cart(ndb.Model):
             products.append({
                 'title': p.product_key.get().title,
                 'price': p.product_key.get().price,
+                'quantity': p.quantity,
                 'image': p.product_key.get().images[0] if p.product_key.get().images else None,
                 'store_user_key': p.product_key.get().user_key
             })
@@ -79,14 +80,16 @@ class Order(ndb.Model):
 
     @classmethod
     def get_orders(cls, request):
-        orders = cls.query(cls.store_user_key == ndb.Key(urlsafe=request.session.get('user')))
+        # orders = cls.query(cls.store_user_key == ndb.Key(urlsafe=request.session.get('user')))
+        orders = cls.query().fetch()
         all_orders = []
         for order in orders:
             all_orders.append({
-                "order_key": order.order_key,
-                "user": order.user_key.get().name,
+                "order_number": order.order_key,
+                "user": order.user_key.get().first_name,
                 "status": order.status,
-                "order": order.key.urlsafe().decode
+                "order_key": order.key.urlsafe(),
+                "date_time": order.date
             })
 
         return all_orders
@@ -100,6 +103,7 @@ class Order(ndb.Model):
                 "order_key": order.order_key,
                 "user": order.user_key.get().first_name,
                 "status": order.status,
+                "date_time": order.date
                 # "order": order.key.urlsafe().decode
             }
             all_orders.append(current_order)
@@ -140,13 +144,54 @@ class OrderItems(ndb.Model):
 
     @classmethod
     def get_order_items(cls, request):
-        order_items = cls.query(cls.order_key == ndb.Key(urlsafe=request.GET.get('order_key')))
+        order_items = cls.query(cls.order_key == cls.get_with_key(request.POST.get('order_key')).key)
         all_items = []
         for item in order_items:
             all_items.append({
                 "price": item.price,
                 "title": item.product_key.get().title,
-                "image": item.product_key.get().images[0]
+                "image": item.product_key.get().images[0] if item.product_key.get().images else None
             })
 
         return all_items
+
+
+class Favorites(ndb.Model):
+    user_key = ndb.KeyProperty()
+    product_key = ndb.KeyProperty()
+    date = ndb.DateTimeProperty(auto_now=True)
+
+    @classmethod
+    def get_with_key(cls, key):
+        return ndb.Key(urlsafe=key).get()
+
+    @classmethod
+    def fav_unfav(cls, request):
+        ancestor_key = ndb.Key("Favorites", "favorites")
+        if request.POST.get('product_key'):
+            check_fav = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
+                      cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+            if check_fav:
+                check_fav.key.delete()
+            else:
+                fav = Favorites(parent=ancestor_key,
+                            product_key=cls.get_with_key(request.POST.get('product_key')).key,
+                            user_key=cls.get_with_key(request.session.get('user')).key)
+                fav.put()
+
+        return True
+
+
+    @classmethod
+    def get_favorites(cls, request):
+        favorites_products = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
+        products = []
+        for p in favorites_products:
+            products.append({
+                'title': p.product_key.get().title,
+                'price': p.product_key.get().price,
+                'image': p.product_key.get().images[0] if p.product_key.get().images else None,
+            })
+
+        return products
+

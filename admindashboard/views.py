@@ -64,7 +64,7 @@ def AllProducts(request):
     products = Products.get_products(request)
     if products:
         return Response({
-            'status': status.HTTP_200_OK, 'products': to_json_ndb(products)
+            'status': status.HTTP_200_OK, 'products': products
         }, status.HTTP_200_OK)
     else:
         return Response({
