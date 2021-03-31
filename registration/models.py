@@ -99,6 +99,7 @@ class User(ndb.Model):
                         first_name=request.data['first_name'],
                         last_name=request.data['last_name'],
                         email=request.data['email'],
+                        role=1,
                         password=make_password(request.data['password']))
             token = get_token(user)
             user.token = token
