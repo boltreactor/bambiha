@@ -30,9 +30,10 @@ def ViewCart(request):
 def CheckOut(request):
         order = Order.place_order(request)
         OrderItems.add_order_items(request, order)
-        return Response({
-            'status': status.HTTP_200_OK, 'message': "Order placed"
-        }, status.HTTP_200_OK)
+        if order:
+            return Response({
+                'status': status.HTTP_200_OK, 'message': "Order placed"
+            }, status.HTTP_200_OK)
 
 
 @csrf_exempt
