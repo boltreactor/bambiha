@@ -1,11 +1,10 @@
-from google.cloud import ndb
-from django.contrib.auth.hashers import make_password, check_password
-from bambiha.utils import get_token
-from django.utils.crypto import get_random_string
-from rest_framework import status as http_status
 import boto3
-from dateutil import parser
-import datetime
+from django.contrib.auth.hashers import make_password, check_password
+from django.utils.crypto import get_random_string
+from google.cloud import ndb
+from rest_framework import status as http_status
+
+from bambiha.utils import get_token
 
 with ndb.Client().context():
     ancestor_key = ndb.Key("User", "user")
@@ -82,6 +81,7 @@ class User(ndb.Model):
     stripe_connect_account_id = ndb.StringProperty()
     stripe_connect_country = ndb.StringProperty()
     user_type = ndb.IntegerProperty(default=1)  # 2 google, 3 fb ,4 linkedin
+    user_role = ndb.IntegerProperty(default=1)  # 1-Normal user, 2-Admin
     google_connection_email = ndb.StringProperty()
     facebook_connection_email = ndb.StringProperty()
     account_status = ndb.BooleanProperty(default=True)
@@ -115,6 +115,15 @@ class User(ndb.Model):
     def get_user(cls, key):
         if ndb.Key(urlsafe=key):
             return ndb.Key(urlsafe=key).get()
+
+    @classmethod
+    def make_admin(cls, request):
+        user = ndb.Key(urlsafe=request.POST['user_id']).get()
+        user.role = 2
+        token = get_token(user)
+        user.token = token
+        user.put()
+        return user
 
     @classmethod
     def manage_status(cls, request):
