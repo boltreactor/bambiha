@@ -88,8 +88,8 @@ class ManageOrders extends Component {
                                                             <h3 className="bold">Orders</h3>
                                                         </header>
                                                         <p>
-                                                            Products management made easy. <br/>
-                                                            All products at the store will be shown here.
+                                                            Orders management made easy. <br/>
+                                                            All Orders at the store will be shown here.
                                                         </p>
                                                     </div> : <CustomTable headers={headers}
                                                                           data={orders}

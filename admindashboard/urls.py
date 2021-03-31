@@ -17,5 +17,5 @@ urlpatterns = [
     path('allproducts/', ndb_context_middleware(admin_auth_middleware(AllProducts))),
     path('vieworders/', ndb_context_middleware(admin_auth_middleware(ViewOrders))),
     path('vieworderitems/', ndb_context_middleware(admin_auth_middleware(ViewOrderItems))),
-    path('updateorder/', ndb_context_middleware(admin_auth_middleware(UpdateOrder))),
+    path('updatestatus/', ndb_context_middleware(admin_auth_middleware(UpdateOrder))),
 ]

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../../../actions/profile";
-
+import {getAllCategories} from "../../../actions/admin";
 
 class TopAppBarIndex extends Component {
 
@@ -10,6 +10,7 @@ class TopAppBarIndex extends Component {
         if (localStorage.getItem("token")) {
             this.props.getUser();
         }
+        this.props.getAllCategories();
     }
 
     render() {
@@ -36,30 +37,18 @@ class TopAppBarIndex extends Component {
                                     <span className="mdc-button__label">New Release</span>
                                 </button>
                             </Link>
-                            <Link to="/men" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Men</span>
-                                </button>
-                            </Link>
-                            <Link to="/women" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Women</span>
-                                </button>
-                            </Link>
-                            <Link to="/kids" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Kids</span>
-                                </button>
-                            </Link>
-                            <Link to="/custom" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Custom</span>
-                                </button>
-                            </Link>
+
+                            {this.props.categories.map(category => {
+                                return <div key={category.id}>
+                                        <Link to={`/category/${category.id}`} className="show-lg link-mute">
+                                           <button className="mdc-button mdc-top-app-bar__action-item round">
+                                               <span className="mdc-button__ripple"/>
+                                               <span className="mdc-button__label">{category.name}</span>
+                                           </button>
+                                        </Link>
+                                       </div>
+                            })}
+
                             <Link to="/sale" className="show-lg link-mute">
                                 <button className="mdc-button mdc-top-app-bar__action-item round">
                                     <span className="mdc-button__ripple"/>
@@ -152,7 +141,8 @@ class TopAppBarIndex extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.user
+    user: state.user.user,
+    categories: state.admin.categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser})(TopAppBarIndex))
+export default withRouter(connect(mapStateToProps, {getUser, getAllCategories})(TopAppBarIndex))
