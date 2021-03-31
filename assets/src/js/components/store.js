@@ -1,9 +1,31 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import StoreDrawer from "../reusable-components/Drawers/Static/store-drawer";
+import {getAllProducts} from "../actions/admin";
+import {connect} from "react-redux";
 
 class Store extends Component {
-    render() {
+
+  constructor(props) {
+        super(props);
+        this.props.getAllProducts()
+        this.state = {
+            products: []
+        }
+    }
+
+   componentDidMount() {
+      this.props.getAllProducts()
+   }
+
+   // componentWillReceiveProps(nextProps, nextContext) {
+   //      this.props.match.params.id && nextProps.products && this.setState({category: nextProps.products})
+   //      const products = this.props.products;
+   //      console.log(products);
+   //  }
+
+
+   render() {
         return (
                <div className="page">
         <div className="page__content">
@@ -12,90 +34,19 @@ class Store extends Component {
             <main className="main" style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
               <div className="container l">
                 <div className="row mt6">
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/show-2.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/shorts.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/t-shirt.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/kid.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/kid.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/dumy-pics1.jpg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/dumy-pics2.jpg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/dumy-pics4.jpg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/dumy-pics5.jpg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l4 mb3">
-                    <Link to="/product" className="link-mute">
-                      <div className="img-wrapper s">
-                        <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
+                  {this.props.products && this.props.products.length !== 0? this.props.products.filter(product =>
+                      product.category_key === this.props.match.params.id).length !== 0? this.props.products.filter(product =>
+                      product.category_key === this.props.match.params.id).map(item =>
+                      {
+                        return <div key={item.id} className="col s12 m6 l4 mb3">
+                                <Link to="/product" className="link-mute">
+                                  <div className="img-wrapper s">
+                                    <img className="w-100 h-100"
+                                         src={item.images.length !== 0? item.images : "/static/show-1.jpeg"} alt="" />
+                                  </div>
+                                </Link>
+                               </div>
+                      }) :<h3>No product found for this category</h3>:<h3>No product found</h3>}
                 </div>
                 <div className="row">
                   <div className="col s12">
@@ -109,13 +60,41 @@ class Store extends Component {
                     </div>
                     <div className="mb3">
                       <div className="flex flex-wrap">
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">Best Selling Products</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">Best Shoes</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">Best Training &amp; Gym</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">New Men's Shoes</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">New Sports Shoes</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">Best Women's Products</Link></div>
-                        <div className="ma2 montserrat"><Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">Best Selling Accessories</Link></div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            Best Selling Products
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            Best Shoes
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            Best Training & Gym
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            New Men's Shoes
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            New Sports Shoes
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            Best Women's Products
+                          </Link>
+                        </div>
+                        <div className="ma2 montserrat">
+                          <Link className="f6 link dim br-pill ba ph3 pv2 mb2 dib black link-mute" to="#0">
+                            Best Selling Accessories
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -129,4 +108,8 @@ class Store extends Component {
     }
 }
 
-export default Store;
+const mapStateToProps = (state) => ({
+    products: state.admin.products
+})
+
+export default withRouter(connect(mapStateToProps, {getAllProducts})(Store));

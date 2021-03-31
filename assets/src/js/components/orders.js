@@ -29,9 +29,6 @@ class Orders extends Component {
      this.props.viewOrders();
     }
 
-    onEdit = (e) => {
-        e.preventDefault();
-    }
 
 
     render() {
@@ -91,8 +88,7 @@ class Orders extends Component {
                                                         </p>
                                                  </div>:
 
-                                                     <CustomTable headers={headers}
-                                                                  data={orders} onEdit={this.onEdit}/>}
+                                                     <CustomTable headers={headers} data={orders}/>}
 
                                                 {/*<div className="mv3">*/}
                                                 {/*    <button className="btn btn-primary btn-lg">*/}

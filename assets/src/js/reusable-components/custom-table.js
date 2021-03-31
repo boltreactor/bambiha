@@ -9,20 +9,14 @@ class CustomTable extends Component {
     }
 
 
-    handleClass = (name, e) => {
-        e.preventDefault();
-        if (name === "Price" || "Quantity" || "Date") {
-            this.setState({class: "mdc-data-table__header-cell mdc-data-table__header-cell--numeric"})
-        } else {
-            this.setState({class: "mdc-data-table__header-cell"})
-        }
-    }
-    findCategory = (key)=>{
-      //   debugger
-      //   return  this.props.categories.find(function (category) {
-      //   return category.id === key;
-      // }).name
-    }
+    // handleClass = (name, e) => {
+    //     e.preventDefault();
+    //     if (name === "Price" || "Quantity" || "Date") {
+    //         this.setState({class: "mdc-data-table__header-cell mdc-data-table__header-cell--numeric"})
+    //     } else {
+    //         this.setState({class: "mdc-data-table__header-cell"})
+    //     }
+    // }
 
     render() {
 
@@ -38,6 +32,26 @@ class CustomTable extends Component {
                                     <tr  className="mdc-data-table__header-row">
                                     <th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"
                                         role="columnheader" scope="col">
+                                         {/*<div*/}
+                                        {/*    className="mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected">*/}
+                                        {/*    <input type="checkbox"*/}
+                                        {/*           className="mdc-checkbox__native-control"*/}
+                                        {/*           aria-label="Toggle all rows"/>*/}
+                                        {/*    <div*/}
+                                        {/*        className="mdc-checkbox__background">*/}
+                                        {/*        <svg*/}
+                                        {/*            className="mdc-checkbox__checkmark"*/}
+                                        {/*            viewBox="0 0 24 24">*/}
+                                        {/*            <path*/}
+                                        {/*                className="mdc-checkbox__checkmark-path"*/}
+                                        {/*                fill="none"*/}
+                                        {/*                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>*/}
+                                        {/*        </svg>*/}
+                                        {/*        <div*/}
+                                        {/*            className="mdc-checkbox__mixedmark"/>*/}
+                                        {/*    </div>*/}
+                                        {/*    <div className="mdc-checkbox__ripple"/>*/}
+                                        {/*</div>*/}
                                     </th>
                                        {this.props.headers.map((h, index) =>{
                                          return  <th key={index} className="mdc-data-table__header-cell"
@@ -76,29 +90,30 @@ class CustomTable extends Component {
                                                 />
                                             </RadioGroup>
                                         </td>
+
                                         {item.name &&
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}
                                         </th>}
-                                    {item.order_key &&
-                                        <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.order_key}
-                                    </th>}
 
-                                    {item.user &&
-                                        <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.user}
-                                    </th>}
-
-                                    {item.status !== "abc" ?
-                                        <td className="mdc-data-table__cell tl">{item.status}</td> :
-                                        <td className="mdc-data-table__cell tl">pending</td>}
-
-                                    {item.name &&
+                                        {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"
                                             id="u0">25-03-2021</td>}
 
-                                    {item.title &&
+                                        {item.order_key &&
+                                         <th className="mdc-data-table__cell tl"
+                                         scope="row" id="u0">{item.order_key}
+                                         </th>}
+
+                                        {item.user &&
+                                        <th className="mdc-data-table__cell tl"
+                                        scope="row" id="u0">{item.user}
+                                         </th>}
+
+                                        {item.user &&
+                                        <td className="mdc-data-table__cell tl">{item.status}</td>}
+
+                                        {item.title &&
                                        <th className="mdc-data-table__cell tl"
                                         scope="row" id="u0">{item.title}
                                        </th>}
@@ -112,8 +127,8 @@ class CustomTable extends Component {
                                         <td className="mdc-data-table__cell">{item.quantity}
                                         </td>}
 
-                                        {item.category_key &&
-                                        <td className="mdc-data-table__cell tl">{item.category_key}</td>}
+                                        {item.title &&
+                                        <td className="mdc-data-table__cell tl">category</td>}
 
                                         {item.description &&
                                         <td className="mdc-data-table__cell tl">{item.description}
@@ -129,6 +144,7 @@ class CustomTable extends Component {
                         </div>
                     </div>
                 </div>
+                {!window.location.pathname.startsWith("/orders") &&
                 <div className="tr mv3">
                     <button className="btn btn-outline-primary btn-sm mr3" onClick={(e) => this.props.onEdit(e)}>
                         <i className="material-icons-outlined"
@@ -144,7 +160,7 @@ class CustomTable extends Component {
                     {/*       style="font-size: 16px;color: var(--danger);">delete</i>*/}
                     {/*    DELETE*/}
                     {/*</button>*/}
-                </div>
+                </div>}
             </div>
 
         );

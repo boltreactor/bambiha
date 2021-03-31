@@ -23,7 +23,7 @@ class Home extends Component {
                         <div className="banner-wrapper gray tc my-page">
                             <h5 className="bold">Free Shipping & 60-Day Free Returns</h5>
                             <div className="mt1">
-                                <Link href="#" className="link-mute link-dark">
+                                <Link to="#" className="link-mute link-dark">
                                     <h5 className="bold">Join Now</h5>
                                 </Link>
                             </div>

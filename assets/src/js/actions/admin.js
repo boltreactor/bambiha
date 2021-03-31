@@ -32,7 +32,7 @@ export const editCategory = (id, category,props) => dispatch => {
 
 
 export const getAllCategories = () => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
@@ -153,7 +153,7 @@ export const editProduct = () => dispatch => {
     )
 };
 export const getAllProducts = () => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/allproducts/', {headers: Header})
         .then(res => {
             dispatch({
@@ -178,7 +178,6 @@ export const getAllOrders = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/vieworders/', {headers: Header})
         .then(res => {
-            debugger
             dispatch({
                 type: ADMIN_ORDERS,
                 orders: res.data.orders,

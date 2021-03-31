@@ -111,6 +111,9 @@ class App extends Component {
                     <Route exact path='/product' render={(props) => <Product {...props}/>}/>
                     <Route exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
                     <Route exact path='/store' render={(props) => <Store {...props}/>}/>
+
+                    <Route exact path='/category/:id' render={(props) => <Store {...props}/>}/>
+
                     <Route exact path='/women' render={(props) => <Store {...props}/>}/>
                     <Route exact path='/men' render={(props) => <Store {...props}/>}/>
                     <Route exact path='/new' render={(props) => <Store {...props}/>}/>
