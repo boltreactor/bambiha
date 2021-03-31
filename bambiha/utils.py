@@ -9,7 +9,7 @@ def get_token(user):
         'username': user.email,
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'role': user.role,
+        'role': user.user_role,
         # 'country': user.country,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=10)
     }

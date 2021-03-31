@@ -100,8 +100,8 @@ class User(ndb.Model):
                         first_name=request.data['first_name'],
                         last_name=request.data['last_name'],
                         email=request.data['email'],
-                        role=1,
                         password=make_password(request.data['password']))
+            user.user_role = 1
             token = get_token(user)
             user.token = token
             user.put()
@@ -120,7 +120,7 @@ class User(ndb.Model):
     @classmethod
     def make_admin(cls, request):
         user = ndb.Key(urlsafe=request.POST['user_id']).get()
-        user.role = 2
+        user.user_role = 2
         token = get_token(user)
         user.token = token
         user.put()
