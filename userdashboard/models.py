@@ -59,6 +59,11 @@ class Order(ndb.Model):
     user_key = ndb.KeyProperty()
     order_key = ndb.IntegerProperty()
     address = ndb.StringProperty()
+    name = ndb.StringProperty()
+    city = ndb.StringProperty()
+    country = ndb.StringProperty()
+    email = ndb.StringProperty()
+    contact_number = ndb.StringProperty()
     status = ndb.IntegerProperty(default=0)
     date = ndb.DateTimeProperty(auto_now=True)
 
@@ -73,6 +78,11 @@ class Order(ndb.Model):
                       user_key=cls.get_with_key(request.session.get('user')).key,
                       order_key=cls.get_with_key(request.session.get('user')).key.id(),
                       address=request.POST.get('address'),
+                      name=request.POST.get('name'),
+                      city=request.POST.get('city'),
+                      country=request.POST.get('country'),
+                      email=request.POST.get('email'),
+                      contact_number=request.POST.get('contact_number'),
                       # store_user_key=ndb.Key(urlsafe=request.POST.get('store_user_key'))
                       )
         order.put()
@@ -80,13 +90,20 @@ class Order(ndb.Model):
 
     @classmethod
     def get_orders(cls, request):
+        ancestor_key = ndb.Key("Order", "order")
         # orders = cls.query(cls.store_user_key == ndb.Key(urlsafe=request.session.get('user')))
-        orders = cls.query().fetch()
+        orders = cls.query(ancestor=ancestor_key).order(-cls.date).fetch()
         all_orders = []
         for order in orders:
             all_orders.append({
                 "order_number": order.order_key,
                 "user": order.user_key.get().first_name,
+                "name": order.name,
+                "email": order.email,
+                "address": order.address,
+                "city": order.city,
+                "country": order.country,
+                "contact": order.contact_number,
                 "status": order.status,
                 "order_key": order.key.urlsafe(),
                 "date_time": order.date

@@ -1,0 +1,22 @@
+indexes:
+
+- kind: Category
+  ancestor: yes
+  properties:
+  - name: user_key
+  - name: date
+    direction: desc
+
+
+- kind: Products
+  ancestor: yes
+  properties:
+  - name: user_key
+  - name: date
+    direction: desc
+
+- kind: Order
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
