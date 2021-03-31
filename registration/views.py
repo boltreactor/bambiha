@@ -93,6 +93,16 @@ def all_users(request):
         return Response(serialized_results)
 
 
+# make user role to admin and refreshes token.
+@api_view(['POST'])
+def make_admin(request):
+    if request.method == 'POST':
+        user = User.make_admin(request)
+        return Response({
+            'status': status.HTTP_200_OK, 'message': 'Status Changed', 'user': to_json_ndb(user)
+        })
+
+
 @api_view(['GET', 'POST'])
 def social_login(request):
     if request.method == 'POST':
@@ -110,9 +120,9 @@ def add_social_connection(request):
 @api_view(['GET', 'POST'])
 def social_login_linkedin(request):
     if request.method == 'POST':
-        code =  request.data['code']
+        code = request.data['code']
         import requests
-        url = "https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=77gr3ejlwri2v8&client_secret=Tr8BHf3bXnWR1m7K&code="+code+"&redirect_uri=http://localhost:8000/linkedin"
+        url = "https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=77gr3ejlwri2v8&client_secret=Tr8BHf3bXnWR1m7K&code=" + code + "&redirect_uri=http://localhost:8000/linkedin"
 
         payload = {}
         headers = {
@@ -121,12 +131,10 @@ def social_login_linkedin(request):
 
         response = requests.request("POST", url, headers=headers, data=payload)
         import json
-        response_parsed=json.loads(response.text)
-        token =response_parsed['access_token']
+        response_parsed = json.loads(response.text)
+        token = response_parsed['access_token']
 
-
-
-        url = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token="+token
+        url = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token=" + token
 
         payload = {}
         headers = {
@@ -135,13 +143,10 @@ def social_login_linkedin(request):
 
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        response_parsed=json.loads(response.text)
+        response_parsed = json.loads(response.text)
         email = response_parsed['elements'][0]['handle~']['emailAddress']
 
-
-
-
-        url = "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token="+token
+        url = "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token=" + token
 
         payload = {}
         headers = {
@@ -150,16 +155,16 @@ def social_login_linkedin(request):
 
         response = requests.request("GET", url, headers=headers, data=payload)
         response_parsed = json.loads(response.text)
-        first_name=response_parsed['firstName']['localized']['en_US']
-        last_name=response_parsed['lastName']['localized']['en_US']
-        image=response_parsed['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier']
+        first_name = response_parsed['firstName']['localized']['en_US']
+        last_name = response_parsed['lastName']['localized']['en_US']
+        image = response_parsed['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier']
 
-        user = User.query(User.email == email, ancestor= ndb.Key("User", "user")).get()
+        user = User.query(User.email == email, ancestor=ndb.Key("User", "user")).get()
         if user:
             return Response(to_json_ndb(user))
         else:
-            user = User(parent= ndb.Key("User", "user"))
-            user.first_name =first_name
+            user = User(parent=ndb.Key("User", "user"))
+            user.first_name = first_name
             user.last_name = last_name
             user.email = email
             user.password = make_password(email)

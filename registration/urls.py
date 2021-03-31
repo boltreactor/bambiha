@@ -2,13 +2,14 @@ from django.conf.urls import url
 from django.urls import path, include
 
 from registration.views import signup, login, all_users, forgot, social_login_linkedin, social_login, ResetPassword, \
-    profile_image, refresh_token, profile, set_password, notification, add_social_connection
+    profile_image, refresh_token, profile, set_password, notification, add_social_connection, make_admin
 from bambiha.middlewares import auth_middleware, ndb_context_middleware
 
 urlpatterns = [
     path('register/', ndb_context_middleware(signup)),
     path('login/', ndb_context_middleware(login)),
     url(r'all-users/', ndb_context_middleware(auth_middleware(all_users))),
+    url(r'make-admin/', ndb_context_middleware(auth_middleware(make_admin))),
     url(r'refresh-token/', ndb_context_middleware(refresh_token)),
     path('social-login/', ndb_context_middleware(social_login)),
     path('add-social-connection/', ndb_context_middleware(auth_middleware(add_social_connection))),
