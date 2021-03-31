@@ -26,6 +26,12 @@ class Category(ndb.Model):
         return cat
 
     @classmethod
+    def get_categories_headers(cls, request):
+        ancestor_key = ndb.Key("Category", "category")
+        cat = Category.query(Category.user_key == request.session.get('user'), ancestor=ancestor_key).fetch(5)
+        return cat
+
+    @classmethod
     def get_category(cls, request):
         return ndb.Key(urlsafe=request.query_params.get('category_key')).get()
 
@@ -93,7 +99,9 @@ class Products(ndb.Model):
         ancestor_key = ndb.Key("Product", "product")
         all_products = []
         if request.query_params.get('category_key', None):
-            products = cls.query(cls.user_key == request.session.get('user'), cls.category_key == request.query_params['category_key'], ancestor=ancestor_key).fetch()
+            products = cls.query(cls.user_key == request.session.get('user'),
+                                 cls.category_key == request.query_params['category_key'],
+                                 ancestor=ancestor_key).fetch()
         else:
             products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
         for p in products:
