@@ -92,7 +92,10 @@ class Products(ndb.Model):
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
         all_products = []
-        products = cls.query(cls.user_key==request.session.get('user'), ancestor=ancestor_key).fetch()
+        if request.query_params.get('category_key', None):
+            products = cls.query(cls.user_key == request.session.get('user'), cls.category_key == request.query_params['category_key'], ancestor=ancestor_key).fetch()
+        else:
+            products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
         for p in products:
             all_products.append({
                 "category": cls.get_with_key(p.category_key).name,
@@ -106,7 +109,6 @@ class Products(ndb.Model):
             })
         return all_products
 
-
     @classmethod
     def edit_product(cls, request):
         product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
@@ -115,7 +117,6 @@ class Products(ndb.Model):
         product.category_key = request.POST.get('category_key')
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
-
 
         files = request.FILES.getlist('images')
         if files:
