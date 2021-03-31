@@ -114,12 +114,12 @@ class ManageCategory extends Component {
                                                             <h3 className="bold">Products</h3>
                                                         </header>
                                                         <p>
-                                                            Products management made easy. <br/>
-                                                            All products at the store will be shown here.
+                                                            Categories management made easy. <br/>
+                                                            All Categories at the store will be shown here.
                                                         </p>
                                                     </div> : <CustomTable headers={headers}
                                                                           data={categories} onEdit={this.onEdit}
-                                                                          onChange={this.handleRadioButton}
+                                                                          onChange={console.log(1) && this.handleRadioButton}
                                                                           id={this.state.id}/>}
 
 
