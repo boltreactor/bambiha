@@ -97,7 +97,7 @@ class Order(ndb.Model):
         for order in orders:
             all_orders.append({
                 "order_number": order.order_key,
-                "user": order.user_key.get().first_name,
+                "user": order.user_key.get().first_name if order.user_key.get() else None,
                 "name": order.name,
                 "email": order.email,
                 "address": order.address,
