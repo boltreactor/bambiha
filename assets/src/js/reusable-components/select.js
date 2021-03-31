@@ -43,6 +43,7 @@ class SelectText extends Component {
                 },
             },
         };
+        debugger
         const {name, type, label, onChange, error, onClick, options, value} = this.props;
         return (
             <Fragment>
@@ -55,7 +56,7 @@ class SelectText extends Component {
                         name={name}
                         labelId="demo-simple-select-filled-label"
                         id="select-multiple-chip"
-                        value={name === 'gender' ? value ? value : '' : value || []}
+                        value={name === 'category_key' ? value ? value : '' : value || []}
                         onChange={onChange}
                         renderValue={name === 'language' ? (options) => (
                             <div style={{display: 'flex', flexWrap: 'wrap'}}>
@@ -82,7 +83,7 @@ class SelectText extends Component {
                         name === "checkout_currency" && options.map((status, id) => {
                             return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
                         }) ||
-                            name === "category" && options.map((status, id) => {
+                            name === "category_key" && options.map((status, id) => {
                             return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
                         })}
 

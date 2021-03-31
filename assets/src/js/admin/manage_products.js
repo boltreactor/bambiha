@@ -97,7 +97,7 @@ class ManageProducts extends Component {
                                                     </div>:
 
                                                    <CustomTable headers={headers}
-                                                                  data={products} onEdit={this.editProduct}/>}
+                                                                  data={products} onEdit={this.editProduct} categories={this.props.categories}/>}
 
 
                                                 </div>
@@ -135,6 +135,7 @@ class ManageProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-    products: state.admin.products
+    products: state.admin.products,
+    categories:state.admin.categories
 })
 export default withRouter(connect(mapStateToProps, {getAllProducts})(ManageProducts));
