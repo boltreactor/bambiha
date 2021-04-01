@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
+import { getProduct} from "../actions/admin";
+import {connect} from "react-redux";
 
 class Product extends Component {
-    render() {
+
+
+    componentDidMount() {
+      this.props.getProduct(this.props.match.params.id)
+    }
+
+  render() {
+      const {product} = this.props;
+
+
+
         return (
             <div className="page">
         <div className="page__content">
@@ -31,84 +43,42 @@ class Product extends Component {
                       </div>
                       <div className="flex">
                         <div className="flex-grow-1 mr2">
-                          <h4>Nike Air Max 270</h4>
+                          <h4>{product.title}</h4>
                         </div>
                         <div>
-                          <h6>$150</h6>
+                          <h6>{product.price}</h6>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col s12 m6 l6 mb3">
+
+
+                  {product.images !== undefined && product.images.map((img, index)=> {
+                  return <div key={index} className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
                       <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
+                        <img className="w-100 h-100" src={img} alt="" />
                       </div>
                     </Link>
                   </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
-                      <div className="img-wrapper">
-                        <img className="w-100 h-100" src="/static/show-1.jpeg" alt="" />
-                      </div>
-                    </Link>
-                  </div>
+                  })}
+
+
+
                 </div>
               </div>
               <div className="col s12 m4 l4 mb3">
                 {/* */}
                 <div className="show-lg show-md mb3">
                   <div className="mb2">
-                    <h6>Men's Shoe</h6>
+                    <h6>{product.description}</h6>
                   </div>
                   <div className="flex">
                     <div className="flex-grow-1 mr2">
-                      <h4>Nike Air Max 270</h4>
+                      <h4>{product.title}</h4>
                     </div>
                     <div>
-                      <h6>$150</h6>
+                      <h6>{product.price}</h6>
                     </div>
                   </div>
                 </div>
@@ -326,4 +296,8 @@ class Product extends Component {
     }
 }
 
-export default Product;
+const mapStateToProps = (state) => ({
+    product: state.admin.product
+})
+
+export default withRouter(connect(mapStateToProps, {getProduct})(Product));
