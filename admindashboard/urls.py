@@ -14,7 +14,7 @@ urlpatterns = [
     path('headercategories/', ndb_context_middleware(HeaderCategories)),
     path('addproduct/', ndb_context_middleware(admin_auth_middleware(AddProduct))),
     path('editproduct/', ndb_context_middleware(admin_auth_middleware(EditProduct))),
-    path('getproduct/', ndb_context_middleware(admin_auth_middleware(GetProduct))),
+    path('getproduct/', ndb_context_middleware(GetProduct)),
     path('deleteproduct/', ndb_context_middleware(admin_auth_middleware(DeleteProduct))),
     path('allproducts/', ndb_context_middleware(AllProducts)),
     path('vieworders/', ndb_context_middleware(admin_auth_middleware(ViewOrders))),

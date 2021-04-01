@@ -108,7 +108,7 @@ class App extends Component {
                     <Route exact path='/settings' render={(props) => <SettingHome{...props}/>}/>
                     <ProtectedRoute exact path='/settings/notifications'
                                     render={(props) => <Notifications{...props}/>}/>
-                    <Route exact path='/product' render={(props) => <Product {...props}/>}/>
+                    <Route exact path='/product/:id' render={(props) => <Product {...props}/>}/>
                     <Route exact path='/product/detail' render={(props) => <ProductDetail {...props}/>}/>
                     <Route exact path='/store' render={(props) => <Store {...props}/>}/>
 

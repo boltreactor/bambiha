@@ -18,6 +18,13 @@ class Store extends Component {
         this.props.getAllProducts(this.props.match.params.id)
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.props.getAllProducts(this.props.match.params.id)
+        }
+    }
+
     render() {
         return (
             <div className="page">
@@ -29,7 +36,7 @@ class Store extends Component {
                                 <div className="row mt6">
                                     {this.props.products && this.props.products.length !== 0 ? this.props.products.map(item => {
                                         return <div key={item.id} className="col s12 m6 l4 mb3">
-                                            <Link to="/product" className="link-mute">
+                                            <Link to={`/product/${item.id}`} className="link-mute">
                                                 <div className="img-wrapper s">
                                                     <img className="w-100 h-100"
                                                          src={item.images.length !== 0 ? item.images : "/static/show-1.jpeg"}
