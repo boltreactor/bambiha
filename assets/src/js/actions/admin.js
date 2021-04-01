@@ -1,6 +1,7 @@
 import axios from "axios";
 import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
+
 const qs = require('query-string');
 loadProgressBar();
 const Header = {
@@ -19,7 +20,7 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
-export const editCategory = (id, category,props) => dispatch => {
+export const editCategory = (id, category, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category_key', id);
@@ -32,7 +33,7 @@ export const editCategory = (id, category,props) => dispatch => {
 
 
 export const getAllCategories = () => dispatch => {
-    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
@@ -96,11 +97,11 @@ export const delProduct = (id) => dispatch => {
 
 export const addProduct = (product, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`
-    Header['Content-Type'] =  'multipart/form-data'
+    Header['Content-Type'] = 'multipart/form-data'
 
     axios.post("/admin/addproduct/", product, {headers: Header})
         .then(res => {
-              props.history.push('/admin/products')
+                props.history.push('/admin/products')
 
             }
         ).catch(err => {
@@ -153,7 +154,7 @@ export const editProduct = () => dispatch => {
     )
 };
 export const getAllProducts = () => dispatch => {
-    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/allproducts/', {headers: Header})
         .then(res => {
             dispatch({

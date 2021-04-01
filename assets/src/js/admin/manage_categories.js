@@ -56,7 +56,7 @@ class ManageCategory extends Component {
     // }
 
     render() {
-        const headers = [{name: 'Category name'}, {name: 'Date'}];
+        const headers = [{name: 'Category name'}, {name: 'Date and Time'}];
         const {categories} = this.props;
         return (
             <Fragment>
@@ -111,7 +111,7 @@ class ManageCategory extends Component {
                                                 <div className="tc">
                                                     {!categories.length > 0 ? <div>
                                                         <header className="mt3 my-page">
-                                                            <h3 className="bold">Products</h3>
+                                                            <h3 className="bold">Categories</h3>
                                                         </header>
                                                         <p>
                                                             Categories management made easy. <br/>
@@ -119,10 +119,8 @@ class ManageCategory extends Component {
                                                         </p>
                                                     </div> : <CustomTable headers={headers}
                                                                           data={categories} onEdit={this.onEdit}
-                                                                          onChange={console.log(1) && this.handleRadioButton}
+                                                                          onChange={this.handleRadioButton}
                                                                           id={this.state.id}/>}
-
-
                                                 </div>
                                             </div>}
 
