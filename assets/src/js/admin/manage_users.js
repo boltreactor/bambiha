@@ -2,12 +2,17 @@ import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
+import {addCategory, editCategory, getAllUsers, getCategory} from "../actions/admin";
+import {connect} from "react-redux";
+import CustomTable from "../reusable-components/custom-table";
+
 
 class ManageUsers extends Component {
 
     state = {
         Users: true,
-        HelpSupport: false
+        HelpSupport: false,
+        id: null
     }
 
     handleTab = (e) => {
@@ -20,7 +25,19 @@ class ManageUsers extends Component {
         }
     }
 
+    handleRadioButton = (event) => {
+        event.preventDefault();
+        this.setState({id: event.target.value})
+    };
+
+    componentDidMount() {
+        this.props.getAllUsers();
+
+    }
+
     render() {
+        const headers = [{name: 'User Names'}];
+        const {users} = this.props;
         return (
             <Fragment>
                 <div className="page my-page">
@@ -60,30 +77,38 @@ class ManageUsers extends Component {
                                         {/* */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold"> {this.state.Users === true ? "User Management" : "Help & Support"}</h3>
-                                            </div>
-                                            {/* Call to action - Favourites */}
-                                            <div
-                                                className={this.state.Users === true ? "tab-no-data" : "tab-no-data hide"}>
-                                                <div className="tc">
-                                                    <header className="mt3 my-page">
-                                                        <h3 className="bold">Users</h3>
-                                                    </header>
-                                                    <p>
-                                                        User management made easy. <br/>
-                                                        All users at the store will be shown here.
-                                                    </p>
-                                                    <div className="mv3">
-                                                        {/* <button class="btn btn-primary btn-lg">
-                                                              <i class="material-icons-outlined">shopping_cart</i> Continue Shopping
-                                                            </button> */}
+                                                <h3 className="bold">{this.state.Users === true ? users.length > 0 ?
+                                                    <div>
+                                                        Users
                                                     </div>
-                                                </div>
+                                                    : "Orders Management" : "Help & Support"}</h3>
                                             </div>
-                                            <div className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                            {/*{/ Table /}*/}
+                                            {this.state.Users &&
+                                            <div>
+                                                <div className="tc">
+                                                    {!users.length > 0 ? <div>
+                                                        <header className="mt3 my-page">
+                                                            <h3 className="bold">Users</h3>
+                                                        </header>
+                                                        <p>
+                                                            <br/>
+                                                            All Users at the store will be shown here.
+                                                        </p>
+                                                    </div> : <CustomTable headers={headers}
+                                                                          data={users}
+                                                        // onEdit={this.onEdit}
+                                                                          onChange={this.handleRadioButton}
+                                                                          id={this.state.id}/>}
+
+
+                                                </div>
+                                            </div>}
+                                            <div
+                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
-                                                        <h3 className="bold">Help &amp; Support</h3>
+                                                        <h3 className="bold">Help & Support</h3>
                                                     </header>
                                                     <p>
                                                         24/7 chat support — message us at anytime!
@@ -112,4 +137,7 @@ class ManageUsers extends Component {
     }
 }
 
-export default ManageUsers;
+const mapStateToProps = (state) => ({
+    users: state.admin.users
+})
+export default connect(mapStateToProps, {getAllUsers})(ManageUsers);

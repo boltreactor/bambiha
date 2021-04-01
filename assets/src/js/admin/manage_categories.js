@@ -31,6 +31,7 @@ class ManageCategory extends Component {
 
     handleRadioButton = (event) => {
         event.preventDefault();
+        debugger
         this.setState({id: event.target.value})
     };
 
@@ -56,7 +57,7 @@ class ManageCategory extends Component {
     // }
 
     render() {
-        const headers = [{name: 'Category name'}, {name: 'Date'}];
+        const headers = [{name: 'Category name'}, {name: 'Date and Time'}];
         const {categories} = this.props;
         return (
             <Fragment>
@@ -111,18 +112,16 @@ class ManageCategory extends Component {
                                                 <div className="tc">
                                                     {!categories.length > 0 ? <div>
                                                         <header className="mt3 my-page">
-                                                            <h3 className="bold">Products</h3>
+                                                            <h3 className="bold">Categories</h3>
                                                         </header>
                                                         <p>
-                                                            Products management made easy. <br/>
-                                                            All products at the store will be shown here.
+                                                            Categories management made easy. <br/>
+                                                            All Categories at the store will be shown here.
                                                         </p>
                                                     </div> : <CustomTable headers={headers}
                                                                           data={categories} onEdit={this.onEdit}
                                                                           onChange={this.handleRadioButton}
                                                                           id={this.state.id}/>}
-
-
                                                 </div>
                                             </div>}
 

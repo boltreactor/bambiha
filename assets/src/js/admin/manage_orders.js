@@ -10,7 +10,8 @@ class ManageOrders extends Component {
 
     state = {
         Orders: true,
-        HelpSupport: false
+        HelpSupport: false,
+        id: null
     }
 
     componentDidMount() {
@@ -27,9 +28,17 @@ class ManageOrders extends Component {
             this.setState({Orders: false, HelpSupport: true})
         }
     }
+    handleRadioButton = (event) => {
+        event.preventDefault();
+        this.setState({id: event.target.value})
+    };
+    onEdit = (event) => {
+        event.preventDefault();
+        return this.props.history.push(`/admin/categories/${this.state.id}`)
+    }
 
     render() {
-        const headers = [{name: 'Order name'}, {name: 'Date'}];
+        const headers = [{name: 'Order Number'}, {name: 'Placed by'}, {name: 'Date and time'}];
         const {orders} = this.props;
         return (
             <Fragment>
@@ -93,8 +102,8 @@ class ManageOrders extends Component {
                                                         </p>
                                                     </div> : <CustomTable headers={headers}
                                                                           data={orders}
-                                                        // onEdit={this.onEdit}
-                                                        // onChange={this.handleRadioButton}
+                                                                          onEdit={this.onEdit}
+                                                                          onChange={this.handleRadioButton}
                                                                           id={this.state.id}/>}
 
 

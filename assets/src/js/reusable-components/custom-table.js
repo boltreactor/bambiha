@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 
 class CustomTable extends Component {
 
     state = {
-        class: "mdc-data-table__header-cell"
+        class : "mdc-data-table__header-cell"
 
     }
 
@@ -73,13 +73,19 @@ class CustomTable extends Component {
                                         <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                             <RadioGroup
                                                 value={this.props.id}
-                                                onChange={this.props.onChange}
-                                            >
-                                                <FormControlLabel value={item.id}
+                                                onChange={this.props.onChange}>
+                                                <FormControlLabel value={item.id || item.order_key}
                                                                   control={<Radio/>}
+                                                    // label={item.id || item.order_key}
                                                 />
                                             </RadioGroup>
                                         </td>
+                                        {
+                                            item.first_name &&
+                                            <th className="mdc-data-table__cell tl"
+                                                scope="row" id="u0">{item.first_name}
+                                            </th>
+                                        }
                                         {item.name &&
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}

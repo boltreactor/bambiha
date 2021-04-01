@@ -1,15 +1,6 @@
 import axios from "axios";
-import {
-    ADMIN_PRODUCTS,
-    ADMIN_PRODUCT,
-    CATEGORIES,
-    CATEGORY,
-    DEL_PRODUCT,
-    ADMIN_ORDERS,
-    HEADER_CATEGORIES
-} from "./types";
+import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS, USERS,HEADER_CATEGORIES} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
-
 const qs = require('query-string');
 loadProgressBar();
 const Header = {
@@ -28,11 +19,13 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
-export const editCategory = (id, category, props) => dispatch => {
+export const editCategory = (id, category, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
+    bodyFormData.append('status', status);
+    debugger
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -172,16 +165,9 @@ export const editProduct = () => dispatch => {
         }
     )
 };
-export const getAllProducts = (key) => dispatch => {
-
-    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let config = {
-        headers: Header,
-        params: {
-            category_key: key,
-        },
-    }
-    axios.get('/admin/allproducts/', config)
+export const getAllProducts = () => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/admin/allproducts/', {headers: Header})
         .then(res => {
             dispatch({
                 type: ADMIN_PRODUCTS,
@@ -208,6 +194,16 @@ export const getAllOrders = () => dispatch => {
             dispatch({
                 type: ADMIN_ORDERS,
                 orders: res.data.orders,
+            });
+        });
+};
+export const getAllUsers = () => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/auth/all-users/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: USERS,
+                users: res.data.users,
             });
         });
 };

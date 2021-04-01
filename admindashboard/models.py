@@ -140,6 +140,7 @@ class Products(ndb.Model):
             })
         return all_products
 
+
     @classmethod
     def edit_product(cls, request):
         product = ndb.Key(urlsafe=request.POST.get('product_key')).get()

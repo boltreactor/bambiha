@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
-import {addCategory,  editCategory, getCategory} from "../actions/admin";
+import {addCategory, editCategory, getCategory} from "../actions/admin";
 import {connect} from 'react-redux';
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 
@@ -22,7 +22,7 @@ class NewCategory extends Component {
     addToCategory = () => {
         const category = this.state.category
         const id = this.props.match.params.id
-        id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, this.props)
+        id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, 1, this.props)
     }
 
     componentWillReceiveProps(nextProps, nextContext) {

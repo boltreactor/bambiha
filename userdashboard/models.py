@@ -23,7 +23,8 @@ class Cart(ndb.Model):
             cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
                       cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get().key.delete()
             return True
-        cart_check = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')), cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+        cart_check = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
+                               cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
         if cart_check:
             cart_check.quantity = int(request.POST.get('quantity'))
             cart_check.put()
@@ -51,7 +52,6 @@ class Cart(ndb.Model):
             })
 
         return products
-
 
 
 class Order(ndb.Model):
@@ -86,7 +86,7 @@ class Order(ndb.Model):
         for order in orders:
             all_orders.append({
                 "order_number": order.order_key,
-                "user": order.user_key.get().first_name,
+                "user": order.user_key.get().first_name if order.user_key.get() else None,
                 "status": order.status,
                 "order_key": order.key.urlsafe(),
                 "date_time": order.date
@@ -170,17 +170,16 @@ class Favorites(ndb.Model):
         ancestor_key = ndb.Key("Favorites", "favorites")
         if request.POST.get('product_key'):
             check_fav = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
-                      cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+                                  cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
             if check_fav:
                 check_fav.key.delete()
             else:
                 fav = Favorites(parent=ancestor_key,
-                            product_key=cls.get_with_key(request.POST.get('product_key')).key,
-                            user_key=cls.get_with_key(request.session.get('user')).key)
+                                product_key=cls.get_with_key(request.POST.get('product_key')).key,
+                                user_key=cls.get_with_key(request.session.get('user')).key)
                 fav.put()
 
         return True
-
 
     @classmethod
     def get_favorites(cls, request):
@@ -194,4 +193,3 @@ class Favorites(ndb.Model):
             })
 
         return products
-
