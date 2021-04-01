@@ -165,9 +165,15 @@ export const editProduct = () => dispatch => {
         }
     )
 };
-export const getAllProducts = () => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    axios.get('/admin/allproducts/', {headers: Header})
+export const getAllProducts = (id) => dispatch => {
+    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let config = {
+        headers: Header,
+        params: {
+            category_key: id,
+        },
+    }
+    axios.get('/admin/allproducts/', config)
         .then(res => {
             dispatch({
                 type: ADMIN_PRODUCTS,

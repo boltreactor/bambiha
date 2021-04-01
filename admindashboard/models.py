@@ -106,7 +106,7 @@ class Products(ndb.Model):
             products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
         for p in products:
             all_products.append({
-                "category": cls.get_with_key(p.category_key).name,
+                "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
                 "date": p.date,
                 "description": p.description,
                 "images": p.images,
@@ -139,7 +139,6 @@ class Products(ndb.Model):
                 "id": p.key.urlsafe()
             })
         return all_products
-
 
     @classmethod
     def edit_product(cls, request):
