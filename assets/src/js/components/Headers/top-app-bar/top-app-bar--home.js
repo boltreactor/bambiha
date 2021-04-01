@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../../../actions/profile";
-import {getAllCategories} from "../../../actions/admin";
+import {getHeaderCategories} from "../../../actions/admin";
 
 
 class TopAppBarHome extends Component {
@@ -11,7 +11,7 @@ class TopAppBarHome extends Component {
         if (localStorage.getItem("token")) {
             this.props.getUser();
         }
-        this.props.getAllCategories();
+        this.props.getHeaderCategories();
 
     }
 
@@ -43,15 +43,15 @@ class TopAppBarHome extends Component {
                                     <span className="mdc-button__label">New Release</span>
                                 </button>
                             </Link>
-                            {this.props.categories.map(category => {
+                            {this.props.header_categories && this.props.header_categories.map(category => {
                                 return <div key={category.id}>
-                                        <Link to={`/category/${category.id}`} className="show-lg link-mute">
-                                           <button className="mdc-button mdc-top-app-bar__action-item round">
-                                               <span className="mdc-button__ripple"/>
-                                               <span className="mdc-button__label">{category.name}</span>
-                                           </button>
-                                        </Link>
-                                       </div>
+                                    <Link to={`/category/${category.id}`} className="show-lg link-mute">
+                                        <button className="mdc-button mdc-top-app-bar__action-item round">
+                                            <span className="mdc-button__ripple"/>
+                                            <span className="mdc-button__label">{category.name}</span>
+                                        </button>
+                                    </Link>
+                                </div>
                             })}
 
                             {/*<Link to="/men" className="show-lg link-mute">*/}
@@ -78,12 +78,12 @@ class TopAppBarHome extends Component {
                             {/*        <span className="mdc-button__label">Custom</span>*/}
                             {/*    </button>*/}
                             {/*</Link>*/}
-                            <Link to="/sale" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Sale</span>
-                                </button>
-                            </Link>
+                            {/*<Link to="/sale" className="show-lg link-mute">*/}
+                            {/*    <button className="mdc-button mdc-top-app-bar__action-item round">*/}
+                            {/*        <span className="mdc-button__ripple"/>*/}
+                            {/*        <span className="mdc-button__label">Sale</span>*/}
+                            {/*    </button>*/}
+                            {/*</Link>*/}
 
                         </section>
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
@@ -180,7 +180,7 @@ class TopAppBarHome extends Component {
 
 const mapStateToProps = state => ({
     user: state.user.user,
-    categories: state.admin.categories
+    header_categories: state.admin.header_categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser, getAllCategories})(TopAppBarHome))
+export default withRouter(connect(mapStateToProps, {getUser, getHeaderCategories})(TopAppBarHome))

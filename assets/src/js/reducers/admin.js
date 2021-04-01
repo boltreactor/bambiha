@@ -1,5 +1,13 @@
 import React from 'react';
-import {CATEGORIES, ADMIN_PRODUCT, ADMIN_PRODUCTS, DEL_PRODUCT, CATEGORY, ADMIN_ORDERS} from "../actions/types";
+import {
+    CATEGORIES,
+    ADMIN_PRODUCT,
+    ADMIN_PRODUCTS,
+    DEL_PRODUCT,
+    CATEGORY,
+    ADMIN_ORDERS,
+    HEADER_CATEGORIES
+} from "../actions/types";
 
 export const initialState = {
     user: {
@@ -26,6 +34,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 categories: action.categories
+            }
+        }
+        case HEADER_CATEGORIES: {
+            return {
+                ...state,
+                header_categories: action.header_categories
             }
         }
 
