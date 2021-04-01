@@ -67,8 +67,8 @@ class CustomTable extends Component {
 
                                 </thead>
                                 <tbody className="mdc-data-table__content">
-                                {this.props.data.map(item => {
-                                    return <tr key={item.id} data-row-id="u0"
+                                {this.props.data.map((item, index) => {
+                                    return <tr key={index} data-row-id="u0"
                                                className="mdc-data-table__row transparent">
                                         <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                             <RadioGroup
@@ -90,6 +90,20 @@ class CustomTable extends Component {
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}
                                         </th>}
+
+                                         {item.order_key &&
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0">{item.order_key}
+                                        </th>}
+
+                                        {item.user &&
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0">{item.user}
+                                        </th>}
+
+                                        {item.user &&
+                                        <td className="mdc-data-table__cell tl">{item.status}
+                                        </td>}
 
                                         {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"

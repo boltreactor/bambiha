@@ -52,18 +52,15 @@ class Product extends Component {
                     </div>
                   </div>
 
-
                   {product.images !== undefined && product.images.map((img, index)=> {
                   return <div key={index} className="col s12 m6 l6 mb3">
-                    <Link to="/product/detail">
+                    <Link to={`/product/detail/${this.props.match.params.id}`}>
                       <div className="img-wrapper">
                         <img className="w-100 h-100" src={img} alt="" />
                       </div>
                     </Link>
                   </div>
                   })}
-
-
 
                 </div>
               </div>
@@ -86,77 +83,24 @@ class Product extends Component {
                 <div className="color-way db">
                   <div className="mb3 ph0 ">
                     <div className="color-way__image-wrapper mb3 hide-scrollbar">
-                      <div className="list">
-                        <Link to="#" className="link-mute dib relative active">
+                       <div className="list">
+                         {product.images !== undefined && product.images.map((img, index)=> {
+                       return <div key={index}>
+                           <Link to="#" className="link-mute dib relative">
                           <div className="relative">
                             <div className="mr2 mb1">
-                              <img src="/static/show-1.jpeg" className="color-images" alt="" />
+                              <img src={img} className="color-images" alt="" />
                             </div>
                           </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
-                        <Link to="#" className="link-mute dib relative">
-                          <div className="relative">
-                            <div className="mr2 mb1">
-                              <img src="/static/img-noise.png" className="color-images" alt="" />
-                            </div>
-                          </div>
-                        </Link>
+                           </Link>
+                        {/*<Link to="#" className="link-mute dib relative  active">*/}
+                        {/*  <div className="relative">*/}
+                        {/*    <div className="mr2 mb1">*/}
+                        {/*      <img src="/static/img-noise.png" className="color-images" alt="" />*/}
+                        {/*    </div>*/}
+                        {/*  </div>*/}
+                        {/*</Link>*/}
+                      </div>})}
                       </div>
                     </div>
                   </div>
@@ -174,7 +118,7 @@ class Product extends Component {
                     </div>
                   </div>
                 </div>
-                <form action className="mv3">
+                <form className="mv3">
                   <div className="ph2">
                     <div className="size-grid">
                       <div className="relative">
@@ -243,7 +187,7 @@ class Product extends Component {
                       </button>
                     </Link>
                   </div>
-                  <div className>
+                  <div>
                     <button className="btn btn-outline-dark btn-lg btn-block btn-pill">
                       Favourite <i className="material-icons-outlined v-mid">favorite_border</i>
                     </button>
@@ -252,7 +196,7 @@ class Product extends Component {
                 {/* */}
                 <div className="mv4 mh4-m mh4-l">
                   <p className="m">
-                    The Nike Air Max 270 is our first-ever intentional lifestyle Air Max, delivering energy with every springy step. Updated with a varsity color combo and modernized comfort, it nods to the original 1991 Air Max 180 with its exaggerated tongue top and heritage-inspired tongue logo design.
+                    {product.description}
                   </p>
                 </div>
               </div>

@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import { getProduct} from "../actions/admin";
+import {connect} from "react-redux";
+
 
 class ProductDetail extends Component {
+
+  componentDidMount() {
+      this.props.getProduct(this.props.match.params.id)
+    }
+
+
     render() {
+        const {product} = this.props;
+
         return (
              <div className="page">
         <div className="page__content-fluid">
@@ -17,21 +28,13 @@ class ProductDetail extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
+            {product.images !== undefined && product.images.map((img, index)=> {
+              return <div key={index} className="col s12 mb3">
+                <div className="img-wrapper l">
+                  <img className="w-100 h-100" src={img} alt=""/>
+                </div>
               </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
-              </div>
-            </div>
-            <div className="col s12 mb3">
-              <div className="img-wrapper l">
-                <img className="w-100 h-100" src="/static/main_banner.jpeg" alt="" />
-              </div>
-            </div>
+            })}
           </div>
         </div>
       </div>
@@ -39,4 +42,8 @@ class ProductDetail extends Component {
     }
 }
 
-export default ProductDetail;
+const mapStateToProps = (state) => ({
+    product: state.admin.product
+})
+
+export default withRouter(connect(mapStateToProps, {getProduct})(ProductDetail));
