@@ -1,56 +1,61 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
-import { getProduct} from "../actions/admin";
+import {getProduct} from "../actions/admin";
 import {connect} from "react-redux";
+import {addToCart} from "../actions/user";
 
 class Product extends Component {
 
-
     componentDidMount() {
-      this.props.getProduct(this.props.match.params.id)
+        this.props.getProduct(this.props.match.params.id)
     }
 
-  render() {
-      const {product} = this.props;
+    addItemToCart = () => {
+        debugger
+        this.props.addToCart(1, this.props.match.params.id, this.props)
+    }
+
+    render() {
+        const {product} = this.props;
 
 
 
         return (
             <div className="page">
-        <div className="page__content">
-          {/* Banner */}
-          <section className="banner">
-            <div className="banner-wrapper gray tc my-page">
-              <h5 className="bold">Free Shipping &amp; 60-Day Free Returns</h5>
-              <div className="mt1">
-                <Link to="#" className="link-mute link-dark">
-                  <h5 className="bold">Join Now</h5>
-                </Link>
-              </div>
-            </div>
-          </section>
-          {/* Hero */}
-          <section className="container xl">
-            <div className="mv5" />
-            <div className="row mb0">
-              <div className="col s12 m8 l8">
-                <div className="row mb0">
-                  <div className="col s12">
-                    <div className="show-sm mb3">
-                      <div className="mb2">
-                        <h6>Men's Shoe</h6>
-                      </div>
-                      <div className="flex">
-                        <div className="flex-grow-1 mr2">
-                          <h4>{product.title}</h4>
+                <div className="page__content">
+                    {/* Banner */}
+                    <section className="banner">
+                        <div className="banner-wrapper gray tc my-page">
+                            <h5 className="bold">Free Shipping &amp; 60-Day Free Returns</h5>
+                            <div className="mt1">
+                                <Link to="#" className="link-mute link-dark">
+                                    <h5 className="bold">Join Now</h5>
+                                </Link>
+                            </div>
                         </div>
-                        <div>
-                          <h6>{product.price}</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    </section>
+                    {/* Hero */}
+                    <section className="container xl">
+                        <div className="mv5"/>
+                        <div className="row mb0">
+                            <div className="col s12 m8 l8">
+                                <div className="row mb0">
+                                    <div className="col s12">
+                                        <div className="show-sm mb3">
+                                            <div className="mb2">
+                                                <h6>Men's Shoe</h6>
+                                            </div>
+                                            <div className="flex">
+                                                <div className="flex-grow-1 mr2">
+                                                    <h4>{product.title}</h4>
+                                                </div>
+                                                <div>
+                                                    <h6>{product.price}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                   {product.images !== undefined && product.images.map((img, index)=> {
                   return <div key={index} className="col s12 m6 l6 mb3">
@@ -244,4 +249,4 @@ const mapStateToProps = (state) => ({
     product: state.admin.product
 })
 
-export default withRouter(connect(mapStateToProps, {getProduct})(Product));
+export default withRouter(connect(mapStateToProps, {getProduct, addToCart})(Product));
