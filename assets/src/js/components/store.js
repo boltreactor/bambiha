@@ -39,7 +39,7 @@ class Store extends Component {
                                             <Link to={`/product/${item.id}`} className="link-mute">
                                                 <div className="img-wrapper s">
                                                     <img className="w-100 h-100"
-                                                         src={item.images.length !== 0 ? item.images : "/static/show-1.jpeg"}
+                                                         src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
                                                          alt=""/>
                                                 </div>
                                             </Link>

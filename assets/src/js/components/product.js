@@ -52,7 +52,6 @@ class Product extends Component {
                     </div>
                   </div>
 
-
                   {product.images !== undefined && product.images.map((img, index)=> {
                   return <div key={index} className="col s12 m6 l6 mb3">
                     <Link to="/product/detail">
@@ -62,8 +61,6 @@ class Product extends Component {
                     </Link>
                   </div>
                   })}
-
-
 
                 </div>
               </div>

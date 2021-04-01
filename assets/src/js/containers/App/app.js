@@ -114,11 +114,11 @@ class App extends Component {
 
                     <Route exact path='/category/:id' render={(props) => <Store {...props}/>}/>
 
-                    <Route exact path='/women' render={(props) => <Store {...props}/>}/>
-                    <Route exact path='/men' render={(props) => <Store {...props}/>}/>
-                    <Route exact path='/new' render={(props) => <Store {...props}/>}/>
-                    <Route exact path='/kids' render={(props) => <Store {...props}/>}/>
-                    <Route exact path='/custom' render={(props) => <Store {...props}/>}/>
+                    {/*<Route exact path='/women' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/men' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/new' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/kids' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/custom' render={(props) => <Store {...props}/>}/>*/}
                     <Route exact path='/sale' render={(props) => <Store {...props}/>}/>
                     <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/dashboard' render={(props) => <Dashboard {...props}/>}/>
