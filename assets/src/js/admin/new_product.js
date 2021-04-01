@@ -62,7 +62,7 @@ class NewProduct extends Form {
     doSubmit = () => {
 
         let fd = new FormData();
-        let category_key=this.state.data.category_key
+        let category_key = this.state.data.category_key
         for (let i = 0; i < this.state.data.images.length; i++) {
             fd.append("images", this.state.data.images[i], this.state.data.images[i].name);
         }
@@ -70,12 +70,12 @@ class NewProduct extends Form {
         fd.append("description", this.state.data.desc);
         fd.append("quantity", this.state.data.quantity);
         fd.append("price", this.state.data.price);
-        fd.append("category_key",`${this.props.categories.find(function (category) {
-        return category.name === category_key;
-      }).id}`);
+        fd.append("category_key", `${this.props.categories.find(function (category) {
+            return category.name === category_key;
+        }).id}`);
         console.log(this.props.categories.find(function (category) {
-        return category.name === category_key;
-      }).id)
+            return category.name === category_key;
+        }).id)
         this.props.addProduct(fd, this.props)
     }
 
@@ -228,6 +228,7 @@ class NewProduct extends Form {
                                                 accept=".jpg, .png, .jpeg"
                                                 id="images"
                                                 name='images'
+                                                multiple={true}
                                                 style={{display: 'none'}}/>
                                             <div className="photos my2">
                                                 {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {

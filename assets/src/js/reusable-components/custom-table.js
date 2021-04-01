@@ -18,15 +18,15 @@ class CustomTable extends Component {
             this.setState({class: "mdc-data-table__header-cell"})
         }
     }
-    findCategory = (key) => {
-        debugger
-        console.log(this.props.categories.find(function (category) {
-            return category.id === key;
-        }).name)
-        return this.props.categories.find(function (category) {
-            return category.id === key;
-        }).name
-    }
+    // findCategory = (key) => {
+    //     debugger
+    //     console.log(this.props.categories.find(function (category) {
+    //         return category.id === key;
+    //     }).name)
+    //     return this.props.categories.find(function (category) {
+    //         return category.id === key;
+    //     }).name
+    // }
 
     render() {
 
@@ -103,8 +103,8 @@ class CustomTable extends Component {
                                         <td className="mdc-data-table__cell">{item.quantity}
                                         </td>}
 
-                                        {item.category_key &&
-                                        <td className="mdc-data-table__cell tl">{this.findCategory(item.category_key)}</td>}
+                                        {item.category &&
+                                        <td className="mdc-data-table__cell tl">{item.category}</td>}
 
                                         {item.description &&
                                         <td className="mdc-data-table__cell tl">{item.description}
