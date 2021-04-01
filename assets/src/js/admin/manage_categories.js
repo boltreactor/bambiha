@@ -31,6 +31,7 @@ class ManageCategory extends Component {
 
     handleRadioButton = (event) => {
         event.preventDefault();
+        debugger
         this.setState({id: event.target.value})
     };
 

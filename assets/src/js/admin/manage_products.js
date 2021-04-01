@@ -11,7 +11,8 @@ class ManageProducts extends Component {
 
     state = {
         Products: true,
-        HelpSupport: false
+        HelpSupport: false,
+        id: null
     }
 
     handleTab = (e) => {
@@ -26,6 +27,16 @@ class ManageProducts extends Component {
 
     componentDidMount() {
         this.props.getAllProducts()
+    }
+
+    handleRadioButton = (event) => {
+        event.preventDefault();
+        debugger
+        this.setState({id: event.target.value})
+    };
+    onEdit = (event) => {
+        event.preventDefault();
+        return this.props.history.push(`/admin/categories/${this.state.id}`)
     }
 
     render() {
@@ -75,35 +86,42 @@ class ManageProducts extends Component {
                                         {/*Products */}
                                         <div className="tab-content">
                                             <div className="mb4">
-                                                <h3 className="bold"> {this.state.Products === true ? products.length>0?<div>
-                                                    Products<span className="ml2" style={{color: '#0258ff'}}>15</span>
-                                                </div>
-                                                    :"Products Management" : "Help & Support"}</h3>
+                                                <h3 className="bold"> {this.state.Products === true ? products.length > 0 ?
+                                                    <div>
+                                                        Products<span className="ml2"
+                                                                      style={{color: '#0258ff'}}>15</span>
+                                                    </div>
+                                                    : "Products Management" : "Help & Support"}</h3>
                                             </div>
 
                                             {/* Table */}
 
                                             {/*<div className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>*/}
                                             {this.state.Products &&
-                                                <div>
+                                            <div>
                                                 <div className="tc">
-                                                    {!products.length>0 ? <div><header className="mt3 my-page">
-                                                        <h3 className="bold">Products</h3>
-                                                    </header>
-                                                    <p>
-                                                        Products management made easy. <br/>
-                                                        All products at the store will be shown here.
-                                                    </p>
-                                                    </div>:
+                                                    {!products.length > 0 ? <div>
+                                                            <header className="mt3 my-page">
+                                                                <h3 className="bold">Products</h3>
+                                                            </header>
+                                                            <p>
+                                                                Products management made easy. <br/>
+                                                                All products at the store will be shown here.
+                                                            </p>
+                                                        </div> :
 
-                                                   <CustomTable headers={headers}
-                                                                  data={products} onEdit={this.editProduct} categories={this.props.categories}/>}
+                                                        <CustomTable headers={headers}
+                                                                     data={products}
+                                                                     onEdit={this.onEdit}
+                                                                     onChange={this.handleRadioButton}
+                                                                     id={this.state.id}/>}
 
 
                                                 </div>
                                             </div>}
 
-                                            <div className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
+                                            <div
+                                                className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
                                                     <header className="mt3 my-page">
                                                         <h3 className="bold">Help & Support</h3>
@@ -136,6 +154,6 @@ class ManageProducts extends Component {
 
 const mapStateToProps = state => ({
     products: state.admin.products,
-    categories:state.admin.categories
+    categories: state.admin.categories
 })
 export default withRouter(connect(mapStateToProps, {getAllProducts})(ManageProducts));

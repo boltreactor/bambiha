@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS} from "./types";
+import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS, USERS} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
 const qs = require('query-string');
@@ -20,11 +20,13 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
-export const editCategory = (id, category, props) => dispatch => {
+export const editCategory = (id, category, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
+    bodyFormData.append('status', status);
+    debugger
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -182,6 +184,16 @@ export const getAllOrders = () => dispatch => {
             dispatch({
                 type: ADMIN_ORDERS,
                 orders: res.data.orders,
+            });
+        });
+};
+export const getAllUsers = () => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/auth/all-users/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: USERS,
+                users: res.data.users,
             });
         });
 };

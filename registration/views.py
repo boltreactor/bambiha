@@ -89,8 +89,12 @@ def refresh_token(request):
 def all_users(request):
     if request.method == 'GET':
         users = User.get_users(request)
-        serialized_results = to_json_ndb(users)
-        return Response(serialized_results)
+        # serialized_results = to_json_ndb(users)
+        if users:
+            return Response({
+                'status': status.HTTP_200_OK, 'users': to_json_ndb(users)
+            }, status.HTTP_200_OK)
+        # return Response(serialized_results)
 
 
 @csrf_exempt

@@ -1,6 +1,7 @@
 import axios from "axios";
 import {CART, USER_ORDERS} from "./types";
 import {loadProgressBar} from "axios-progress-bar";
+
 const qs = require('query-string');
 loadProgressBar();
 const Header = {
@@ -10,19 +11,18 @@ const Header = {
 };
 
 
-
 export const addToCart = (quantity, id, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-     let bodyFormData = new FormData();
-      bodyFormData.append('product_key', id);
-      bodyFormData.append('quantity', quantity);
+    let bodyFormData = new FormData();
+    bodyFormData.append('product_key', id);
+    bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-             props.history.push('/')
+            props.history.push('/')
 
         }).catch(err => {
 
-        })
+    })
 };
 
 
@@ -37,19 +37,19 @@ export const viewCart = () => dispatch => {
         });
 };
 
-export const checkout = (quantity, id, props) => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-     let bodyFormData = new FormData();
-      bodyFormData.append('product_key', id);
-      bodyFormData.append('quantity', quantity);
-    axios.post('/user/checkout/', bodyFormData, {headers: Header})
-        .then(res => {
-             props.history.push('/')
-
-        }).catch(err => {
-
-        })
-};
+// export const checkout = (quantity, id, props) => dispatch => {
+//     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+//      let bodyFormData = new FormData();
+//       bodyFormData.append('product_key', id);
+//       bodyFormData.append('quantity', quantity);
+//     axios.post('/user/checkout/', bodyFormData, {headers: Header})
+//         .then(res => {
+//              props.history.push('/')
+//
+//         }).catch(err => {
+//
+//         })
+// };
 
 export const viewOrders = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -60,4 +60,16 @@ export const viewOrders = () => dispatch => {
                 orders: res.data.orders,
             });
         });
+};
+export const checkout = (props, address) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('address', address);
+    axios.post('/user/checkout/', bodyFormData, {headers: Header})
+        .then(res => {
+            props.history.push('/')
+
+        }).catch(err => {
+
+    });
 };

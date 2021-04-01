@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+
 class CustomTable extends Component {
 
     state = {
-        class : "mdc-data-table__header-cell"
+        class: "mdc-data-table__header-cell"
 
     }
 
@@ -29,15 +30,15 @@ class CustomTable extends Component {
                             <table className="mdc-data-table__table"
                                    aria-label="Dessert calories">
                                 <thead>
-                                    <tr  className="mdc-data-table__header-row">
+                                <tr className="mdc-data-table__header-row">
                                     <th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"
                                         role="columnheader" scope="col">
                                     </th>
-                                       {this.props.headers.map((h, index) =>{
-                                         return  <th key={index} className="mdc-data-table__header-cell"
-                                        role="columnheader" scope="col">{h.name}
-                                    </th>
-                                            })}
+                                    {this.props.headers.map((h, index) => {
+                                        return <th key={index} className="mdc-data-table__header-cell"
+                                                   role="columnheader" scope="col">{h.name}
+                                        </th>
+                                    })}
                                     {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"*/}
                                     {/*    role="columnheader" scope="col">Price*/}
                                     {/*</th>*/}
@@ -57,45 +58,51 @@ class CustomTable extends Component {
 
                                 </thead>
                                 <tbody className="mdc-data-table__content">
-                                {this.props.data.map((item, index )=> {
+                                {this.props.data.map((item, index) => {
                                     return <tr key={index} data-row-id="u0"
                                                className="mdc-data-table__row transparent">
                                         <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
                                             <RadioGroup
                                                 value={this.props.id}
-                                                onChange={this.props.onChange}
-                                            >
-                                                <FormControlLabel value={index}
+                                                onChange={this.props.onChange}>
+                                                <FormControlLabel value={item.id || item.order_key}
                                                                   control={<Radio/>}
+                                                    // label={item.id || item.order_key}
                                                 />
                                             </RadioGroup>
                                         </td>
+                                        {
+                                            item.first_name &&
+                                            <th className="mdc-data-table__cell tl"
+                                                scope="row" id="u0">{item.first_name}
+                                            </th>
+                                        }
                                         {item.name &&
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}
                                         </th>}
-                                    {item.order_key &&
+                                        {item.order_key &&
                                         <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.order_key}
-                                    </th>}
+                                            scope="row" id="u0">{item.order_key}
+                                        </th>}
 
-                                    {item.user &&
+                                        {item.user &&
                                         <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.user}
-                                    </th>}
+                                            scope="row" id="u0">{item.user}
+                                        </th>}
 
-                                    {item.status !== "abc" ?
-                                        <td className="mdc-data-table__cell tl">{item.status}</td> :
-                                        <td className="mdc-data-table__cell tl">pending</td>}
+                                        {item.status !== "abc" ?
+                                            <td className="mdc-data-table__cell tl">{item.status}</td> :
+                                            <td className="mdc-data-table__cell tl">pending</td>}
 
-                                    {item.name &&
+                                        {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"
                                             id="u0">25-03-2021</td>}
 
-                                    {item.title &&
-                                       <th className="mdc-data-table__cell tl"
-                                        scope="row" id="u0">{item.title}
-                                       </th>}
+                                        {item.title &&
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0">{item.title}
+                                        </th>}
 
                                         {item.price &&
                                         <td className="mdc-data-table__cell tl">PKR
@@ -116,8 +123,8 @@ class CustomTable extends Component {
                                         {item.images &&
                                         <td className="mdc-data-table__cell">{item.images.length}</td>}
 
-                                </tr>
-                                    })}
+                                    </tr>
+                                })}
                                 </tbody>
                             </table>
                         </div>
@@ -144,4 +151,5 @@ class CustomTable extends Component {
         );
     }
 }
-export default withRouter (CustomTable);
+
+export default withRouter(CustomTable);

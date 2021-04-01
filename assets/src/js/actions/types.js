@@ -35,3 +35,4 @@ export const ADMIN_PRODUCTS = "ADMIN_PRODUCTS";
 export const ADMIN_ORDERS = "ADMIN_ORDERS";
 export const CART = "CART";
 export const USER_ORDERS = "USER_ORDERS";
+export const USERS = "USERS";
