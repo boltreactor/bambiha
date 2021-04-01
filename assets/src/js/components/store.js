@@ -15,7 +15,14 @@ class Store extends Component {
     }
 
     componentDidMount() {
+        debugger
         this.props.getAllProducts(this.props.match.params.id)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.props.getAllProducts(this.props.match.params.id)
+        }
     }
 
     render() {
@@ -37,7 +44,7 @@ class Store extends Component {
                                                 </div>
                                             </Link>
                                         </div>
-                                    })  : <h3>No product found</h3>}
+                                    }) : <h3>No product found</h3>}
                                 </div>
                                 <div className="row">
                                     <div className="col s12">

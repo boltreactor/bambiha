@@ -28,6 +28,7 @@ export const PAYMENT_INTENT = "PAYMENT_INTENT";
 export const VAT = "VAT";
 export const CURRENT_LISTING = "CURRENT_LISTING";
 export const CATEGORIES = "CATEGORIES";
+export const HEADER_CATEGORIES = "HEADER_CATEGORIES";
 export const CATEGORY = "CATEGORY";
 export const ADMIN_PRODUCT = "ADMIN_PRODUCT";
 export const DEL_PRODUCT = "DEL_PRODUCT";

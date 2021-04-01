@@ -1,5 +1,13 @@
 import axios from "axios";
-import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS} from "./types";
+import {
+    ADMIN_PRODUCTS,
+    ADMIN_PRODUCT,
+    CATEGORIES,
+    CATEGORY,
+    DEL_PRODUCT,
+    ADMIN_ORDERS,
+    HEADER_CATEGORIES
+} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
 const qs = require('query-string');
@@ -39,6 +47,17 @@ export const getAllCategories = () => dispatch => {
             dispatch({
                 type: CATEGORIES,
                 categories: res.data.category
+            });
+        });
+};
+
+export const getHeaderCategories = () => dispatch => {
+    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/admin/headercategories/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: HEADER_CATEGORIES,
+                header_categories: res.data.category
             });
         });
 };
