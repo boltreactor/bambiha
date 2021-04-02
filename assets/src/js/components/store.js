@@ -1,26 +1,25 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import StoreDrawer from "../reusable-components/Drawers/Static/store-drawer";
-import {getAllProducts} from "../actions/admin";
 import {connect} from "react-redux";
+import {getUserProducts} from "../actions/user";
 
 class Store extends Component {
 
     constructor(props) {
         super(props);
-        // this.props.getAllProducts()
         this.state = {
             products: []
         }
     }
 
     componentDidMount() {
-        this.props.getAllProducts(this.props.match.params.id)
+        this.props.getUserProducts(this.props.match.params.id)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            this.props.getAllProducts(this.props.match.params.id)
+            this.props.getUserProducts(this.props.match.params.id)
         }
     }
 
@@ -120,7 +119,7 @@ class Store extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    products: state.admin.products
+    products: state.user.products
 })
 
-export default withRouter(connect(mapStateToProps, {getAllProducts})(Store));
+export default withRouter(connect(mapStateToProps, {getUserProducts})(Store));

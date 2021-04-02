@@ -80,6 +80,7 @@ def AllProducts(request):
             'status': status.HTTP_200_OK, 'message': "No products found"
         }, status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def NewProducts(request):
     products = Products.get_new_products(request)

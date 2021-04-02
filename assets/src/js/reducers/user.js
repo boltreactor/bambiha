@@ -12,8 +12,8 @@ import {
   ID_FOR_IMAGES,
   IMAGES_VIEW,
   CURRENT_LISTING,
-    CART,
-    USER_ORDERS
+  CART,
+  USER_ORDERS, HEADER_CATEGORIES, USER_PRODUCTS
   // STATE_IMAGES,
 } from '../actions/types';
 import React from 'react';
@@ -27,6 +27,7 @@ export const initialState = {
   },
   cart: [],
   orders: [],
+  products: [],
   currentListing: null,
   listing: {
     title: "",
@@ -120,6 +121,20 @@ export default function (state = initialState, action) {
         ...state,
        orders: action.orders
       }
+    }
+
+    case HEADER_CATEGORIES: {
+            return {
+                ...state,
+                header_categories: action.header_categories
+            }
+    }
+
+    case USER_PRODUCTS: {
+            return {
+                ...state,
+                products: action.products
+            }
     }
 
     default:

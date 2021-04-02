@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
-import { getHeaderCategories} from "../../../actions/admin";
+import {getUserCategories} from "../../../actions/user";
 import {connect} from "react-redux";
 
 
@@ -8,7 +8,7 @@ class StoreDrawer extends Component {
 
     componentDidMount() {
 
-        this.props.getHeaderCategories();
+        this.props.getUserCategories();
 
     }
 
@@ -36,8 +36,8 @@ class StoreDrawer extends Component {
 }
 
 const mapStateToProps = state => ({
-    header_categories: state.admin.header_categories
+    header_categories: state.user.header_categories
 });
 
 
-export default withRouter(connect(mapStateToProps, {getHeaderCategories})(StoreDrawer));
+export default withRouter(connect(mapStateToProps, {getUserCategories})(StoreDrawer));

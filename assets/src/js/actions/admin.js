@@ -44,16 +44,6 @@ export const getAllCategories = () => dispatch => {
         });
 };
 
-export const getHeaderCategories = () => dispatch => {
-    // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    axios.get('/admin/headercategories/', {headers: Header})
-        .then(res => {
-            dispatch({
-                type: HEADER_CATEGORIES,
-                header_categories: res.data.category
-            });
-        });
-};
 
 export const getCategory = (id) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -213,3 +203,4 @@ export const getAllUsers = () => dispatch => {
             });
         });
 };
+

@@ -29,13 +29,6 @@ export default function (state = initialState, action) {
                 categories: action.categories
             }
         }
-        case HEADER_CATEGORIES: {
-            return {
-                ...state,
-                header_categories: action.header_categories
-            }
-        }
-
         case CATEGORY: {
             return {
                 ...state,

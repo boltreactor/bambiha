@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../../../actions/profile";
-import {getHeaderCategories} from "../../../actions/admin";
+import {getUserCategories} from "../../../actions/user";
 
 
 class TopAppBarHome extends Component {
@@ -11,7 +11,7 @@ class TopAppBarHome extends Component {
         if (localStorage.getItem("token")) {
             this.props.getUser();
         }
-        this.props.getHeaderCategories();
+        this.props.getUserCategories();
 
     }
 
@@ -180,7 +180,7 @@ class TopAppBarHome extends Component {
 
 const mapStateToProps = state => ({
     user: state.user.user,
-    header_categories: state.admin.header_categories
+    header_categories: state.user.header_categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser, getHeaderCategories})(TopAppBarHome))
+export default withRouter(connect(mapStateToProps, {getUser, getUserCategories})(TopAppBarHome))

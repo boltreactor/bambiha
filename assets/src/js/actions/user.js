@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CART, USER_ORDERS} from "./types";
+import {CART, HEADER_CATEGORIES, USER_ORDERS, USER_PRODUCTS} from "./types";
 import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
@@ -72,4 +72,30 @@ export const checkout = (props, address) => dispatch => {
         }).catch(err => {
 
     });
+};
+
+export const getUserCategories = () => dispatch => {
+    axios.get('/user/getcategories/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: HEADER_CATEGORIES,
+                header_categories: res.data.category
+            });
+        });
+};
+
+export const getUserProducts = (id) => dispatch => {
+    let config = {
+        headers: Header,
+        params: {
+            category_key: id,
+        },
+    }
+    axios.get('/user/getproducts/', config)
+        .then(res => {
+            dispatch({
+                type: USER_PRODUCTS,
+                products: res.data.products
+            });
+        });
 };
