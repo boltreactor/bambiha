@@ -40,6 +40,10 @@ class Store extends Component {
                                                          src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
                                                          alt=""/>
                                                 </div>
+                                                <div className="mv3">
+                                                    <div><h4>{item.title}</h4></div>
+                                                    <div><h6>{item.price}</h6></div>
+                                                </div>
                                             </Link>
                                         </div>
                                     }) : <h3>No product found</h3>}
