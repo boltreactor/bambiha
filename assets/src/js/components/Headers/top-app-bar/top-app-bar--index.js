@@ -49,12 +49,12 @@ class TopAppBarIndex extends Component {
                                        </div>
                             })}
 
-                            <Link to="/sale" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">Sale</span>
-                                </button>
-                            </Link>
+                            {/*<Link to="/sale" className="show-lg link-mute">*/}
+                            {/*    <button className="mdc-button mdc-top-app-bar__action-item round">*/}
+                            {/*        <span className="mdc-button__ripple"/>*/}
+                            {/*        <span className="mdc-button__label">Sale</span>*/}
+                            {/*    </button>*/}
+                            {/*</Link>*/}
                             {/*<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button dn-l js-trigger-mdc-drawer" aria-label="Open navigation menu">menu</button>*/}
                         </section>
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"

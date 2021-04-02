@@ -70,6 +70,10 @@ export const clearAuthErrors = (props) => dispatch => {
 }
 export const login = (user, props) => dispatch => {
     axios.post("/auth/login/", user, {headers: Header}).then(res => {
+        if (res.data.user.user_role === 2)
+            localStorage.setItem("admin", true)
+        else
+            localStorage.setItem('admin', false)
         localStorage.setItem("loginStatus", true)
         localStorage.setItem("token", res.data.user.token);
         dispatch({

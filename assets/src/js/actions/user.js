@@ -18,7 +18,7 @@ export const addToCart = (quantity, id, props) => dispatch => {
     bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/')
+            props.history.push('/cart')
 
         }).catch(err => {
 
@@ -67,7 +67,7 @@ export const checkout = (props, address) => dispatch => {
     bodyFormData.append('address', address);
     axios.post('/user/checkout/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/')
+            props.history.push('/orders')
 
         }).catch(err => {
 

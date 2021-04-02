@@ -48,6 +48,8 @@ import ManageProducts from "../../admin/manage_products";
 import ManageUsers from "../../admin/manage_users";
 import NewCategory from "../../admin/new_category";
 import NewProduct from "../../admin/new_product";
+import Checkout from "../../components/checkout";
+import AdminProtectedRoute from "../../components/adminProtectedRoutes";
 
 
 class App extends Component {
@@ -65,14 +67,14 @@ class App extends Component {
             <Fragment>
                 <Header loginStatus={this.props.loginStatus}/>
                 <Switch>
-                    <ProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
-                    <ProtectedRoute path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
-                    <ProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
-                    <ProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
-                    <ProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
-                    <ProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
-                    <ProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
-                    <ProtectedRoute path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
+                    <AdminProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
                     <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>

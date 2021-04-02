@@ -112,25 +112,23 @@ class TopAppBarHome extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="mr2" to="/cart">
+                            <Link className="mr2" to="#">
                                 <button className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">favorite_border
                                 </button>
                             </Link>
-                            <div className="mr2">
+                            <Link className="mr2" to="/cart">
                                 <div className="pri-dropdown right">
                                     <button
                                         className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">shopping_cart
                                     </button>
                                 </div>
-                            </div>
+                            </Link>
                             <div className="mr3">
                                 <div className="default-dropdown">
                                     <div style={{height: '32px', width: '32px'}}>
-                                        {/*
-            <img class="img-avatar" src="/static/user_avatar.svg" alt="">
-            */}
+
                                         <img className="img-avatar"
                                              src={this.props.user && this.props.user.profile_image ? this.props.user.profile_image : "/static/user_avatar.svg"}
                                              alt=""/>
