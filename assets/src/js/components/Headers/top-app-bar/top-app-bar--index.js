@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser} from "../../../actions/profile";
-import {getAllCategories} from "../../../actions/admin";
+import {getHeaderCategories} from "../../../actions/admin";
 
 class TopAppBarIndex extends Component {
 
@@ -10,7 +10,7 @@ class TopAppBarIndex extends Component {
         if (localStorage.getItem("token")) {
             this.props.getUser();
         }
-        this.props.getAllCategories();
+        this.props.getHeaderCategories();
     }
 
     render() {
@@ -38,7 +38,7 @@ class TopAppBarIndex extends Component {
                                 </button>
                             </Link>
 
-                            {this.props.categories.map(category => {
+                            {this.props.categories && this.props.categories.map(category => {
                                 return <div key={category.id}>
                                         <Link to={`/category/${category.id}`} className="show-lg link-mute">
                                            <button className="mdc-button mdc-top-app-bar__action-item round">
@@ -142,7 +142,7 @@ class TopAppBarIndex extends Component {
 
 const mapStateToProps = state => ({
     user: state.user.user,
-    categories: state.admin.categories
+    categories: state.admin.header_categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser, getAllCategories})(TopAppBarIndex))
+export default withRouter(connect(mapStateToProps, {getUser, getHeaderCategories})(TopAppBarIndex))
