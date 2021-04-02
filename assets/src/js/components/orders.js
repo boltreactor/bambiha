@@ -32,7 +32,7 @@ class Orders extends Component {
 
 
     render() {
-        const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
+        // const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
         const {orders} = this.props;
 
         return (
@@ -76,19 +76,65 @@ class Orders extends Component {
 
                                         {this.state.Orders &&
                                         <div>
-                                        {/*<div className={this.state.Orders===true ? "tab-no-data": "tab-no-data hide"}>*/}
-                                            <div className="tc">
                                                  {!orders.length>0 ?
-                                                 <div>
+                                                   <section className="tab-no-data">
+                                                     <div className="tc">
                                                         <header className="mt3 my-page">
-                                                          <h3 className="bold">My orders</h3>
+                                                            <h3 className="bold">My orders</h3>
                                                         </header>
                                                         <p>
                                                            You don't have any orders yet
                                                         </p>
-                                                 </div>:
+                                                       <div className="mv3">
+                                                       <Link to="/" className="link-mute">
+                                                         <button className="btn btn-primary btn-lg">
+                                                          <i className="material-icons-outlined">shopping_cart</i> Continue Shopping
+                                                         </button>
+                                                       </Link>
+                                                       </div>
+                                                     </div>
+                                                   </section>:
 
-                                                     <CustomTable headers={headers} data={orders}/>}
+                                                     <div>
+
+                                                     <section className="cart-or-bag mv4">
+                                                         {orders && orders.map(item => {
+                                                               return <div key={item.order_key} className="cart-item ma0">
+                                                            <div key={item.order_key} className="flex mb3">
+                                                          <div className="mr2 mb3">
+                                                            <Link to="#" className="link-mute">
+                                                             <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
+                                                            </Link>
+                                                          </div>
+                                                        <div className="flex-grow-1 pa2">
+                                                         <div className="description">
+                                                           <div className="flex flex-wrap mb2">
+                                                             <div className="flex-grow-1 mr2">
+                                                                <h4>Nike Air Max 270</h4>
+                                                             </div>
+                                                           <div>
+                                                             <h6>$150</h6>
+                                                           </div>
+                                                         </div>
+                                                          <p className="ma0" style={{fontSize: '16px'}}>
+                                                             Men's Shoe
+                                                          </p>
+                                                     </div>
+                                                       <div className="actions">
+                                                          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>
+                                                          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
+                                                     </div>
+                                                     </div>
+                                                 </div>
+
+
+                                                 <div className="mv3">
+                                                     <h6>Shipping</h6>
+                                                      <p style={{color: '#082244', fontSize: '16px', paddingBottom: '16px'}}>Arrives within 10 days</p>
+                                                 </div>
+                                            </div>})}
+                                         </section>
+                                                         </div> }
 
                                                 {/*<div className="mv3">*/}
                                                 {/*    <button className="btn btn-primary btn-lg">*/}
@@ -96,7 +142,7 @@ class Orders extends Component {
                                                 {/*        Shopping*/}
                                                 {/*    </button>*/}
                                                 {/*</div>*/}
-                                            </div>
+
                                         </div>}
 
                                         <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
@@ -131,74 +177,6 @@ class Orders extends Component {
                                 </header>
 
                                 <div className="content">
-
-                                    {/*<div className="row">*/}
-                                    {/*  <div className="col s12 m6">*/}
-                                    {/*    <div className="shadow border rounded-sm db mb5">*/}
-                                    {/*      <header className="pa3 flex items-center border-bottom">*/}
-                                    {/*        <div className="flex-grow-1">*/}
-                                    {/*          <h2 className="bold">Contact Hub</h2>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="widget-label rounded-xs fw7">*/}
-                                    {/*          FREE*/}
-                                    {/*        </div>*/}
-                                    {/*      </header>*/}
-                                    {/*      <div className="content tc">*/}
-                                    {/*        <div className="pa3">*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <img src="/static/trial-contact-hub.png" alt="" />*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <h3 className="bold">*/}
-                                    {/*              Stay connected to your customer base using our cloud-based Contact Hub*/}
-                                    {/*            </h3>*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="blue-cta mv3">*/}
-                                    {/*            <a href="tel:00923165953458">*/}
-                                    {/*              TALK TO SALES*/}
-                                    {/*            </a>*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <div className="caption" style={{fontSize: '.75rem'}}>(+92)316-5953-458</div>*/}
-                                    {/*          </div>*/}
-                                    {/*        </div>*/}
-                                    {/*      </div>*/}
-                                    {/*    </div>*/}
-                                    {/*  </div>*/}
-                                    {/*  <div className="col s12 m6">*/}
-                                    {/*    <div className="shadow border rounded-sm db mb5">*/}
-                                    {/*      <header className="pa3 flex items-center border-bottom">*/}
-                                    {/*        <div className="flex-grow-1">*/}
-                                    {/*          <h2 className="bold">Payments</h2>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="widget-label rounded-xs fw7">*/}
-                                    {/*          FREE*/}
-                                    {/*        </div>*/}
-                                    {/*      </header>*/}
-                                    {/*      <div className="content tc">*/}
-                                    {/*        <div className="pa3">*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <img src="/static/trial-payments.png" alt="" />*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <h3 className="bold">*/}
-                                    {/*              Allow your customers to pay you instantly online, on mobile, or through text messaging*/}
-                                    {/*            </h3>*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="blue-cta mv3">*/}
-                                    {/*            <a href="tel:00923165953458">*/}
-                                    {/*              TALK TO SALES*/}
-                                    {/*            </a>*/}
-                                    {/*          </div>*/}
-                                    {/*          <div className="mv3">*/}
-                                    {/*            <div className="caption" style={{fontSize: '.75rem'}}>(+92)316-5953-458</div>*/}
-                                    {/*          </div>*/}
-                                    {/*        </div>*/}
-                                    {/*      </div>*/}
-                                    {/*    </div>*/}
-                                    {/*  </div>*/}
-                                    {/*</div>*/}
-
                                     <div className="row">
                                         <div className="col s12">
                                             <h1 className="bold pb4">Learn More about BAMBIHA</h1>
