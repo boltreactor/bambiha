@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
-import {getAllCategories} from "../actions/admin";
+import {getAllCategories, editCategory} from "../actions/admin";
 import {connect} from 'react-redux';
-import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import CustomTable from "../reusable-components/custom-table";
 import SmartFooter from "../components/Footers/smart-footer";
 
@@ -11,17 +10,20 @@ class ManageCategory extends Component {
     state = {
         id: null,
         Categories: true,
-        HelpSupport: false
+        HelpSupport: false,
     }
 
-    componentDidMount() {
-        this.props.getAllCategories();
+    // componentDidMount() {
+    //     this.props.getAllCategories();
+    //
+    // }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.props.getAllCategories();
     }
 
     handleTab = (e) => {
         let name = e.target.text
-
         if (name === "Categories") {
             this.setState({Categories: true, HelpSupport: false})
         } else {
@@ -31,13 +33,25 @@ class ManageCategory extends Component {
 
     handleRadioButton = (event) => {
         event.preventDefault();
-        debugger
         this.setState({id: event.target.value})
     };
 
     onEdit = (event) => {
         event.preventDefault();
         return this.props.history.push(`/admin/categories/${this.state.id}`)
+    }
+    handleDisable = (event) => {
+        event.preventDefault();
+        let category
+        let id = this.state.id
+        let status
+        this.props.categories.map(cat => {
+            if (cat.id === this.state.id) {
+                cat.status === 1 ? status = 0 : status = 1
+                category = cat.name
+            }
+        })
+        this.state.id && this.props.editCategory(id, category, status, this.props)
     }
 
 
@@ -57,7 +71,7 @@ class ManageCategory extends Component {
     // }
 
     render() {
-        const headers = [{name: 'Category name'}, {name: 'Date and Time'}];
+        const headers = [{name: 'Category name'}, {name: 'Date and Time'}, {name: "status"}];
         const {categories} = this.props;
         return (
             <Fragment>
@@ -121,6 +135,7 @@ class ManageCategory extends Component {
                                                     </div> : <CustomTable headers={headers}
                                                                           data={categories} onEdit={this.onEdit}
                                                                           onChange={this.handleRadioButton}
+                                                                          onDisable={this.handleDisable}
                                                                           id={this.state.id}/>}
                                                 </div>
                                             </div>}
@@ -162,4 +177,4 @@ const mapStateToProps = (state) => ({
     categories: state.admin.categories
 })
 
-export default withRouter(connect(mapStateToProps, {getAllCategories})(ManageCategory));
+export default withRouter(connect(mapStateToProps, {getAllCategories, editCategory})(ManageCategory));
