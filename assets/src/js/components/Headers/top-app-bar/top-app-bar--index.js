@@ -31,12 +31,12 @@ class TopAppBarIndex extends Component {
                         </section>
                         <section className="mdc-top-app-bar__section app-shop mdc-top-app-bar__section--align-center"
                                  role="toolbar">
-                            <Link to="/new" className="show-lg link-mute">
-                                <button className="mdc-button mdc-top-app-bar__action-item round">
-                                    <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">New Release</span>
-                                </button>
-                            </Link>
+                            {/*<Link to="/new" className="show-lg link-mute">*/}
+                            {/*    <button className="mdc-button mdc-top-app-bar__action-item round">*/}
+                            {/*        <span className="mdc-button__ripple"/>*/}
+                            {/*        <span className="mdc-button__label">New Release</span>*/}
+                            {/*    </button>*/}
+                            {/*</Link>*/}
 
                             {this.props.categories && this.props.categories.map(category => {
                                 return <div key={category.id}>
@@ -83,19 +83,19 @@ class TopAppBarIndex extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="mr2" to="/cart">
+                            <Link className="mr2" to="/favorites">
                                 <button className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">favorite_border
                                 </button>
                             </Link>
-                            <div className="mr2">
+                            <Link className="mr2" to="/cart">
                                 <div>
                                     <button
                                         className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">shopping_cart
                                     </button>
                                 </div>
-                            </div>
+                            </Link>
                             <div className="mr3">
                                 <div className="default-dropdown">
                                     <div style={{height: '32px', width: '32px'}}>

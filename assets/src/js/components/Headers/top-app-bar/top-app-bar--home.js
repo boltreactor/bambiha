@@ -37,10 +37,10 @@ class TopAppBarHome extends Component {
 
                             {/*get categories*/}
 
-                            <Link to="/new" className="show-lg link-mute">
+                            <Link to="/" className="show-lg link-mute">
                                 <button className="mdc-button mdc-top-app-bar__action-item round">
                                     <span className="mdc-button__ripple"/>
-                                    <span className="mdc-button__label">New Release</span>
+                                    <span className="mdc-button__label">Home</span>
                                 </button>
                             </Link>
                             {this.props.header_categories && this.props.header_categories.map(category => {
@@ -112,7 +112,7 @@ class TopAppBarHome extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="mr2" to="#">
+                            <Link className="mr2" to="/favorites">
                                 <button className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">favorite_border
                                 </button>

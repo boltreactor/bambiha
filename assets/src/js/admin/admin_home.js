@@ -113,7 +113,7 @@ class AdminHome extends Component {
                                         </div>
                                         <div className="row">
                                             <div className="col s12 m4">
-                                                <a href="https://www.boltreactor.com/booking" target="_blank"
+                                                <Link to="https://www.boltreactor.com/booking"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -134,10 +134,10 @@ class AdminHome extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <a href="https://www.boltreactor.com/sites" target="_blank"
+                                                <Link to="https://www.boltreactor.com/sites" target="_blank"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -158,10 +158,10 @@ class AdminHome extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <a href="https://www.boltreactor.com/reviews" target="_blank"
+                                                <Link to="https://www.boltreactor.com/reviews" target="_blank"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -180,10 +180,10 @@ class AdminHome extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <a href="https://www.boltreactor.com/messenger" target="_blank"
+                                                <Link to="https://www.boltreactor.com/messenger" target="_blank"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -204,10 +204,10 @@ class AdminHome extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <a href="https://www.boltreactor.com/placement" target="_blank"
+                                                <Link to="https://www.boltreactor.com/placement" target="_blank"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -227,7 +227,7 @@ class AdminHome extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

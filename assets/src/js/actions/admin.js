@@ -1,6 +1,16 @@
 import axios from "axios";
-import {ADMIN_PRODUCTS, ADMIN_PRODUCT, CATEGORIES, CATEGORY, DEL_PRODUCT, ADMIN_ORDERS, USERS,HEADER_CATEGORIES} from "./types";
+import {
+    ADMIN_PRODUCTS,
+    ADMIN_PRODUCT,
+    CATEGORIES,
+    CATEGORY,
+    DEL_PRODUCT,
+    ADMIN_ORDERS,
+    USERS,
+    HEADER_CATEGORIES, EDIT_CATEGORY
+} from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
+
 const qs = require('query-string');
 loadProgressBar();
 const Header = {
@@ -29,8 +39,12 @@ export const editCategory = (id, category, status, props) => dispatch => {
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
+            dispatch({
+                type: EDIT_CATEGORY,
+                category: category
+            })
         })
-};
+}
 
 
 export const getAllCategories = () => dispatch => {
@@ -203,4 +217,3 @@ export const getAllUsers = () => dispatch => {
             });
         });
 };
-

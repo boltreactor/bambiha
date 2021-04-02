@@ -19,7 +19,7 @@ class StoreDrawer extends Component {
 
       <aside className="side-menu-panel hide-scrollbar">
         <div className="ph3">
-          <h4 className="mv3 pt5">New Release</h4>
+          <h4 className="mv3 pt5">Categories</h4>
           <ul className="store-categories">
             {this.props.header_categories && this.props.header_categories.map(cat => {
               return <div key={cat.id}>

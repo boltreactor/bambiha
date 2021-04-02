@@ -53,19 +53,19 @@ class TopAppBarDashboard extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="mr2" to="/cart">
+                            <Link className="mr2" to="/favorites">
                                 <button className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">favorite_border
                                 </button>
                             </Link>
-                            <div className="mr2">
+                            <Link className="mr2" to="/cart">
                                 <div className="pri-dropdown right">
                                     <button
                                         className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">shopping_cart
                                     </button>
                                 </div>
-                            </div>
+                            </Link>
                             <div className="mr3">
                                 <div className="default-dropdown">
                                     <div style={{height: '32px', width: '32px'}}>

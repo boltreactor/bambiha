@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom';
 import {addCategory, editCategory, getCategory} from "../actions/admin";
 import {connect} from 'react-redux';
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
+import Select from "@material-ui/core/Select";
+import {InputLabel, MenuItem} from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
 
 class NewCategory extends Component {
     constructor(props) {
@@ -11,7 +14,14 @@ class NewCategory extends Component {
         this.state = {
             category: "",
             categoryId: this.props.match.params.id,
+            selected: "enable",
         }
+    }
+
+    handleStatus = (event) => {
+        event.preventDefault()
+        debugger
+        this.setState({selected: event.target.value})
     }
 
 
@@ -22,12 +32,16 @@ class NewCategory extends Component {
     addToCategory = () => {
         const category = this.state.category
         const id = this.props.match.params.id
-        id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, 1, this.props)
+        const status = this.state.selected === "enable" ? 1 : 0
+        id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, status, this.props)
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.props.match.params.id && nextProps.category && this.setState({category: nextProps.category.name})
+        // && this.props.category.status === 1 ? this.setState({selected: "disable"}) : this.setState({selected: "enable"})
+
     }
+
 
     // componentDidMount() {
     //     const categoryId = this.props.match.params.id
@@ -46,6 +60,10 @@ class NewCategory extends Component {
     // }
 
     render() {
+        const status = [
+            'enable',
+            'disable',
+        ];
         return (
             <Fragment>
                 <div className="page my-page">
@@ -65,6 +83,27 @@ class NewCategory extends Component {
                                     label="Category name"
                                     onChange={this.handleNameChange}
                                     value={this.state.category ? this.state.category : ''}/>
+
+                                {this.props.match.params.id && <FormControl style={{
+                                    minWidth: 325,
+                                    // marginLeft: "10px",
+                                    marginTop: "20px"
+                                }}>
+                                    <InputLabel
+                                        id="demo-simple-select-label">Status</InputLabel>
+                                    <Select
+                                        labelId="Enable/Disable"
+                                        id="Enable/Disable"
+                                        value={this.state.selected}
+                                        onChange={this.handleStatus}>
+                                        {status.map((values) => (
+                                            <MenuItem key={values}
+                                                      value={values}>
+                                                {values}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>}
 
                                 <div className="mt4 mb4">
                                     <button className="btn btn-primary btn-lg" onClick={this.addToCategory}>

@@ -1,5 +1,15 @@
 import React from 'react';
-import {CATEGORIES, ADMIN_PRODUCT, ADMIN_PRODUCTS, DEL_PRODUCT, CATEGORY, ADMIN_ORDERS, USERS,HEADER_CATEGORIES} from "../actions/types";
+import {
+    CATEGORIES,
+    ADMIN_PRODUCT,
+    ADMIN_PRODUCTS,
+    DEL_PRODUCT,
+    CATEGORY,
+    ADMIN_ORDERS,
+    USERS,
+    HEADER_CATEGORIES,
+    EDIT_CATEGORY
+} from "../actions/types";
 
 export const initialState = {
     user: {
@@ -27,6 +37,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 categories: action.categories
+            }
+        }
+        case EDIT_CATEGORY: {
+            return {
+                ...state,
+                categories: state.categories.map(category => category.id === action.category.id ? action.category : category)
             }
         }
         case CATEGORY: {
