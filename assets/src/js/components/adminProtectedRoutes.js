@@ -8,10 +8,12 @@ function AdminProtectedRoute({path, component: Component, render, user, ...rest}
     let isAdmin = localStorage.getItem('admin')
     return (
         <Route {...rest} render={props => {
-            if (!loginStatus && !isAdmin) return <Redirect to={{
-                pathname: "/",
-                state: {from: props.location}
-            }}/>;
+            debugger
+            if (isAdmin !== "true")
+                return <Redirect to={{
+                    pathname: "/",
+                    state: {from: props.location}
+                }}/>;
             return Component ? <Component {...props}/> : render(props);
         }}/>
     );

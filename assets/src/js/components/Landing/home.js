@@ -36,7 +36,7 @@ class Home extends Component {
                             <div className="col s12 l6 pr0-l">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics1.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b1.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -46,7 +46,7 @@ class Home extends Component {
                             <div className="col s12 l6 pl0-l">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics3.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b2.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -64,17 +64,17 @@ class Home extends Component {
                         <div className="row">
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/dumy-pics4.jpg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b3.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/dumy-pics7.jpg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b4.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b5.jpg" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@ class Home extends Component {
                             <div className="col s12 l6">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics6.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b6.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -99,7 +99,7 @@ class Home extends Component {
                             <div className="col s12 l6">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b7.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -117,17 +117,17 @@ class Home extends Component {
                         <div className="row">
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/shorts.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b8.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/kid.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b9.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/t-shirt.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b10.jpg" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@ class Home extends Component {
                             <div className="col s12 l6 pr0-l">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics1.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b1.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -152,7 +152,7 @@ class Home extends Component {
                             <div className="col s12 l6 pl0-l">
                                 <figure className="relative ma0">
                                     <div className="img-wrapper l relative ma0 pa0 w-100">
-                                        <img className="w-100 h-100" src="/static/dumy-pics2.jpg" alt=""/>
+                                        <img className="w-100 h-100" src="/static/b2.jpg" alt=""/>
                                     </div>
                                     <figcaption className="img-caption left collapse">
                                     </figcaption>
@@ -182,17 +182,17 @@ class Home extends Component {
                         <div className="row">
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/jacket.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b3.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/shorts.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b4.jpg" alt=""/>
                                 </div>
                             </div>
                             <div className="col s12 m12 l4 mb3">
                                 <div className="img-wrapper">
-                                    <img className="w-100 h-100" src="/static/show-2.jpeg" alt=""/>
+                                    <img className="w-100 h-100" src="/static/b5.jpg" alt=""/>
                                 </div>
                             </div>
                         </div>
