@@ -101,7 +101,7 @@ class ManageCategory extends Component {
                                                 <h3 className="bold">{this.state.Categories === true ? categories.length > 0 ?
                                                     <div>
                                                         Categories<span className="ml2"
-                                                                        style={{color: '#0258ff'}}>15</span>
+                                                                        style={{color: '#0258ff'}}>{categories.length}</span>
                                                     </div>
                                                     : "Catagories Management" : "Help & Support"}</h3>
                                             </div>

@@ -1,48 +1,43 @@
 import React, {Component, Fragment} from 'react';
 import {Link, withRouter} from "react-router-dom";
+import { getHeaderCategories} from "../../../actions/admin";
+import {connect} from "react-redux";
+
 
 class StoreDrawer extends Component {
+
+    componentDidMount() {
+
+        this.props.getHeaderCategories();
+
+    }
+
+
+
     render() {
         return (
 
-        <aside className="side-menu-panel hide-scrollbar">
+      <aside className="side-menu-panel hide-scrollbar">
         <div className="ph3">
-          <h4 className="mv3 pt5">New Release (123)</h4>
+          <h4 className="mv3 pt5">New Release</h4>
           <ul className="store-categories">
-            <Link to="#" className="link-mute">
-              <li>Shoes</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Sports Bags</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Tracksuits</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Socks</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Base layer</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Pants</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Tights</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Jumpsuits</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Surf & Swimwear</li>
-            </Link>
-            <Link to="#" className="link-mute">
-              <li>Accessories & Equipment</li>
-            </Link>
+            {this.props.header_categories && this.props.header_categories.map(cat => {
+              return <div key={cat.id}>
+                       <Link to={`/category/${cat.id}`} className="link-mute">
+                          <li>{cat.name}</li>
+                       </Link>
+                </div>
+            })}
           </ul>
         </div>
       </aside>
         );
     }
 }
-export default withRouter(StoreDrawer);
+
+const mapStateToProps = state => ({
+    header_categories: state.admin.header_categories
+});
+
+
+export default withRouter(connect(mapStateToProps, {getHeaderCategories})(StoreDrawer));

@@ -89,7 +89,7 @@ class ManageProducts extends Component {
                                                 <h3 className="bold"> {this.state.Products === true ? products.length > 0 ?
                                                     <div>
                                                         Products<span className="ml2"
-                                                                      style={{color: '#0258ff'}}>15</span>
+                                                                      style={{color: '#0258ff'}}>{products.length}</span>
                                                     </div>
                                                     : "Products Management" : "Help & Support"}</h3>
                                             </div>

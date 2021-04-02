@@ -83,8 +83,8 @@ class ManageOrders extends Component {
                                                 <h3 className="bold">{this.state.Orders === true ? orders.length > 0 ?
                                                     <div>
                                                         Orders
-                                                        {/*<span className="ml2"*/}
-                                                        {/*                style={{color: '#0258ff'}}></span>*/}
+                                                        <span className="ml2"
+                                                                        style={{color: '#0258ff'}}>{orders.length}</span>
                                                     </div>
                                                     : "Orders Management" : "Help & Support"}</h3>
                                             </div>
