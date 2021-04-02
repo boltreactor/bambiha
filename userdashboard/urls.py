@@ -1,9 +1,8 @@
-from django.conf.urls import url
-from django.urls import path, include
+from django.urls import path
 
-from userdashboard.views import AddToCart, ViewCart, CheckOut, ViewOrders, FavUnfav, GetFavorites
-
-from bambiha.middlewares import auth_middleware, ndb_context_middleware
+from bambiha.middlewares import ndb_context_middleware
+from userdashboard.views import AddToCart, ViewCart, CheckOut, ViewOrders, FavUnfav, GetFavorites, getProducts, \
+    getCategoriesHeaders
 
 urlpatterns = [
     path('addtocart/', ndb_context_middleware(AddToCart)),
@@ -12,6 +11,7 @@ urlpatterns = [
     path('vieworders/', ndb_context_middleware(ViewOrders)),
     path('managefavorites/', ndb_context_middleware(FavUnfav)),
     path('getfavorites/', ndb_context_middleware(GetFavorites)),
-
+    path('getproducts/', ndb_context_middleware(getProducts)),
+    path('getcategories/', ndb_context_middleware(getCategoriesHeaders)),
 
 ]

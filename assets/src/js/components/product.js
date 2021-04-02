@@ -12,14 +12,11 @@ class Product extends Component {
     }
 
     addItemToCart = () => {
-        debugger
         this.props.addToCart(1, this.props.match.params.id, this.props)
     }
 
     render() {
         const {product} = this.props;
-
-
 
         return (
             <div className="page">
@@ -187,7 +184,7 @@ class Product extends Component {
                 <div className="mv5">
                   <div className="mb3">
                     <Link to="/cart" className="link-mute">
-                      <button className="btn btn-dark btn-lg btn-block btn-pill">
+                      <button className="btn btn-dark btn-lg btn-block btn-pill" onClick={this.addItemToCart()}>
                         Add to Bag
                       </button>
                     </Link>
