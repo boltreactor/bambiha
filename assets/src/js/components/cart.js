@@ -1,24 +1,17 @@
 import React, {Component} from 'react';
-import {withRouter, Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
-import {viewCart, checkout} from "../actions/user";
+import {checkout, viewCart} from "../actions/user";
 import {connect} from "react-redux";
-import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 
 class Cart extends Component {
-    state = {
-        address: ""
-    }
 
     componentDidMount() {
         this.props.viewCart();
     }
 
-    handleAddress = ({currentTarget: input}) => {
-        this.setState({address: input.value})
-    }
     handleCheckout = () => {
-        this.props.checkout(this.props, this.props.address)
+        this.props.history.push('/checkout')
     }
 
     render() {
@@ -210,12 +203,6 @@ class Cart extends Component {
                                             <h6>{this.props.cart.reduce((accumulator, current) => accumulator + current.price, 0)}</h6>
                                         </div>
                                     </div>
-                                    <NoLabelTextfield
-                                        type="text"
-                                        name="Address"
-                                        label="Address"
-                                        onChange={this.handleAddress}
-                                        value={this.state.address ? this.state.address : ''}/>
                                     <div className="mv2" style={{borderBottom: '1px solid #e5e5e5'}}/>
                                     <div className="mv5">
                                         <button className="btn btn-dark btn-lg btn-block btn-pill"

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 
 class CustomTable extends Component {
 
     state = {
-        class : "mdc-data-table__header-cell"
+        class: "mdc-data-table__header-cell"
 
     }
 
@@ -91,9 +91,9 @@ class CustomTable extends Component {
                                             scope="row" id="u0">{item.name}
                                         </th>}
 
-                                         {item.order_key &&
+                                        {item.order_number &&
                                         <th className="mdc-data-table__cell tl"
-                                            scope="row" id="u0">{item.order_key}
+                                            scope="row" id="u0">{item.order_number}
                                         </th>}
 
                                         {item.user &&
@@ -107,7 +107,14 @@ class CustomTable extends Component {
 
                                         {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"
-                                            id="u0">25-03-2021</td>}
+                                            id="u0">{item.date}</td>}
+
+                                        {item.name && (item.status === 1 ?
+                                            <td className="mdc-data-table__cell tl" scope="row"
+                                                id="u0">Enable</td> :
+                                            <td className="mdc-data-table__cell tl" scope="row"
+                                                style={{color: "#FF0000"}}
+                                                id="u0">Disabled</td>)}
 
                                         {item.title &&
                                         <th className="mdc-data-table__cell tl"
@@ -145,9 +152,9 @@ class CustomTable extends Component {
                            style={{fontSize: '16px'}}>edit</i>
                         Edit
                     </button>
-                    <button className="btn btn-outline-primary btn-sm mr3">
+                    <button className="btn btn-outline-primary btn-sm mr3" onClick={this.props.onDisable}>
                         <i className="material-icons-outlined" style={{fontSize: "16px"}}>block</i>
-                        DISABLE
+                        ENABLE/DISABLE
                     </button>
                     {/*<button className="btn btn-outline-danger btn-sm">*/}
                     {/*    <i className="material-icons-outlined"*/}

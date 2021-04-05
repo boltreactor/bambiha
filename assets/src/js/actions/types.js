@@ -38,3 +38,4 @@ export const CART = "CART";
 export const USER_ORDERS = "USER_ORDERS";
 export const USERS = "USERS";
 export const USER_PRODUCTS = "USER_PRODUCTS";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";

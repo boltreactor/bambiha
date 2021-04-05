@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react"
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
 import {addProduct, getAllCategories} from "../actions/admin"
-import {withRouter,Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
 class AdminHome extends Component {

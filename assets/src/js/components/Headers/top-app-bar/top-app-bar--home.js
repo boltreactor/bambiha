@@ -128,9 +128,7 @@ class TopAppBarHome extends Component {
                             <div className="mr3">
                                 <div className="default-dropdown">
                                     <div style={{height: '32px', width: '32px'}}>
-                                        {/*
-            <img class="img-avatar" src="/static/user_avatar.svg" alt="">
-            */}
+
                                         <img className="img-avatar"
                                              src={this.props.user && this.props.user.profile_image ? this.props.user.profile_image : "/static/user_avatar.svg"}
                                              alt=""/>

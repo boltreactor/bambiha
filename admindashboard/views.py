@@ -77,7 +77,7 @@ def AllProducts(request):
         }, status.HTTP_200_OK)
     else:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "No products found"
+            'status': status.HTTP_200_OK, 'message': "No products found", 'products': []
         }, status.HTTP_200_OK)
 
 

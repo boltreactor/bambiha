@@ -23,8 +23,7 @@ class Cart(ndb.Model):
             cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
                       cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get().key.delete()
             return True
-        cart_check = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
-                               cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+        cart_check = cls.query(cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
         if cart_check:
             cart_check.quantity = int(request.POST.get('quantity'))
             cart_check.put()
