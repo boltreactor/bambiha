@@ -108,6 +108,14 @@ class Order(ndb.Model):
         return all_orders
 
     @classmethod
+    def delete_order(cls, request):
+        order = ndb.Key(urlsafe=request.query_params.get('order_key')).get()
+        if order:
+            order.key.delete()
+            return True
+        return False
+
+    @classmethod
     def get_user_orders(cls, request):
         orders = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
         all_orders = []
