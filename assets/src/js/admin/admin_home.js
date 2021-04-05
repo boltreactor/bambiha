@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react"
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
 import {addProduct, getAllCategories} from "../actions/admin"
-import {withRouter} from "react-router-dom";
+import {withRouter,Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 class AdminHome extends Component {
@@ -113,7 +113,7 @@ class AdminHome extends Component {
                                         </div>
                                         <div className="row">
                                             <div className="col s12 m4">
-                                                <Link to="https://www.boltreactor.com/booking"
+                                                <Link to="/admin/users"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -137,7 +137,7 @@ class AdminHome extends Component {
                                                 </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <Link to="https://www.boltreactor.com/sites" target="_blank"
+                                                <Link to="/admin/orders"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -161,7 +161,7 @@ class AdminHome extends Component {
                                                 </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <Link to="https://www.boltreactor.com/reviews" target="_blank"
+                                                <Link to="/admin/products"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -183,7 +183,7 @@ class AdminHome extends Component {
                                                 </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <Link to="https://www.boltreactor.com/messenger" target="_blank"
+                                                <Link to="/admin/categories"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -206,29 +206,29 @@ class AdminHome extends Component {
                                                     </div>
                                                 </Link>
                                             </div>
-                                            <div className="col s12 m4">
-                                                <Link to="https://www.boltreactor.com/placement" target="_blank"
-                                                   className="link-mute">
-                                                    <div className="shadow-0 rounded-sm db mb5 pa3">
-                                                        <div className="flex">
-                                                            <div className="mh3">
-                                                                <i className="material-icons-outlined" style={{
-                                                                    color: '#0258ff',
-                                                                    fontSize: '36px'
-                                                                }}>live_help</i>
-                                                            </div>
-                                                            <div className="flex-grow-1" style={{minHeight: '136px'}}>
-                                                                <h4 className="bold mb3">
-                                                                    Help & Support
-                                                                </h4>
-                                                                <p>
-                                                                    Show us your own unique designs with #bambihabyyou
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </Link>
-                                            </div>
+                                            {/*<div className="col s12 m4">*/}
+                                            {/*    <Link to="https://www.boltreactor.com/placement" target="_blank"*/}
+                                            {/*       className="link-mute">*/}
+                                            {/*        <div className="shadow-0 rounded-sm db mb5 pa3">*/}
+                                            {/*            <div className="flex">*/}
+                                            {/*                <div className="mh3">*/}
+                                            {/*                    <i className="material-icons-outlined" style={{*/}
+                                            {/*                        color: '#0258ff',*/}
+                                            {/*                        fontSize: '36px'*/}
+                                            {/*                    }}>live_help</i>*/}
+                                            {/*                </div>*/}
+                                            {/*                <div className="flex-grow-1" style={{minHeight: '136px'}}>*/}
+                                            {/*                    <h4 className="bold mb3">*/}
+                                            {/*                        Help & Support*/}
+                                            {/*                    </h4>*/}
+                                            {/*                    <p>*/}
+                                            {/*                        Show us your own unique designs with #bambihabyyou*/}
+                                            {/*                    </p>*/}
+                                            {/*                </div>*/}
+                                            {/*            </div>*/}
+                                            {/*        </div>*/}
+                                            {/*    </Link>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>

@@ -71,7 +71,7 @@ class TopAppBarAdmin extends Component {
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
                                             <div className="content" style={{width: '15.25rem'}}>
                                                 <h4 className="dropdown-header dropdown-menu-item text-secondary"
-                                                    to="#!">Farwa Ali</h4>
+                                                   >{this.props.user.first_name} {this.props.user.last_name }</h4>
                                                 <div className="dropdown-divider"/>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
