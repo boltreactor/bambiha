@@ -4,7 +4,6 @@ from algoliasearch import index, client, algoliasearch
 import boto3
 
 
-# Create your models here.
 class Cart(ndb.Model):
     user_key = ndb.KeyProperty()
     product_key = ndb.KeyProperty()
@@ -83,14 +82,29 @@ class Order(ndb.Model):
         orders = cls.query().fetch()
         all_orders = []
         for order in orders:
+            order_items = OrderItems.query(
+                OrderItems.order_key == order.key)
+            all_items = []
+            total = 0
+            for item in order_items:
+                total = total + item.price
+                all_items.append({
+                    "price": item.price,
+                    "title": item.product_key.get().title,
+                    "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                })
+
             all_orders.append({
                 "order_number": order.order_key,
                 "user": order.user_key.get().first_name if order.user_key.get() else None,
                 "status": order.status,
+                "address": order.address,
+                "total_price": total,
+                'product_quantity': len(OrderItems.query(OrderItems.order_key == order.key).fetch()),
+                'products': all_items,
                 "order_key": order.key.urlsafe(),
                 "date_time": order.date
             })
-
         return all_orders
 
     @classmethod
@@ -143,7 +157,8 @@ class OrderItems(ndb.Model):
 
     @classmethod
     def get_order_items(cls, request):
-        order_items = cls.query(cls.order_key == cls.get_with_key(request.POST.get('order_key')).key)
+        order_items = OrderItems.query(
+            OrderItems.order_key == OrderItems.get_with_key(request.POST.get('order_key')).key)
         all_items = []
         for item in order_items:
             all_items.append({
