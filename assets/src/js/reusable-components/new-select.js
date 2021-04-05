@@ -14,7 +14,7 @@ class NewSelect extends Component {
                  >
 
                      {data.map((status, index) => {
-                         return <option key={index} value="status-1">{status.name}</option>
+                         return <option key={index} value={status.name}>{status.name}</option>
                      })}
 
                  </select>

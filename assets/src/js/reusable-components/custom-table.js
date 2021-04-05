@@ -99,18 +99,18 @@ class CustomTable extends Component {
                                             scope="row" id="u0">{item.name}
                                         </th>}
 
-                                        {item.order_number &&
+                                        {item.products &&
                                         <th className="mdc-data-table__cell tl"
-                                            scope="row" id="u0">{item.order_number}
+                                            scope="row" id="u0">{item.products[0].title}
                                         </th>}
 
-                                        {item.order_key &&
+                                        {item.total_price &&
                                         <td className="mdc-data-table__cell tl">PKR
-                                            5000
+                                            {item.total_price}
                                         </td>}
 
-                                        {item.user &&
-                                        <td className="mdc-data-table__cell">quantity
+                                        {item.product_quantity &&
+                                        <td className="mdc-data-table__cell">{item.product_quantity}
                                         </td>}
 
                                         {item.user &&
@@ -118,19 +118,17 @@ class CustomTable extends Component {
                                             scope="row" id="u0">{item.user}
                                         </th>}
 
-                                        {item.user &&
+                                        {item.address &&
                                         <th className="mdc-data-table__cell tl"
-                                            scope="row" id="u0">address
+                                            scope="row" id="u0">{item.address}
                                         </th>}
 
-                                        {item.order_key &&
+                                        {item.order_number &&
                                         <th className="mdc-data-table__cell tl"
-                                            scope="row" id="u0"><NewSelect data={data}/>
+                                            scope="row" id="u0">
+                                            <NewSelect data={data}/>
                                         </th>}
 
-                                        {/*{item.user &&*/}
-                                        {/*<td className="mdc-data-table__cell tl">{item.status}*/}
-                                        {/*</td>}*/}
 
                                         {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"
