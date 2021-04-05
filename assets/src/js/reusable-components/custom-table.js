@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+import NewSelect from "./new-select";
 
 class CustomTable extends Component {
 
@@ -29,6 +30,12 @@ class CustomTable extends Component {
     // }
 
     render() {
+        const data = [
+            {"name": "Shipped"},
+            {"name": "Pending"},
+            {"name": "Delivered"},
+            {"name": "Cancelled"},
+        ];
 
         return (
             <div>
@@ -80,12 +87,13 @@ class CustomTable extends Component {
                                                 />
                                             </RadioGroup>
                                         </td>
-                                        {
-                                            item.first_name &&
+
+                                        {item.first_name &&
                                             <th className="mdc-data-table__cell tl"
                                                 scope="row" id="u0">{item.first_name}
                                             </th>
                                         }
+
                                         {item.name &&
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.name}
@@ -96,14 +104,33 @@ class CustomTable extends Component {
                                             scope="row" id="u0">{item.order_number}
                                         </th>}
 
+                                        {item.order_key &&
+                                        <td className="mdc-data-table__cell tl">PKR
+                                            5000
+                                        </td>}
+
+                                        {item.user &&
+                                        <td className="mdc-data-table__cell">quantity
+                                        </td>}
+
                                         {item.user &&
                                         <th className="mdc-data-table__cell tl"
                                             scope="row" id="u0">{item.user}
                                         </th>}
 
                                         {item.user &&
-                                        <td className="mdc-data-table__cell tl">{item.status}
-                                        </td>}
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0">address
+                                        </th>}
+
+                                        {item.order_key &&
+                                        <th className="mdc-data-table__cell tl"
+                                            scope="row" id="u0"><NewSelect data={data}/>
+                                        </th>}
+
+                                        {/*{item.user &&*/}
+                                        {/*<td className="mdc-data-table__cell tl">{item.status}*/}
+                                        {/*</td>}*/}
 
                                         {item.name &&
                                         <td className="mdc-data-table__cell tl" scope="row"

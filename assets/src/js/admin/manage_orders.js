@@ -38,7 +38,8 @@ class ManageOrders extends Component {
     }
 
     render() {
-        const headers = [{name: 'Order Number'}, {name: 'Placed by'}, {name: 'Date and time'}];
+        const headers = [{name: 'Product'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'}, {name: 'Address'},
+            {name: 'Status'}];
         const {orders} = this.props;
         return (
             <Fragment>
