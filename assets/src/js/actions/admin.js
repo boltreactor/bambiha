@@ -94,6 +94,7 @@ export const getProduct = (id) => dispatch => {
 };
 
 export const delProduct = (id) => dispatch => {
+    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,

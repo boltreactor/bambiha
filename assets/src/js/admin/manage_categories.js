@@ -13,10 +13,10 @@ class ManageCategory extends Component {
         HelpSupport: false,
     }
 
-    // componentDidMount() {
-    //     this.props.getAllCategories();
-    //
-    // }
+    componentDidMount() {
+        this.props.getAllCategories();
+
+    }
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.props.getAllCategories();
@@ -55,20 +55,7 @@ class ManageCategory extends Component {
     }
 
 
-    // state = {
-    //     Categories: true,
-    //     HelpSupport: false
-    // }
-    //
-    // handleTab = (e) => {
-    //     let name = e.target.text
-    //     debugger
-    //     if (name === "Categories") {
-    //         this.setState({Categories: true, HelpSupport: false})
-    //     } else {
-    //         this.setState({Categories: false, HelpSupport: true})
-    //     }
-    // }
+
 
     render() {
         const headers = [{name: 'Category name'}, {name: 'Date and Time'}, {name: "status"}];

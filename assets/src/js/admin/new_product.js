@@ -6,13 +6,14 @@ import {Label} from "@material-ui/icons";
 import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
-import {addProduct, editProduct} from "../actions/admin";
+import {addProduct, editProduct, getProduct} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
 
 class NewProduct extends Form {
     constructor(props) {
         super(props);
+        this.props.getProduct(this.props.match.params.id)
         this.state = {
             errors: {},
             data: {
@@ -23,6 +24,7 @@ class NewProduct extends Form {
                 price: "",
                 images: []
             },
+            product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
@@ -156,6 +158,8 @@ class NewProduct extends Form {
 
 
     render() {
+        const {product_id} = this.state;
+        debugger
         return (
             <Fragment>
                 <div className="page my-page">
@@ -172,7 +176,7 @@ class NewProduct extends Form {
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="title" label="Product Title"
-                                                          value={this.state.data.title}
+                                                          value={product_id !== null ? this.props.product.title : this.state.data.title}
                                                           placeholder="Enter product title"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.title}/>
@@ -184,32 +188,28 @@ class NewProduct extends Form {
                                             name="category_key"
                                             options={this.getCategoriesList()}
                                             onChange={this.handleCategoryChange}
-                                            value={this.state.data.category_key}
+                                            value={product_id !== null ? this.props.product.category_key : this.state.data.category_key}
                                             error={this.state.errors.category_key}
                                         />
-                                        {/*<NoLabelTextfield name="category" label="Product Category"*/}
-                                        {/*                  value={this.state.data.category}*/}
-                                        {/*                  placeholder="Select product category"*/}
-                                        {/*                  onChange={this.handleChange}*/}
-                                        {/*                  error={this.state.errors.category}/>*/}
+
                                     </div>
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
-                                                          value={this.state.data.desc}
+                                                          value={product_id !== null ? this.props.product.description : this.state.data.desc}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="quantity" label="Product Quantity"
-                                                          value={this.state.data.quantity}
+                                                          value={product_id !== null ? this.props.product.quantity : this.state.data.quantity}
                                                           placeholder="Enter product quantity"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="price" label="Price"
-                                                          value={this.state.data.price}
+                                                          value={product_id !== null ? this.props.product.price : this.state.data.price}
                                                           placeholder="Enter product price"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>
@@ -237,6 +237,27 @@ class NewProduct extends Form {
                                                         key={index}>
                                                         <img
                                                             src={URL.createObjectURL(image)}
+                                                            style={{
+                                                                minHeight: '124px',
+                                                                width: '100%',
+                                                                height: '135px'
+                                                            }} alt=""/>
+                                                        <div className="photos__menu">
+                                                            <button
+                                                                className="button2 button2--icon"
+                                                                onClick={(e) => this.handleDeleteImageState(e, image)}>
+                                                                <i className="material-icons"
+                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                }) : null}
+                                                {product_id !== null && this.props.product.images.length > 0 ? this.props.product.images.map((image, index) => {
+                                                    return <div
+                                                        className="photos__cell"
+                                                        key={index}>
+                                                        <img
+                                                            src={image}
                                                             style={{
                                                                 minHeight: '124px',
                                                                 width: '100%',
@@ -281,8 +302,9 @@ class NewProduct extends Form {
 }
 
 const mapStateToProps = (state) => ({
-    categories: state.admin.categories
+    categories: state.admin.categories,
+    product: state.admin.product
 });
 
 
-export default withRouter(connect(mapStateToProps, {addProduct, editProduct})(NewProduct));
+export default withRouter(connect(mapStateToProps, {addProduct, editProduct, getProduct})(NewProduct));

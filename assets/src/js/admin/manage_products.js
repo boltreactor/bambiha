@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {getAllProducts} from "../actions/admin";
+import {getAllProducts, delProduct} from "../actions/admin";
 import {connect} from "react-redux";
 import Table from "../reusable-components/table";
 import CustomTable from "../reusable-components/custom-table";
@@ -28,6 +28,11 @@ class ManageProducts extends Component {
     componentDidMount() {
         this.props.getAllProducts()
     }
+    componentDidUpdate(prevProps) {
+        if(prevProps.products!== this.props.products){
+            this.props.getAllProducts()
+        }
+    }
 
     handleRadioButton = (event) => {
         event.preventDefault();
@@ -36,7 +41,12 @@ class ManageProducts extends Component {
     };
     onEdit = (event) => {
         event.preventDefault();
-        return this.props.history.push(`/admin/categories/${this.state.id}`)
+        return this.props.history.push(`/admin/products/${this.state.id}`)
+    }
+    handleDeleteProduct = () => {
+        debugger
+        this.props.delProduct(this.state.id)
+        this.setState({id:null})
     }
 
     render() {
@@ -113,6 +123,7 @@ class ManageProducts extends Component {
                                                         <CustomTable headers={headers}
                                                                      data={products}
                                                                      onEdit={this.onEdit}
+                                                                     onDelete={this.handleDeleteProduct}
                                                                      onChange={this.handleRadioButton}
                                                                      id={this.state.id}/>}
 
@@ -156,4 +167,4 @@ const mapStateToProps = state => ({
     products: state.admin.products,
     categories: state.admin.categories
 })
-export default withRouter(connect(mapStateToProps, {getAllProducts})(ManageProducts));
+export default withRouter(connect(mapStateToProps, {getAllProducts, delProduct})(ManageProducts));

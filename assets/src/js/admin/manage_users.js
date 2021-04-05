@@ -34,6 +34,28 @@ class ManageUsers extends Component {
         this.props.getAllUsers();
 
     }
+     onEdit = (event) => {
+        event.preventDefault();
+        return this.props.history.push(`/admin/users/${this.state.id}`)
+    }
+    handleDisable = (event) => {
+        event.preventDefault();
+        let category
+        let id = this.state.id
+        let status
+        this.props.categories.map(cat => {
+            if (cat.id === this.state.id) {
+                cat.status === 1 ? status = 0 : status = 1
+                category = cat.name
+            }
+        })
+        this.state.id && this.props.editCategory(id, category, status, this.props)
+    }
+
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.props.getAllUsers();
+    }
 
     render() {
         const headers = [{name: 'User Names'}];
@@ -80,6 +102,8 @@ class ManageUsers extends Component {
                                                 <h3 className="bold">{this.state.Users === true ? users.length > 0 ?
                                                     <div>
                                                         Users
+                                                         <span className="ml2"
+                                                                        style={{color: '#0258ff'}}>{users.length}</span>
                                                     </div>
                                                     : "Orders Management" : "Help & Support"}</h3>
                                             </div>
