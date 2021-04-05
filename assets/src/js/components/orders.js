@@ -100,7 +100,7 @@ class Orders extends Component {
                                                      <section className="cart-or-bag mv4">
                                                          {orders && orders.map(item => {
                                                                return <div key={item.order_key} className="cart-item ma0">
-                                                            <div key={item.order_key} className="flex mb3">
+                                                            <div  className="flex mb3">
                                                           <div className="mr2 mb3">
                                                             <Link to="#" className="link-mute">
                                                              <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
@@ -148,7 +148,7 @@ class Orders extends Component {
                                         <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
                                             <div className="tc">
                                                 <header className="mt3 my-page">
-                                                    <h3 className="bold">Help &amp; Support</h3>
+                                                    <h3 className="bold">Help & Support</h3>
                                                 </header>
                                                 <p>
                                                     24/7 chat support — message us at anytime!

@@ -206,9 +206,11 @@ class Home extends Component {
                             </div>
                         </div>
                         <div className="mv4 tc pb4">
-                            <button className="btn btn-dark btn-lg btn-pill">
-                                Join Us
-                            </button>
+                            <Link to='/signup'>
+                                <button className="btn btn-dark btn-lg btn-pill">
+                                    Join Us
+                                </button>
+                            </Link>
                             <Link to='/login'>
                                 <button className="btn btn-dark btn-lg btn-pill">
                                     Sign In
