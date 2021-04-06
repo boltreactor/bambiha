@@ -41,7 +41,7 @@ class ManageOrders extends Component {
 
     handleDelete = (event, id) => {
         event.preventDefault();
-        this.props.deleteOrder(id)
+        this.props.deleteOrder(id, this.props)
 
     }
 
@@ -57,6 +57,7 @@ class ManageOrders extends Component {
         const {orders} = this.props;
 
         const data = [
+
             {"name": "Cancelled", "status": 0},
             {"name": "Pending", "status": 1},
             {"name": "Shipped", "status": 2 },

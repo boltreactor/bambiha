@@ -29,6 +29,7 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
+
 export const editCategory = (id, category, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
@@ -218,7 +219,7 @@ export const getAllUsers = () => dispatch => {
         });
 };
 
-export const deleteOrder = (id) => dispatch => {
+export const deleteOrder = (id, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -228,7 +229,19 @@ export const deleteOrder = (id) => dispatch => {
     }
     axios.get(`/admin/deleteorder/`, config)
         .then(res => {
-            this.props.history.push("/admin/orders")
+            props.history.push("/admin/orders")
+        })
+
+};
+
+export const disableUser = (id, status, props) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('user_key', id);
+    bodyFormData.append('status', status);
+    axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
+        .then(res => {
+           props.history.push("/admin/users")
         })
 
 };

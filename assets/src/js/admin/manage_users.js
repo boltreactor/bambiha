@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {addCategory, editCategory, getAllUsers, getCategory} from "../actions/admin";
+import { getAllUsers, disableUser} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
@@ -13,7 +13,11 @@ class ManageUsers extends Component {
     state = {
         Users: true,
         HelpSupport: false,
-        id: null
+        id: null,
+        status: 1,
+
+
+
     }
 
     handleTab = (e) => {
@@ -33,6 +37,14 @@ class ManageUsers extends Component {
 
     componentDidMount() {
         this.props.getAllUsers();
+
+    }
+
+    handleDisable = (event, id, status) => {
+        event.preventDefault();
+        debugger
+        status ? this.setState({status: 0}) : this.setState({status: 1})
+        this.props.disableUser(id, this.state.status, this.props);
 
     }
 
@@ -122,7 +134,7 @@ class ManageUsers extends Component {
                                                                </thead>
                                                                <tbody className="mdc-data-table__content">
                                                                 {users.map((item, index) => {
-                                                                  return <tr key={index} data-row-id="u0"
+                                                                  return <tr key={item.id} data-row-id="u0"
                                                                        className="mdc-data-table__row transparent">
                                                                        {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
                                                                        {/*  <RadioGroup*/}
@@ -149,10 +161,12 @@ class ManageUsers extends Component {
 
                                                                          <td className="mdc-data-table__cell tl">
                                                                            <button
-                                                                              className="btn btn-outline-primary btn-sm mr3">
+                                                                              className="btn btn-outline-primary btn-sm mr3"
+                                                                              onClick={(e) => {this.handleDisable(e, item.id, item.account_status)}}
+                                                                           >
                                                                               <i className="material-icons-outlined"
                                                                                  style={{fontSize: '16px'}}>block</i>
-                                                                              DISABLE
+                                                                               DISABLE
                                                                            </button>
                                                                            <button
                                                                               className="btn btn-outline-danger btn-sm">
@@ -209,4 +223,4 @@ class ManageUsers extends Component {
 const mapStateToProps = (state) => ({
     users: state.admin.users
 })
-export default connect(mapStateToProps, {getAllUsers})(ManageUsers);
+export default connect(mapStateToProps, {getAllUsers, disableUser})(ManageUsers);
