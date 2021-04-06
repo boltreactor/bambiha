@@ -127,21 +127,39 @@ class Order(ndb.Model):
         order.put()
         return order
 
-
-
     @classmethod
     def get_user_orders(cls, request):
         orders = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
         all_orders = []
         for order in orders:
-            current_order = {
-                "order_key": order.order_key,
-                "user": order.user_key.get().first_name,
+            order_items = OrderItems.query(
+                OrderItems.order_key == order.key)
+            all_items = []
+            total = 0
+            for item in order_items:
+                total = total + item.price
+                all_items.append({
+                    "price": item.price,
+                    "title": item.product_key.get().title,
+                    "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                })
+
+            user = order.user_key.get()
+            all_orders.append({
+                "order_number": order.order_key,
+                "user": {
+                    "name": user.first_name + " " + user.last_name,
+                    "email": user.email,
+                },
                 "status": order.status,
+                "address": order.address,
+                "total_price": total,
+                "phone_number": order.phone_number,
+                'product_quantity': len(all_items),
+                'products': all_items,
+                "order_key": order.key.urlsafe(),
                 "date_time": order.date
-                # "order": order.key.urlsafe().decode
-            }
-            all_orders.append(current_order)
+            })
 
         return all_orders
 

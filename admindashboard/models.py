@@ -55,6 +55,7 @@ class Products(ndb.Model):
     price = ndb.IntegerProperty()
     images = ndb.StringProperty(repeated=True)
     date = ndb.DateTimeProperty(auto_now=True)
+    product_status = ndb.IntegerProperty(default=1)
 
     @classmethod
     def get_with_key(cls, key):
