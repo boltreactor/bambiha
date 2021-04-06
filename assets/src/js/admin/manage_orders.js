@@ -21,6 +21,11 @@ class ManageOrders extends Component {
 
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.props.orders && nextProps.orders && this.props.getAllOrders()
+
+    }
+
     handleTab = (e) => {
         let name = e.target.text
 
@@ -48,7 +53,6 @@ class ManageOrders extends Component {
     handleChangeOption = (event, id) => {
          event.preventDefault();
         // console.log(event.target.value, id);
-
 
         this.props.updateOrderStatus(id, event.target.value, this.props);
     }

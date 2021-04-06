@@ -221,13 +221,10 @@ export const getAllUsers = () => dispatch => {
 
 export const deleteOrder = (id, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let config = {
-        headers: Header,
-        params: {
-            order_key: id,
-        },
-    }
-    axios.get(`/admin/deleteorder/`, config)
+    let bodyFormData = new FormData();
+    bodyFormData.append('order_key', id);
+
+    axios.post(`/admin/deleteorder/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/orders")
         })

@@ -174,7 +174,7 @@ def UpdateOrder(request):
     }, status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def DeleteOrder(request):
     order = Order.delete_order(request)
     if order:
