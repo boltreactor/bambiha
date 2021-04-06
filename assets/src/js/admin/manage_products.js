@@ -34,9 +34,9 @@ class ManageProducts extends Component {
         debugger
         this.setState({id: event.target.value})
     };
-    onEdit = (event) => {
+    onEdit = (event, productId) => {
         event.preventDefault();
-        return this.props.history.push(`/admin/categories/${this.state.id}`)
+        return this.props.history.push(`/admin/products/new/${productId}`)
     }
 
     render() {
@@ -101,20 +101,104 @@ class ManageProducts extends Component {
                                             <div>
                                                 <div className="tc">
                                                     {!products.length > 0 ? <div>
-                                                            <header className="mt3 my-page">
-                                                                <h3 className="bold">Products</h3>
-                                                            </header>
-                                                            <p>
-                                                                Products management made easy. <br/>
-                                                                All products at the store will be shown here.
-                                                            </p>
-                                                        </div> :
+                                                        <header className="mt3 my-page">
+                                                            <h3 className="bold">Products</h3>
+                                                        </header>
+                                                        <p>
+                                                            Products management made easy. <br/>
+                                                            All products at the store will be shown here.
+                                                        </p>
+                                                    </div> : <div>
+                                                        <div
+                                                            className="custom-datatable overflow-x-auto overflow-y-hidden">
+                                                            <div className="mdc-data-table hide-scrollbar"
+                                                                 data-mdc-auto-init="MDCDataTable">
+                                                                <div className="mdc-data-table__table-container">
+                                                                    <table className="mdc-data-table__table"
+                                                                           aria-label="Dessert calories">
+                                                                        <thead>
+                                                                        <tr className="mdc-data-table__header-row">
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">Sr. No.
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">Avatar
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">Product
+                                                                                title
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                                                                                role="columnheader" scope="col">Price
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+                                                                                role="columnheader" scope="col">Quantity
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">Category
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader"
+                                                                                scope="col">Description
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">No. of
+                                                                                Images
+                                                                            </th>
+                                                                            <th className="mdc-data-table__header-cell"
+                                                                                role="columnheader" scope="col">Actions
+                                                                            </th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody className="mdc-data-table__content">
+                                                                        {products.map(product =>
+                                                                            <tr data-row-id="u0"
+                                                                                className="mdc-data-table__row transparent">
+                                                                                <th className="mdc-data-table__cell tl">1</th>
+                                                                                <th className="mdc-data-table__cell tl">
+                                                                                    <img src={product.images[0]}/></th>
+                                                                                <th className="mdc-data-table__cell tl"
+                                                                                    scope="row" id="u0">{product.title}
+                                                                                </th>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric">{product.price}
+                                                                                </td>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric">{product.quantity}</td>
+                                                                                <td className="mdc-data-table__cell">{product.category}</td>
+                                                                                <td className="mdc-data-table__cell">{product.description}</td>
+                                                                                <td className="mdc-data-table__cell">{product.images.length}</td>
+                                                                                <td className="mdc-data-table__cell">
+                                                                                    <button
+                                                                                        onClick={(e) => this.onEdit(e, product.id)}
+                                                                                        className="btn btn-outline-primary btn-sm mr3">
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{fontSize: '16px'}}>edit</i>
+                                                                                        Edit
+                                                                                    </button>
+                                                                                    <button
+                                                                                        className="btn btn-outline-danger btn-sm">
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{
+                                                                                               fontSize: '16px',
+                                                                                               color: 'var(--danger)'
+                                                                                           }}>delete</i>
+                                                                                        DELETE
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        )}
 
-                                                        <CustomTable headers={headers}
-                                                                     data={products}
-                                                                     onEdit={this.onEdit}
-                                                                     onChange={this.handleRadioButton}
-                                                                     id={this.state.id}/>}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>}
+
+                                                    {/*// <CustomTable headers={headers}*/}
+                                                    {/*//              data={products}*/}
+                                                    {/*//              onEdit={this.onEdit}*/}
+                                                    {/*//              onChange={this.handleRadioButton}*/}
+                                                    {/*//              id={this.state.id}/>}*/}
 
 
                                                 </div>
