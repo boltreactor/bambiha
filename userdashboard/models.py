@@ -1,9 +1,4 @@
-from django.db import models
 from google.cloud import ndb
-from algoliasearch import index, client, algoliasearch
-import boto3
-
-from bambiha.utils import to_json_ndb
 
 
 class Cart(ndb.Model):
@@ -109,7 +104,7 @@ class Order(ndb.Model):
                 "address": order.address,
                 "total_price": total,
                 "phone_number": order.phone_number,
-                'product_quantity': len(OrderItems.query(OrderItems.order_key == order.key).fetch()),
+                'product_quantity': len(all_items),
                 'products': all_items,
                 "order_key": order.key.urlsafe(),
                 "date_time": order.date

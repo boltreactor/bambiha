@@ -4,6 +4,7 @@ from admindashboard.views import AddCategory, EditCategory, GetCategory, DeleteC
     EditProduct, ViewOrders, ViewOrderItems, UpdateOrderStatus, HeaderCategories, NewProducts, DeleteOrder
 from admindashboard.views import GetProduct, DeleteProduct, AllProducts
 from bambiha.middlewares import ndb_context_middleware, admin_auth_middleware
+from registration.views import account_status
 
 urlpatterns = [
     path('addcategory/', ndb_context_middleware(admin_auth_middleware(AddCategory))),
@@ -22,4 +23,6 @@ urlpatterns = [
     path('vieworderitems/', ndb_context_middleware(admin_auth_middleware(ViewOrderItems))),
     path('deleteorder/', ndb_context_middleware(admin_auth_middleware(DeleteOrder))),
     path('updatestatus/', ndb_context_middleware(admin_auth_middleware(UpdateOrderStatus))),
+
+    path('manage_status/', ndb_context_middleware(admin_auth_middleware(account_status))),
 ]
