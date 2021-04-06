@@ -9,7 +9,6 @@ urlpatterns = [
     path('register/', ndb_context_middleware(signup)),
     path('login/', ndb_context_middleware(login)),
     url(r'all-users/', ndb_context_middleware(auth_middleware(all_users))),
-    path('manage_status/', ndb_context_middleware(auth_middleware(account_status))),
     url(r'make-admin/', ndb_context_middleware(auth_middleware(make_admin))),
     url(r'refresh-token/', ndb_context_middleware(refresh_token)),
     path('social-login/', ndb_context_middleware(social_login)),
