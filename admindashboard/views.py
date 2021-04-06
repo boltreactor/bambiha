@@ -110,7 +110,7 @@ def EditProduct(request):
     product = Products.edit_product(request)
     if product:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': to_json_ndb(product)
+            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': product
         }, status.HTTP_200_OK)
 
 
@@ -162,13 +162,25 @@ def UpdateOrderStatus(request):
     }, status.HTTP_200_OK)
 
 
+@api_view(['POST'])
+def UpdateOrder(request):
+    order = Order.update_order(request)
+    if order:
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Order Updated", 'order': to_json_ndb(order)
+        }, status.HTTP_200_OK)
+    return Response({
+        'status': status.HTTP_200_OK, 'message': "Order not found",
+    }, status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def DeleteOrder(request):
     order = Order.delete_order(request)
     if order:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Category Deleted",
+            'status': status.HTTP_200_OK, 'message': "Order Deleted",
         }, status.HTTP_200_OK)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Category not found",
+        'status': status.HTTP_200_OK, 'message': "Order not found",
     }, status.HTTP_200_OK)
