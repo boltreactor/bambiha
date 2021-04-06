@@ -3,7 +3,7 @@ import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
 import {getProduct} from "../actions/admin";
 import {connect} from "react-redux";
-import {addToCart} from "../actions/user";
+import {addToCart, manageFavorite} from "../actions/user";
 
 class Product extends Component {
 
@@ -14,6 +14,11 @@ class Product extends Component {
     addItemToCart = (e) => {
         e.preventDefault();
         this.props.addToCart(1, this.props.match.params.id, this.props)
+    }
+
+    addFavorite = (e) => {
+        e.preventDefault();
+        this.props.manageFavorite(this.props.match.params.id, this.props)
     }
 
     render() {
@@ -191,7 +196,7 @@ class Product extends Component {
                     </Link>
                   </div>
                   <div>
-                    <button className="btn btn-outline-dark btn-lg btn-block btn-pill">
+                    <button className="btn btn-outline-dark btn-lg btn-block btn-pill" onClick={e => {this.addFavorite(e)}}>
                       Favourite <i className="material-icons-outlined v-mid">favorite_border</i>
                     </button>
                   </div>
@@ -247,4 +252,4 @@ const mapStateToProps = (state) => ({
     product: state.admin.product
 })
 
-export default withRouter(connect(mapStateToProps, {getProduct, addToCart})(Product));
+export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite})(Product));

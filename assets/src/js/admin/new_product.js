@@ -6,7 +6,7 @@ import {Label} from "@material-ui/icons";
 import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
-import {addProduct, editProduct} from "../actions/admin";
+import {addProduct, editProduct, getProduct} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
 

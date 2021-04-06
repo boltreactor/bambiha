@@ -93,7 +93,10 @@ export const login = (user, props) => dispatch => {
             loginStatus: true
         });
         const {state} = props.location;
-        window.location = state ? state.from.pathname : "/dashboard";
+        if (localStorage.getItem('admin') === 'true')
+            window.location = state ? state.from.pathname : "/admin";
+        else
+            window.location = state ? state.from.pathname : "/dashboard";
     }).catch(err => {
         dispatch({
             type: ERROR,

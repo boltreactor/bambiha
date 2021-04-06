@@ -23,7 +23,7 @@ class Home extends Component {
                         <div className="banner-wrapper gray tc my-page">
                             <h5 className="bold">Free Shipping & 60-Day Free Returns</h5>
                             <div className="mt1">
-                                <Link to="#" className="link-mute link-dark">
+                                <Link to="/login" className="link-mute link-dark">
                                     <h5 className="bold">Join Now</h5>
                                 </Link>
                             </div>
@@ -206,9 +206,11 @@ class Home extends Component {
                             </div>
                         </div>
                         <div className="mv4 tc pb4">
-                            <button className="btn btn-dark btn-lg btn-pill">
-                                Join Us
-                            </button>
+                            <Link to='/signup'>
+                                <button className="btn btn-dark btn-lg btn-pill">
+                                    Join Us
+                                </button>
+                            </Link>
                             <Link to='/login'>
                                 <button className="btn btn-dark btn-lg btn-pill">
                                     Sign In

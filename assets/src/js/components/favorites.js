@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import DashboardDrawer from "../reusable-components/Drawers/Static/dashboard-drawer";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import SmartFooter from "./Footers/estore-smart-footer";
+import {addToCart, getFavorite, manageFavorite} from "../actions/user";
+import {connect} from "react-redux";
+import {getProduct} from "../actions/admin";
 
 class Favorites extends Component {
        state = {
@@ -20,7 +23,12 @@ class Favorites extends Component {
         }
     }
 
+    componentDidMount() {
+     this.props.getFavorite();
+    }
+
     render() {
+           const {favorites} = this.props;
         return (
 
             <div className="page">
@@ -62,72 +70,12 @@ class Favorites extends Component {
                                         <div className="mb4">
                                             <h3 className="bold">{this.state.Favorites===true ? "Favorites": "Help & Support"}</h3>
                                         </div>
-                                        {/* Orders list */}
-                                        {/*<div className="cart-or-bag mv4">*/}
-                                        {/*  <div className="cart-item ma0">*/}
-                                        {/*    <div className="flex mb3">*/}
-                                        {/*      <div className="mr2 mb3">*/}
-                                        {/*        <Link to="#" className="link-mute">*/}
-                                        {/*          <img src="/static/img-noise.png" alt="" />*/}
-                                        {/*        </Link>*/}
-                                        {/*      </div>*/}
-                                        {/*      <div className="flex-grow-1 pa2">*/}
-                                        {/*        <div className="description">*/}
-                                        {/*          <div className="flex flex-wrap mb2">*/}
-                                        {/*            <div className="flex-grow-1 mr2">*/}
-                                        {/*              <h4>Nike Air Max 270</h4>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div>*/}
-                                        {/*              <h6>$150</h6>*/}
-                                        {/*            </div>*/}
-                                        {/*          </div>*/}
-                                        {/*          <p className="ma0" style={{fontSize: '16px'}}>*/}
-                                        {/*            Men's Shoe*/}
-                                        {/*          </p>*/}
-                                        {/*          /!**/}
-                                        {/*      <div class="mv2">*/}
-                                        {/*        <div class="dib mr3">*/}
-                                        {/*          <p class="ma0" style="font-size: 16px">*/}
-                                        {/*            <span>Size</span>*/}
-                                        {/*            <span>*/}
-                                        {/*          <select name="size" id="size">*/}
-                                        {/*            <option value="10">10</option>*/}
-                                        {/*            <option value="11">11</option>*/}
-                                        {/*            <option value="12">12</option>*/}
-                                        {/*          </select>*/}
-                                        {/*        </span>*/}
-                                        {/*          </p>*/}
-                                        {/*        </div>*/}
-                                        {/*        <div class="dib mr3">*/}
-                                        {/*          <p class="ma0" style="font-size: 16px">*/}
-                                        {/*            <span>Quantity</span>*/}
-                                        {/*            <span>*/}
-                                        {/*          <select name="size" id="size">*/}
-                                        {/*            <option value="1">1</option>*/}
-                                        {/*            <option value="2">2</option>*/}
-                                        {/*            <option value="3">3</option>*/}
-                                        {/*          </select>*/}
-                                        {/*        </span>*/}
-                                        {/*          </p>*/}
-                                        {/*        </div>*/}
-                                        {/*      </div>*/}
-                                        {/*      *!/*/}
-                                        {/*        </div>*/}
-                                        {/*        <div className="actions">*/}
-                                        {/*          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>*/}
-                                        {/*          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>*/}
-                                        {/*        </div>*/}
-                                        {/*      </div>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="mv3">*/}
-                                        {/*      <h6>Shipping</h6>*/}
-                                        {/*      <p style={{color: '#082244', fontSize: '16px', paddingBottom: '16px'}}>Arrives by <span>Wed,</span> <span>March 10, 2021</span></p>*/}
-                                        {/*    </div>*/}
-                                        {/*  </div>*/}
-                                        {/*</div>*/}
+
                                         {/* Call to action - Favourites */}
-                                         <div className={this.state.Favorites===true ? "tab-no-data": "tab-no-data hide"}>
-                                            <div className="tc">
+                                        {this.state.Favorites &&
+                                        <div>
+                                            {!favorites.length>0 ?
+                                                <div className="tc">
                                                 <header className="mt3 my-page">
                                                     <h3 className="bold">My favourites</h3>
                                                 </header>
@@ -140,8 +88,60 @@ class Favorites extends Component {
                                                         Shopping
                                                     </button>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </div> :
+                                                <div>
+                                                    <section className="cart-or-bag mv4">
+                                                         {favorites && favorites.map((item, index) => {
+                                                               return <div key={index} className="cart-item ma0">
+                                                            <div className="flex mb3">
+                                                          <div className="mr2 mb3">
+                                                            <Link to="#" className="link-mute">
+                                                             <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
+                                                            </Link>
+                                                          </div>
+                                                        <div className="flex-grow-1 pa2">
+                                                         <div className="description">
+                                                           <div className="flex flex-wrap mb2">
+                                                             <div className="flex-grow-1 mr2">
+                                                                <h4>{item.title}</h4>
+                                                             </div>
+                                                           <div>
+                                                             <h6>{item.price}</h6>
+                                                           </div>
+                                                         </div>
+                                                          {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
+                                                          {/*   Men's Shoe*/}
+                                                          {/*</p>*/}
+                                                     </div>
+                                                       <div className="actions">
+                                                          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Cart</Link>
+                                                          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
+                                                     </div>
+                                                     </div>
+                                                 </div>
+
+                                            </div>})}
+                                         </section>
+                                                </div>}
+
+                                        </div>}
+
+                                        {/* <div className={this.state.Favorites===true ? "tab-no-data": "tab-no-data hide"}>*/}
+                                        {/*    <div className="tc">*/}
+                                        {/*        <header className="mt3 my-page">*/}
+                                        {/*            <h3 className="bold">My favourites</h3>*/}
+                                        {/*        </header>*/}
+                                        {/*        <p>*/}
+                                        {/*            Items added to your Favorites will be saved here.*/}
+                                        {/*        </p>*/}
+                                        {/*        <div className="mv3">*/}
+                                        {/*            <button className="btn btn-primary btn-lg">*/}
+                                        {/*                <i className="material-icons-outlined">shopping_cart</i> Continue*/}
+                                        {/*                Shopping*/}
+                                        {/*            </button>*/}
+                                        {/*        </div>*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
 
                                           <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
                                             <div className="tc">
@@ -375,4 +375,8 @@ class Favorites extends Component {
     }
 }
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+    favorites: state.user.favorites
+})
+
+export default withRouter(connect(mapStateToProps, {getFavorite})(Favorites));
