@@ -98,6 +98,7 @@ class Products(ndb.Model):
             all_products.append({
                 "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
                 "date": p.date,
+                "product_status": p.product_status,
                 "description": p.description,
                 "images": p.images,
                 "price": p.price,
@@ -107,29 +108,6 @@ class Products(ndb.Model):
             })
         return all_products
 
-    # @classmethod
-    # def get_new_products(cls, request):
-    #     ancestor_key = ndb.Key("Product", "product")
-    #     all_products = []
-    #     if request.query_params.get('category_key', None):
-    #         products = cls.query(cls.user_key == request.session.get('user'),
-    #                              cls.category_key == request.query_params['category_key'],
-    #                              ancestor=ancestor_key).fetch()
-    #     else:
-    #         products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
-    #     for p in products:
-    #         all_products.append({
-    #             "category": cls.get_with_key(p.category_key).name,
-    #             "date": p.date,
-    #             "description": p.description,
-    #             "images": p.images,
-    #             "price": p.price,
-    #             "quantity": p.quantity,
-    #             "title": p.title,
-    #             "id": p.key.urlsafe()
-    #         })
-    #     return all_products
-
     @classmethod
     def edit_product(cls, request):
         product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
@@ -138,6 +116,7 @@ class Products(ndb.Model):
         product.category_key = request.POST.get('category_key')
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
+        product.product_status = int(request.POST.get('status'))
 
         files = request.FILES.getlist('images')
         if files:
@@ -162,6 +141,7 @@ class Products(ndb.Model):
             "images": product.images,
             "price": product.price,
             "quantity": product.quantity,
+            "product_status": product.product_status,
             "title": product.title,
             "id": product.key.urlsafe()
         }]
@@ -178,6 +158,7 @@ class Products(ndb.Model):
             "price": product.price,
             "quantity": product.quantity,
             "title": product.title,
+            "product_status": product.product_status,
             "id": product.key.urlsafe()
         }
         return p
