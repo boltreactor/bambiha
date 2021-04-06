@@ -55,24 +55,9 @@ class CustomTable extends Component {
                                                    role="columnheader" scope="col">{h.name}
                                         </th>
                                     })}
-                                    {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"*/}
-                                    {/*    role="columnheader" scope="col">Price*/}
-                                    {/*</th>*/}
-                                    {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"*/}
-                                    {/*    role="columnheader" scope="col">Quantity*/}
-                                    {/*</th>*/}
-                                    {/*<th className="mdc-data-table__header-cell"*/}
-                                    {/*    role="columnheader" scope="col">Category*/}
-                                    {/*</th>*/}
-                                    {/*<th className="mdc-data-table__header-cell"*/}
-                                    {/*    role="columnheader" scope="col">Description*/}
-                                    {/*</th>*/}
-                                    {/*<th className="mdc-data-table__header-cell"*/}
-                                    {/*    role="columnheader" scope="col">Images*/}
-                                    {/*</th>*/}
                                 </tr>
-
                                 </thead>
+
                                 <tbody className="mdc-data-table__content">
                                 {this.props.data.map((item, index) => {
                                     return <tr key={index} data-row-id="u0"
