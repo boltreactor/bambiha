@@ -154,9 +154,21 @@ def ViewOrderItems(request):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def UpdateOrder(request):
+def UpdateOrderStatus(request):
     Order.update_status(request)
 
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Order Updated"
+        'status': status.HTTP_200_OK, 'message': "Order Status Updated"
+    }, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def DeleteOrder(request):
+    order = Order.delete_order(request)
+    if order:
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Category Deleted",
+        }, status.HTTP_200_OK)
+    return Response({
+        'status': status.HTTP_200_OK, 'message': "Category not found",
     }, status.HTTP_200_OK)
