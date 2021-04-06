@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {getAllOrders} from "../actions/admin";
+import {getAllOrders, deleteOrder} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
@@ -39,18 +39,29 @@ class ManageOrders extends Component {
         return this.props.history.push(`/admin/categories/${this.state.id}`)
     }
 
+    handleDelete = (event, id) => {
+        event.preventDefault();
+        this.props.deleteOrder(id)
+
+    }
+
+    handleChangeOption = () => {
+        console.log('changed');
+    }
+
     render() {
 
         const headers = [{name: 'Sr. No.'}, {name: 'Order No.'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'},
-           {name: 'Email'},  {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
+           {name: 'Email'}, {name: 'Phone no'},  {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
 
         const {orders} = this.props;
 
         const data = [
-            {"name": "Shipped"},
-            {"name": "Pending"},
-            {"name": "Delivered"},
-            {"name": "Cancelled"},
+            {"name": "Cancelled", "status": 0},
+            {"name": "Pending", "status": 1},
+            {"name": "Shipped", "status": 2 },
+            {"name": "Delivered", "status": 3},
+
         ];
 
         return (
@@ -171,15 +182,15 @@ class ManageOrders extends Component {
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.user}
+                                                                          scope="row" id="u0">{item.user.name}
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">abcd@gmail.com
+                                                                          scope="row" id="u0">{item.user.email}
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">03000000000
+                                                                          scope="row" id="u0">{item.phone_number}
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl"
@@ -188,7 +199,10 @@ class ManageOrders extends Component {
 
                                                                          <td className="mdc-data-table__cell tl"
                                                                           scope="row" id="u0">
-                                                                             <NewSelect data={data}/>
+                                                                             <NewSelect data={data}
+                                                                                        value={item.status}
+                                                                                        onChange={this.handleChangeOption}
+                                                                             />
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl">
@@ -202,7 +216,9 @@ class ManageOrders extends Component {
                                                                               Edit
                                                                            </button>
                                                                            <button
-                                                                              className="btn btn-outline-danger btn-sm">
+                                                                              className="btn btn-outline-danger btn-sm"
+                                                                              onClick={(e) => {this.handleDelete(e, item.order_key)}}
+                                                                           >
                                                                               <i className="material-icons-outlined"
                                                                                  style={{fontSize: '16px', color: 'var(--danger)'}}>
                                                                                   delete</i>
@@ -261,4 +277,4 @@ const mapStateToProps = (state) => ({
     orders: state.admin.orders
 })
 
-export default withRouter(connect(mapStateToProps, {getAllOrders})(ManageOrders));
+export default withRouter(connect(mapStateToProps, {getAllOrders, deleteOrder})(ManageOrders));

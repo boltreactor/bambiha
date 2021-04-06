@@ -217,3 +217,18 @@ export const getAllUsers = () => dispatch => {
             });
         });
 };
+
+export const deleteOrder = (id) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let config = {
+        headers: Header,
+        params: {
+            order_key: id,
+        },
+    }
+    axios.get(`/admin/deleteorder/`, config)
+        .then(res => {
+            this.props.history.push("/admin/orders")
+        })
+
+};

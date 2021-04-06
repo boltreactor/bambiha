@@ -37,7 +37,7 @@ class ManageUsers extends Component {
     }
 
     render() {
-        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}];
+        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}, {name: 'Action'}];
         const {users} = this.props;
         return (
             <Fragment>
@@ -148,14 +148,11 @@ class ManageUsers extends Component {
                                                                          </td>
 
                                                                          <td className="mdc-data-table__cell tl">
-                                                                           <button className="btn btn-primary mr3">
-                                                                              Update
-                                                                           </button>
                                                                            <button
                                                                               className="btn btn-outline-primary btn-sm mr3">
                                                                               <i className="material-icons-outlined"
-                                                                                 style={{fontSize: '16px'}}>edit</i>
-                                                                              Edit
+                                                                                 style={{fontSize: '16px'}}>block</i>
+                                                                              DISABLE
                                                                            </button>
                                                                            <button
                                                                               className="btn btn-outline-danger btn-sm">

@@ -162,7 +162,7 @@ def UpdateOrderStatus(request):
     }, status.HTTP_200_OK)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def DeleteOrder(request):
     order = Order.delete_order(request)
     if order:
