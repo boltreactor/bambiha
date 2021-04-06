@@ -3,6 +3,8 @@ from google.cloud import ndb
 from algoliasearch import index, client, algoliasearch
 import boto3
 
+from bambiha.utils import to_json_ndb
+
 
 class Cart(ndb.Model):
     user_key = ndb.KeyProperty()
@@ -57,6 +59,7 @@ class Order(ndb.Model):
     user_key = ndb.KeyProperty()
     order_key = ndb.IntegerProperty()
     address = ndb.StringProperty()
+    phone_number = ndb.StringProperty()
     status = ndb.IntegerProperty(default=0)
     date = ndb.DateTimeProperty(auto_now=True)
 
@@ -71,6 +74,7 @@ class Order(ndb.Model):
                       user_key=cls.get_with_key(request.session.get('user')).key,
                       order_key=cls.get_with_key(request.session.get('user')).key.id(),
                       address=request.POST.get('address'),
+                      phone_number=request.POST.get('phone_number')
                       # store_user_key=ndb.Key(urlsafe=request.POST.get('store_user_key'))
                       )
         order.put()
@@ -94,12 +98,17 @@ class Order(ndb.Model):
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
 
+            user = order.user_key.get()
             all_orders.append({
                 "order_number": order.order_key,
-                "user": order.user_key.get().first_name if order.user_key.get() else None,
+                "user": {
+                    "name": user.first_name + " " + user.last_name,
+                    "email": user.email,
+                },
                 "status": order.status,
                 "address": order.address,
                 "total_price": total,
+                "phone_number": order.phone_number,
                 'product_quantity': len(OrderItems.query(OrderItems.order_key == order.key).fetch()),
                 'products': all_items,
                 "order_key": order.key.urlsafe(),

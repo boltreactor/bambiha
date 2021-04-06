@@ -48,10 +48,11 @@ export const viewOrders = () => dispatch => {
             });
         });
 };
-export const checkout = (props, address) => dispatch => {
+export const checkout = (props, address, phone) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('address', address);
+    bodyFormData.append('phone_number', phone);
     axios.post('/user/checkout/', bodyFormData, {headers: Header})
         .then(res => {
             props.history.push('/orders')
