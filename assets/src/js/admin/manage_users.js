@@ -43,8 +43,9 @@ class ManageUsers extends Component {
     handleDisable = (event, id, status) => {
         event.preventDefault();
         debugger
-        status ? this.setState({status: 0}) : this.setState({status: 1})
-        this.props.disableUser(id, this.state.status, this.props);
+        let account_status;
+        status ? account_status = 0 : account_status = 1
+        this.props.disableUser(id, account_status, this.props);
 
     }
 
@@ -166,7 +167,7 @@ class ManageUsers extends Component {
                                                                            >
                                                                               <i className="material-icons-outlined"
                                                                                  style={{fontSize: '16px'}}>block</i>
-                                                                               DISABLE
+                                                                               {item.account_status? "DISABLE": "ENABLE"}
                                                                            </button>
                                                                            <button
                                                                               className="btn btn-outline-danger btn-sm">
