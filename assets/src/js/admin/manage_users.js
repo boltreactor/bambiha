@@ -42,7 +42,6 @@ class ManageUsers extends Component {
 
     handleDisable = (event, id, status) => {
         event.preventDefault();
-        debugger
         let account_status;
         status ? account_status = 0 : account_status = 1
         this.props.disableUser(id, account_status, this.props);

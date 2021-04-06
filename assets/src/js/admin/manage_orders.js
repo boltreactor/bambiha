@@ -13,11 +13,12 @@ class ManageOrders extends Component {
     state = {
         Orders: true,
         HelpSupport: false,
-        id: null
+        id: null,
+
     }
 
     componentDidMount() {
-        this.props.getAllOrders()
+        this.props.getAllOrders();
 
     }
 
@@ -53,8 +54,8 @@ class ManageOrders extends Component {
     handleChangeOption = (event, id) => {
          event.preventDefault();
         // console.log(event.target.value, id);
-
         this.props.updateOrderStatus(id, event.target.value, this.props);
+
     }
 
     render() {
@@ -66,8 +67,8 @@ class ManageOrders extends Component {
 
         const data = [
 
-            {"name": "Cancelled", "status": 0},
-            {"name": "Pending", "status": 1},
+            {"name": "Pending", "status": 0},
+            {"name": "Cancelled", "status": 1},
             {"name": "Shipped", "status": 2 },
             {"name": "Delivered", "status": 3},
 
