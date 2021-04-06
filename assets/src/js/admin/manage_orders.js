@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {getAllOrders, deleteOrder} from "../actions/admin";
+import {getAllOrders, deleteOrder, updateOrderStatus} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
@@ -45,8 +45,12 @@ class ManageOrders extends Component {
 
     }
 
-    handleChangeOption = () => {
-        console.log('changed');
+    handleChangeOption = (event, id) => {
+         event.preventDefault();
+        // console.log(event.target.value, id);
+
+
+        this.props.updateOrderStatus(id, event.target.value, this.props);
     }
 
     render() {
@@ -202,7 +206,9 @@ class ManageOrders extends Component {
                                                                           scope="row" id="u0">
                                                                              <NewSelect data={data}
                                                                                         value={item.status}
-                                                                                        onChange={this.handleChangeOption}
+                                                                                        onChange={(e) => {
+                                                                                            this.handleChangeOption(e, item.order_key)
+                                                                                        }}
                                                                              />
                                                                          </td>
 
@@ -278,4 +284,4 @@ const mapStateToProps = (state) => ({
     orders: state.admin.orders
 })
 
-export default withRouter(connect(mapStateToProps, {getAllOrders, deleteOrder})(ManageOrders));
+export default withRouter(connect(mapStateToProps, {getAllOrders, deleteOrder, updateOrderStatus})(ManageOrders));

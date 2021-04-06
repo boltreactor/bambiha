@@ -245,3 +245,15 @@ export const disableUser = (id, status, props) => dispatch => {
         })
 
 };
+
+export const updateOrderStatus = (id, status, props) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('order_key', id);
+    bodyFormData.append('status', status);
+    axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
+        .then(res => {
+           props.history.push("/admin/orders")
+        })
+
+};
