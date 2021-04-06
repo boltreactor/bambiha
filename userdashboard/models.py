@@ -113,11 +113,21 @@ class Order(ndb.Model):
 
     @classmethod
     def delete_order(cls, request):
-        order = ndb.Key(urlsafe=request.query_params.get('order_key')).get()
+        order = ndb.Key(urlsafe=request.POST.get('order_key')).get()
         if order:
             order.key.delete()
             return True
         return False
+
+    @classmethod
+    def update_order(cls, request):
+        order = ndb.Key(urlsafe=request.POST.get('order_key')).get()
+        order.address = request.POST.get('address'),
+        order.phone_number = request.POST.get('phone_number')
+        order.put()
+        return order
+
+
 
     @classmethod
     def get_user_orders(cls, request):

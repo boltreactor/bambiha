@@ -154,7 +154,17 @@ class Products(ndb.Model):
                 product.put()
         cls.algolia_search(product, request)
         product.put()
-        return product
+        all_products = [{
+            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "date": product.date,
+            "description": product.description,
+            "images": product.images,
+            "price": product.price,
+            "quantity": product.quantity,
+            "title": product.title,
+            "id": product.key.urlsafe()
+        }]
+        return all_products
 
     @classmethod
     def get_product(cls, request):
