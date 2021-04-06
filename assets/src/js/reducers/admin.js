@@ -8,7 +8,7 @@ import {
     ADMIN_ORDERS,
     USERS,
     HEADER_CATEGORIES,
-    EDIT_CATEGORY
+    EDIT_CATEGORY, USER_STATUS
 } from "../actions/types";
 
 export const initialState = {
@@ -18,6 +18,7 @@ export const initialState = {
         phone: "",
         email: "",
     },
+    user_status: {},
     categories: [],
     category: {},
     products: [],
@@ -82,6 +83,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 users: action.users
+            }
+        }
+
+        case USER_STATUS: {
+            return {
+                ...state,
+                user_status: action.user
             }
         }
 

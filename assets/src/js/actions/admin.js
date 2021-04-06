@@ -250,6 +250,10 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
     bodyFormData.append('status', status);
     axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
         .then(res => {
+            dispatch({
+                type: USER_STATUS,
+                user: res.data.token
+            });
            props.history.push("/admin/orders")
         })
 

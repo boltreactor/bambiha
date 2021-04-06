@@ -37,12 +37,40 @@ class ManageUsers extends Component {
 
     }
 
+    componentDidUpdate(prevProps,prevState) {
+
+             if (prevProps.users !== this.props.users) {
+
+                console.log('hi');
+            }
+         debugger
+             if (prevState.status !== this.state.status) {
+                 this.props.getAllUsers();
+                 this.checkUser(this.state.id);
+             }
+
+    }
+
+    checkUser = (id) => {
+        let fav = "DISABLE";
+        for (var i = 0; i < this.props.users.length; i++) {
+            if (this.props.users[i].id === id) {
+                if (this.props.users[i].account_status === false) {
+                    fav = "ENABLE"
+                }
+
+            }
+        }
+        return fav
+    }
+
     handleDisable = (event, id, status) => {
         event.preventDefault();
+
         let account_status;
         status ? account_status = 0 : account_status = 1
+        this.setState({id: id, status: status});
         this.props.disableUser(id, account_status, this.props);
-        this.setState({account_status: account_status})
 
     }
 
@@ -164,6 +192,7 @@ class ManageUsers extends Component {
                                                                            >
                                                                               <i className="material-icons-outlined"
                                                                                  style={{fontSize: '16px'}}>block</i>
+                                                                               {/*{this.checkUser(item.id)}*/}
                                                                                {item.account_status? "DISABLE": "ENABLE"}
                                                                            </button>
                                                                            <button
