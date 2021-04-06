@@ -14,10 +14,7 @@ class ManageUsers extends Component {
         Users: true,
         HelpSupport: false,
         id: null,
-        status: 1,
-
-
-
+        account_status: 1
     }
 
     handleTab = (e) => {
@@ -45,6 +42,7 @@ class ManageUsers extends Component {
         let account_status;
         status ? account_status = 0 : account_status = 1
         this.props.disableUser(id, account_status, this.props);
+        this.setState({account_status: account_status})
 
     }
 
