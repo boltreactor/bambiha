@@ -37,7 +37,7 @@ class ManageUsers extends Component {
     }
 
     render() {
-        const headers = [{name: 'User name'}, {name: 'E-mail address'}];
+        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}];
         const {users} = this.props;
         return (
             <Fragment>
@@ -105,13 +105,13 @@ class ManageUsers extends Component {
                                                           <div className="custom-datatable overflow-x-auto overflow-y-hidden">
                                                        <div className="mdc-data-table hide-scrollbar"
                                                             data-mdc-auto-init="MDCDataTable">
-                                                            <div className="mdc-data-table__table-container">
+                                                           <div className="mdc-data-table__table-container">
                                                              <table className="mdc-data-table__table" aria-label="Dessert calories">
                                                                <thead>
                                                                 <tr className="mdc-data-table__header-row">
-                                                                 <th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"
-                                                                  role="columnheader" scope="col">
-                                                                 </th>
+                                                                 {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"*/}
+                                                                 {/* role="columnheader" scope="col">*/}
+                                                                 {/*</th>*/}
                                                                   {headers.map((h, index) => {
                                                                     return <th key={index} className="mdc-data-table__header-cell"
                                                                         role="columnheader" scope="col">{h.name}
@@ -124,24 +124,47 @@ class ManageUsers extends Component {
                                                                 {users.map((item, index) => {
                                                                   return <tr key={index} data-row-id="u0"
                                                                        className="mdc-data-table__row transparent">
-                                                                       <td className="mdc-data-table__cell mdc-data-table__cell--checkbox">
-                                                                         <RadioGroup
-                                                                           value={this.state.id}
-                                                                           onChange={this.handleRadioButton}>
-                                                                           <FormControlLabel value={item.id || item.order_key}
-                                                                             control={<Radio/>}
-                                                                            // label={item.id || item.order_key}
-                                                                           />
-                                                                         </RadioGroup>
-                                                                       </td>
+                                                                       {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
+                                                                       {/*  <RadioGroup*/}
+                                                                       {/*    value={this.state.id}*/}
+                                                                       {/*    onChange={this.handleRadioButton}>*/}
+                                                                       {/*    <FormControlLabel value={item.id || item.order_key}*/}
+                                                                       {/*      control={<Radio/>}*/}
+                                                                       {/*     // label={item.id || item.order_key}*/}
+                                                                       {/*    />*/}
+                                                                       {/*  </RadioGroup>*/}
+                                                                       {/*</td>*/}
 
-                                                                         <th className="mdc-data-table__cell tl"
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{index}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
                                                                           scope="row" id="u0">{item.first_name}
-                                                                         </th>
+                                                                         </td>
 
-                                                                         <th className="mdc-data-table__cell tl"
+                                                                         <td className="mdc-data-table__cell tl"
                                                                           scope="row" id="u0">{item.email}
-                                                                         </th>
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl">
+                                                                           <button className="btn btn-primary mr3">
+                                                                              Update
+                                                                           </button>
+                                                                           <button
+                                                                              className="btn btn-outline-primary btn-sm mr3">
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px'}}>edit</i>
+                                                                              Edit
+                                                                           </button>
+                                                                           <button
+                                                                              className="btn btn-outline-danger btn-sm">
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px', color: 'var(--danger)'}}>
+                                                                                  delete</i>
+                                                                              DELETE
+                                                                           </button>
+                                                                         </td>
                                                                      </tr>
                                                                 })}
                                                               </tbody>
@@ -149,16 +172,6 @@ class ManageUsers extends Component {
                                                        </div>
                                                     </div>
                                                 </div>
-                                                            <div className="tr mv3">
-                                                             <button className="btn btn-outline-primary btn-sm mr3">
-                                                               <i className="material-icons-outlined" style={{fontSize: '16px'}}>block</i>
-                                                                  DISABLE
-                                                             </button>
-                                                             <button className="btn btn-outline-danger btn-sm">
-                                                               <i className="material-icons-outlined" style={{fontSize: '16px', color: 'var(--danger)'}}>delete</i>
-                                                                  DELETE
-                                                             </button>
-                                                            </div>
                                                          </div>}
 
                                                 </div>

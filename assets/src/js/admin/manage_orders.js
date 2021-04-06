@@ -5,6 +5,8 @@ import SmartFooter from "../components/Footers/smart-footer";
 import {getAllOrders} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
+import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+import NewSelect from "../reusable-components/new-select";
 
 class ManageOrders extends Component {
 
@@ -38,9 +40,19 @@ class ManageOrders extends Component {
     }
 
     render() {
-        const headers = [{name: 'Product'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'}, {name: 'Address'},
-            {name: 'Status'}];
+
+        const headers = [{name: 'Sr. No.'}, {name: 'Order No.'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'},
+           {name: 'Email'},  {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
+
         const {orders} = this.props;
+
+        const data = [
+            {"name": "Shipped"},
+            {"name": "Pending"},
+            {"name": "Delivered"},
+            {"name": "Cancelled"},
+        ];
+
         return (
             <Fragment>
                 <div className="page my-page">
@@ -90,6 +102,7 @@ class ManageOrders extends Component {
                                                     : "Orders Management" : "Help & Support"}</h3>
                                             </div>
                                             {/*{/ Table /}*/}
+
                                             {this.state.Orders &&
                                             <div>
                                                 <div className="tc">
@@ -101,11 +114,112 @@ class ManageOrders extends Component {
                                                             Orders management made easy. <br/>
                                                             All Orders at the store will be shown here.
                                                         </p>
-                                                    </div> : <CustomTable headers={headers}
-                                                                          data={orders}
-                                                                          onEdit={this.onEdit}
-                                                                          onChange={this.handleRadioButton}
-                                                                          id={this.state.id}/>}
+                                                    </div> :
+                                                        // <CustomTable headers={headers}
+                                                        //                   data={orders}
+                                                        //                   onEdit={this.onEdit}
+                                                        //                   onChange={this.handleRadioButton}
+                                                        //                   id={this.state.id}/>
+
+                                                        <div className="custom-datatable overflow-x-auto overflow-y-hidden">
+                                                       <div className="mdc-data-table hide-scrollbar"
+                                                            data-mdc-auto-init="MDCDataTable">
+                                                            <div className="mdc-data-table__table-container">
+                                                             <table className="mdc-data-table__table" aria-label="Dessert calories">
+                                                               <thead>
+                                                                <tr className="mdc-data-table__header-row">
+                                                                 {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"*/}
+                                                                 {/* role="columnheader" scope="col">*/}
+                                                                 {/*</th>*/}
+                                                                  {headers.map((h, index) => {
+                                                                    return <th key={index} className="mdc-data-table__header-cell"
+                                                                        role="columnheader" scope="col">{h.name}
+                                                                    </th>
+                                                                  })}
+                                                                </tr>
+
+                                                               </thead>
+                                                               <tbody className="mdc-data-table__content">
+                                                                {orders.map((item, index) => {
+                                                                  return <tr key={index} data-row-id="u0"
+                                                                       className="mdc-data-table__row transparent">
+                                                                       {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
+                                                                       {/*  <RadioGroup*/}
+                                                                       {/*    value={this.state.id}*/}
+                                                                       {/*    onChange={this.handleRadioButton}>*/}
+                                                                       {/*    <FormControlLabel value={item.id || item.order_key}*/}
+                                                                       {/*      control={<Radio/>}*/}
+                                                                       {/*     // label={item.id || item.order_key}*/}
+                                                                       {/*    />*/}
+                                                                       {/*  </RadioGroup>*/}
+                                                                       {/*</td>*/}
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{index}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{item.order_number}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
+                                                                          scope="row" id="u0">{item.total_price}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
+                                                                          scope="row" id="u0">{item.product_quantity}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{item.user}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">abcd@gmail.com
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">03000000000
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{item.address}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">
+                                                                             <NewSelect data={data}/>
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl">
+                                                                           <button className="btn btn-primary mr3">
+                                                                              Update
+                                                                           </button>
+                                                                           <button
+                                                                              className="btn btn-outline-primary btn-sm mr3">
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px'}}>edit</i>
+                                                                              Edit
+                                                                           </button>
+                                                                           <button
+                                                                              className="btn btn-outline-danger btn-sm">
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px', color: 'var(--danger)'}}>
+                                                                                  delete</i>
+                                                                              DELETE
+                                                                           </button>
+                                                                         </td>
+
+                                                                     </tr>
+                                                                })}
+                                                              </tbody>
+                                                             </table>
+                                                       </div>
+                                                    </div>
+                                                </div>
+
+
+                                                    }
 
 
                                                 </div>
