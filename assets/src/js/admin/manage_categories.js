@@ -3,11 +3,9 @@ import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import {getAllCategories, editCategory} from "../actions/admin";
 import {connect} from 'react-redux';
-import CustomTable from "../reusable-components/custom-table";
 import SmartFooter from "../components/Footers/smart-footer";
 
 class ManageCategory extends Component {
-
     state = {
         id: null,
         Categories: true,
@@ -19,11 +17,15 @@ class ManageCategory extends Component {
         this.props.getAllCategories();
     }
 
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.props.getAllCategories();
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.id !== this.state.id) {
+            this.props.getAllCategories()
+            this.setState({id: null})
+        }
+    }
 
     handleTab = (e) => {
+        e.preventDefault()
         let name = e.target.text
         if (name === "Categories") {
             this.setState({Categories: true, HelpSupport: false})
@@ -36,15 +38,14 @@ class ManageCategory extends Component {
         event.preventDefault();
         return this.props.history.push(`/admin/categories/${categoryId}`)
     }
+
     handleDisable = (event, category) => {
-        debugger
         event.preventDefault();
-        console.log(category)
         let name = category.name
         let id = category.id
         let status = category.status === 1 ? 0 : 1
         this.props.editCategory(id, name, status, this.props)
-        this.props.getAllCategories();
+        this.setState({id: id})
     }
 
     render() {
@@ -138,9 +139,10 @@ class ManageCategory extends Component {
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody className="mdc-data-table__content">
-                                                                        {categories.map(category => <tr data-row-id="u0"
-                                                                                                        className="mdc-data-table__row">
-                                                                            <th className="mdc-data-table__cell tl">1</th>
+                                                                        {categories.map((category, index) => <tr
+                                                                            data-row-id="u0"
+                                                                            className="mdc-data-table__row">
+                                                                            <th className="mdc-data-table__cell tl">{index + 1}</th>
                                                                             <th className="mdc-data-table__cell tl"
                                                                                 scope="row" id="u0">{category.name}
                                                                             </th>

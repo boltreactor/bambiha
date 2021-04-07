@@ -13,8 +13,6 @@ import Select from "../reusable-components/select";
 class NewProduct extends Form {
     constructor(props) {
         super(props);
-        this.props.getProduct(this.props.match.params.id)
-        this.props.getAllCategories()
         this.state = {
             errors: {},
             data: {
@@ -26,15 +24,20 @@ class NewProduct extends Form {
                 status: 1,
                 images: []
             },
-            newProduct: {}
+            product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        this.props.match.params.id && nextProps.product && this.setState({newProduct: nextProps.product})
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     this.props.match.params.id && nextProps.product && this.setState({newProduct: nextProps.product})
+    //
+    // }
 
+    componentDidMount() {
+        this.props.getProduct(this.props.match.params.id)
+        this.props.getAllCategories()
     }
 
     handleDeleteImageState = (event, image) => {
@@ -69,7 +72,7 @@ class NewProduct extends Form {
 
 
     doSubmit = () => {
-
+        debugger
         let fd = new FormData();
         let category_key = this.state.data.category_key
         for (let i = 0; i < this.state.data.images.length; i++) {
@@ -79,14 +82,16 @@ class NewProduct extends Form {
         fd.append("description", this.state.data.desc);
         fd.append("quantity", this.state.data.quantity);
         fd.append("price", this.state.data.price);
+        fd.append("status", this.state.data.status);
         fd.append("category_key", `${this.props.categories.find(function (category) {
             return category.name === category_key;
         }).id}`);
+        debugger
         this.props.match.params.id && fd.append("product_key", this.props.match.params.id);
         // console.log(this.props.categories.find(function (category) {
         //     return category.name === category_key;
         // }).id)
-        this.props.match.params.id ? this.props.editProduct(fd, this.props):this.props.addProduct(fd, this.props)
+        this.props.match.params.id ? this.props.editProduct(fd, this.props) : this.props.addProduct(fd, this.props)
     }
 
 
@@ -167,6 +172,7 @@ class NewProduct extends Form {
 
     render() {
         // console.log(this.state.newProduct)
+        const {product_id} = this.state
         return (
             <Fragment>
                 <div className="page my-page">
@@ -183,7 +189,7 @@ class NewProduct extends Form {
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="title" label="Product Title"
-                                                          value={this.state.data.title === "" ? this.props.match.params.id && this.props.product ? this.props.product.title : "" : this.state.data.title}
+                                                          value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.title : "" : this.state.data.title}
                                                           placeholder="Enter product title"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.title}/>
@@ -195,14 +201,10 @@ class NewProduct extends Form {
                                             name="category_key"
                                             options={this.getCategoriesList()}
                                             onChange={this.handleCategoryChange}
-                                            value={this.state.data.category_key === "" ? this.props.match.params.id && this.props.product ? this.props.product.category_key : "" : this.state.data.category_key}
+                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
                                             error={this.state.errors.category_key}
                                         />
-                                        {/*<NoLabelTextfield name="category" label="Product Category"*/}
-                                        {/*                  value={this.state.data.category}*/}
-                                        {/*                  placeholder="Select product category"*/}
-                                        {/*                  onChange={this.handleChange}*/}
-                                        {/*                  error={this.state.errors.category}/>*/}
+
                                     </div>
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
@@ -264,12 +266,34 @@ class NewProduct extends Form {
                                                         </div>
                                                     </div>
                                                 }) : null}
+                                                {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product.images.map((image, index) => {
+                                                    return <div
+                                                        className="photos__cell"
+                                                        key={index}>
+                                                        <img
+                                                            src={image}
+                                                            style={{
+                                                                minHeight: '124px',
+                                                                width: '100%',
+                                                                height: '135px'
+                                                            }} alt=""/>
+                                                        <div className="photos__menu">
+                                                            <button
+                                                                className="button2 button2--icon"
+                                                                onClick={(e) => this.handleDeleteImageState(e, image)}>
+                                                                <i className="material-icons"
+                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                }) : null}
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col s12 mt3 mb3">
 
-                                        <button className="btn btn-primary btn-lg" disabled={this.validateProduct()}
+                                        <button className="btn btn-primary btn-lg"
+                                            // disabled={this.validateProduct()}
                                                 onClick={event => this.handleSubmitProduct(event)}
                                         >
                                             ADD

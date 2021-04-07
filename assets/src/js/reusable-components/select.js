@@ -3,12 +3,8 @@ import Select from "@material-ui/core/Select";
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from "@material-ui/core/InputLabel";
-
 class SelectText extends Component {
-
-
     render() {
-
         const genders = [
             {"value": "Male"},
             {"value": "Female"},
@@ -32,7 +28,6 @@ class SelectText extends Component {
             {value: "German"},
             {value: "Italian"}
         ];
-
         const ITEM_HEIGHT = 48;
         const ITEM_PADDING_TOP = 8;
         const MenuProps = {
@@ -43,8 +38,8 @@ class SelectText extends Component {
                 },
             },
         };
-        debugger
         const {name, type, label, onChange, error, onClick, options, value} = this.props;
+        debugger
         return (
             <Fragment>
                 <FormControl variant="filled" fullWidth>
@@ -67,7 +62,6 @@ class SelectText extends Component {
                         ) : null}
                         MenuProps={MenuProps}
                     >
-
                         {name === "gender" && genders.map((gender, id) => {
                             return <MenuItem key={id} value={gender.value}>{gender.value}</MenuItem>
                         }) ||
@@ -86,7 +80,6 @@ class SelectText extends Component {
                             name === "category_key" && options.map((status, id) => {
                             return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
                         })}
-
                     </Select>
                     {error && <div className="mdc-text-field-helper-line">
                         {error}
@@ -95,9 +88,7 @@ class SelectText extends Component {
                     </div>}
                 </FormControl>
             </Fragment>
-
         );
     }
 }
-
 export default SelectText;

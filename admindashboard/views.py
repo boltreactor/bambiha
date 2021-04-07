@@ -110,7 +110,7 @@ def EditProduct(request):
     product = Products.edit_product(request)
     if product:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': to_json_ndb(product)
+            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': product
         }, status.HTTP_200_OK)
 
 
@@ -118,7 +118,7 @@ def EditProduct(request):
 def GetProduct(request):
     product = Products.get_product(request)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Product Added", 'product': to_json_ndb(product)
+        'status': status.HTTP_200_OK, 'message': "Product Added", 'product': product
     }, status.HTTP_200_OK)
 
 
@@ -137,7 +137,6 @@ def DeleteProduct(request):
 @api_view(['GET'])
 def ViewOrders(request):
     orders = Order.get_orders(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Orders by users loaded!", 'orders': orders
     }, status.HTTP_200_OK)
@@ -146,7 +145,6 @@ def ViewOrders(request):
 @api_view(['GET'])
 def ViewOrderItems(request):
     items = OrderItems.get_order_items(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Order Items", 'orders': items
     }, status.HTTP_200_OK)
@@ -156,9 +154,20 @@ def ViewOrderItems(request):
 @api_view(['GET', 'POST'])
 def UpdateOrderStatus(request):
     Order.update_status(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Order Status Updated"
+    }, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def UpdateOrder(request):
+    order = Order.update_order(request)
+    if order:
+        return Response({
+            'status': status.HTTP_200_OK, 'message': "Order Updated", 'order': to_json_ndb(order)
+        }, status.HTTP_200_OK)
+    return Response({
+        'status': status.HTTP_200_OK, 'message': "Order not found",
     }, status.HTTP_200_OK)
 
 
@@ -167,8 +176,8 @@ def DeleteOrder(request):
     order = Order.delete_order(request)
     if order:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Category Deleted",
+            'status': status.HTTP_200_OK, 'message': "Order Deleted",
         }, status.HTTP_200_OK)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Category not found",
+        'status': status.HTTP_200_OK, 'message': "Order not found",
     }, status.HTTP_200_OK)
