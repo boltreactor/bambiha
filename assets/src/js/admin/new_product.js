@@ -56,7 +56,7 @@ class NewProduct extends Form {
     }
     handleCategoryChange = (event) => {
         event.preventDefault();
-        debugger
+
         const errors = {...this.state.errors};
         name = event.target.name
         const obj = {[name]: event.target.value};

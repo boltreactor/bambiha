@@ -37,6 +37,12 @@ class Navigation extends Component {
                                 <span>Categories</span>
                             </Link>
                         </li>
+                        <li className={this.props.location.pathname === ("/admin/brand-folder") ? "item item-active" : "item"}>
+                            <Link className="db text-decoration-none" to="/admin/brand-folder">
+                               <i className="material-icons-outlined v-mid mr2">tune</i>
+                                <span>Brand Folder</span>
+                            </Link>
+                        </li>
                         {/*<li className="item">*/}
                         {/*    <Link className="db text-decoration-none" to="#">*/}
                         {/*        <i className="material-icons-outlined v-mid mr2">live_help</i>*/}

@@ -135,7 +135,7 @@ class ManageUsers extends Component {
                                                         //                   data={users}
                                                         //                   onChange={this.handleRadioButton}
                                                         //                   id={this.state.id}/>
-                                                        <div>
+
                                                           <div className="custom-datatable overflow-x-auto overflow-y-hidden">
                                                        <div className="mdc-data-table hide-scrollbar"
                                                             data-mdc-auto-init="MDCDataTable">
@@ -205,7 +205,7 @@ class ManageUsers extends Component {
                                                        </div>
                                                     </div>
                                                 </div>
-                                                         </div>}
+                                                         }
 
                                                 </div>
                                             </div>}
