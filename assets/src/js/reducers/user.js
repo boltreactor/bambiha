@@ -13,7 +13,8 @@ import {
   IMAGES_VIEW,
   CURRENT_LISTING,
   CART,
-  USER_ORDERS, HEADER_CATEGORIES, USER_PRODUCTS
+  USER_ORDERS, HEADER_CATEGORIES, USER_PRODUCTS,
+  FAVORITES
   // STATE_IMAGES,
 } from '../actions/types';
 import React from 'react';
@@ -28,6 +29,7 @@ export const initialState = {
   cart: [],
   orders: [],
   products: [],
+  favorites: [],
   currentListing: null,
   listing: {
     title: "",
@@ -134,6 +136,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 products: action.products
+            }
+    }
+
+    case FAVORITES: {
+            return {
+                ...state,
+                favorites: action.favorites
             }
     }
 

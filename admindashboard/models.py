@@ -22,8 +22,7 @@ class Category(ndb.Model):
     @classmethod
     def get_categories(cls, request):
         ancestor_key = ndb.Key("Category", "category")
-        cat = Category.query(Category.user_key == request.session.get('user'), ancestor=ancestor_key).order(
-            -cls.date).fetch()
+        cat = Category.query().order(-cls.date).fetch()
         return cat
 
     @classmethod
@@ -56,6 +55,7 @@ class Products(ndb.Model):
     price = ndb.IntegerProperty()
     images = ndb.StringProperty(repeated=True)
     date = ndb.DateTimeProperty(auto_now=True)
+    product_status = ndb.IntegerProperty(default=1)
 
     @classmethod
     def get_with_key(cls, key):
@@ -93,34 +93,12 @@ class Products(ndb.Model):
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
         all_products = []
-        products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
+        products = cls.query().order(-cls.date).fetch()
         for p in products:
             all_products.append({
                 "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
                 "date": p.date,
-                "description": p.description,
-                "images": p.images,
-                "price": p.price,
-                "quantity": p.quantity,
-                "title": p.title,
-                "id": p.key.urlsafe()
-            })
-        return all_products
-
-    @classmethod
-    def get_new_products(cls, request):
-        ancestor_key = ndb.Key("Product", "product")
-        all_products = []
-        if request.query_params.get('category_key', None):
-            products = cls.query(cls.user_key == request.session.get('user'),
-                                 cls.category_key == request.query_params['category_key'],
-                                 ancestor=ancestor_key).fetch()
-        else:
-            products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
-        for p in products:
-            all_products.append({
-                "category": cls.get_with_key(p.category_key).name,
-                "date": p.date,
+                "product_status": p.product_status,
                 "description": p.description,
                 "images": p.images,
                 "price": p.price,
@@ -138,6 +116,7 @@ class Products(ndb.Model):
         product.category_key = request.POST.get('category_key')
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
+        product.product_status = int(request.POST.get('status'))
 
         files = request.FILES.getlist('images')
         if files:
@@ -162,6 +141,7 @@ class Products(ndb.Model):
             "images": product.images,
             "price": product.price,
             "quantity": product.quantity,
+            "product_status": product.product_status,
             "title": product.title,
             "id": product.key.urlsafe()
         }]
@@ -178,6 +158,7 @@ class Products(ndb.Model):
             "price": product.price,
             "quantity": product.quantity,
             "title": product.title,
+            "product_status": product.product_status,
             "id": product.key.urlsafe()
         }
         return p

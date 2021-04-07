@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CART, HEADER_CATEGORIES, USER_ORDERS, USER_PRODUCTS} from "./types";
+import {CART, FAVORITES, HEADER_CATEGORIES, USER_ORDERS, USER_PRODUCTS} from "./types";
 import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
@@ -37,19 +37,6 @@ export const viewCart = () => dispatch => {
         });
 };
 
-// export const checkout = (quantity, id, props) => dispatch => {
-//     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-//      let bodyFormData = new FormData();
-//       bodyFormData.append('product_key', id);
-//       bodyFormData.append('quantity', quantity);
-//     axios.post('/user/checkout/', bodyFormData, {headers: Header})
-//         .then(res => {
-//              props.history.push('/')
-//
-//         }).catch(err => {
-//
-//         })
-// };
 
 export const viewOrders = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -61,10 +48,11 @@ export const viewOrders = () => dispatch => {
             });
         });
 };
-export const checkout = (props, address) => dispatch => {
+export const checkout = (props, address, phone) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('address', address);
+    bodyFormData.append('phone_number', phone);
     axios.post('/user/checkout/', bodyFormData, {headers: Header})
         .then(res => {
             props.history.push('/orders')
@@ -96,6 +84,30 @@ export const getUserProducts = (id) => dispatch => {
             dispatch({
                 type: USER_PRODUCTS,
                 products: res.data.products
+            });
+        });
+};
+
+export const manageFavorite = (id, props) => dispatch => {
+
+    let bodyFormData = new FormData();
+    bodyFormData.append('product_key', id);
+    axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
+        .then(res => {
+            props.history.push('/favorites')
+
+        }).catch(err => {
+
+    })
+};
+
+export const getFavorite = () => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.get('/user/getfavorites/', {headers: Header})
+        .then(res => {
+            dispatch({
+                type: FAVORITES,
+                favorites: res.data.favorites
             });
         });
 };

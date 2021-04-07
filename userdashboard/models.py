@@ -1,10 +1,6 @@
-from django.db import models
 from google.cloud import ndb
-from algoliasearch import index, client, algoliasearch
-import boto3
 
 
-# Create your models here.
 class Cart(ndb.Model):
     user_key = ndb.KeyProperty()
     product_key = ndb.KeyProperty()
@@ -23,8 +19,7 @@ class Cart(ndb.Model):
             cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
                       cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get().key.delete()
             return True
-        cart_check = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
-                               cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+        cart_check = cls.query(cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
         if cart_check:
             cart_check.quantity = int(request.POST.get('quantity'))
             cart_check.put()
@@ -59,6 +54,7 @@ class Order(ndb.Model):
     user_key = ndb.KeyProperty()
     order_key = ndb.IntegerProperty()
     address = ndb.StringProperty()
+    phone_number = ndb.StringProperty()
     status = ndb.IntegerProperty(default=0)
     date = ndb.DateTimeProperty(auto_now=True)
 
@@ -73,6 +69,7 @@ class Order(ndb.Model):
                       user_key=cls.get_with_key(request.session.get('user')).key,
                       order_key=cls.get_with_key(request.session.get('user')).key.id(),
                       address=request.POST.get('address'),
+                      phone_number=request.POST.get('phone_number')
                       # store_user_key=ndb.Key(urlsafe=request.POST.get('store_user_key'))
                       )
         order.put()
@@ -84,29 +81,85 @@ class Order(ndb.Model):
         orders = cls.query().fetch()
         all_orders = []
         for order in orders:
+            order_items = OrderItems.query(
+                OrderItems.order_key == order.key)
+            all_items = []
+            total = 0
+            for item in order_items:
+                total = total + item.price
+                all_items.append({
+                    "price": item.price,
+                    "title": item.product_key.get().title,
+                    "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                })
+
+            user = order.user_key.get()
             all_orders.append({
                 "order_number": order.order_key,
-                "user": order.user_key.get().first_name if order.user_key.get() else None,
+                "user": {
+                    "name": user.first_name + " " + user.last_name,
+                    "email": user.email,
+                },
                 "status": order.status,
+                "address": order.address,
+                "total_price": total,
+                "phone_number": order.phone_number,
+                'product_quantity': len(all_items),
+                'products': all_items,
                 "order_key": order.key.urlsafe(),
                 "date_time": order.date
             })
-
         return all_orders
+
+    @classmethod
+    def delete_order(cls, request):
+        order = ndb.Key(urlsafe=request.POST.get('order_key')).get()
+        if order:
+            order.key.delete()
+            return True
+        return False
+
+    @classmethod
+    def update_order(cls, request):
+        order = ndb.Key(urlsafe=request.POST.get('order_key')).get()
+        order.address = request.POST.get('address'),
+        order.phone_number = request.POST.get('phone_number')
+        order.put()
+        return order
 
     @classmethod
     def get_user_orders(cls, request):
         orders = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
         all_orders = []
         for order in orders:
-            current_order = {
-                "order_key": order.order_key,
-                "user": order.user_key.get().first_name,
+            order_items = OrderItems.query(
+                OrderItems.order_key == order.key)
+            all_items = []
+            total = 0
+            for item in order_items:
+                total = total + item.price
+                all_items.append({
+                    "price": item.price,
+                    "title": item.product_key.get().title,
+                    "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                })
+
+            user = order.user_key.get()
+            all_orders.append({
+                "order_number": order.order_key,
+                "user": {
+                    "name": user.first_name + " " + user.last_name,
+                    "email": user.email,
+                },
                 "status": order.status,
+                "address": order.address,
+                "total_price": total,
+                "phone_number": order.phone_number,
+                'product_quantity': len(all_items),
+                'products': all_items,
+                "order_key": order.key.urlsafe(),
                 "date_time": order.date
-                # "order": order.key.urlsafe().decode
-            }
-            all_orders.append(current_order)
+            })
 
         return all_orders
 
@@ -144,7 +197,8 @@ class OrderItems(ndb.Model):
 
     @classmethod
     def get_order_items(cls, request):
-        order_items = cls.query(cls.order_key == cls.get_with_key(request.POST.get('order_key')).key)
+        order_items = OrderItems.query(
+            OrderItems.order_key == OrderItems.get_with_key(request.POST.get('order_key')).key)
         all_items = []
         for item in order_items:
             all_items.append({

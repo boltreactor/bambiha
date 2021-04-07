@@ -21,7 +21,7 @@ class Checkout extends Component {
         this.setState({[input.name]: input.value})
     }
     handleCheckout = () => {
-        this.props.checkout(this.props, this.state.address)
+        this.props.checkout(this.props, this.state.address, this.state.phone)
     }
 
     render() {

@@ -100,30 +100,30 @@ class Orders extends Component {
                                                      <section className="cart-or-bag mv4">
                                                          {orders && orders.map(item => {
                                                                return <div key={item.order_key} className="cart-item ma0">
-                                                            <div key={item.order_key} className="flex mb3">
+                                                            <div  className="flex mb3">
                                                           <div className="mr2 mb3">
                                                             <Link to="#" className="link-mute">
-                                                             <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
+                                                             <img src={item.products[0]? item.products[0].image : "/static/img-noise.png"} alt="" />
                                                             </Link>
                                                           </div>
                                                         <div className="flex-grow-1 pa2">
                                                          <div className="description">
                                                            <div className="flex flex-wrap mb2">
                                                              <div className="flex-grow-1 mr2">
-                                                                <h4>Nike Air Max 270</h4>
+                                                                <h4>{item.products[0].title}</h4>
                                                              </div>
                                                            <div>
-                                                             <h6>$150</h6>
+                                                             <h6>{item.total_price}</h6>
                                                            </div>
                                                          </div>
-                                                          <p className="ma0" style={{fontSize: '16px'}}>
-                                                             Men's Shoe
-                                                          </p>
+                                                          {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
+                                                          {/*   Men's Shoe*/}
+                                                          {/*</p>*/}
                                                      </div>
-                                                       <div className="actions">
-                                                          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>
-                                                          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
-                                                     </div>
+                                                     {/*  <div className="actions">*/}
+                                                     {/*     <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>*/}
+                                                     {/*     <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>*/}
+                                                     {/*</div>*/}
                                                      </div>
                                                  </div>
 
@@ -148,7 +148,7 @@ class Orders extends Component {
                                         <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
                                             <div className="tc">
                                                 <header className="mt3 my-page">
-                                                    <h3 className="bold">Help &amp; Support</h3>
+                                                    <h3 className="bold">Help & Support</h3>
                                                 </header>
                                                 <p>
                                                     24/7 chat support — message us at anytime!

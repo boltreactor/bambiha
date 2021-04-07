@@ -53,12 +53,12 @@ class DrawerAdminDashboard extends Component {
                       <span>Categories</span>
                     </Link>
                   </li>
-                  <li className="item">
-                    <Link className="db text-decoration-none" to="#">
-                      <i className="material-icons-outlined v-mid mr2">live_help</i>
-                      <span>Help &amp; Support</span>
-                    </Link>
-                  </li>
+                  {/*<li className="item">*/}
+                  {/*  <Link className="db text-decoration-none" to="#">*/}
+                  {/*    <i className="material-icons-outlined v-mid mr2">live_help</i>*/}
+                  {/*    <span>Help &amp; Support</span>*/}
+                  {/*  </Link>*/}
+                  {/*</li>*/}
                 </ul>
               </div>
             </aside>
