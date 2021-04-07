@@ -48,7 +48,7 @@ class ManageCategory extends Component {
     }
 
     render() {
-        const headers = [{name: 'Category name'}, {name: 'Date and Time'}, {name: "status"}];
+        const headers = [{name: 'Category name'}, {name: 'Date and Time'}, {name: "Status"}];
         const {categories} = this.props;
         return (
             <Fragment>
