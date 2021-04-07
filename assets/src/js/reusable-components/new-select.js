@@ -6,15 +6,15 @@ class NewSelect extends Component {
 
 
     render() {
-         const {onChange, data} = this.props
+         const {onChange, data, value} = this.props
         return (
              <span>
                  <select name="size" id="size"
                          onChange={onChange}
+                         value={value}
                  >
-
-                     {data.map((status, index) => {
-                         return <option key={index} value={status.name}>{status.name}</option>
+                     {data.map((item, index) => {
+                         return <option key={index} value={item.status}>{item.name}</option>
                      })}
 
                  </select>

@@ -2,9 +2,10 @@ import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {addCategory, editCategory, getAllUsers, getCategory} from "../actions/admin";
+import { getAllUsers, disableUser} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
+import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 
 
 class ManageUsers extends Component {
@@ -12,7 +13,8 @@ class ManageUsers extends Component {
     state = {
         Users: true,
         HelpSupport: false,
-        id: null
+        id: null,
+        account_status: 1
     }
 
     handleTab = (e) => {
@@ -35,8 +37,17 @@ class ManageUsers extends Component {
 
     }
 
+    handleDisable = (event, id, status) => {
+        event.preventDefault();
+        let account_status;
+        status ? account_status = 0 : account_status = 1
+        this.props.disableUser(id, account_status, this.props);
+        this.setState({account_status: account_status})
+
+    }
+
     render() {
-        const headers = [{name: 'User Names'}];
+        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}, {name: 'Action'}];
         const {users} = this.props;
         return (
             <Fragment>
@@ -95,12 +106,82 @@ class ManageUsers extends Component {
                                                             <br/>
                                                             All Users at the store will be shown here.
                                                         </p>
-                                                    </div> : <CustomTable headers={headers}
-                                                                          data={users}
-                                                        // onEdit={this.onEdit}
-                                                                          onChange={this.handleRadioButton}
-                                                                          id={this.state.id}/>}
+                                                    </div> :
+                                                        // <CustomTable headers={headers}
+                                                        //                   data={users}
+                                                        //                   onChange={this.handleRadioButton}
+                                                        //                   id={this.state.id}/>
+                                                        <div>
+                                                          <div className="custom-datatable overflow-x-auto overflow-y-hidden">
+                                                       <div className="mdc-data-table hide-scrollbar"
+                                                            data-mdc-auto-init="MDCDataTable">
+                                                           <div className="mdc-data-table__table-container">
+                                                             <table className="mdc-data-table__table" aria-label="Dessert calories">
+                                                               <thead>
+                                                                <tr className="mdc-data-table__header-row">
+                                                                 {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"*/}
+                                                                 {/* role="columnheader" scope="col">*/}
+                                                                 {/*</th>*/}
+                                                                  {headers.map((h, index) => {
+                                                                    return <th key={index} className="mdc-data-table__header-cell"
+                                                                        role="columnheader" scope="col">{h.name}
+                                                                    </th>
+                                                                  })}
+                                                                </tr>
 
+                                                               </thead>
+                                                               <tbody className="mdc-data-table__content">
+                                                                {users.map((item, index) => {
+                                                                  return <tr key={item.id} data-row-id="u0"
+                                                                       className="mdc-data-table__row transparent">
+                                                                       {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
+                                                                       {/*  <RadioGroup*/}
+                                                                       {/*    value={this.state.id}*/}
+                                                                       {/*    onChange={this.handleRadioButton}>*/}
+                                                                       {/*    <FormControlLabel value={item.id || item.order_key}*/}
+                                                                       {/*      control={<Radio/>}*/}
+                                                                       {/*     // label={item.id || item.order_key}*/}
+                                                                       {/*    />*/}
+                                                                       {/*  </RadioGroup>*/}
+                                                                       {/*</td>*/}
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{index}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{item.first_name}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl"
+                                                                          scope="row" id="u0">{item.email}
+                                                                         </td>
+
+                                                                         <td className="mdc-data-table__cell tl">
+                                                                           <button
+                                                                              className="btn btn-outline-primary btn-sm mr3"
+                                                                              onClick={(e) => {this.handleDisable(e, item.id, item.account_status)}}
+                                                                           >
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px'}}>block</i>
+                                                                               {item.account_status? "DISABLE": "ENABLE"}
+                                                                           </button>
+                                                                           <button
+                                                                              className="btn btn-outline-danger btn-sm">
+                                                                              <i className="material-icons-outlined"
+                                                                                 style={{fontSize: '16px', color: 'var(--danger)'}}>
+                                                                                  delete</i>
+                                                                              DELETE
+                                                                           </button>
+                                                                         </td>
+                                                                     </tr>
+                                                                })}
+                                                              </tbody>
+                                                             </table>
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                                         </div>}
 
                                                 </div>
                                             </div>}
@@ -140,4 +221,4 @@ class ManageUsers extends Component {
 const mapStateToProps = (state) => ({
     users: state.admin.users
 })
-export default connect(mapStateToProps, {getAllUsers})(ManageUsers);
+export default connect(mapStateToProps, {getAllUsers, disableUser})(ManageUsers);

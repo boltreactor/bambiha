@@ -103,27 +103,27 @@ class Orders extends Component {
                                                             <div  className="flex mb3">
                                                           <div className="mr2 mb3">
                                                             <Link to="#" className="link-mute">
-                                                             <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
+                                                             <img src={item.products[0]? item.products[0].image : "/static/img-noise.png"} alt="" />
                                                             </Link>
                                                           </div>
                                                         <div className="flex-grow-1 pa2">
                                                          <div className="description">
                                                            <div className="flex flex-wrap mb2">
                                                              <div className="flex-grow-1 mr2">
-                                                                <h4>Nike Air Max 270</h4>
+                                                                <h4>{item.products[0].title}</h4>
                                                              </div>
                                                            <div>
-                                                             <h6>$150</h6>
+                                                             <h6>{item.total_price}</h6>
                                                            </div>
                                                          </div>
-                                                          <p className="ma0" style={{fontSize: '16px'}}>
-                                                             Men's Shoe
-                                                          </p>
+                                                          {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
+                                                          {/*   Men's Shoe*/}
+                                                          {/*</p>*/}
                                                      </div>
-                                                       <div className="actions">
-                                                          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>
-                                                          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
-                                                     </div>
+                                                     {/*  <div className="actions">*/}
+                                                     {/*     <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>*/}
+                                                     {/*     <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>*/}
+                                                     {/*</div>*/}
                                                      </div>
                                                  </div>
 
