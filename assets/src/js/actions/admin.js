@@ -35,7 +35,7 @@ export const editCategory = (id, category, status, props) => dispatch => {
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
     bodyFormData.append('status', status);
-    debugger
+
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -94,7 +94,7 @@ export const getProduct = (id) => dispatch => {
 };
 
 export const delProduct = (id) => dispatch => {
-    debugger
+
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,

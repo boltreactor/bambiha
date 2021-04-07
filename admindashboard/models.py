@@ -155,11 +155,32 @@ class Products(ndb.Model):
                 product.put()
         cls.algolia_search(product, request)
         product.put()
-        return product
+        all_products = [{
+            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "date": product.date,
+            "description": product.description,
+            "images": product.images,
+            "price": product.price,
+            "quantity": product.quantity,
+            "title": product.title,
+            "id": product.key.urlsafe()
+        }]
+        return all_products
 
     @classmethod
     def get_product(cls, request):
-        return ndb.Key(urlsafe=request.query_params.get('product_key')).get()
+        product = ndb.Key(urlsafe=request.query_params.get('product_key')).get()
+        p = {
+            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "date": product.date,
+            "description": product.description,
+            "images": product.images,
+            "price": product.price,
+            "quantity": product.quantity,
+            "title": product.title,
+            "id": product.key.urlsafe()
+        }
+        return p
 
     @classmethod
     def delete_product(cls, request):

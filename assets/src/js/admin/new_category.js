@@ -20,7 +20,7 @@ class NewCategory extends Component {
 
     handleStatus = (event) => {
         event.preventDefault()
-        debugger
+
         this.setState({selected: event.target.value})
     }
 

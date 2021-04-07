@@ -118,9 +118,8 @@ def EditProduct(request):
 def GetProduct(request):
     product = Products.get_product(request)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Product Added", 'product': to_json_ndb(product)
+        'status': status.HTTP_200_OK, 'message': "Product Added", 'product': product
     }, status.HTTP_200_OK)
-
 
 @api_view(['GET'])
 def DeleteProduct(request):

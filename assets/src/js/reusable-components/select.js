@@ -43,8 +43,9 @@ class SelectText extends Component {
                 },
             },
         };
-        debugger
+
         const {name, type, label, onChange, error, onClick, options, value} = this.props;
+        debugger
         return (
             <Fragment>
                 <FormControl variant="filled" fullWidth>

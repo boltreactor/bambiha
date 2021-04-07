@@ -36,7 +36,7 @@ class ManageProducts extends Component {
 
     handleRadioButton = (event) => {
         event.preventDefault();
-        debugger
+
         this.setState({id: event.target.value})
     };
     onEdit = (event) => {
@@ -44,7 +44,7 @@ class ManageProducts extends Component {
         return this.props.history.push(`/admin/products/${this.state.id}`)
     }
     handleDeleteProduct = () => {
-        debugger
+
         this.props.delProduct(this.state.id)
         this.setState({id:null})
     }

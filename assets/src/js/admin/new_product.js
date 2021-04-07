@@ -6,14 +6,15 @@ import {Label} from "@material-ui/icons";
 import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
-import {addProduct, editProduct, getProduct} from "../actions/admin";
+import {addProduct, editProduct, getProduct, getAllCategories} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
+import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
         super(props);
-        this.props.getProduct(this.props.match.params.id)
+
         this.state = {
             errors: {},
             data: {
@@ -24,17 +25,28 @@ class NewProduct extends Form {
                 price: "",
                 images: []
             },
+            updated:false,
             product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
     }
+    componentDidMount() {
+        debugger
+        this.props.getProduct(this.props.match.params.id)
+         this.props.getAllCategories()
+    }
+
 
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
         const data = {...this.state.data}
         data["images"] = this.state.data.images.filter(i => i !== image);
         this.setState({data})
+    };
+    handleDeleteImageProps = (event, image) => {
+        event.preventDefault();
+
     };
 
     handleImageClick = (event) => {
@@ -62,7 +74,7 @@ class NewProduct extends Form {
 
 
     doSubmit = () => {
-
+        if(this.props.match.params.id==='new'){
         let fd = new FormData();
         let category_key = this.state.data.category_key
         for (let i = 0; i < this.state.data.images.length; i++) {
@@ -75,10 +87,11 @@ class NewProduct extends Form {
         fd.append("category_key", `${this.props.categories.find(function (category) {
             return category.name === category_key;
         }).id}`);
-        console.log(this.props.categories.find(function (category) {
-            return category.name === category_key;
-        }).id)
-        this.props.addProduct(fd, this.props)
+
+        this.props.addProduct(fd, this.props)}
+        else{
+
+        }
     }
 
 
@@ -159,7 +172,6 @@ class NewProduct extends Form {
 
     render() {
         const {product_id} = this.state;
-        debugger
         return (
             <Fragment>
                 <div className="page my-page">
@@ -176,7 +188,7 @@ class NewProduct extends Form {
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="title" label="Product Title"
-                                                          value={product_id !== null ? this.props.product.title : this.state.data.title}
+                                                          value={product_id !== null && product_id!==undefined ? this.props.product.title : this.state.data.title}
                                                           placeholder="Enter product title"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.title}/>
@@ -188,28 +200,28 @@ class NewProduct extends Form {
                                             name="category_key"
                                             options={this.getCategoriesList()}
                                             onChange={this.handleCategoryChange}
-                                            value={product_id !== null ? this.props.product.category_key : this.state.data.category_key}
+                                            value={product_id !== null && product_id!==undefined ? this.props.product.category : this.state.data.category_key}
                                             error={this.state.errors.category_key}
                                         />
 
                                     </div>
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
-                                                          value={product_id !== null ? this.props.product.description : this.state.data.desc}
+                                                          value={product_id !== null && product_id!==undefined ? this.props.product.description : this.state.data.desc}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="quantity" label="Product Quantity"
-                                                          value={product_id !== null ? this.props.product.quantity : this.state.data.quantity}
+                                                          value={product_id !== null && product_id!==undefined ? this.props.product.quantity : this.state.data.quantity}
                                                           placeholder="Enter product quantity"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="price" label="Price"
-                                                          value={product_id !== null ? this.props.product.price : this.state.data.price}
+                                                          value={product_id !== null && product_id!==undefined ? this.props.product.price : this.state.data.price}
                                                           placeholder="Enter product price"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>
@@ -252,7 +264,7 @@ class NewProduct extends Form {
                                                         </div>
                                                     </div>
                                                 }) : null}
-                                                {product_id !== null && this.props.product.images.length > 0 ? this.props.product.images.map((image, index) => {
+                                                {product_id !== null && product_id!==undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product.images.map((image, index) => {
                                                     return <div
                                                         className="photos__cell"
                                                         key={index}>
@@ -307,4 +319,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default withRouter(connect(mapStateToProps, {addProduct, editProduct, getProduct})(NewProduct));
+export default withRouter(connect(mapStateToProps, {addProduct, editProduct, getProduct, getAllCategories})(NewProduct));

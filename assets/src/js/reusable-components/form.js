@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import Joi from 'joi-browser';
 
 class Form extends Component {
