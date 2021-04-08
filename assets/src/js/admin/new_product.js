@@ -103,7 +103,7 @@ class NewProduct extends Form {
         }
         console.log(this.props.delete_product_images.length)
         // for (let i = 0; i < this.props.delete_product_images.length; i++) {
-        //     debugger
+        //     
         //     // fd.append("delete_images", this.props.delete_product_images[i]
         //     //     // , this.props.delete_product_images[i].name
         //     // );
@@ -136,7 +136,7 @@ class NewProduct extends Form {
     schema = {
         title: Joi.string().required().error(errors => {
             return errors.map(error => {
-                debugger
+                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Title is required"};
@@ -145,7 +145,7 @@ class NewProduct extends Form {
         }),
         category_key: Joi.string().required().error(errors => {
             return errors.map(error => {
-                debugger
+                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Category is required"};
@@ -155,7 +155,7 @@ class NewProduct extends Form {
         desc: Joi.string().required().error(errors => {
 
             return errors.map(error => {
-                debugger
+                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Description is required"};
@@ -164,7 +164,7 @@ class NewProduct extends Form {
         }),
         quantity: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-                debugger
+                
                 switch (error.type) {
                     case "string.base":
                         return {message: "Quantity is required"};
@@ -178,7 +178,7 @@ class NewProduct extends Form {
             })
         }), price: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-                debugger
+                
                 switch (error.type) {
                     case "string.base":
                         return {message: "Price is required"};
