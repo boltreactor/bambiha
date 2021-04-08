@@ -7,7 +7,7 @@ import {
     DEL_PRODUCT,
     ADMIN_ORDERS,
     USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY
+    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES
 } from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
@@ -29,7 +29,6 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
-
 export const editCategory = (id, category, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
@@ -95,7 +94,6 @@ export const getProduct = (id) => dispatch => {
 };
 
 export const delProduct = (id) => dispatch => {
-
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -218,42 +216,4 @@ export const getAllUsers = () => dispatch => {
                 users: res.data.users,
             });
         });
-};
-
-export const deleteOrder = (id, props) => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let bodyFormData = new FormData();
-    bodyFormData.append('order_key', id);
-
-    axios.post(`/admin/deleteorder/`, bodyFormData, {headers: Header})
-        .then(res => {
-            props.history.push("/admin/orders")
-        })
-
-};
-
-export const disableUser = (id, status, props) => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let bodyFormData = new FormData();
-    bodyFormData.append('user_key', id);
-    bodyFormData.append('status', status);
-    axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
-        .then(res => {
-            debugger
-            getAllUsers()
-           // props.history.push("/admin/users")
-        })
-
-};
-
-export const updateOrderStatus = (id, status, props) => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let bodyFormData = new FormData();
-    bodyFormData.append('order_key', id);
-    bodyFormData.append('status', status);
-    axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
-        .then(res => {
-           props.history.push("/admin/orders")
-        })
-
 };

@@ -136,7 +136,6 @@ def DeleteProduct(request):
 @api_view(['GET'])
 def ViewOrders(request):
     orders = Order.get_orders(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Orders by users loaded!", 'orders': orders
     }, status.HTTP_200_OK)
@@ -145,7 +144,6 @@ def ViewOrders(request):
 @api_view(['GET'])
 def ViewOrderItems(request):
     items = OrderItems.get_order_items(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Order Items", 'orders': items
     }, status.HTTP_200_OK)
@@ -155,7 +153,6 @@ def ViewOrderItems(request):
 @api_view(['GET', 'POST'])
 def UpdateOrderStatus(request):
     Order.update_status(request)
-
     return Response({
         'status': status.HTTP_200_OK, 'message': "Order Status Updated"
     }, status.HTTP_200_OK)

@@ -112,10 +112,11 @@ class Form extends Component {
     validateProduct = () => {
 
         const options = {abortEarly: false};
+        console.log(this.state.data)
+        debugger
         const {error} = Joi.validate(this.state.data, this.schema, options);
         if (!error) return null;
         const errors = {};
-
         for (let item of error.details)
             if (errors[item.path[0]] === 'profile') {
                 errors[item.path[1]] = item.message;

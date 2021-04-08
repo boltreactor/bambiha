@@ -101,7 +101,6 @@ class Products(ndb.Model):
                     "name": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None
                 },
                 "date": p.date,
-                "product_status": p.product_status,
                 "description": p.description,
                 "images": p.images,
                 "price": p.price,
@@ -120,10 +119,17 @@ class Products(ndb.Model):
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
         product.product_status = int(request.POST.get('status'))
+        delete_images = request.POST.get('delete_images')
+        if delete_images:
+            images_to_delete = delete_images.split(",")
+            for image in images_to_delete:
+                product.images.remove(image)
+                product.put()
 
         files = request.FILES.getlist('images')
         if files:
-            product.images = []
+            if len(product.images) == 0:
+                product.images = []
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
@@ -202,7 +208,6 @@ class Products(ndb.Model):
         client = algoliasearch.Client("NAZL5D5N2H", "6b46e44428396a9af7db1a3ba527577e")
         index = client.init_index('search')
         results = index.search(request.GET.get('search'))
-
         for r in results["hits"]:
             all_products.append({
                 'title': r['title'],

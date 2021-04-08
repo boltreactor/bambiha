@@ -3,12 +3,8 @@ import Select from "@material-ui/core/Select";
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from "@material-ui/core/InputLabel";
-
 class SelectText extends Component {
-
-
     render() {
-
         const genders = [
             {"value": "Male"},
             {"value": "Female"},
@@ -32,7 +28,6 @@ class SelectText extends Component {
             {value: "German"},
             {value: "Italian"}
         ];
-
         const ITEM_HEIGHT = 48;
         const ITEM_PADDING_TOP = 8;
         const MenuProps = {
@@ -43,9 +38,7 @@ class SelectText extends Component {
                 },
             },
         };
-
         const {name, type, label, onChange, error, onClick, options, value} = this.props;
-        debugger
         return (
             <Fragment>
                 <FormControl variant="filled" fullWidth>
