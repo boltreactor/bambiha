@@ -96,7 +96,10 @@ class Products(ndb.Model):
         products = cls.query().order(-cls.date).fetch()
         for p in products:
             all_products.append({
-                "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
+                "category": {
+                    "key": p.category_key,
+                    "name": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None
+                },
                 "date": p.date,
                 "product_status": p.product_status,
                 "description": p.description,
@@ -135,7 +138,10 @@ class Products(ndb.Model):
         cls.algolia_search(product, request)
         product.put()
         all_products = [{
-            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "category": {
+                "key": product.category_key,
+                "name": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None
+            },
             "date": product.date,
             "description": product.description,
             "images": product.images,
@@ -151,7 +157,10 @@ class Products(ndb.Model):
     def get_product(cls, request):
         product = ndb.Key(urlsafe=request.query_params.get('product_key')).get()
         p = {
-            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "category": {
+                "key": product.category_key,
+                "name": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            },
             "date": product.date,
             "description": product.description,
             "images": product.images,
