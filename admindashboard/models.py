@@ -115,9 +115,17 @@ class Products(ndb.Model):
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
         product.product_status = int(request.POST.get('status'))
+        delete_images = request.POST.get('delete_images')
+        if delete_images:
+            images_to_delete = delete_images.split(",")
+            for image in images_to_delete:
+                product.images.remove(image)
+                product.put()
+
         files = request.FILES.getlist('images')
         if files:
-            product.images = []
+            if len(product.images) == 0:
+                product.images = []
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',

@@ -7,7 +7,7 @@ import {
     DEL_PRODUCT,
     ADMIN_ORDERS,
     USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY
+    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES
 } from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
@@ -180,4 +180,11 @@ export const getAllUsers = () => dispatch => {
                 users: res.data.users,
             });
         });
+};
+export const imagesToDelete = (imageToDelete) => dispatch => {
+    console.log(imageToDelete)
+    dispatch({
+        type: DELETE_PRODUCT_IMAGES,
+        imageToDelete: imageToDelete,
+    });
 };
