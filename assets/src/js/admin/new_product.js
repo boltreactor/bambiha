@@ -89,9 +89,7 @@ class NewProduct extends Form {
         const data = {...this.state.data};
         data[event.target.name] = event.target.value;
         this.setState({data, errors})
-        this.setState({errors});
-        const user = {...this.props.user, gender: event.target.value};
-        this.props.setUserInfo(user)
+
     };
 
 
@@ -247,7 +245,6 @@ class NewProduct extends Form {
                                     </div>
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
-                                                          value={this.state.data.desc}
                                                           value={this.state.data.desc ? this.state.data.desc : ""}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
