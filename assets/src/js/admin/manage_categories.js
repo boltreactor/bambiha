@@ -140,6 +140,7 @@ class ManageCategory extends Component {
                                                                         </thead>
                                                                         <tbody className="mdc-data-table__content">
                                                                         {categories.map((category, index) => <tr
+                                                                            key={index}
                                                                             data-row-id="u0"
                                                                             className="mdc-data-table__row">
                                                                             <th className="mdc-data-table__cell tl">{index + 1}</th>

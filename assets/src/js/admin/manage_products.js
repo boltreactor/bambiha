@@ -163,7 +163,7 @@ class ManageProducts extends Component {
                                                                             </thead>
                                                                             <tbody className="mdc-data-table__content">
                                                                             {products.map((product, index) =>
-                                                                                <tr data-row-id="u0"
+                                                                                <tr key={index} data-row-id="u0"
                                                                                     className="mdc-data-table__row transparent">
                                                                                     <th className="mdc-data-table__cell tl">{index + 1}</th>
                                                                                     <th className="mdc-data-table__cell tl">

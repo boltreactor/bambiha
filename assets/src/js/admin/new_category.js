@@ -36,10 +36,15 @@ class NewCategory extends Component {
         id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, status, this.props)
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        this.props.match.params.id && nextProps.category && this.setState({category: nextProps.category.name})
-        // && this.props.category.status === 1 ? this.setState({selected: "disable"}) : this.setState({selected: "enable"})
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     this.props.match.params.id && nextProps.category && this.setState({category: nextProps.category.name})
+    //     // && this.props.category.status === 1 ? this.setState({selected: "disable"}) : this.setState({selected: "enable"})
+    //
+    // }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger
+        this.props.match.params.id && prevProps !== this.props && this.setState({category: this.props.category.name})
     }
 
 

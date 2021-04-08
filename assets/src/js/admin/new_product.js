@@ -13,6 +13,7 @@ import Select from "../reusable-components/select";
 class NewProduct extends Form {
     constructor(props) {
         super(props);
+        this.props.getProduct(this.props.match.params.id)
         this.state = {
             errors: {},
             data: {
@@ -40,6 +41,25 @@ class NewProduct extends Form {
         this.props.getAllCategories()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger
+        if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
+            let data = {
+                title: this.props.product.title,
+                category_key: this.props.product.category,
+                desc: this.props.product.description,
+                quantity: this.props.product.quantity,
+                price: this.props.product.price,
+                status: this.props.product.product_status,
+                // images: this.props.product.images,
+                images:[]
+            }
+            console.log(data)
+            // this.props.match.params.id && prevProps !== this.props &&
+            this.setState({data: data})
+        }
+    }
+
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
         const data = {...this.state.data}
@@ -54,18 +74,21 @@ class NewProduct extends Form {
     }
     handleCategoryChange = (event) => {
         event.preventDefault();
-        debugger
-        const errors = {...this.state.errors};
-        name = event.target.name
-        const obj = {[name]: event.target.value};
-        const schema = {[name]: this.schema[name]};
-        const {error} = Joi.validate(obj, schema);
-        if (error) errors[name] = error.details[0].message;
-        else delete errors[name];
+        // debugger
+        // const errors = {...this.state.errors};
+        // const name = event.target.name
+        // const obj = {[name]: event.target.value};
+        // const schema = {[name]: this.schema[name]};
+        // const {error} = Joi.validate(obj, schema);
+        // if (error) errors[name] = error.details[0].message;
+        // else delete errors[name];
         const data = {...this.state.data};
         data[event.target.name] = event.target.value;
-        this.setState({data, errors})
-        this.setState({errors});
+        this.setState({
+            data
+            // , errors
+        })
+        // this.setState({errors});
         // const user = {...this.props.user, gender: event.target.value};
         // this.props.setUserInfo(user)
     };
@@ -103,63 +126,62 @@ class NewProduct extends Form {
         this.setState({data});
     };
 
-    schema = {
-        title: Joi.string().required().error(errors => {
-            return errors.map(error => {
-
-                switch (error.type) {
-                    case "any.empty":
-                        return {message: "Title is required"};
-                }
-            })
-        }),
-        category_key: Joi.string().required().error(errors => {
-            return errors.map(error => {
-
-                switch (error.type) {
-                    case "any.empty":
-                        return {message: "Category is required"};
-                }
-            })
-        }),
-        desc: Joi.string().required().error(errors => {
-
-            return errors.map(error => {
-                switch (error.type) {
-                    case "any.empty":
-                        return {message: "Description is required"};
-                }
-            })
-        }),
-        quantity: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "any.required":
-                        return {message: "Price is required"};
-                    case "any.empty":
-                        return {message: "Price is required"};
-                    case "string.regex.base":
-                        return {message: "Invalid"};
-                }
-            })
-        }), price: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "any.required":
-                        return {message: "Price is required"};
-                    case "any.empty":
-                        return {message: "Price is required"};
-                    case "string.regex.base":
-                        return {message: "Invalid"};
-                }
-            })
-        }),
-        images: Joi.allow("").optional()
-    };
+    // schema = {
+    //     title: Joi.string().required().error(errors => {
+    //         return errors.map(error => {
+    //
+    //             switch (error.type) {
+    //                 case "any.empty":
+    //                     return {message: "Title is required"};
+    //             }
+    //         })
+    //     }),
+    //     category_key: Joi.string().required().error(errors => {
+    //         return errors.map(error => {
+    //
+    //             switch (error.type) {
+    //                 case "any.empty":
+    //                     return {message: "Category is required"};
+    //             }
+    //         })
+    //     }),
+    //     desc: Joi.string().required().error(errors => {
+    //
+    //         return errors.map(error => {
+    //             switch (error.type) {
+    //                 case "any.empty":
+    //                     return {message: "Description is required"};
+    //             }
+    //         })
+    //     }),
+    //     quantity: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
+    //         return errors.map(error => {
+    //             switch (error.type) {
+    //                 case "any.required":
+    //                     return {message: "Price is required"};
+    //                 case "any.empty":
+    //                     return {message: "Price is required"};
+    //                 case "string.regex.base":
+    //                     return {message: "Invalid"};
+    //             }
+    //         })
+    //     }), price: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
+    //         return errors.map(error => {
+    //             switch (error.type) {
+    //                 case "any.required":
+    //                     return {message: "Price is required"};
+    //                 case "any.empty":
+    //                     return {message: "Price is required"};
+    //                 case "string.regex.base":
+    //                     return {message: "Invalid"};
+    //             }
+    //         })
+    //     }),
+    //     images: Joi.allow("").optional()
+    // };
 
     getCategoriesList = () => {
         var dict = [];
-        debugger
         for (var i = 0; i < this.props.categories.length; i++) {
             dict.push({
                 "value": this.props.categories[i].name,
@@ -167,6 +189,11 @@ class NewProduct extends Form {
             });
         }
         return dict
+    }
+    handleFieldChange = ({currentTarget: input}) => {
+        const data = {...this.state.data};
+        data[input.name] = input.value;
+        this.setState({data})
     }
 
 
@@ -185,13 +212,13 @@ class NewProduct extends Form {
                                 </p>
                             </header>
                             <div className="mv4">
-                                <form className="row" onSubmit={event => this.handleSubmitProduct(event)}
+                                <form className="row" onSubmit={event => this.doSubmit(event)}
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="title" label="Product Title"
                                                           value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.title : "" : this.state.data.title}
                                                           placeholder="Enter product title"
-                                                          onChange={this.handleChange}
+                                                          onChange={this.handleFieldChange}
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
@@ -211,21 +238,21 @@ class NewProduct extends Form {
                                                           value={this.state.data.desc}
                                                           value={this.state.data.desc === "" ? this.props.match.params.id && this.props.product ? this.props.product.description : "" : this.state.data.desc}
                                                           placeholder="Enter product description"
-                                                          onChange={this.handleChange}
+                                                          onChange={this.handleFieldChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="quantity" label="Product Quantity"
                                                           value={this.state.data.quantity === "" ? this.props.match.params.id && this.props.product ? this.props.product.quantity : "" : this.state.data.quantity}
                                                           placeholder="Enter product quantity"
-                                                          onChange={this.handleChange}
+                                                          onChange={this.handleFieldChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="price" label="Price"
                                                           value={this.state.data.price === "" ? this.props.match.params.id && this.props.product ? this.props.product.price : "" : this.state.data.price}
                                                           placeholder="Enter product price"
-                                                          onChange={this.handleChange}
+                                                          onChange={this.handleFieldChange}
                                                           error={this.state.errors.price}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
