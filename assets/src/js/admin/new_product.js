@@ -13,7 +13,8 @@ import Select from "../reusable-components/select";
 class NewProduct extends Form {
     constructor(props) {
         super(props);
-        this.props.getProduct(this.props.match.params.id)
+        this.props.match.params.id && this.props.getProduct(this.props.match.params.id)
+        this.props.getAllCategories()
         this.state = {
             errors: {},
             data: {
@@ -36,10 +37,10 @@ class NewProduct extends Form {
     //
     // }
 
-    componentDidMount() {
-        this.props.getProduct(this.props.match.params.id)
-        this.props.getAllCategories()
-    }
+    // componentDidMount() {
+    //     this.props.getProduct(this.props.match.params.id)
+    //     this.props.getAllCategories()
+    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
@@ -54,7 +55,6 @@ class NewProduct extends Form {
                 images: []
             }
             console.log(data)
-            // this.props.match.params.id && prevProps !== this.props &&
             this.setState({data: data})
         }
     }
@@ -95,7 +95,8 @@ class NewProduct extends Form {
     };
 
 
-    doSubmit = () => {
+    doSubmit = (event) => {
+        event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
         for (let i = 0; i < this.state.data.images.length; i++) {
@@ -103,7 +104,7 @@ class NewProduct extends Form {
         }
         console.log(this.props.delete_product_images.length)
         // for (let i = 0; i < this.props.delete_product_images.length; i++) {
-        //     
+        //     debugger
         //     // fd.append("delete_images", this.props.delete_product_images[i]
         //     //     // , this.props.delete_product_images[i].name
         //     // );
@@ -136,7 +137,6 @@ class NewProduct extends Form {
     schema = {
         title: Joi.string().required().error(errors => {
             return errors.map(error => {
-                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Title is required"};
@@ -145,7 +145,6 @@ class NewProduct extends Form {
         }),
         category_key: Joi.string().required().error(errors => {
             return errors.map(error => {
-                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Category is required"};
@@ -155,7 +154,6 @@ class NewProduct extends Form {
         desc: Joi.string().required().error(errors => {
 
             return errors.map(error => {
-                
                 switch (error.type) {
                     case "any.empty":
                         return {message: "Description is required"};
@@ -164,7 +162,6 @@ class NewProduct extends Form {
         }),
         quantity: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-                
                 switch (error.type) {
                     case "string.base":
                         return {message: "Quantity is required"};
@@ -178,7 +175,6 @@ class NewProduct extends Form {
             })
         }), price: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
-                
                 switch (error.type) {
                     case "string.base":
                         return {message: "Price is required"};
