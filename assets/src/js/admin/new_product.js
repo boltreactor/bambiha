@@ -9,6 +9,7 @@ import NoLabelTextfield from "../reusable-components/material-io/no-label-textfi
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
+import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -234,6 +235,21 @@ class NewProduct extends Form {
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
+                                        {/*<NewSelect*/}
+                                        {/*    data={this.getCategoriesList()}*/}
+                                        {/*    onChange={this.handleCategoryChange}*/}
+                                        {/*/>*/}
+                                        {/*<span>*/}
+                                        {/*  <select className="select-css" name="size" id="size">*/}
+                                        {/*    <option value="">Ordered</option>*/}
+                                        {/*    <option value="status-1">Shipped</option>*/}
+                                        {/*    <option value="status-2">Pending</option>*/}
+                                        {/*    <option value="status-3">Delivered</option>*/}
+                                        {/*    <option value="status-4">Cancelled</option>*/}
+                                        {/*  </select>*/}
+                                        {/*</span>*/}
+
+                                        {/*<*/}
                                         <Select
                                             id="category_key"
                                             type="text"
@@ -267,13 +283,33 @@ class NewProduct extends Form {
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>
                                     </div>
-                                    <div className="col s12 m6 mb3">
+                                    <div className="col s12 mb3">
                                         <div className="mv3">
-                                            <button className="btn btn-dark btn-lg"
-                                                    onClick={event => this.handleImageClick(event)}>
-                                                <i className="material-icons-outlined v-mid mr2">add_a_photo</i>
-                                                Add Photos
-                                            </button>
+                                            <div className="border-dotted rounded-xs mb3">
+                                                <div className="ma3">
+                                                    <div className="upload-data">
+                                                        <div className="flex items-center flex-wrap">
+                                                            <div className="mv2">
+                                                                <div style={{
+                                                                    color: '#082244',
+                                                                    fontFamily: 'var(--font-family-montserrat)'
+                                                                }}> {/*Drop files here or */} Upload files
+                                                                    manually by
+                                                                    clicking <strong><span>Upload Image</span></strong> button
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex-grow-1 mv2 tr">
+                                                                <button className="btn btn-primary btn-lg ml3"
+                                                                        onClick={event => this.handleImageClick(event)}>
+                                                                    <i className="v-mid material-icons mr1"
+                                                                       style={{fontSize: '18px'}}>cloud_upload</i> UPLOAD
+                                                                    IMAGE
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <input
                                                 type="file"
                                                 ref={this.hiddenFileInput}
@@ -283,53 +319,60 @@ class NewProduct extends Form {
                                                 name='images'
                                                 multiple={true}
                                                 style={{display: 'none'}}/>
-                                            <div className="photos my2">
-                                                {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={URL.createObjectURL(image)}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageState(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
-                                                {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={image}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageProp(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
+                                            <div className="media-images-gallery hide-scrollbar">
+                                                <div className="h-auto overflow-auto"
+                                                     style={{overflowX: 'hidden'}}>
+                                                    <ul className="pl0 pr0 dib w-100">
+                                                        {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={URL.createObjectURL(image)}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                {/*<div className="photos__menu">*/}
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageState(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+                                                                {/*</div>*/}
+                                                            </li>
+                                                        }) : null}
+                                                        {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={image}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                {/*<div className="photos__menu">*/}
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageProp(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+                                                                {/*</div>*/}
+                                                            </li>
+                                                        }) : null}
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col s12 mt3 mb3">
+                                    <div className="col s12 mb3">
 
                                         <button className="btn btn-primary btn-lg"
                                                 disabled={this.validateProduct()}
@@ -343,6 +386,40 @@ class NewProduct extends Form {
                                                 CANCEL
                                             </button>
                                         </Link>
+                                        {/*New Code*/}
+                                        {/*<div>*/}
+                                        {/*    <div className="row">*/}
+                                        {/*        <div className="col s12">*/}
+                                        {/*            /!* Upload Images *!/*/}
+
+                                        {/*            /!* End *!/*/}
+                                        {/*            /!* Images List *!/*/}
+                                        {/*            <div className="media-images-gallery hide-scrollbar">*/}
+                                        {/*                <div className="h-auto overflow-auto"*/}
+                                        {/*                     style={{overflowX: 'hidden'}}>*/}
+                                        {/*                    <ul className="pl0 pr0 dib w-100">*/}
+                                        {/*                        <li>*/}
+                                        {/*                            <figure>*/}
+                                        {/*                                <img*/}
+                                        {/*                                    src="https://d1hz0qcu1muexe.cloudfront.net/upload/6011173b313bb1000f44a6d0/profile/37c7cf086a6c0095db98c324d91a8ec9GreenHondCivic1.jpg"*/}
+                                        {/*                                    alt=""/>*/}
+                                        {/*                            </figure>*/}
+                                        {/*                            <button className="btn round"*/}
+                                        {/*                                    onClick={(e) => this.handleDeleteImageState(e, image)}>*/}
+                                        {/*                                <i className="material-icons-outlined"*/}
+                                        {/*                                   style={{color: '#fff'}}>delete</i>*/}
+                                        {/*                            </button>*/}
+                                        {/*                        </li>*/}
+                                        {/*                    </ul>*/}
+                                        {/*                </div>*/}
+                                        {/*            </div>*/}
+                                        {/*            /!* End *!/*/}
+                                        {/*        </div>*/}
+                                        {/*    </div>*/}
+                                        {/*    /!*white_check_mark*!/*/}
+                                        {/*    /!*eyes*!/*/}
+                                        {/*    /!*raised_hands*!/*/}
+                                        {/*</div>*/}
                                     </div>
                                 </form>
                             </div>

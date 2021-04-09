@@ -1,18 +1,15 @@
 import React, {Component, Fragment} from 'react';
 
 
-
 class NewSelect extends Component {
 
 
     render() {
-         const {onChange, data} = this.props
+        const {onChange, data} = this.props
         return (
-             <span>
+            <span>
                  <select name="size" id="size"
-                         onChange={onChange}
-                 >
-
+                         onChange={onChange}>
                      {data.map((status, index) => {
                          return <option key={index} value={status.name}>{status.name}</option>
                      })}
@@ -23,4 +20,5 @@ class NewSelect extends Component {
         );
     }
 }
+
 export default NewSelect;
