@@ -49,7 +49,6 @@ class NewCategory extends Form {
         this.setState({data})
     }
     addToCategory = () => {
-        debugger
         const category = this.state.data.name
         const id = this.props.match.params.id
         const status = id === undefined ? this.state.data.status === "enable" ? 1 : 0 : this.state.data.status

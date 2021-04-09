@@ -201,27 +201,26 @@ class NewProduct extends Form {
                                         <label className="label-text bold">Product Category <i
                                             className="material-icons red" style={{fontSize: "7px"}}>star</i>
                                         </label>
-                                            <NewSelect
-                                                placeholder="Enter category name"
-                                                data={this.getCategoriesList()}
-                                                name="category_key"
-                                                value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
-                                                onChange={this.handleCategoryChange}
+                                        <NewSelect
+                                            placeholder="Enter category name"
+                                            data={this.getCategoriesList()}
+                                            name="category_key"
+                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
+                                            onChange={this.handleCategoryChange}
                                         />
 
                                     </div>
 
 
-
-                                        {/*<Select*/}
-                                        {/*    id="category_key"*/}
-                                        {/*    type="text"*/}
-                                        {/*    name="category_key"*/}
-                                        {/*    options={this.getCategoriesList()}*/}
-                                        {/*    onChange={this.handleCategoryChange}*/}
-                                        {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
-                                        {/*    error={this.state.errors.category_key}*/}
-                                        {/*/>*/}
+                                    {/*<Select*/}
+                                    {/*    id="category_key"*/}
+                                    {/*    type="text"*/}
+                                    {/*    name="category_key"*/}
+                                    {/*    options={this.getCategoriesList()}*/}
+                                    {/*    onChange={this.handleCategoryChange}*/}
+                                    {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
+                                    {/*    error={this.state.errors.category_key}*/}
+                                    {/*/>*/}
 
 
                                     <div className="col s12 mb3">
@@ -281,53 +280,59 @@ class NewProduct extends Form {
                                                 name='images'
                                                 multiple={true}
                                                 style={{display: 'none'}}/>
-                                            <div className="photos my2">
-                                                {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={URL.createObjectURL(image)}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageState(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
-                                                {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={image}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageProp(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
+                                            <div className="media-images-gallery hide-scrollbar">
+                                                <div className="h-auto overflow-auto"
+                                                     style={{overflowX: 'hidden'}}>
+                                                    <ul className="pl0 pr0 dib w-100">
+                                                        {this.state.state_images.length > 0 ? this.state.state_images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={URL.createObjectURL(image)}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                {/*<div className="photos__menu">*/}
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageState(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+                                                                {/*</div>*/}
+                                                            </li>
+                                                        }) : null}
+                                                        {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={image}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageProp(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+
+                                                            </li>
+                                                        }) : null}
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col s12 mt3 mb3">
+                                    <div className="col s12 mb3">
 
                                         <button className="btn btn-primary btn-lg"
                                                 disabled={this.validateProduct()}

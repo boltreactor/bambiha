@@ -95,7 +95,6 @@ export default function (state = initialState, action) {
             }
         }
         case EMPTY_DELETED_PRODUCTS: {
-            debugger
             return {
                 ...state,
                 delete_product_images: []

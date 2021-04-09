@@ -25,7 +25,6 @@ class ManageOrders extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         if (this.state.id !== prevState.id) {
-            debugger
             this.props.getAllOrders();
             this.setState({id: null})
         }
@@ -57,7 +56,6 @@ class ManageOrders extends Component {
 
     handleChangeOption = (event, id) => {
         event.preventDefault();
-        debugger
         this.props.updateOrderStatus(id, event.target.value, this.props);
         this.setState({id})
 

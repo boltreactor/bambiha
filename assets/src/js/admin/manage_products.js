@@ -26,7 +26,6 @@ class ManageProducts extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
         if (prevState.id !== this.state.id) {
             this.props.getAllProducts()
             this.setState({id: null})
@@ -35,7 +34,6 @@ class ManageProducts extends Component {
 
     onEdit = (event, productId) => {
         event.preventDefault();
-        debugger
         return this.props.history.push(`/admin/products/${productId}`)
     }
     handleDeleteProduct = (event, productId) => {
