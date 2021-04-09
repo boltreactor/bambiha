@@ -90,6 +90,7 @@ class Order(ndb.Model):
                 all_items.append({
                     "price": item.price,
                     "title": item.product_key.get().title,
+                    "quantity": item.quantity,
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
 
@@ -141,6 +142,7 @@ class Order(ndb.Model):
                 all_items.append({
                     "price": item.price,
                     "title": item.product_key.get().title,
+                    "quantity": item.quantity,
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
 
@@ -174,6 +176,7 @@ class Order(ndb.Model):
 class OrderItems(ndb.Model):
     order_key = ndb.KeyProperty()
     product_key = ndb.KeyProperty()
+    quantity = ndb.IntegerProperty()
     price = ndb.IntegerProperty()
 
     @classmethod
@@ -182,7 +185,7 @@ class OrderItems(ndb.Model):
 
     @classmethod
     def add_order_items(cls, request, order):
-        cart_products = Cart.query(Cart.user_key == ndb.Key(urlsafe=request.session.get('user')))
+        cart_products = Cart.query(Cart.user_key == ndb.Key(urlsafe=request.session.get('user'))).fetch()
 
         ancestor_key = ndb.Key("OrderItems", "orderitems")
 
@@ -190,6 +193,7 @@ class OrderItems(ndb.Model):
             item = OrderItems(parent=ancestor_key,
                               order_key=order.key,
                               product_key=product.product_key,
+                              quantity=product.quantity,
                               price=product.product_key.get().price)
             item.put()
             product.key.delete()
@@ -204,6 +208,7 @@ class OrderItems(ndb.Model):
             all_items.append({
                 "price": item.price,
                 "title": item.product_key.get().title,
+                "quantity": item.quantity,
                 "image": item.product_key.get().images[0] if item.product_key.get().images else None
             })
 
