@@ -88,7 +88,6 @@ export default function (state = initialState, action) {
             }
         }
         case DELETE_PRODUCT_IMAGES: {
-            debugger
             return {
                 ...state,
                 delete_product_images: [...state.delete_product_images, action.imageToDelete],

@@ -182,7 +182,6 @@ export const getAllUsers = () => dispatch => {
         });
 };
 export const imagesToDelete = (imageToDelete) => dispatch => {
-    console.log(imageToDelete)
     dispatch({
         type: DELETE_PRODUCT_IMAGES,
         imageToDelete: imageToDelete,

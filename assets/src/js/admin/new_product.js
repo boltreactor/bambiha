@@ -1,15 +1,11 @@
 import React, {Component, Fragment} from "react";
 import {withRouter, Link} from 'react-router-dom';
 import Form from "../reusable-components/form"
-import OutlinedTextfield from "../reusable-components/outlined-textfield";
-import {Label} from "@material-ui/icons";
-import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
-import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -27,21 +23,12 @@ class NewProduct extends Form {
                 status: 1,
                 images: []
             },
+            state_images: [],
             product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
     }
-
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.props.match.params.id && nextProps.product && this.setState({newProduct: nextProps.product})
-    //
-    // }
-
-    // componentDidMount() {
-    //     this.props.getProduct(this.props.match.params.id)
-    //     this.props.getAllCategories()
-    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
@@ -52,30 +39,24 @@ class NewProduct extends Form {
                 quantity: this.props.product.quantity.toString(),
                 price: this.props.product.price.toString(),
                 status: this.props.product.product_status,
-                // images: this.props.product.images,
                 images: []
             }
-            console.log(data)
             this.setState({data: data})
         }
     }
 
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = this.state.data.images.filter(i => i !== image);
-        this.setState({data})
+        let state_images = this.state.state_images.filter(i => i !== image);
+        this.setState({state_images})
     };
     handleDeleteImageProp = (event, image) => {
         event.preventDefault()
         this.props.imagesToDelete(image)
-        console.log(image)
-
     };
 
     handleImageClick = (event) => {
         event.preventDefault()
-
         this.hiddenFileInput.current.click();
     }
     handleCategoryChange = (event) => {
@@ -100,16 +81,9 @@ class NewProduct extends Form {
         event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
-        for (let i = 0; i < this.state.data.images.length; i++) {
-            fd.append("images", this.state.data.images[i], this.state.data.images[i].name);
+        for (let i = 0; i < this.state.state_images.length; i++) {
+            fd.append("images", this.state.state_images[i], this.state.state_images[i].name);
         }
-        console.log(this.props.delete_product_images.length)
-        // for (let i = 0; i < this.props.delete_product_images.length; i++) {
-        //     debugger
-        //     // fd.append("delete_images", this.props.delete_product_images[i]
-        //     //     // , this.props.delete_product_images[i].name
-        //     // );
-        // }
         fd.append("delete_images", this.props.delete_product_images);
         fd.append("title", this.state.data.title);
         fd.append("description", this.state.data.desc);
@@ -120,19 +94,16 @@ class NewProduct extends Form {
             return category.name === category_key;
         }).id}`);
         this.props.match.params.id && fd.append("product_key", this.props.match.params.id);
-        // console.log(this.props.categories.find(function (category) {
-        //     return category.name === category_key;
-        // }).id)
         this.props.match.params.id ? this.props.editProduct(fd, this.props) : this.props.addProduct(fd, this.props)
     }
 
 
     imageChange = (e) => {
-
         e.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = [...this.state.data.images, ...e.target.files]
-        this.setState({data});
+        let state_images = [...this.state.state_images, ...e.target.files]
+        this.setState({state_images});
+        e.target.value = ''
+
     };
 
     schema = {
@@ -202,15 +173,8 @@ class NewProduct extends Form {
         }
         return dict
     }
-    handleFieldChange = ({currentTarget: input}) => {
-        const data = {...this.state.data};
-        data[input.name] = input.value;
-        this.setState({data})
-    }
-
 
     render() {
-        // console.log(this.state.newProduct)
         const {product_id} = this.state
         return (
             <Fragment>
@@ -235,21 +199,7 @@ class NewProduct extends Form {
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        {/*<NewSelect*/}
-                                        {/*    data={this.getCategoriesList()}*/}
-                                        {/*    onChange={this.handleCategoryChange}*/}
-                                        {/*/>*/}
-                                        {/*<span>*/}
-                                        {/*  <select className="select-css" name="size" id="size">*/}
-                                        {/*    <option value="">Ordered</option>*/}
-                                        {/*    <option value="status-1">Shipped</option>*/}
-                                        {/*    <option value="status-2">Pending</option>*/}
-                                        {/*    <option value="status-3">Delivered</option>*/}
-                                        {/*    <option value="status-4">Cancelled</option>*/}
-                                        {/*  </select>*/}
-                                        {/*</span>*/}
 
-                                        {/*<*/}
                                         <Select
                                             id="category_key"
                                             type="text"
@@ -323,7 +273,7 @@ class NewProduct extends Form {
                                                 <div className="h-auto overflow-auto"
                                                      style={{overflowX: 'hidden'}}>
                                                     <ul className="pl0 pr0 dib w-100">
-                                                        {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {
+                                                        {this.state.state_images.length > 0 ? this.state.state_images.map((image, index) => {
                                                             return <li
                                                                 // className="photos__cell"
                                                                 key={index}>
@@ -358,13 +308,12 @@ class NewProduct extends Form {
                                                                             height: '135px'
                                                                         }} alt=""/>
                                                                 </figure>
-                                                                {/*<div className="photos__menu">*/}
                                                                 <button className="btn round"
                                                                         onClick={(e) => this.handleDeleteImageProp(e, image)}>
                                                                     <i className="material-icons-outlined"
                                                                        style={{color: '#fff'}}>delete</i>
                                                                 </button>
-                                                                {/*</div>*/}
+
                                                             </li>
                                                         }) : null}
                                                     </ul>
@@ -386,40 +335,6 @@ class NewProduct extends Form {
                                                 CANCEL
                                             </button>
                                         </Link>
-                                        {/*New Code*/}
-                                        {/*<div>*/}
-                                        {/*    <div className="row">*/}
-                                        {/*        <div className="col s12">*/}
-                                        {/*            /!* Upload Images *!/*/}
-
-                                        {/*            /!* End *!/*/}
-                                        {/*            /!* Images List *!/*/}
-                                        {/*            <div className="media-images-gallery hide-scrollbar">*/}
-                                        {/*                <div className="h-auto overflow-auto"*/}
-                                        {/*                     style={{overflowX: 'hidden'}}>*/}
-                                        {/*                    <ul className="pl0 pr0 dib w-100">*/}
-                                        {/*                        <li>*/}
-                                        {/*                            <figure>*/}
-                                        {/*                                <img*/}
-                                        {/*                                    src="https://d1hz0qcu1muexe.cloudfront.net/upload/6011173b313bb1000f44a6d0/profile/37c7cf086a6c0095db98c324d91a8ec9GreenHondCivic1.jpg"*/}
-                                        {/*                                    alt=""/>*/}
-                                        {/*                            </figure>*/}
-                                        {/*                            <button className="btn round"*/}
-                                        {/*                                    onClick={(e) => this.handleDeleteImageState(e, image)}>*/}
-                                        {/*                                <i className="material-icons-outlined"*/}
-                                        {/*                                   style={{color: '#fff'}}>delete</i>*/}
-                                        {/*                            </button>*/}
-                                        {/*                        </li>*/}
-                                        {/*                    </ul>*/}
-                                        {/*                </div>*/}
-                                        {/*            </div>*/}
-                                        {/*            /!* End *!/*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*    /!*white_check_mark*!/*/}
-                                        {/*    /!*eyes*!/*/}
-                                        {/*    /!*raised_hands*!/*/}
-                                        {/*</div>*/}
                                     </div>
                                 </form>
                             </div>
