@@ -110,6 +110,7 @@ class OrderDetail extends Component {
                   {/* */}
                   <div className="tab-content">
                     {/* */}
+
                     <div className="mb4">
                       <div className="row">
                         <div className="col s12 m6 l8">
@@ -202,7 +203,7 @@ class OrderDetail extends Component {
 
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
                                                                                     scope="row"
-                                                                                    id="u0">quantity
+                                                                                    id="u0">{item.quantity}
                                                                                 </td>
 
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"

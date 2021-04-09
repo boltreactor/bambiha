@@ -9,12 +9,12 @@ class NewSelect extends Component {
          const {onChange, data, value} = this.props
         return (
              <span>
-                 <select name="size" id="size"
+                 <select className="select-css" name="size" id="size"
                          onChange={onChange}
                          value={value}
                  >
                      {data.map((item, index) => {
-                         return <option key={index} value={item.status}>{item.name}</option>
+                         return <option key={index} value={item.status || item.key}>{item.name || item.value}</option>
                      })}
 
                  </select>

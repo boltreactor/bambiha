@@ -10633,7 +10633,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
     appearance: none;
     background-color: #fff;
-    background-image: url('/assets/images/static/select.svg'),
+    background-image: url('/static/select.svg'),
     linear-gradient(to bottom, #ffffff 0%, #fff 100%);
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;

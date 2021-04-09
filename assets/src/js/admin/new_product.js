@@ -9,6 +9,7 @@ import NoLabelTextfield from "../reusable-components/material-io/no-label-textfi
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
+import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -207,6 +208,10 @@ class NewProduct extends Form {
 
 
     render() {
+        // let categories = [...this.props.categories.name];
+        // // categories = this.getCategoriesList;
+        // console.log(categories, "categories")
+
         // console.log(this.state.newProduct)
         const {product_id} = this.state
         return (
@@ -232,17 +237,31 @@ class NewProduct extends Form {
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <Select
-                                            id="category_key"
-                                            type="text"
-                                            name="category_key"
-                                            options={this.getCategoriesList()}
-                                            onChange={this.handleCategoryChange}
+                                        <label className="label-text bold">Product Category <i
+                                            className="material-icons red" style={{fontSize: "7px"}}>star</i>
+                                        </label>
+                                            <NewSelect
+
+                                            data={this.getCategoriesList()}
                                             value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
-                                            error={this.state.errors.category_key}
+                                            onChange={this.handleCategoryChange}
                                         />
 
                                     </div>
+
+
+
+                                        {/*<Select*/}
+                                        {/*    id="category_key"*/}
+                                        {/*    type="text"*/}
+                                        {/*    name="category_key"*/}
+                                        {/*    options={this.getCategoriesList()}*/}
+                                        {/*    onChange={this.handleCategoryChange}*/}
+                                        {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
+                                        {/*    error={this.state.errors.category_key}*/}
+                                        {/*/>*/}
+
+
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
                                                           value={this.state.data.desc ? this.state.data.desc : ""}
