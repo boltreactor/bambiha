@@ -7,7 +7,7 @@ import {
     DEL_PRODUCT,
     ADMIN_ORDERS,
     USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES
+    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS
 } from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
@@ -130,6 +130,9 @@ export const editProduct = (fd, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post(`/admin/editproduct/`, fd, {headers: Header})
         .then(res => {
+            dispatch({
+                type: EMPTY_DELETED_PRODUCTS,
+            });
             props.history.push("/admin/products")
         })
 };
