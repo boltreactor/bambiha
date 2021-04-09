@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 // import CustomTable from "../reusable-components/custom-table";
 // import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import NewSelect from "../reusable-components/new-select";
+import OrderSelect from "../components/order_select";
 
 class ManageOrders extends Component {
 
@@ -190,7 +191,8 @@ class ManageOrders extends Component {
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row"
                                                                                     id="u0">
-                                                                                    <Link to={`/admin/orders/${item.order_key}`}>
+                                                                                    <Link
+                                                                                        to={`/admin/orders/${item.order_key}`}>
                                                                                         {item.order_number}
                                                                                     </Link>
                                                                                 </td>
@@ -226,7 +228,11 @@ class ManageOrders extends Component {
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row" id="u0">
 
-
+                                                                                    <OrderSelect data={data}
+                                                                                                 value={item.status}
+                                                                                                 onChange={(e) => {
+                                                                                                     this.handleChangeOption(e, item.order_key)
+                                                                                                 }}/>
 
                                                                                     {/*<NewSelect data={data}*/}
                                                                                     {/*           value={item.status}*/}
