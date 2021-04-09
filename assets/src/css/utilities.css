@@ -737,7 +737,8 @@ img {
     box-shadow: 0 1px 3px rgba(206, 211, 218, .2);
 }
 
-.shadow-0 {
+.shadow-0,
+.s0 {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .12);
 }
 
@@ -1194,7 +1195,8 @@ img {
     font-family: baskerville, serif
 }
 
-.montserrat {
+.montserrat,
+.mont {
     font-family: 'Montserrat', sans-serif;
 }
 

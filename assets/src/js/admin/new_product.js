@@ -79,6 +79,7 @@ class NewProduct extends Form {
     }
     handleCategoryChange = (event) => {
         event.preventDefault();
+        debugger
         const errors = {...this.state.errors};
         const name = event.target.name
         const obj = {[name]: event.target.value};
@@ -209,6 +210,7 @@ class NewProduct extends Form {
     render() {
         // console.log(this.state.newProduct)
         const {product_id} = this.state
+        const categories = this.getCategoriesList()
         return (
             <Fragment>
                 <div className="page my-page">
@@ -232,15 +234,26 @@ class NewProduct extends Form {
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <Select
-                                            id="category_key"
-                                            type="text"
-                                            name="category_key"
-                                            options={this.getCategoriesList()}
-                                            onChange={this.handleCategoryChange}
-                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
-                                            error={this.state.errors.category_key}
-                                        />
+                                        <div>
+                                            <span>
+                                                 <select className="select-css" name="category_key" id="category_key"
+                                                         onChange={this.handleCategoryChange}>
+                                                     {categories !== undefined && categories.map((cat, index) => {
+                                                         return <option value={cat.value}>{cat.value}</option>
+                                                     })}
+                                        </select>
+                                            </span>
+                                        </div>
+
+                                        {/*<Select*/}
+                                        {/*    id="category_key"*/}
+                                        {/*    type="text"*/}
+                                        {/*    name="category_key"*/}
+                                        {/*    options={this.getCategoriesList()}*/}
+                                        {/*    onChange={this.handleCategoryChange}*/}
+                                        {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
+                                        {/*    error={this.state.errors.category_key}*/}
+                                        {/*/>*/}
 
                                     </div>
                                     <div className="col s12 mb3">

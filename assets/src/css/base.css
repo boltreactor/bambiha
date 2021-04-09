@@ -68,7 +68,7 @@ body {
     font-weight: 400;
     line-height: 1.25rem;
     /*color: var(--black);*/
-    color: var(--space-gray);
+    color: #576c77;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -1033,4 +1033,97 @@ template {
         left: auto;
         right: auto;
     }
+}
+
+/* Client Layout */
+.p-workspace-layout {
+	display: grid;
+	grid-template-rows: auto;
+	overflow: hidden;
+	position: relative
+}
+
+.p-workspace-layout {
+    grid-template-columns: 260px auto 400px;
+    grid-template-areas: 'p-workspace__sidebar p-workspace__primary_view p-workspace__secondary_view';
+}
+
+.p-workspace__sidebar {
+    grid-area: p-workspace__sidebar;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 36px auto;
+    grid-template-areas:
+        "p-workspace__sidebar_header"
+        "p-workspace__channel_sidebar";
+    position: relative;
+}
+
+.p-workspace-layout .p-workspace__sidebar {
+    grid-template-areas: "p-workspace__channel_sidebar";
+    grid-template-rows: auto;
+    overflow: hidden;
+}
+
+.p-resizer {
+    position: absolute;
+    z-index: 1000;
+    top: 1px;
+    width: 8px;
+    bottom: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: col-resize;
+}
+
+.p-workspace__primary_view {
+    grid-area: p-workspace__primary_view;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 36px auto;
+    grid-template-areas:
+        "p-workspace__primary_view_header"
+        "p-workspace__primary_view_contents";
+}
+
+.p-workspace__secondary_view {
+    grid-area: p-workspace__secondary_view;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 44px auto;
+    grid-template-areas:
+        "p-workspace__secondary_view_header"
+        "p-workspace__secondary_view_contents";
+    overflow: hidden;
+    border-left: 1px solid rgba(var(--sk_foreground_low,29,28,29),.13);
+}
+
+.p-workspace, .p-workspace__primary_view, .p-workspace__primary_view_contents, .p-workspace__secondary_view {
+    min-width: 0;
+    min-height: 0;
+}
+
+.p-workspace-layout .p-workspace__primary_view {
+    grid-template-areas: "p-workspace__primary_view_contents";
+    grid-template-rows: auto;
+}
+
+.p-workspace-layout .p-workspace__secondary_view {
+    grid-template-areas: "p-workspace__secondary_view_contents";
+    grid-template-rows: auto;
+    z-index: 202;
+}
+
+.p-workspace__primary_view_header {
+	grid-area: p-workspace__primary_view_header;
+	display: flex;
+	height: 36px;
+	min-width: 0
+}
+.p-workspace__primary_view_contents {
+	display: flex;
+	flex-direction: column;
+	grid-area: p-workspace__primary_view_contents
 }
