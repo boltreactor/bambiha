@@ -4,8 +4,8 @@ import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
 import {getAllOrders, deleteOrder, updateOrderStatus} from "../actions/admin";
 import {connect} from "react-redux";
-import CustomTable from "../reusable-components/custom-table";
-import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+// import CustomTable from "../reusable-components/custom-table";
+// import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import NewSelect from "../reusable-components/new-select";
 
 class ManageOrders extends Component {
@@ -22,7 +22,7 @@ class ManageOrders extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if (this.state.id !== prevState.id) {
             debugger
             this.props.getAllOrders();
@@ -56,7 +56,7 @@ class ManageOrders extends Component {
 
     handleChangeOption = (event, id) => {
         event.preventDefault();
-        // console.log(event.target.value, id);
+        debugger
         this.props.updateOrderStatus(id, event.target.value, this.props);
         this.setState({id})
 
@@ -189,7 +189,10 @@ class ManageOrders extends Component {
 
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row"
-                                                                                    id="u0">{item.order_number}
+                                                                                    id="u0">
+                                                                                    <Link to={`/admin/orders/${item.order_key}`}>
+                                                                                        {item.order_number}
+                                                                                    </Link>
                                                                                 </td>
 
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"

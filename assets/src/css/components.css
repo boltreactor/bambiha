@@ -2409,30 +2409,9 @@ h4.accordion__tab:before {
     border-radius: 4px;
 }
 
-.r6 {
-    border-radius: 6px;
-}
-
-.auth_master-form,
-.canvas {
+.auth_master-form {
     max-width: 27.5rem;
     width: 90%;
-}
-
-.canvas.m {
-    max-width: 27.5rem;
-}
-
-@media (min-width: 48rem) {
-    .canvas.m {
-        max-width: 37.5rem;
-    }
-}
-
-@media (min-width: 62rem) {
-    .canvas.m {
-        max-width: 50rem;
-    }
 }
 
 .auth_page-auth .btn-google-custom {
@@ -3704,19 +3683,6 @@ ul.store-categories a:hover {
     /*cursor: pointer;*/
 }
 
-.back-to-site .text-save-exit {
-    display: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: .875rem;
-    color: #082344;
-}
-
-@media (min-width: 576px) {
-    .back-to-site .text-save-exit {
-        display: block;
-    }
-}
-
 .border-dotted {
     border: .125rem dashed #dbe3eb;
 }
@@ -4077,151 +4043,4 @@ ul.store-categories a:hover {
 .custom-datatable .mdc-data-table__row.disabled,
 .custom-datatable .mdc-data-table__row.disabled:hover {
     background-color: #e6e6e6 !important;
-}
-
-/* Progress bar */
-.progress-bar-with-steps {
-    margin: 0 auto;
-    max-width: 600px;
-}
-
-ol.progress-bar-with-steps {
-    display: table;
-    list-style-type: none;
-    margin: 0;
-    padding: 2em 5em;
-    table-layout: fixed;
-    width: 100%
-}
-
-ol.progress-bar-with-steps li {
-    display: table-cell;
-    line-height: 3em;
-    position: relative
-}
-
-ol.progress-bar-with-steps li .icon-wrap {
-    border-radius: 50%;
-    top: -1.5em;
-    display: block;
-    height: 1.5em;
-    width: 1.5em;
-    position: absolute;
-    left: 0;
-    right: 0;
-    border: .75em solid #fff;
-    margin: -1px -1.5em 0;
-    background-color: #0258ff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    box-sizing: content-box
-}
-
-ol.progress-bar-with-steps li .progress-text {
-    position: relative;
-    width: 10em;
-    left: -5em;
-    display: block;
-    text-align: center;
-    margin-top: 2.5em;
-    line-height: normal;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: var(--font-family-montserrat);
-    color: #082344;
-}
-
-ol.progress-bar-with-steps .progress-done,
-ol.progress-bar-with-steps .progress-current,
-ol.progress-bar-with-steps .progress-todo {
-    border-top: 2px solid #0258ff;
-    transition: border-color 1s ease-in-out
-}
-
-ol.progress-bar-with-steps .progress-current {
-    border-color: #ddd
-}
-
-ol.progress-bar-with-steps .progress-todo {
-    border-color: #ddd
-}
-
-ol.progress-bar-with-steps .progress-todo .icon-wrap {
-    border: 0;
-    top: -.75em;
-    margin-left: -.75em;
-    box-shadow: none;
-    background-color: #ddd
-}
-
-ol.progress-bar-with-steps .progress-current:last-child,
-ol.progress-bar-with-steps .progress-todo:last-child {
-    width: 0
-}
-
-/* Create Wrapper */
-.wrapper {
-    margin: 32px auto 96px;
-    max-width: 504px;
-    /*padding: 36px 50px 32px;*/
-    background: #fff;
-    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, .1);
-}
-
-.wrapper .form-group {
-    padding: 36px 50px 32px;
-}
-
-@media (max-width: 767px) {
-    .wrapper .form-group {
-        padding: 18px 25px 16px;
-    }
-}
-
-.wrapper-wide {
-    max-width: 100%;
-}
-
-.wrapper-wide.wrapper-with-header {
-    /*background-color: #f8f8f8;*/
-    background-color: #fff;
-}
-
-.wrapper.wrapper-with-header .form-header-container .form-header {
-    margin-top: 0;
-    margin-bottom: 30px;
-    background: #fff;
-    padding: 36px 50px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
-}
-
-@media (max-width: 767px) {
-    .wrapper.wrapper-with-header .form-header-container .form-header {
-        padding: 18px 25px;
-    }
-}
-
-.form-header small.desc {
-    font-size: 13px;
-    font-family: var(--font-family-montserrat);
-    font-weight: 500;
-    line-height: 1.5em;
-    display: block;
-    max-width: 600px;
-    margin: 12px auto 0;
-}
-
-/**/
-.search-form-container {
-    background-color: #fff;
-    padding: 34px 25px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-}
-
-@media (min-width: 768px) {
-    .search-form-container {
-        border-radius: 20px;
-    }
 }

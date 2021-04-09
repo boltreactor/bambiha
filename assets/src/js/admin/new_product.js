@@ -9,6 +9,7 @@ import NoLabelTextfield from "../reusable-components/material-io/no-label-textfi
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
+import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -79,7 +80,6 @@ class NewProduct extends Form {
     }
     handleCategoryChange = (event) => {
         event.preventDefault();
-        debugger
         const errors = {...this.state.errors};
         const name = event.target.name
         const obj = {[name]: event.target.value};
@@ -210,7 +210,6 @@ class NewProduct extends Form {
     render() {
         // console.log(this.state.newProduct)
         const {product_id} = this.state
-        const categories = this.getCategoriesList()
         return (
             <Fragment>
                 <div className="page my-page">
@@ -234,16 +233,20 @@ class NewProduct extends Form {
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <div>
-                                            <span>
-                                                 <select className="select-css" name="category_key" id="category_key"
-                                                         onChange={this.handleCategoryChange}>
-                                                     {categories !== undefined && categories.map((cat, index) => {
-                                                         return <option value={cat.value}>{cat.value}</option>
-                                                     })}
-                                        </select>
-                                            </span>
-                                        </div>
+                                        <label className="label-text bold">Product Category <i
+                                            className="material-icons red" style={{fontSize: "7px"}}>star</i>
+                                        </label>
+                                            <NewSelect
+                                                placeholder="Enter category name"
+                                                data={this.getCategoriesList()}
+                                                name="category_key"
+                                                value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
+                                                onChange={this.handleCategoryChange}
+                                        />
+
+                                    </div>
+
+
 
                                         {/*<Select*/}
                                         {/*    id="category_key"*/}
@@ -255,7 +258,7 @@ class NewProduct extends Form {
                                         {/*    error={this.state.errors.category_key}*/}
                                         {/*/>*/}
 
-                                    </div>
+
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
                                                           value={this.state.data.desc ? this.state.data.desc : ""}

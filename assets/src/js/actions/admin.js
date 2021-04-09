@@ -191,7 +191,7 @@ export const disableUser = (id, status, props) => dispatch => {
     bodyFormData.append('status', status);
     axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
         .then(res => {
-            debugger
+
             getAllUsers()
             // props.history.push("/admin/users")
         })
@@ -221,3 +221,4 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
         })
 
 };
+
