@@ -44,6 +44,7 @@ import HelpSupport from "../../components/Help&Support";
 import AdminHome from "../../admin/admin_home";
 import ManageCategory from "../../admin/manage_categories";
 import ManageOrders from "../../admin/manage_orders";
+import OrderDetail from "../../admin/order-detail";
 import ManageProducts from "../../admin/manage_products";
 import ManageUsers from "../../admin/manage_users";
 import NewCategory from "../../admin/new_category";
@@ -73,6 +74,7 @@ class App extends Component {
                     <AdminProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
                     <AdminProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
                     <AdminProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/orders/:id" exact render={(props) => <OrderDetail {...props}/>}/>
                     <AdminProtectedRoute path="/admin/brand-folder" exact render={(props) => <BrandFolder {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>

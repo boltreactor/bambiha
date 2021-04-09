@@ -189,7 +189,10 @@ class ManageOrders extends Component {
 
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row"
-                                                                                    id="u0">{item.order_number}
+                                                                                    id="u0">
+                                                                                    <Link to={`/admin/orders/${item.order_key}`}>
+                                                                                        {item.order_number}
+                                                                                    </Link>
                                                                                 </td>
 
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
