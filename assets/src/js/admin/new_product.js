@@ -208,9 +208,6 @@ class NewProduct extends Form {
 
 
     render() {
-        // let categories = [...this.props.categories.name];
-        // // categories = this.getCategoriesList;
-        // console.log(categories, "categories")
 
         // console.log(this.state.newProduct)
         const {product_id} = this.state
@@ -241,10 +238,9 @@ class NewProduct extends Form {
                                             className="material-icons red" style={{fontSize: "7px"}}>star</i>
                                         </label>
                                             <NewSelect
-
-                                            data={this.getCategoriesList()}
-                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
-                                            onChange={this.handleCategoryChange}
+                                                data={this.getCategoriesList()}
+                                                value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
+                                                onChange={this.handleCategoryChange}
                                         />
 
                                     </div>
