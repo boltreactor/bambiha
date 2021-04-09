@@ -10,7 +10,7 @@ class NewSelect extends Component {
              <span>
                  <select className="select-css"  name={name} id={name}
                          onChange={onChange}
-                         value={value}
+                         // value={value}
                  >
                      {name === "category_key" && <option default>{placeholder}</option>}
                      {data.map((item, index) => {
