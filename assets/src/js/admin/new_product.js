@@ -79,6 +79,7 @@ class NewProduct extends Form {
         this.hiddenFileInput.current.click();
     }
     handleCategoryChange = (event) => {
+        debugger
         event.preventDefault();
         const errors = {...this.state.errors};
         const name = event.target.name
@@ -238,7 +239,9 @@ class NewProduct extends Form {
                                             className="material-icons red" style={{fontSize: "7px"}}>star</i>
                                         </label>
                                             <NewSelect
+                                                placeholder="Enter category name"
                                                 data={this.getCategoriesList()}
+                                                name="category_key"
                                                 value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
                                                 onChange={this.handleCategoryChange}
                                         />

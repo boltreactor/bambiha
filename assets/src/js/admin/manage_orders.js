@@ -56,7 +56,7 @@ class ManageOrders extends Component {
 
     handleChangeOption = (event, id) => {
         event.preventDefault();
-        // console.log(event.target.value, id);
+        debugger
         this.props.updateOrderStatus(id, event.target.value, this.props);
         this.setState({id})
 

@@ -45,8 +45,8 @@ class ManageProducts extends Component {
     }
 
     render() {
-        const headers = [{name: 'Product Title'}, {name: 'Price'}, {name: 'Quantity'},
-            {name: 'Category'}, {name: 'Description'}, {name: 'Images'}];
+        const headers = [{name: 'Sr. No.'}, {name: 'Avatar'}, {name: 'Product Title'}, {name: 'Price'}, {name: 'Quantity'},
+            {name: 'Category'}, {name: 'Description'}, {name: 'No. of Images'}, {name: 'Action'}];
         const {products} = this.props;
         return (
             <Fragment>
@@ -121,44 +121,15 @@ class ManageProducts extends Component {
                                                                                aria-label="Dessert calories">
                                                                             <thead>
                                                                             <tr className="mdc-data-table__header-row">
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader" scope="col">Sr.
-                                                                                    No.
+                                                                                {headers.map((h, index) => {
+                                                                                return <th key={index}
+                                                                                           className="mdc-data-table__header-cell"
+                                                                                           role="columnheader"
+                                                                                           scope="col">{h.name}
                                                                                 </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Avatar
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Product
-                                                                                    title
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Price
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Quantity
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Category
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Description
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader" scope="col">No.
-                                                                                    of
-                                                                                    Images
-                                                                                </th>
-                                                                                <th className="mdc-data-table__header-cell"
-                                                                                    role="columnheader"
-                                                                                    scope="col">Actions
-                                                                                </th>
+                                                                            })}
+
+
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody className="mdc-data-table__content">

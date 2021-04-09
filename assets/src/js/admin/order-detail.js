@@ -34,19 +34,16 @@ class OrderDetail extends Component {
         }
     }
 
-    // componentDidMount() {
-    //
-    //
-    // }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-     debugger
+
         if (prevProps.orders === this.props.orders ) {
 
             this.props.getAllOrders();
             const orders = this.props.orders && this.props.orders.filter(order =>
             this.state.id === order.order_key)
-          console.log('hi');
+
         }
 
     }
