@@ -1,9 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {withRouter, Link} from 'react-router-dom';
 import Form from "../reusable-components/form"
-import OutlinedTextfield from "../reusable-components/outlined-textfield";
-import {Label} from "@material-ui/icons";
-import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
@@ -27,21 +24,12 @@ class NewProduct extends Form {
                 status: 1,
                 images: []
             },
+            state_images: [],
             product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
     }
-
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.props.match.params.id && nextProps.product && this.setState({newProduct: nextProps.product})
-    //
-    // }
-
-    // componentDidMount() {
-    //     this.props.getProduct(this.props.match.params.id)
-    //     this.props.getAllCategories()
-    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
@@ -52,30 +40,24 @@ class NewProduct extends Form {
                 quantity: this.props.product.quantity.toString(),
                 price: this.props.product.price.toString(),
                 status: this.props.product.product_status,
-                // images: this.props.product.images,
                 images: []
             }
-            console.log(data)
             this.setState({data: data})
         }
     }
 
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = this.state.data.images.filter(i => i !== image);
-        this.setState({data})
+        let state_images = this.state.state_images.filter(i => i !== image);
+        this.setState({state_images})
     };
     handleDeleteImageProp = (event, image) => {
         event.preventDefault()
         this.props.imagesToDelete(image)
-        console.log(image)
-
     };
 
     handleImageClick = (event) => {
         event.preventDefault()
-
         this.hiddenFileInput.current.click();
     }
     handleCategoryChange = (event) => {
@@ -98,16 +80,9 @@ class NewProduct extends Form {
         event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
-        for (let i = 0; i < this.state.data.images.length; i++) {
-            fd.append("images", this.state.data.images[i], this.state.data.images[i].name);
+        for (let i = 0; i < this.state.state_images.length; i++) {
+            fd.append("images", this.state.state_images[i], this.state.state_images[i].name);
         }
-        console.log(this.props.delete_product_images.length)
-        // for (let i = 0; i < this.props.delete_product_images.length; i++) {
-        //     debugger
-        //     // fd.append("delete_images", this.props.delete_product_images[i]
-        //     //     // , this.props.delete_product_images[i].name
-        //     // );
-        // }
         fd.append("delete_images", this.props.delete_product_images);
         fd.append("title", this.state.data.title);
         fd.append("description", this.state.data.desc);
@@ -118,19 +93,16 @@ class NewProduct extends Form {
             return category.name === category_key;
         }).id}`);
         this.props.match.params.id && fd.append("product_key", this.props.match.params.id);
-        // console.log(this.props.categories.find(function (category) {
-        //     return category.name === category_key;
-        // }).id)
         this.props.match.params.id ? this.props.editProduct(fd, this.props) : this.props.addProduct(fd, this.props)
     }
 
 
     imageChange = (e) => {
-
         e.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = [...this.state.data.images, ...e.target.files]
-        this.setState({data});
+        let state_images = [...this.state.state_images, ...e.target.files]
+        this.setState({state_images});
+        e.target.value = ''
+
     };
 
     schema = {
@@ -200,15 +172,8 @@ class NewProduct extends Form {
         }
         return dict
     }
-    handleFieldChange = ({currentTarget: input}) => {
-        const data = {...this.state.data};
-        data[input.name] = input.value;
-        this.setState({data})
-    }
-
 
     render() {
-        // console.log(this.state.newProduct)
         const {product_id} = this.state
         return (
             <Fragment>
@@ -280,13 +245,33 @@ class NewProduct extends Form {
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>
                                     </div>
-                                    <div className="col s12 m6 mb3">
+                                    <div className="col s12 mb3">
                                         <div className="mv3">
-                                            <button className="btn btn-dark btn-lg"
-                                                    onClick={event => this.handleImageClick(event)}>
-                                                <i className="material-icons-outlined v-mid mr2">add_a_photo</i>
-                                                Add Photos
-                                            </button>
+                                            <div className="border-dotted rounded-xs mb3">
+                                                <div className="ma3">
+                                                    <div className="upload-data">
+                                                        <div className="flex items-center flex-wrap">
+                                                            <div className="mv2">
+                                                                <div style={{
+                                                                    color: '#082244',
+                                                                    fontFamily: 'var(--font-family-montserrat)'
+                                                                }}> {/*Drop files here or */} Upload files
+                                                                    manually by
+                                                                    clicking <strong><span>Upload Image</span></strong> button
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex-grow-1 mv2 tr">
+                                                                <button className="btn btn-primary btn-lg ml3"
+                                                                        onClick={event => this.handleImageClick(event)}>
+                                                                    <i className="v-mid material-icons mr1"
+                                                                       style={{fontSize: '18px'}}>cloud_upload</i> UPLOAD
+                                                                    IMAGE
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <input
                                                 type="file"
                                                 ref={this.hiddenFileInput}

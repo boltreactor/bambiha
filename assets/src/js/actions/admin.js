@@ -35,7 +35,6 @@ export const editCategory = (id, category, status, props) => dispatch => {
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
     bodyFormData.append('status', status);
-
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -183,6 +182,12 @@ export const getAllUsers = () => dispatch => {
         });
 };
 
+export const imagesToDelete = (imageToDelete) => dispatch => {
+    dispatch({
+        type: DELETE_PRODUCT_IMAGES,
+        imageToDelete: imageToDelete,
+    });
+};
 
 export const disableUser = (id, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -207,8 +212,8 @@ export const deleteOrder = (id, props) => dispatch => {
         .then(res => {
             props.history.push("/admin/orders")
         })
-
 };
+
 
 export const updateOrderStatus = (id, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;

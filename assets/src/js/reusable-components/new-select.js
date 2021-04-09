@@ -1,13 +1,11 @@
 import React, {Component, Fragment} from 'react';
 
 
-
 class NewSelect extends Component {
 
 
     render() {
-         const {onChange, data, value, name, placeholder} = this.props
-        debugger
+        const {onChange, data, value, name, placeholder} = this.props
         return (
              <span>
                  <select className="select-css"  name={name} id={name}
