@@ -6,58 +6,67 @@ import NoLabelTextfield from "../reusable-components/material-io/no-label-textfi
 import Select from "@material-ui/core/Select";
 import {InputLabel, MenuItem} from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
+import Joi from "joi-browser";
+import Form from "../reusable-components/form";
 
-class NewCategory extends Component {
+
+class NewCategory extends Form {
     constructor(props) {
         super(props);
-        this.props.getCategory(this.props.match.params.id)
+
+        this.props.match.params.id !== 'new' && this.props.getCategory(this.props.match.params.id)
         this.state = {
             category: "",
+            data: {
+                name: "",
+                status: 1,
+            },
             categoryId: this.props.match.params.id,
             selected: "enable",
+            errors: {}
         }
     }
 
+    schema = {
+        name: Joi.string().required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "any.empty":
+                        return {message: "Category is required"};
+                }
+            })
+        }),
+        user_key: Joi.allow("").optional(),
+        id: Joi.allow("").optional(),
+        status: Joi.allow("").optional(),
+        date: Joi.allow("").optional(),
+
+    }
     handleStatus = (event) => {
         event.preventDefault()
-        debugger
-        this.setState({selected: event.target.value})
+        const data = this.state.data
+        data["status"] = event.target.value === "enable" ? 1 : 0
+        this.setState({data})
     }
-
-
-    handleNameChange = ({currentTarget: input}) => {
-        this.setState({category: input.value})
-    }
-
     addToCategory = () => {
-        const category = this.state.category
+        debugger
+        const category = this.state.data.name
         const id = this.props.match.params.id
-        const status = this.state.selected === "enable" ? 1 : 0
+        const status = id === undefined ? this.state.data.status === "enable" ? 1 : 0 : this.state.data.status
         id === undefined ? this.props.addCategory(category, this.props) : this.props.editCategory(id, category, status, this.props)
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        this.props.match.params.id && nextProps.category && this.setState({category: nextProps.category.name})
-        // && this.props.category.status === 1 ? this.setState({selected: "disable"}) : this.setState({selected: "enable"})
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.id && this.props.category.name !== undefined && prevProps !== this.props) {
+            let data = {
+                name: this.props.category.name,
+                status: this.props.category.status
+            }
+            // this.props.match.params.id && prevProps !== this.props &&
+            this.setState({data: data})
+        }
     }
-
-
-    // componentDidMount() {
-    //     const categoryId = this.props.match.params.id
-    //     this.setState({categoryId})
-    //     this.props.getCategory(categoryId)
-    //     this.props.getAllCategories()
-    //     const categories=[...this.props.categories]
-    //     console.log(categories)
-    //     this.setState({categories})
-    //     const obj = this.props.categories.filter(category => (
-    //         this.props.match.params.id === category.id
-    //     ))
-    //     console.log(this.props.category)
-    //     const category = this.props.category
-    //     category !== undefined && this.setState({category: category.name})
-    // }
 
     render() {
         const status = [
@@ -79,10 +88,11 @@ class NewCategory extends Component {
                             <div className="mv4">
                                 <NoLabelTextfield
                                     type="text"
-                                    name="Category Name"
+                                    name="name"
                                     label="Category name"
-                                    onChange={this.handleNameChange}
-                                    value={this.state.category ? this.state.category : ''}/>
+                                    error={this.state.errors.name}
+                                    onChange={this.handleChange}
+                                    value={this.state.data.name ? this.state.data.name : ''}/>
 
                                 {this.props.match.params.id && <FormControl style={{
                                     minWidth: 325,
@@ -94,7 +104,7 @@ class NewCategory extends Component {
                                     <Select
                                         labelId="Enable/Disable"
                                         id="Enable/Disable"
-                                        value={this.state.selected}
+                                        value={this.state.data.status === 1 ? "enable" : "disable"}
                                         onChange={this.handleStatus}>
                                         {status.map((values) => (
                                             <MenuItem key={values}
@@ -106,7 +116,8 @@ class NewCategory extends Component {
                                 </FormControl>}
 
                                 <div className="mt4 mb4">
-                                    <button className="btn btn-primary btn-lg" onClick={this.addToCategory}>
+                                    <button className="btn btn-primary btn-lg" disabled={this.validateProduct()}
+                                            onClick={this.addToCategory}>
                                         <i className="v-mid material-icons mr1"
                                            style={{fontSize: '18px'}}>lock</i> Add
                                     </button>

@@ -19,15 +19,7 @@ class CustomTable extends Component {
             this.setState({class: "mdc-data-table__header-cell"})
         }
     }
-    // findCategory = (key) => {
-    //     debugger
-    //     console.log(this.props.categories.find(function (category) {
-    //         return category.id === key;
-    //     }).name)
-    //     return this.props.categories.find(function (category) {
-    //         return category.id === key;
-    //     }).name
-    // }
+
 
     render() {
         const data = [
@@ -55,6 +47,7 @@ class CustomTable extends Component {
                                                    role="columnheader" scope="col">{h.name}
                                         </th>
                                     })}
+
                                 </tr>
                                 </thead>
 
@@ -162,15 +155,15 @@ class CustomTable extends Component {
                            style={{fontSize: '16px'}}>edit</i>
                         Edit
                     </button>
-                    <button className="btn btn-outline-primary btn-sm mr3" onClick={this.props.onDisable}>
+                    {this.props.onDelete===undefined ? <button className="btn btn-outline-primary btn-sm mr3" onClick={this.props.onDisable}>
                         <i className="material-icons-outlined" style={{fontSize: "16px"}}>block</i>
                         ENABLE/DISABLE
-                    </button>
-                    {/*<button className="btn btn-outline-danger btn-sm">*/}
-                    {/*    <i className="material-icons-outlined"*/}
-                    {/*       style="font-size: 16px;color: var(--danger);">delete</i>*/}
-                    {/*    DELETE*/}
-                    {/*</button>*/}
+                    </button>:
+                    <button className="btn btn-outline-danger btn-sm" onClick={this.props.onDelete}>
+                        <i className="material-icons-outlined"
+                           style={{fontSize: 16+"px", color:" var(--danger)"}}>delete</i>
+                        DELETE
+                    </button>}
                 </div>
             </div>
 

@@ -8,7 +8,8 @@ import {
     ADMIN_ORDERS,
     USERS,
     HEADER_CATEGORIES,
-    EDIT_CATEGORY, USER_STATUS
+    EDIT_CATEGORY,
+    DELETE_PRODUCT_IMAGES
 } from "../actions/types";
 
 export const initialState = {
@@ -18,7 +19,6 @@ export const initialState = {
         phone: "",
         email: "",
     },
-    user_status: {},
     categories: [],
     category: {},
     products: [],
@@ -28,8 +28,9 @@ export const initialState = {
     notification_settings: null,
     msg: null,
     show: false,
-    users: {}
-
+    users: {},
+    delete_product_images: [],
+    product_images: []
 };
 
 export default function (state = initialState, action) {
@@ -56,7 +57,8 @@ export default function (state = initialState, action) {
         case ADMIN_PRODUCT: {
             return {
                 ...state,
-                product: action.product
+                product: action.product,
+                product_images: action.product.images
             }
         }
 
@@ -85,11 +87,12 @@ export default function (state = initialState, action) {
                 users: action.users
             }
         }
-
-        case USER_STATUS: {
+        case DELETE_PRODUCT_IMAGES: {
+            debugger
             return {
                 ...state,
-                user_status: action.user
+                delete_product_images: [...state.delete_product_images, action.imageToDelete],
+                product_images: state.product_images.filter(image => image !== action.imageToDelete && image)
             }
         }
 

@@ -50,6 +50,7 @@ import NewCategory from "../../admin/new_category";
 import NewProduct from "../../admin/new_product";
 import Checkout from "../../components/checkout";
 import AdminProtectedRoute from "../../components/adminProtectedRoutes";
+import BrandFolder from "../../admin/brand_folder";
 
 
 class App extends Component {
@@ -72,8 +73,10 @@ class App extends Component {
                     <AdminProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
                     <AdminProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
                     <AdminProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/brand-folder" exact render={(props) => <BrandFolder {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products/:id" exact render={(props) => <NewProduct {...props}/>}/>
                     <AdminProtectedRoute path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import Joi from 'joi-browser';
 
 class Form extends Component {
@@ -112,10 +112,11 @@ class Form extends Component {
     validateProduct = () => {
 
         const options = {abortEarly: false};
+        console.log(this.state.data)
+        
         const {error} = Joi.validate(this.state.data, this.schema, options);
         if (!error) return null;
         const errors = {};
-
         for (let item of error.details)
             if (errors[item.path[0]] === 'profile') {
                 errors[item.path[1]] = item.message;
@@ -195,6 +196,7 @@ class Form extends Component {
 
 
     validateProperty = ({name, value}) => {
+        
         const obj = {[name]: value};
         const schema = {[name]: this.schema[name]};
         const {error} = Joi.validate(obj, schema);
@@ -217,7 +219,7 @@ class Form extends Component {
         this.doSubmit(event);
     };
     handleChange = ({currentTarget: input}) => {
-
+        
         const errors = {...this.state.errors};
         const errorMessage = this.validateProperty(input);
         if (errorMessage) errors[input.name] = errorMessage;

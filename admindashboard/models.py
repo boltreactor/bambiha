@@ -96,6 +96,10 @@ class Products(ndb.Model):
         products = cls.query().order(-cls.date).fetch()
         for p in products:
             all_products.append({
+                # "category": {
+                #     "key": p.category_key,
+                #     "name": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None
+                # },
                 "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
                 "date": p.date,
                 "description": p.description,
@@ -107,29 +111,6 @@ class Products(ndb.Model):
             })
         return all_products
 
-    # @classmethod
-    # def get_new_products(cls, request):
-    #     ancestor_key = ndb.Key("Product", "product")
-    #     all_products = []
-    #     if request.query_params.get('category_key', None):
-    #         products = cls.query(cls.user_key == request.session.get('user'),
-    #                              cls.category_key == request.query_params['category_key'],
-    #                              ancestor=ancestor_key).fetch()
-    #     else:
-    #         products = cls.query(cls.user_key == request.session.get('user'), ancestor=ancestor_key).fetch()
-    #     for p in products:
-    #         all_products.append({
-    #             "category": cls.get_with_key(p.category_key).name,
-    #             "date": p.date,
-    #             "description": p.description,
-    #             "images": p.images,
-    #             "price": p.price,
-    #             "quantity": p.quantity,
-    #             "title": p.title,
-    #             "id": p.key.urlsafe()
-    #         })
-    #     return all_products
-
     @classmethod
     def edit_product(cls, request):
         product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
@@ -138,10 +119,18 @@ class Products(ndb.Model):
         product.category_key = request.POST.get('category_key')
         product.quantity = int(request.POST.get('quantity'))
         product.price = int(request.POST.get('price'))
+        product.product_status = int(request.POST.get('status'))
+        delete_images = request.POST.get('delete_images')
+        if delete_images:
+            images_to_delete = delete_images.split(",")
+            for image in images_to_delete:
+                product.images.remove(image)
+                product.put()
 
         files = request.FILES.getlist('images')
         if files:
-            product.images = []
+            if len(product.images) == 0:
+                product.images = []
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
@@ -156,12 +145,17 @@ class Products(ndb.Model):
         cls.algolia_search(product, request)
         product.put()
         all_products = [{
+            # "category": {
+            #     "key": product.category_key,
+            #     "name": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None
+            # },
             "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
             "date": product.date,
             "description": product.description,
             "images": product.images,
             "price": product.price,
             "quantity": product.quantity,
+            "product_status": product.product_status,
             "title": product.title,
             "id": product.key.urlsafe()
         }]
@@ -169,7 +163,23 @@ class Products(ndb.Model):
 
     @classmethod
     def get_product(cls, request):
-        return ndb.Key(urlsafe=request.query_params.get('product_key')).get()
+        product = ndb.Key(urlsafe=request.query_params.get('product_key')).get()
+        p = {
+            # "category": {
+            #     "key": product.category_key,
+            #     "name": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            # },
+            "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "date": product.date,
+            "description": product.description,
+            "images": product.images,
+            "price": product.price,
+            "quantity": product.quantity,
+            "title": product.title,
+            "product_status": product.product_status,
+            "id": product.key.urlsafe()
+        }
+        return p
 
     @classmethod
     def delete_product(cls, request):
@@ -201,7 +211,6 @@ class Products(ndb.Model):
         client = algoliasearch.Client("NAZL5D5N2H", "6b46e44428396a9af7db1a3ba527577e")
         index = client.init_index('search')
         results = index.search(request.GET.get('search'))
-
         for r in results["hits"]:
             all_products.append({
                 'title': r['title'],

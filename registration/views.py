@@ -103,7 +103,7 @@ def account_status(request):
     user = User.manage_status(request)
 
     return Response({
-        'status': status.HTTP_200_OK, 'message': 'Account status updated', 'token': to_json_ndb(user)
+        'status': status.HTTP_200_OK, 'message': 'Account status updated', 'user': to_json_ndb(user)
     })
 
 

@@ -7,7 +7,7 @@ import {
     DEL_PRODUCT,
     ADMIN_ORDERS,
     USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY
+    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES
 } from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
@@ -29,14 +29,13 @@ export const addCategory = (category, props) => dispatch => {
         })
 
 };
-
 export const editCategory = (id, category, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
     bodyFormData.append('status', status);
-    debugger
+
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -128,47 +127,12 @@ export const addProduct = (product, props) => dispatch => {
     )
 };
 
-export const editProduct = () => dispatch => {
-
-    axios.post("/auth/register/", user, {headers: Header})
+export const editProduct = (fd, props) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.post(`/admin/editproduct/`, fd, {headers: Header})
         .then(res => {
-                if (res.data.status === 1) {
-                    axios.post("/auth/login/", {
-                        email: user.email,
-                        password: user.password
-                    }, {headers: Header}).then(res => {
-                        localStorage.setItem("loginStatus", true)
-                        localStorage.setItem("token", res.data.user.token);
-                        dispatch({
-                            type: ERROR,
-                            error: ""
-                        });
-                        dispatch({
-                            type: LOGIN_SUCCESS,
-                            loginStatus: true
-                        });
-                    });
-                    dispatch({
-                        type: ERROR,
-                        error: ""
-                    });
-                    dispatch({
-                        type: SIGNUP,
-                        user: res.data.user
-                    });
-                } else if (res.data.status === 0) {
-                    dispatch({
-                        type: ERROR,
-                        error: res.data.message
-                    });
-                }
-
-            }
-        ).catch(err => {
-
-
-        }
-    )
+            props.history.push("/admin/products")
+        })
 };
 export const getAllProducts = (id) => dispatch => {
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -219,6 +183,21 @@ export const getAllUsers = () => dispatch => {
         });
 };
 
+
+export const disableUser = (id, status, props) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('user_key', id);
+    bodyFormData.append('status', status);
+    axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
+        .then(res => {
+            debugger
+            getAllUsers()
+            // props.history.push("/admin/users")
+        })
+
+};
+
 export const deleteOrder = (id, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
@@ -231,18 +210,6 @@ export const deleteOrder = (id, props) => dispatch => {
 
 };
 
-export const disableUser = (id, status, props) => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    let bodyFormData = new FormData();
-    bodyFormData.append('user_key', id);
-    bodyFormData.append('status', status);
-    axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
-        .then(res => {
-           props.history.push("/admin/users")
-        })
-
-};
-
 export const updateOrderStatus = (id, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
@@ -250,11 +217,7 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
     bodyFormData.append('status', status);
     axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
         .then(res => {
-            dispatch({
-                type: USER_STATUS,
-                user: res.data.token
-            });
-           props.history.push("/admin/orders")
+            props.history.push("/admin/orders")
         })
 
 };

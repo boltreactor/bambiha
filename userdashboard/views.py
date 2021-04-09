@@ -76,7 +76,10 @@ def getProducts(request):
         products = Products.query(ancestor=ancestor_key).fetch()
     for p in products:
         all_products.append({
-            "category": Products.get_with_key(p.category_key).name,
+            "category": {
+                "key": p.category_key,
+                "name": Products.get_with_key(p.category_key).name
+            },
             "date": p.date,
             "description": p.description,
             "images": p.images,

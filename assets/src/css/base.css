@@ -455,6 +455,10 @@ template {
     transition: transform .25s cubic-bezier(0.4, 0.0, 0.2, 1), visibility 0s linear 0s;
 }
 
+.main-wrapper .side-menu-panel.s {
+    width: 250px;
+}
+
 .side-menu-panel {
     overflow-x: hidden;
     overflow-y: auto;
@@ -481,6 +485,9 @@ template {
 @media (min-width: 1024px) {
     .main-wrapper .main {
         margin-left: 280px;
+    }
+    .main-wrapper .main.s {
+        margin-left: 250px;
     }
 }
 

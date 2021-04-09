@@ -14,26 +14,21 @@ class ManageOrders extends Component {
         Orders: true,
         HelpSupport: false,
         id: null,
-        status: 1
 
     }
 
     componentDidMount() {
         this.props.getAllOrders();
-
     }
 
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.props.orders && nextProps.orders && this.props.getAllOrders()
-    //
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     // Typical usage (don't forget to compare props):
-    //     if (this.props.orders !== prevProps.orders) {
-    //         this.props.getAllOrders();
-    //     }
-    // }
+        if (this.state.id !== prevState.id) {
+            debugger
+            this.props.getAllOrders();
+            this.setState({id: null})
+        }
+    }
 
     handleTab = (e) => {
         let name = e.target.text
@@ -60,19 +55,17 @@ class ManageOrders extends Component {
     }
 
     handleChangeOption = (event, id) => {
-         event.preventDefault();
+        event.preventDefault();
         // console.log(event.target.value, id);
-
         this.props.updateOrderStatus(id, event.target.value, this.props);
-        this.setState({status: event.target.value})
-        this.props.history.push("/admin/users")
+        this.setState({id})
 
     }
 
     render() {
 
         const headers = [{name: 'Sr. No.'}, {name: 'Order No.'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'},
-           {name: 'Email'}, {name: 'Phone no'},  {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
+            {name: 'Email'}, {name: 'Phone no'}, {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
 
         const {orders} = this.props;
 
@@ -80,7 +73,7 @@ class ManageOrders extends Component {
 
             {"name": "Pending", "status": 0},
             {"name": "Cancelled", "status": 1},
-            {"name": "Shipped", "status": 2 },
+            {"name": "Shipped", "status": 2},
             {"name": "Delivered", "status": 3},
 
         ];
@@ -129,7 +122,7 @@ class ManageOrders extends Component {
                                                     <div>
                                                         Orders
                                                         <span className="ml2"
-                                                                        style={{color: '#0258ff'}}>{orders.length}</span>
+                                                              style={{color: '#0258ff'}}>{orders.length}</span>
                                                     </div>
                                                     : "Orders Management" : "Help & Support"}</h3>
                                             </div>
@@ -139,123 +132,138 @@ class ManageOrders extends Component {
                                             <div>
                                                 <div className="tc">
                                                     {!orders.length > 0 ? <div>
-                                                        <header className="mt3 my-page">
-                                                            <h3 className="bold">Orders</h3>
-                                                        </header>
-                                                        <p>
-                                                            Orders management made easy. <br/>
-                                                            All Orders at the store will be shown here.
-                                                        </p>
-                                                    </div> :
+                                                            <header className="mt3 my-page">
+                                                                <h3 className="bold">Orders</h3>
+                                                            </header>
+                                                            <p>
+                                                                Orders management made easy. <br/>
+                                                                All Orders at the store will be shown here.
+                                                            </p>
+                                                        </div> :
                                                         // <CustomTable headers={headers}
                                                         //                   data={orders}
                                                         //                   onEdit={this.onEdit}
                                                         //                   onChange={this.handleRadioButton}
                                                         //                   id={this.state.id}/>
 
-                                                        <div className="custom-datatable overflow-x-auto overflow-y-hidden">
-                                                       <div className="mdc-data-table hide-scrollbar"
-                                                            data-mdc-auto-init="MDCDataTable">
-                                                            <div className="mdc-data-table__table-container">
-                                                             <table className="mdc-data-table__table" aria-label="Dessert calories">
-                                                               <thead>
-                                                                <tr className="mdc-data-table__header-row">
-                                                                 {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"*/}
-                                                                 {/* role="columnheader" scope="col">*/}
-                                                                 {/*</th>*/}
-                                                                  {headers.map((h, index) => {
-                                                                    return <th key={index} className="mdc-data-table__header-cell"
-                                                                        role="columnheader" scope="col">{h.name}
-                                                                    </th>
-                                                                  })}
-                                                                </tr>
+                                                        <div
+                                                            className="custom-datatable overflow-x-auto overflow-y-hidden">
+                                                            <div className="mdc-data-table hide-scrollbar"
+                                                                 data-mdc-auto-init="MDCDataTable">
+                                                                <div className="mdc-data-table__table-container">
+                                                                    <table className="mdc-data-table__table"
+                                                                           aria-label="Dessert calories">
+                                                                        <thead>
+                                                                        <tr className="mdc-data-table__header-row">
+                                                                            {/*<th className="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox"*/}
+                                                                            {/* role="columnheader" scope="col">*/}
+                                                                            {/*</th>*/}
+                                                                            {headers.map((h, index) => {
+                                                                                return <th key={index}
+                                                                                           className="mdc-data-table__header-cell"
+                                                                                           role="columnheader"
+                                                                                           scope="col">{h.name}
+                                                                                </th>
+                                                                            })}
+                                                                        </tr>
 
-                                                               </thead>
-                                                               <tbody className="mdc-data-table__content">
-                                                                {orders.map((item, index) => {
-                                                                  return <tr key={index} data-row-id="u0"
-                                                                       className="mdc-data-table__row transparent">
-                                                                       {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
-                                                                       {/*  <RadioGroup*/}
-                                                                       {/*    value={this.state.id}*/}
-                                                                       {/*    onChange={this.handleRadioButton}>*/}
-                                                                       {/*    <FormControlLabel value={item.id || item.order_key}*/}
-                                                                       {/*      control={<Radio/>}*/}
-                                                                       {/*     // label={item.id || item.order_key}*/}
-                                                                       {/*    />*/}
-                                                                       {/*  </RadioGroup>*/}
-                                                                       {/*</td>*/}
+                                                                        </thead>
+                                                                        <tbody className="mdc-data-table__content">
+                                                                        {orders.map((item, index) => {
+                                                                            return <tr key={index} data-row-id="u0"
+                                                                                       className="mdc-data-table__row transparent">
+                                                                                {/*<td className="mdc-data-table__cell mdc-data-table__cell--checkbox">*/}
+                                                                                {/*  <RadioGroup*/}
+                                                                                {/*    value={this.state.id}*/}
+                                                                                {/*    onChange={this.handleRadioButton}>*/}
+                                                                                {/*    <FormControlLabel value={item.id || item.order_key}*/}
+                                                                                {/*      control={<Radio/>}*/}
+                                                                                {/*     // label={item.id || item.order_key}*/}
+                                                                                {/*    />*/}
+                                                                                {/*  </RadioGroup>*/}
+                                                                                {/*</td>*/}
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{index}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row" id="u0">{index + 1}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.order_number}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{item.order_number}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
-                                                                          scope="row" id="u0">{item.total_price}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{item.total_price}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
-                                                                          scope="row" id="u0">{item.product_quantity}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{item.product_quantity}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.user.name}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row" id="u0">{item.user.name}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.user.email}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{item.user.email}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.phone_number}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{item.phone_number}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">{item.address}
-                                                                         </td>
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row" id="u0">{item.address}
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl"
-                                                                          scope="row" id="u0">
-                                                                             <NewSelect data={data}
-                                                                                        value={item.status}
-                                                                                        onChange={(e) => {
-                                                                                            this.handleChangeOption(e, item.order_key)
+                                                                                <td className="mdc-data-table__cell tl"
+                                                                                    scope="row" id="u0">
+                                                                                    <NewSelect data={data}
+                                                                                               value={item.status}
+                                                                                               onChange={(e) => {
+                                                                                                   this.handleChangeOption(e, item.order_key)
+                                                                                               }}
+                                                                                    />
+                                                                                </td>
+
+                                                                                <td className="mdc-data-table__cell tl">
+                                                                                    <button
+                                                                                        className="btn btn-primary mr3">
+                                                                                        Update
+                                                                                    </button>
+                                                                                    <button
+                                                                                        className="btn btn-outline-primary btn-sm mr3">
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{fontSize: '16px'}}>edit</i>
+                                                                                        Edit
+                                                                                    </button>
+                                                                                    <button
+                                                                                        className="btn btn-outline-danger btn-sm"
+                                                                                        onClick={(e) => {
+                                                                                            this.handleDelete(e, item.order_key)
                                                                                         }}
-                                                                             />
-                                                                         </td>
+                                                                                    >
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{
+                                                                                               fontSize: '16px',
+                                                                                               color: 'var(--danger)'
+                                                                                           }}>
+                                                                                            delete</i>
+                                                                                        DELETE
+                                                                                    </button>
+                                                                                </td>
 
-                                                                         <td className="mdc-data-table__cell tl">
-                                                                           <button className="btn btn-primary mr3">
-                                                                              Update
-                                                                           </button>
-                                                                           <button
-                                                                              className="btn btn-outline-primary btn-sm mr3">
-                                                                              <i className="material-icons-outlined"
-                                                                                 style={{fontSize: '16px'}}>edit</i>
-                                                                              Edit
-                                                                           </button>
-                                                                           <button
-                                                                              className="btn btn-outline-danger btn-sm"
-                                                                              onClick={(e) => {this.handleDelete(e, item.order_key)}}
-                                                                           >
-                                                                              <i className="material-icons-outlined"
-                                                                                 style={{fontSize: '16px', color: 'var(--danger)'}}>
-                                                                                  delete</i>
-                                                                              DELETE
-                                                                           </button>
-                                                                         </td>
-
-                                                                     </tr>
-                                                                })}
-                                                              </tbody>
-                                                             </table>
-                                                       </div>
-                                                    </div>
-                                                </div>
+                                                                            </tr>
+                                                                        })}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
                                                     }

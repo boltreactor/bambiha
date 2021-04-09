@@ -1935,6 +1935,17 @@ a {
     display: inline-block;
 }
 
+.dashboard-caption {
+    letter-spacing: 1.2px;
+    color: #0258ff;
+    padding-bottom: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    align-items: center;
+    font-size: 18px;
+    line-height: 24px;
+}
+
 /* Testimonial */
 .platform-testimonial {
     padding: 118px 0;
@@ -2396,6 +2407,10 @@ h4.accordion__tab:before {
 /* Form */
 .auth_page-auth {
     border-radius: 4px;
+}
+
+.r6 {
+    border-radius: 6px;
 }
 
 .auth_master-form {

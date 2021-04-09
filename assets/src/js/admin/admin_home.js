@@ -15,21 +15,15 @@ class AdminHome extends Component {
             <Fragment>
                 <div className="page my-page">
                     <div className="page__content">
-                        {/* */}
                         <div className="main-wrapper">
-                            {/* */}
                             <Navigation/>
-                            {/* No data placeholder */}
                             <main className="main"
                                   style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
                                 <div className="container l mb7">
-                                    {/* */}
                                     <header className="mb4 db">
                                         <h1 className="bold">Admin Panel</h1>
                                     </header>
-                                    {/* */}
                                     <div className="content">
-                                        {/* */}
                                         <div className="row">
                                             <div className="col s12 m6">
                                                 <div className="shadow border rounded-sm db mb5">
@@ -37,11 +31,6 @@ class AdminHome extends Component {
                                                         <div className="flex-grow-1">
                                                             <h2 className="bold">Weekly Sales Stats</h2>
                                                         </div>
-                                                        {/*
-                <div class="widget-label rounded-xs fw7">
-                  FREE
-                </div>
-                */}
                                                     </header>
                                                     <div className="content tc">
                                                         <div className="pa3">
@@ -55,14 +44,7 @@ class AdminHome extends Component {
                                                                     our sales analytics.
                                                                 </h3>
                                                             </div>
-                                                            {/*<div class="blue-cta mv3">*/}
-                                                            {/*  <a href="tel:00923165953458">*/}
-                                                            {/*    TALK TO SALES*/}
-                                                            {/*  </a>*/}
-                                                            {/*</div>*/}
-                                                            {/*<div class="mv3">*/}
-                                                            {/*  <div class="caption" style="font-size: .75rem">(+92)316-5953-458</div>*/}
-                                                            {/*</div>*/}
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -73,11 +55,7 @@ class AdminHome extends Component {
                                                         <div className="flex-grow-1">
                                                             <h2 className="bold">Notifications</h2>
                                                         </div>
-                                                        {/*
-                                                        <div class="widget-label rounded-xs fw7">
-                                                          FREE
-                                                        </div>
-                                                        */}
+
                                                     </header>
                                                     <div className="content tc">
                                                         <div className="pa3">
@@ -91,21 +69,11 @@ class AdminHome extends Component {
                                                                     will be shown here.
                                                                 </h3>
                                                             </div>
-                                                            {/*
-                                                              <div class="blue-cta mv3">
-                                                                <a href="tel:00923165953458">
-                                                                  TALK TO SALES
-                                                                </a>
-                                                              </div>
-                                                              <div class="mv3">
-                                                                <div class="caption" style="font-size: .75rem">(+92)316-5953-458</div>
-                                                              </div>*/}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* */}
                                         <div className="row">
                                             <div className="col s12">
                                                 <h1 className="bold pb4">Quick Access</h1>
@@ -146,7 +114,6 @@ class AdminHome extends Component {
                                                                     color: '#0258ff',
                                                                     fontSize: '36px'
                                                                 }}>shopping_bag</i>
-                                                                {/*<img src="/static/card.svg" alt="" style="width: 64px">*/}
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
@@ -206,29 +173,29 @@ class AdminHome extends Component {
                                                     </div>
                                                 </Link>
                                             </div>
-                                            {/*<div className="col s12 m4">*/}
-                                            {/*    <Link to="https://www.boltreactor.com/placement" target="_blank"*/}
-                                            {/*       className="link-mute">*/}
-                                            {/*        <div className="shadow-0 rounded-sm db mb5 pa3">*/}
-                                            {/*            <div className="flex">*/}
-                                            {/*                <div className="mh3">*/}
-                                            {/*                    <i className="material-icons-outlined" style={{*/}
-                                            {/*                        color: '#0258ff',*/}
-                                            {/*                        fontSize: '36px'*/}
-                                            {/*                    }}>live_help</i>*/}
-                                            {/*                </div>*/}
-                                            {/*                <div className="flex-grow-1" style={{minHeight: '136px'}}>*/}
-                                            {/*                    <h4 className="bold mb3">*/}
-                                            {/*                        Help & Support*/}
-                                            {/*                    </h4>*/}
-                                            {/*                    <p>*/}
-                                            {/*                        Show us your own unique designs with #bambihabyyou*/}
-                                            {/*                    </p>*/}
-                                            {/*                </div>*/}
-                                            {/*            </div>*/}
-                                            {/*        </div>*/}
-                                            {/*    </Link>*/}
-                                            {/*</div>*/}
+                                            <div className="col s12 m4">
+                                                <Link to="#"
+                                                   className="link-mute">
+                                                    <div className="shadow-0 rounded-sm db mb5 pa3">
+                                                        <div className="flex">
+                                                            <div className="mh3">
+                                                                <i className="material-icons-outlined" style={{
+                                                                    color: '#0258ff',
+                                                                    fontSize: '36px'
+                                                                }}>live_help</i>
+                                                            </div>
+                                                            <div className="flex-grow-1" style={{minHeight: '136px'}}>
+                                                                <h4 className="bold mb3">
+                                                                    Help & Support
+                                                                </h4>
+                                                                <p>
+                                                                    Show us your own unique designs with #bambihabyyou
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

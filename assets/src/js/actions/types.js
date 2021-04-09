@@ -40,4 +40,4 @@ export const USERS = "USERS";
 export const USER_PRODUCTS = "USER_PRODUCTS";
 export const EDIT_CATEGORY = "EDIT_CATEGORY";
 export const FAVORITES = "FAVORITES";
-export const USER_STATUS = "USER_STATUS";
+export const DELETE_PRODUCT_IMAGES = "DELETE_PRODUCT_IMAGES";
