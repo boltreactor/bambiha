@@ -3693,7 +3693,7 @@ ul.store-categories a:hover {
 }
 
 .media-images-gallery {
-    min-height: 40vh;
+    /*min-height: 40vh;*/
     max-height: 60vh;
     overflow: auto;
     scrollbar-width: thin;
