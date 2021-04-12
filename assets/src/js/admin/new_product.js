@@ -192,7 +192,7 @@ class NewProduct extends Form {
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="title" label="Product Title"
                                             // value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.title : "" : this.state.data.title}
-                                                          value={this.state.data.title ? this.state.data.title : ""}
+                                                          value={this.state.data.title}
                                                           placeholder="Enter product title"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.title}/>
@@ -205,7 +205,7 @@ class NewProduct extends Form {
                                             placeholder="Enter category name"
                                             data={this.getCategoriesList()}
                                             name="category_key"
-                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
+                                            value={this.state.data.category_key}
                                             onChange={this.handleCategoryChange}
                                         />
 
@@ -225,21 +225,21 @@ class NewProduct extends Form {
 
                                     <div className="col s12 mb3">
                                         <NoLabelTextfield name="desc" label="Product Description"
-                                                          value={this.state.data.desc ? this.state.data.desc : ""}
+                                                          value={this.state.data.desc}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="quantity" label="Product Quantity"
-                                                          value={this.state.data.quantity ? this.state.data.quantity : ""}
+                                                          value={this.state.data.quantity}
                                                           placeholder="Enter product quantity"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
                                         <NoLabelTextfield name="price" label="Price"
-                                                          value={this.state.data.price ? this.state.data.price : ""}
+                                                          value={this.state.data.price}
                                                           placeholder="Enter product price"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>

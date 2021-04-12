@@ -7,7 +7,7 @@ class OrderSelect extends Component {
         const {onChange, data, value} = this.props
         return (
             <span>
-             <select className="select-css" name="size" id="size" onChange={onChange}>
+             <select className="select-css" name="size" id="size" onChange={onChange} value={value}>
                  {data.map((status, index) => {
                      return <option key={index} value={status.status}>{status.name}</option>
                  })}
