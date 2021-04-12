@@ -165,10 +165,11 @@ class NewProduct extends Form {
     getCategoriesList = () => {
         var dict = [];
         for (var i = 0; i < this.props.categories.length; i++) {
-            dict.push({
-                "value": this.props.categories[i].name,
-                "key": this.props.categories[i].id
-            });
+            if (this.props.categories[i].status === 1)
+                dict.push({
+                    "value": this.props.categories[i].name,
+                    "key": this.props.categories[i].id
+                });
         }
         return dict
     }

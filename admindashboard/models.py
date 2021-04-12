@@ -22,7 +22,7 @@ class Category(ndb.Model):
     @classmethod
     def get_categories(cls, request):
         ancestor_key = ndb.Key("Category", "category")
-        cat = Category.query().order(-cls.date).fetch()
+        cat = Category.query().order(-cls.status).fetch()
         return cat
 
     @classmethod
@@ -93,7 +93,7 @@ class Products(ndb.Model):
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
         all_products = []
-        products = cls.query().order(-cls.date).fetch()
+        products = cls.query().fetch()
         for p in products:
             all_products.append({
                 # "category": {
