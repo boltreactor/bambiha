@@ -203,6 +203,7 @@ const mapStateToProps = state => ({
 export default withRouter(connect(mapStateToProps, {
     addNotificationSettings,
     setNotificationSettings,
+    getNotificationSettings
 
 
 })(GeneralSettings));
