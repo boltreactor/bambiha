@@ -9,7 +9,7 @@ import {
     USERS,
     HEADER_CATEGORIES,
     EDIT_CATEGORY,
-    DELETE_PRODUCT_IMAGES
+    DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS
 } from "../actions/types";
 
 export const initialState = {
@@ -88,11 +88,16 @@ export default function (state = initialState, action) {
             }
         }
         case DELETE_PRODUCT_IMAGES: {
-            debugger
             return {
                 ...state,
                 delete_product_images: [...state.delete_product_images, action.imageToDelete],
                 product_images: state.product_images.filter(image => image !== action.imageToDelete && image)
+            }
+        }
+        case EMPTY_DELETED_PRODUCTS: {
+            return {
+                ...state,
+                delete_product_images: []
             }
         }
 

@@ -7,7 +7,7 @@ import {
     DEL_PRODUCT,
     ADMIN_ORDERS,
     USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES
+    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS
 } from "./types";
 import {loadProgressBar} from 'axios-progress-bar';
 
@@ -35,7 +35,6 @@ export const editCategory = (id, category, status, props) => dispatch => {
     bodyFormData.append('category_key', id);
     bodyFormData.append('category', category);
     bodyFormData.append('status', status);
-
     axios.post(`/admin/editcategory/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/categories")
@@ -131,6 +130,9 @@ export const editProduct = (fd, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post(`/admin/editproduct/`, fd, {headers: Header})
         .then(res => {
+            dispatch({
+                type: EMPTY_DELETED_PRODUCTS,
+            });
             props.history.push("/admin/products")
         })
 };
@@ -183,6 +185,12 @@ export const getAllUsers = () => dispatch => {
         });
 };
 
+export const imagesToDelete = (imageToDelete) => dispatch => {
+    dispatch({
+        type: DELETE_PRODUCT_IMAGES,
+        imageToDelete: imageToDelete,
+    });
+};
 
 export const disableUser = (id, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -191,7 +199,7 @@ export const disableUser = (id, status, props) => dispatch => {
     bodyFormData.append('status', status);
     axios.post(`/admin/manage_status/`, bodyFormData, {headers: Header})
         .then(res => {
-            debugger
+
             getAllUsers()
             // props.history.push("/admin/users")
         })
@@ -207,8 +215,8 @@ export const deleteOrder = (id, props) => dispatch => {
         .then(res => {
             props.history.push("/admin/orders")
         })
-
 };
+
 
 export const updateOrderStatus = (id, status, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -221,3 +229,4 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
         })
 
 };
+

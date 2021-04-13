@@ -1,14 +1,12 @@
 import React, {Component, Fragment} from "react";
 import {withRouter, Link} from 'react-router-dom';
 import Form from "../reusable-components/form"
-import OutlinedTextfield from "../reusable-components/outlined-textfield";
-import {Label} from "@material-ui/icons";
-import LabelTextfield from "../reusable-components/material-io/textfield";
 import Joi from "joi-browser";
 import NoLabelTextfield from "../reusable-components/material-io/no-label-textfield";
 import {addProduct, editProduct, getProduct, getAllCategories, imagesToDelete} from "../actions/admin";
 import {connect} from "react-redux";
 import Select from "../reusable-components/select";
+import NewSelect from "../reusable-components/new-select";
 
 class NewProduct extends Form {
     constructor(props) {
@@ -26,21 +24,12 @@ class NewProduct extends Form {
                 status: 1,
                 images: []
             },
+            state_images: [],
             product_id: this.props.match.params.id
         }
         this.hiddenFileInput = React.createRef();
 
     }
-
-    // componentWillReceiveProps(nextProps, nextContext) {
-    //     this.props.match.params.id && nextProps.product && this.setState({newProduct: nextProps.product})
-    //
-    // }
-
-    // componentDidMount() {
-    //     this.props.getProduct(this.props.match.params.id)
-    //     this.props.getAllCategories()
-    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         debugger
@@ -53,30 +42,24 @@ class NewProduct extends Form {
                 quantity: this.props.product.quantity.toString(),
                 price: this.props.product.price.toString(),
                 status: this.props.product.product_status,
-                // images: this.props.product.images,
                 images: []
             }
-            console.log(data)
             this.setState({data: data})
         }
     }
 
     handleDeleteImageState = (event, image) => {
         event.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = this.state.data.images.filter(i => i !== image);
-        this.setState({data})
+        let state_images = this.state.state_images.filter(i => i !== image);
+        this.setState({state_images})
     };
     handleDeleteImageProp = (event, image) => {
         event.preventDefault()
         this.props.imagesToDelete(image)
-        console.log(image)
-
     };
 
     handleImageClick = (event) => {
         event.preventDefault()
-
         this.hiddenFileInput.current.click();
     }
     handleCategoryChange = (event) => {
@@ -99,16 +82,9 @@ class NewProduct extends Form {
         event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
-        for (let i = 0; i < this.state.data.images.length; i++) {
-            fd.append("images", this.state.data.images[i], this.state.data.images[i].name);
+        for (let i = 0; i < this.state.state_images.length; i++) {
+            fd.append("images", this.state.state_images[i], this.state.state_images[i].name);
         }
-        console.log(this.props.delete_product_images.length)
-        // for (let i = 0; i < this.props.delete_product_images.length; i++) {
-        //     debugger
-        //     // fd.append("delete_images", this.props.delete_product_images[i]
-        //     //     // , this.props.delete_product_images[i].name
-        //     // );
-        // }
         fd.append("delete_images", this.props.delete_product_images);
         fd.append("title", this.state.data.title);
         fd.append("description", this.state.data.desc);
@@ -119,19 +95,16 @@ class NewProduct extends Form {
             return category.name === category_key;
         }).id}`);
         this.props.match.params.id && fd.append("product_key", this.props.match.params.id);
-        // console.log(this.props.categories.find(function (category) {
-        //     return category.name === category_key;
-        // }).id)
         this.props.match.params.id ? this.props.editProduct(fd, this.props) : this.props.addProduct(fd, this.props)
     }
 
 
     imageChange = (e) => {
-
         e.preventDefault();
-        const data = {...this.state.data}
-        data["images"] = [...this.state.data.images, ...e.target.files]
-        this.setState({data});
+        let state_images = [...this.state.state_images, ...e.target.files]
+        this.setState({state_images});
+        e.target.value = ''
+
     };
 
     schema = {
@@ -194,22 +167,16 @@ class NewProduct extends Form {
     getCategoriesList = () => {
         var dict = [];
         for (var i = 0; i < this.props.categories.length; i++) {
-            dict.push({
-                "value": this.props.categories[i].name,
-                "key": this.props.categories[i].id
-            });
+            if (this.props.categories[i].status === 1)
+                dict.push({
+                    "value": this.props.categories[i].name,
+                    "key": this.props.categories[i].id
+                });
         }
         return dict
     }
-    handleFieldChange = ({currentTarget: input}) => {
-        const data = {...this.state.data};
-        data[input.name] = input.value;
-        this.setState({data})
-    }
-
 
     render() {
-        // console.log(this.state.newProduct)
         const {product_id} = this.state
         return (
             <Fragment>
@@ -226,53 +193,87 @@ class NewProduct extends Form {
                                 <form className="row" onSubmit={event => this.doSubmit(event)}
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="title" label="Product Title"
+                                        <NoLabelTextfield name="title" label="Product Title" autocomplete="off"
                                             // value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.title : "" : this.state.data.title}
-                                                          value={this.state.data.title ? this.state.data.title : ""}
+                                                          value={this.state.data.title}
                                                           placeholder="Enter product title"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.title}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <Select
-                                            id="category_key"
-                                            type="text"
+                                        <label className="label-text bold">Product Category <i
+                                            className="material-icons red" style={{fontSize: "7px"}}>star</i>
+                                        </label>
+                                        <NewSelect
+                                            placeholder="Enter category name"
+                                            data={this.getCategoriesList()}
                                             name="category_key"
-                                            options={this.getCategoriesList()}
+                                            value={this.state.data.category_key}
                                             onChange={this.handleCategoryChange}
-                                            value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}
-                                            error={this.state.errors.category_key}
                                         />
 
                                     </div>
+
+
+                                    {/*<Select*/}
+                                    {/*    id="category_key"*/}
+                                    {/*    type="text"*/}
+                                    {/*    name="category_key"*/}
+                                    {/*    options={this.getCategoriesList()}*/}
+                                    {/*    onChange={this.handleCategoryChange}*/}
+                                    {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
+                                    {/*    error={this.state.errors.category_key}*/}
+                                    {/*/>*/}
+
+
                                     <div className="col s12 mb3">
-                                        <NoLabelTextfield name="desc" label="Product Description"
-                                                          value={this.state.data.desc ? this.state.data.desc : ""}
+                                        <NoLabelTextfield name="desc" label="Product Description" autocomplete="off"
+                                                          value={this.state.data.desc}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="quantity" label="Product Quantity"
-                                                          value={this.state.data.quantity ? this.state.data.quantity : ""}
+                                        <NoLabelTextfield name="quantity" label="Product Quantity" autocomplete="off"
+                                                          value={this.state.data.quantity}
                                                           placeholder="Enter product quantity"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="price" label="Price"
-                                                          value={this.state.data.price ? this.state.data.price : ""}
+                                        <NoLabelTextfield name="price" label="Price" autocomplete="off"
+                                                          value={this.state.data.price}
                                                           placeholder="Enter product price"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.price}/>
                                     </div>
-                                    <div className="col s12 m6 mb3">
+                                    <div className="col s12 mb3">
                                         <div className="mv3">
-                                            <button className="btn btn-dark btn-lg"
-                                                    onClick={event => this.handleImageClick(event)}>
-                                                <i className="material-icons-outlined v-mid mr2">add_a_photo</i>
-                                                Add Photos
-                                            </button>
+                                            <div className="border-dotted rounded-xs mb3">
+                                                <div className="ma3">
+                                                    <div className="upload-data">
+                                                        <div className="flex items-center flex-wrap">
+                                                            <div className="mv2">
+                                                                <div style={{
+                                                                    color: '#082244',
+                                                                    fontFamily: 'var(--font-family-montserrat)'
+                                                                }}> {/*Drop files here or */} Upload files
+                                                                    manually by
+                                                                    clicking <strong><span>Upload Image</span></strong> button
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex-grow-1 mv2 tr">
+                                                                <button className="btn btn-primary btn-lg ml3"
+                                                                        onClick={event => this.handleImageClick(event)}>
+                                                                    <i className="v-mid material-icons mr1"
+                                                                       style={{fontSize: '18px'}}>cloud_upload</i> UPLOAD
+                                                                    IMAGE
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <input
                                                 type="file"
                                                 ref={this.hiddenFileInput}
@@ -282,53 +283,59 @@ class NewProduct extends Form {
                                                 name='images'
                                                 multiple={true}
                                                 style={{display: 'none'}}/>
-                                            <div className="photos my2">
-                                                {this.state.data.images.length > 0 ? this.state.data.images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={URL.createObjectURL(image)}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageState(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
-                                                {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
-                                                    return <div
-                                                        className="photos__cell"
-                                                        key={index}>
-                                                        <img
-                                                            src={image}
-                                                            style={{
-                                                                minHeight: '124px',
-                                                                width: '100%',
-                                                                height: '135px'
-                                                            }} alt=""/>
-                                                        <div className="photos__menu">
-                                                            <button
-                                                                className="button2 button2--icon"
-                                                                onClick={(e) => this.handleDeleteImageProp(e, image)}>
-                                                                <i className="material-icons"
-                                                                   style={{color: 'rgb(237, 239, 237)'}}>delete</i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                }) : null}
+                                            <div className="media-images-gallery hide-scrollbar">
+                                                <div className="h-auto overflow-auto"
+                                                     style={{overflowX: 'hidden'}}>
+                                                    <ul className="pl0 pr0 dib w-100">
+                                                        {this.state.state_images.length > 0 ? this.state.state_images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={URL.createObjectURL(image)}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                {/*<div className="photos__menu">*/}
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageState(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+                                                                {/*</div>*/}
+                                                            </li>
+                                                        }) : null}
+                                                        {product_id !== null && product_id !== undefined && Object.keys(this.props.product).length !== 0 && this.props.product.images.length > 0 ? this.props.product_images.map((image, index) => {
+                                                            return <li
+                                                                // className="photos__cell"
+                                                                key={index}>
+                                                                <figure>
+                                                                    <img
+                                                                        src={image}
+                                                                        style={{
+                                                                            minHeight: '124px',
+                                                                            width: '100%',
+                                                                            height: '135px'
+                                                                        }} alt=""/>
+                                                                </figure>
+                                                                <button className="btn round"
+                                                                        onClick={(e) => this.handleDeleteImageProp(e, image)}>
+                                                                    <i className="material-icons-outlined"
+                                                                       style={{color: '#fff'}}>delete</i>
+                                                                </button>
+
+                                                            </li>
+                                                        }) : null}
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col s12 mt3 mb3">
+                                    <div className="col s12 mb3">
 
                                         <button className="btn btn-primary btn-lg"
                                                 disabled={this.validateProduct()}

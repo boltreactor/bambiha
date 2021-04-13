@@ -8,6 +8,7 @@ import {InputLabel, MenuItem} from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import Joi from "joi-browser";
 import Form from "../reusable-components/form";
+import NewSelect from "../reusable-components/new-select";
 
 
 class NewCategory extends Form {
@@ -49,7 +50,6 @@ class NewCategory extends Form {
         this.setState({data})
     }
     addToCategory = () => {
-        debugger
         const category = this.state.data.name
         const id = this.props.match.params.id
         const status = id === undefined ? this.state.data.status === "enable" ? 1 : 0 : this.state.data.status
@@ -70,8 +70,8 @@ class NewCategory extends Form {
 
     render() {
         const status = [
-            'enable',
-            'disable',
+            {'value': 'enable'},
+            {'value': 'disable'},
         ];
         return (
             <Fragment>
@@ -90,6 +90,7 @@ class NewCategory extends Form {
                                     type="text"
                                     name="name"
                                     label="Category name"
+                                    autocomplete="off"
                                     error={this.state.errors.name}
                                     onChange={this.handleChange}
                                     value={this.state.data.name ? this.state.data.name : ''}/>
@@ -99,20 +100,30 @@ class NewCategory extends Form {
                                     // marginLeft: "10px",
                                     marginTop: "20px"
                                 }}>
-                                    <InputLabel
-                                        id="demo-simple-select-label">Status</InputLabel>
-                                    <Select
-                                        labelId="Enable/Disable"
-                                        id="Enable/Disable"
+                                    <label className="label-text bold">Status <i
+                                        className="material-icons red" style={{fontSize: "7px"}}>star</i>
+                                    </label>
+                                    <NewSelect
+                                        placeholder="Enable/Disable category"
+                                        data={status}
+                                        name="categoryStatus"
                                         value={this.state.data.status === 1 ? "enable" : "disable"}
-                                        onChange={this.handleStatus}>
-                                        {status.map((values) => (
-                                            <MenuItem key={values}
-                                                      value={values}>
-                                                {values}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
+                                        onChange={this.handleStatus}
+                                    />
+                                    {/*<InputLabel*/}
+                                    {/*    id="demo-simple-select-label">Status</InputLabel>*/}
+                                    {/*<Select*/}
+                                    {/*    labelId="Enable/Disable"*/}
+                                    {/*    id="Enable/Disable"*/}
+                                    {/*    value={this.state.data.status === 1 ? "enable" : "disable"}*/}
+                                    {/*    onChange={this.handleStatus}>*/}
+                                    {/*    {status.map((values) => (*/}
+                                    {/*        <MenuItem key={values}*/}
+                                    {/*                  value={values}>*/}
+                                    {/*            {values}*/}
+                                    {/*        </MenuItem>*/}
+                                    {/*    ))}*/}
+                                    {/*</Select>*/}
                                 </FormControl>}
 
                                 <div className="mt4 mb4">

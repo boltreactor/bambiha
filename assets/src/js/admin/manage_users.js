@@ -38,9 +38,10 @@ class ManageUsers extends Component {
         this.props.getAllUsers();
     }
 
+
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.user_id !== prevState.user_id) {
-            debugger
             this.props.getAllUsers();
             this.setState({user_id: null})
         }

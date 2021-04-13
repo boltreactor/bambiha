@@ -22,7 +22,7 @@ class Category(ndb.Model):
     @classmethod
     def get_categories(cls, request):
         ancestor_key = ndb.Key("Category", "category")
-        cat = Category.query().order(-cls.date).fetch()
+        cat = Category.query().order(-cls.status).fetch()
         return cat
 
     @classmethod
@@ -93,7 +93,7 @@ class Products(ndb.Model):
     def get_products(cls, request):
         ancestor_key = ndb.Key("Product", "product")
         all_products = []
-        products = cls.query().order(-cls.date).fetch()
+        products = cls.query().fetch()
         for p in products:
             all_products.append({
                 # "category": {
@@ -125,7 +125,7 @@ class Products(ndb.Model):
             images_to_delete = delete_images.split(",")
             for image in images_to_delete:
                 product.images.remove(image)
-                product.put()
+
 
         files = request.FILES.getlist('images')
         if files:
@@ -202,7 +202,7 @@ class Products(ndb.Model):
             'title': request.POST.get('title'),
             'description': request.POST.get('description'),
             'price': request.POST.get('price'),
-            'image': product.images[0]
+            'image': product.images[0] if product.images else None
         })
 
     @classmethod

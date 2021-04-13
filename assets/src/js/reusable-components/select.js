@@ -5,29 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from "@material-ui/core/InputLabel";
 class SelectText extends Component {
     render() {
-        const genders = [
-            {"value": "Male"},
-            {"value": "Female"},
-            {"value": "Neutral"},
-            {"value": "Other"},
-        ];
+
         const checkout_country = [
             {"value": "United States of America (USA)"},
             {"value": "United Kingdom (UK)"},
         ];
-        const open_status = [
-            {"value": "Opened"},
-            {"value": "Closed"}
-        ]
-        const languages = [
-            {value: "Urdu"},
-            {value: "English"},
-            {value: "Russian"},
-            {value: "Chineese"},
-            {value: "Arabic"},
-            {value: "German"},
-            {value: "Italian"}
-        ];
+
         const ITEM_HEIGHT = 48;
         const ITEM_PADDING_TOP = 8;
         const MenuProps = {
@@ -62,21 +45,14 @@ class SelectText extends Component {
                         MenuProps={MenuProps}
                     >
 
-                        {name === "gender" && genders.map((gender, id) => {
-                            return <MenuItem key={id} value={gender.value}>{gender.value}</MenuItem>
-                        }) ||
-                        name === "language" && languages.map((language, id) => {
-                            return <MenuItem key={id} value={language.value}>{language.value}</MenuItem>
-                        }) ||
-                        name === "open_status" && open_status.map((status, id) => {
-                            return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
-                        }) ||
-                        name === "checkout_country" && checkout_country.map((country, id) => {
-                            return <MenuItem key={id} value={country.value}>{country.value}</MenuItem>
-                        }) ||
-                        name === "checkout_currency" && options.map((status, id) => {
-                            return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
-                        }) ||
+                        {
+
+                        // name === "checkout_country" && checkout_country.map((country, id) => {
+                        //     return <MenuItem key={id} value={country.value}>{country.value}</MenuItem>
+                        // }) ||
+                        // name === "checkout_currency" && options.map((status, id) => {
+                        //     return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
+                        // }) ||
                             name === "category_key" && options.map((status, id) => {
                             return <MenuItem key={id} value={status.value}>{status.value}</MenuItem>
                         })}

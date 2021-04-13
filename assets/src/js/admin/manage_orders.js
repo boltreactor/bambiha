@@ -4,9 +4,10 @@ import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
 import {getAllOrders, deleteOrder, updateOrderStatus} from "../actions/admin";
 import {connect} from "react-redux";
-import CustomTable from "../reusable-components/custom-table";
-import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+// import CustomTable from "../reusable-components/custom-table";
+// import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import NewSelect from "../reusable-components/new-select";
+import OrderSelect from "../components/order_select";
 
 class ManageOrders extends Component {
 
@@ -22,9 +23,8 @@ class ManageOrders extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if (this.state.id !== prevState.id) {
-            debugger
             this.props.getAllOrders();
             this.setState({id: null})
         }
@@ -56,7 +56,6 @@ class ManageOrders extends Component {
 
     handleChangeOption = (event, id) => {
         event.preventDefault();
-        // console.log(event.target.value, id);
         this.props.updateOrderStatus(id, event.target.value, this.props);
         this.setState({id})
 
@@ -65,7 +64,7 @@ class ManageOrders extends Component {
     render() {
 
         const headers = [{name: 'Sr. No.'}, {name: 'Order No.'}, {name: 'Price'}, {name: 'Quantity'}, {name: 'User'},
-            {name: 'Email'}, {name: 'Phone no'}, {name: 'Address'}, {name: 'Status'}, {name: 'Action'}];
+            {name: 'Email'}, {name: 'Phone no'}, {name: 'Address'}, {name: 'Status'}];
 
         const {orders} = this.props;
 
@@ -189,7 +188,11 @@ class ManageOrders extends Component {
 
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row"
-                                                                                    id="u0">{item.order_number}
+                                                                                    id="u0">
+                                                                                    <Link
+                                                                                        to={`/admin/orders/${item.order_key}`}>
+                                                                                        {item.order_number}
+                                                                                    </Link>
                                                                                 </td>
 
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl"
@@ -222,40 +225,49 @@ class ManageOrders extends Component {
 
                                                                                 <td className="mdc-data-table__cell tl"
                                                                                     scope="row" id="u0">
-                                                                                    <NewSelect data={data}
-                                                                                               value={item.status}
-                                                                                               onChange={(e) => {
-                                                                                                   this.handleChangeOption(e, item.order_key)
-                                                                                               }}
-                                                                                    />
+
+                                                                                    <OrderSelect data={data}
+                                                                                                 value={item.status}
+                                                                                                 onChange={(e) => {
+                                                                                                     this.handleChangeOption(e, item.order_key)
+                                                                                                 }}/>
+
+                                                                                    {/*<NewSelect data={data}*/}
+                                                                                    {/*           value={item.status}*/}
+                                                                                    {/*           onChange={(e) => {*/}
+                                                                                    {/*               this.handleChangeOption(e, item.order_key)*/}
+                                                                                    {/*           }}*/}
+                                                                                    {/*/>*/}
                                                                                 </td>
 
-                                                                                <td className="mdc-data-table__cell tl">
-                                                                                    <button
-                                                                                        className="btn btn-primary mr3">
-                                                                                        Update
-                                                                                    </button>
-                                                                                    <button
-                                                                                        className="btn btn-outline-primary btn-sm mr3">
-                                                                                        <i className="material-icons-outlined"
-                                                                                           style={{fontSize: '16px'}}>edit</i>
-                                                                                        Edit
-                                                                                    </button>
-                                                                                    <button
-                                                                                        className="btn btn-outline-danger btn-sm"
-                                                                                        onClick={(e) => {
-                                                                                            this.handleDelete(e, item.order_key)
-                                                                                        }}
-                                                                                    >
-                                                                                        <i className="material-icons-outlined"
-                                                                                           style={{
-                                                                                               fontSize: '16px',
-                                                                                               color: 'var(--danger)'
-                                                                                           }}>
-                                                                                            delete</i>
-                                                                                        DELETE
-                                                                                    </button>
-                                                                                </td>
+                                                                                {/* Intentionally Commented */}
+                                                                                {/*<td className="mdc-data-table__cell tl">*/}
+                                                                                {/*    <button*/}
+                                                                                {/*        className="btn btn-primary mr3">*/}
+                                                                                {/*        Update*/}
+                                                                                {/*    </button>*/}
+                                                                                {/*    <button*/}
+                                                                                {/*        className="btn btn-outline-primary btn-sm mr3">*/}
+                                                                                {/*        <i className="material-icons-outlined"*/}
+                                                                                {/*           style={{fontSize: '16px'}}>edit</i>*/}
+                                                                                {/*        Edit*/}
+                                                                                {/*    </button>*/}
+                                                                                {/*    <button*/}
+                                                                                {/*        className="btn btn-outline-danger btn-sm"*/}
+                                                                                {/*        onClick={(e) => {*/}
+                                                                                {/*            this.handleDelete(e, item.order_key)*/}
+                                                                                {/*        }}*/}
+                                                                                {/*    >*/}
+                                                                                {/*        <i className="material-icons-outlined"*/}
+                                                                                {/*           style={{*/}
+                                                                                {/*               fontSize: '16px',*/}
+                                                                                {/*               color: 'var(--danger)'*/}
+                                                                                {/*           }}>*/}
+                                                                                {/*            delete</i>*/}
+                                                                                {/*        DELETE*/}
+                                                                                {/*    </button>*/}
+                                                                                {/*</td>*/}
+                                                                                {/* Intentionally Commented */}
 
                                                                             </tr>
                                                                         })}

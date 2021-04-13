@@ -100,7 +100,7 @@ def getProducts(request):
 
 @api_view(['GET'])
 def getCategoriesHeaders(request):
-    categories = Category.query().order(-Category.date).fetch(5)
+    categories = Category.query().order(-Category.status).fetch(5)
     if categories:
         return Response({
             'status': status.HTTP_200_OK, 'category': to_json_ndb(categories)
