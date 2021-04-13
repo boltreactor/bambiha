@@ -118,9 +118,9 @@ class User(ndb.Model):
             return ndb.Key(urlsafe=key).get()
 
     @classmethod
-    def make_admin(cls, request):
-        user = ndb.Key(urlsafe=request.POST['user_id']).get()
-        user.user_role = 2
+    def manage_admin_status(cls, request):
+        user = ndb.Key(urlsafe=request.POST['user_key']).get()
+        user.user_role = int(request.POST['user_role'])
         token = get_token(user)
         user.token = token
         user.put()
