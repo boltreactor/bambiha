@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
-import {checkout, viewCart} from "../actions/user";
+import {checkout, viewCart, getFavorite} from "../actions/user";
 import {connect} from "react-redux";
+import {Button} from "@material-ui/core";
 
 class Cart extends Component {
 
     componentDidMount() {
         this.props.viewCart();
+        this.props.getFavorite();
     }
 
     handleCheckout = () => {
@@ -15,6 +17,7 @@ class Cart extends Component {
     }
 
     render() {
+        // const Fav = this.props.favorites[0]
         return (
             <div className="page">
                 <div className="page__content">
@@ -116,23 +119,26 @@ class Cart extends Component {
                                     </div>
                                 </div>
                                 {/* */}
+                                {this.props.favorites !== undefined && this.props.favorites.length > 0 &&
                                 <div className="cart-or-bag mv4">
                                     <h3 className="mb3">Favourites</h3>
                                     <div className="cart-item ma0">
                                         <div className="flex mb3">
                                             <div className="mr2 mb3">
                                                 <Link to="#" className="link-mute">
-                                                    <img src="/static/show-1.jpeg" alt=""/>
+                                                    <img
+                                                        src={this.props.favorites[0].image ? this.props.favorites[0].image : "/static/img-noise.png"}
+                                                        alt=""/>
                                                 </Link>
                                             </div>
                                             <div className="flex-grow-1 pa2">
                                                 <div className="description">
                                                     <div className="flex mb2">
                                                         <div className="flex-grow-1 mr2">
-                                                            <h4>Nike Air Max 270</h4>
+                                                            <h4>{this.props.favorites[0].title}</h4>
                                                         </div>
                                                         <div>
-                                                            <h6>$150</h6>
+                                                            <h6>{this.props.favorites[0].price}</h6>
                                                         </div>
                                                     </div>
                                                     <p className="ma0" style={{fontSize: '16px'}}>
@@ -162,9 +168,11 @@ class Cart extends Component {
                                         </div>
                                     </div>
                                     <div className="mv3">
-                                        <Link to="#" className="fw4 link-mute link-dark">View all Favourites</Link>
+                                        <Link to="/favorites" className="fw4 link-mute link-dark">View all
+                                            Favourites</Link>
                                     </div>
-                                </div>
+                                </div>}
+
                             </div>
                             <div className="col s12 m4 l4">
                                 <div className="ml4-m ml4-l">
@@ -222,7 +230,8 @@ class Cart extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    cart: state.user.cart
+    cart: state.user.cart,
+    favorites: state.user.favorites
 })
 
-export default withRouter(connect(mapStateToProps, {viewCart, checkout})(Cart));
+export default withRouter(connect(mapStateToProps, {viewCart, checkout, getFavorite})(Cart));
