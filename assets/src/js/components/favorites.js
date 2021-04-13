@@ -46,10 +46,10 @@ class Favorites extends Component {
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
                                         {/*
-                <button class="btn btn-primary btn-lg">
-                  Continue Shopping
-                </button>
-                */}
+                                            <button class="btn btn-primary btn-lg">
+                                              Continue Shopping
+                                            </button>
+                                        */}
                                     </div>
                                 </header>
                                 {/* */}
