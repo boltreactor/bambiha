@@ -18,7 +18,7 @@ export const addToCart = (quantity, id, props) => dispatch => {
     bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/cart')
+            // props.history.push('/cart')
 
         }).catch(err => {
 
@@ -94,7 +94,7 @@ export const manageFavorite = (id, props) => dispatch => {
     bodyFormData.append('product_key', id);
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/favorites')
+            // props.history.push('/favorites')
 
         }).catch(err => {
 

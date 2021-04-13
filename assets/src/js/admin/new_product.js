@@ -191,7 +191,7 @@ class NewProduct extends Form {
                                 <form className="row" onSubmit={event => this.doSubmit(event)}
                                       encType="multipart/form-data">
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="title" label="Product Title"
+                                        <NoLabelTextfield name="title" label="Product Title" autocomplete="off"
                                             // value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.title : "" : this.state.data.title}
                                                           value={this.state.data.title}
                                                           placeholder="Enter product title"
@@ -225,21 +225,21 @@ class NewProduct extends Form {
 
 
                                     <div className="col s12 mb3">
-                                        <NoLabelTextfield name="desc" label="Product Description"
+                                        <NoLabelTextfield name="desc" label="Product Description" autocomplete="off"
                                                           value={this.state.data.desc}
                                                           placeholder="Enter product description"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.desc}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="quantity" label="Product Quantity"
+                                        <NoLabelTextfield name="quantity" label="Product Quantity" autocomplete="off"
                                                           value={this.state.data.quantity}
                                                           placeholder="Enter product quantity"
                                                           onChange={this.handleChange}
                                                           error={this.state.errors.quantity}/>
                                     </div>
                                     <div className="col s12 m6 mb3">
-                                        <NoLabelTextfield name="price" label="Price"
+                                        <NoLabelTextfield name="price" label="Price" autocomplete="off"
                                                           value={this.state.data.price}
                                                           placeholder="Enter product price"
                                                           onChange={this.handleChange}

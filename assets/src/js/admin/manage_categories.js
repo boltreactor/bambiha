@@ -80,10 +80,14 @@ class ManageCategory extends Component {
                                     <div className="tab-wrapper">
                                         {/* */}
                                         <header className="tab-header">
-                                            <Link to="#" className="tab-item link-mute" aria-selected="true">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.Categories}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Categories
                                             </Link>
-                                            <Link to="#" className="tab-item link-mute" aria-selected="false">
+                                            <Link to="#" className="tab-item link-mute"
+                                                  aria-selected={this.state.HelpSupport}
+                                                  onClick={(e) => this.handleTab(e)}>
                                                 Help & Support
                                             </Link>
                                         </header>

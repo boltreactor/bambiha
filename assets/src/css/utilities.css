@@ -10625,7 +10625,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     font-size: 15px;
     font-family: var(--font-family-montserrat);
     font-weight: 400;
-    color: #9e9595;
+    color: #5a5555;
     line-height: 1.58;
     padding: 10px 16px;
     box-sizing: border-box;
