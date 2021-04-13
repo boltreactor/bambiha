@@ -90,7 +90,7 @@ class TopAppBarDashboard extends Component {
                                                 </Link>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
-                                                    to="/e-store/dashboard">
+                                                    to="/dashboard">
                                                     <i className="material-icons-outlined v-mid">dashboard</i>
                                                     My Dashboard
                                                 </Link>
