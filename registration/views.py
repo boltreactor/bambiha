@@ -61,11 +61,16 @@ def login(request):
     if request.method == 'POST':
         # with client.context():
         message, status, user = User.authenticate_user(request)
-        if user:
-            user = user.to_dict()
-        return Response({
-            'status': status, 'message': message, 'user': user
-        }, status)
+        if bool(user.account_status):
+            if user:
+                user = user.to_dict()
+            return Response({
+                'status': status, 'message': message, 'user': user
+            }, status)
+        else:
+            return Response({
+                'status': status.HTTP_200_OK, 'message': 'User is Disabled, Contact admin', 'user': []
+            })
 
 
 @api_view(['GET', 'POST'])
@@ -109,9 +114,9 @@ def account_status(request):
 
 # make user role to admin and refreshes token.
 @api_view(['POST'])
-def make_admin(request):
+def manage_admin_status(request):
     if request.method == 'POST':
-        user = User.make_admin(request)
+        user = User.manage_admin_status(request)
         return Response({
             'status': status.HTTP_200_OK, 'message': 'Status Changed', 'user': to_json_ndb(user)
         })

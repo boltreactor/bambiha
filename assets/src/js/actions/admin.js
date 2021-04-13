@@ -203,7 +203,19 @@ export const disableUser = (id, status, props) => dispatch => {
             getAllUsers()
             // props.history.push("/admin/users")
         })
+};
 
+export const manageAdmin = (id, status, props) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('user_key', id);
+    bodyFormData.append('user_role', status);
+    axios.post(`/admin/manage-admin/`, bodyFormData, {headers: Header})
+        .then(res => {
+            debugger
+            getAllUsers()
+            // props.history.push("/admin/users")
+        })
 };
 
 export const deleteOrder = (id, props) => dispatch => {

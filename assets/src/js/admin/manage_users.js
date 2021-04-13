@@ -2,11 +2,12 @@ import React, {Component, Fragment} from "react";
 import {Link} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {getAllUsers, disableUser} from "../actions/admin";
+import {getAllUsers, disableUser, manageAdmin} from "../actions/admin";
 import {connect} from "react-redux";
 import CustomTable from "../reusable-components/custom-table";
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import equal from "fast-deep-equal";
+import OrderSelect from "../components/order_select";
 
 
 class ManageUsers extends Component {
@@ -16,7 +17,8 @@ class ManageUsers extends Component {
         HelpSupport: false,
         id: null,
         user_id: null,
-        account_status: 1
+        account_status: 1,
+        user_role: 1
     }
 
     handleTab = (e) => {
@@ -39,7 +41,6 @@ class ManageUsers extends Component {
     }
 
 
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.user_id !== prevState.user_id) {
             this.props.getAllUsers();
@@ -53,12 +54,26 @@ class ManageUsers extends Component {
         status ? account_status = 0 : account_status = 1
         this.props.disableUser(id, account_status, this.props);
         this.setState({account_status: account_status, user_id: id})
+    }
+
+    handleAdminStatus = (event, id, role) => {
+        event.preventDefault();
+        let user_role;
+        role === 2 ? user_role = 1 : user_role = 2
+        this.props.manageAdmin(id, user_role, this.props);
+        this.setState({user_role, user_id: id})
 
     }
 
     render() {
-        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}, {name: 'Status'}, {name: 'Action'}];
+        const headers = [{name: 'Sr. No.'}, {name: 'User name'}, {name: 'E-mail address'}, {name: 'Status'}, {name: 'Role'}, {name: 'Action'}];
         const {users} = this.props;
+        const data = [
+
+            {"name": "Make Admin", "status": 2},
+            {"name": "Remove Admin", "status": 1},
+
+        ];
         return (
             <Fragment>
                 <div className="page my-page">
@@ -102,7 +117,7 @@ class ManageUsers extends Component {
                                                     <div>
                                                         Users
                                                         <span className="ml2"
-                                                                        style={{color: '#0258ff'}}>{users.length}</span>
+                                                              style={{color: '#0258ff'}}>{users.length}</span>
                                                     </div>
                                                     : "Users Management" : "Help & Support"}</h3>
                                             </div>
@@ -184,6 +199,15 @@ class ManageUsers extends Component {
                                                                                                 style={{color: "#FF0000"}}
                                                                                                 id="u0">Disabled</td>
                                                                                     }
+                                                                                    {
+                                                                                        item.user_role === 2 ?
+                                                                                            <td className="mdc-data-table__cell tl"
+                                                                                                scope="row"
+                                                                                                id="u0">Admin</td> :
+                                                                                            <td className="mdc-data-table__cell tl"
+                                                                                                scope="row"
+                                                                                                id="u0">Customer</td>
+                                                                                    }
 
                                                                                     <td className="mdc-data-table__cell tl">
                                                                                         <button
@@ -196,6 +220,18 @@ class ManageUsers extends Component {
                                                                                                style={{fontSize: '16px'}}>block</i>
                                                                                             {item.account_status ? "DISABLE" : "ENABLE"}
                                                                                         </button>
+                                                                                        <button
+                                                                                            className="btn btn-outline-primary btn-sm"
+                                                                                            onClick={(e) => {
+                                                                                                this.handleAdminStatus(e, item.id, item.user_role)
+                                                                                            }}
+                                                                                        >
+                                                                                            <i className="material-icons-outlined"
+                                                                                               style={{fontSize: '16px'}}>block</i>
+                                                                                            {item.user_role === 2 ? "Remove Admin" : "Make Admin"}
+                                                                                        </button>
+
+
                                                                                         {/*<button*/}
                                                                                         {/*    className="btn btn-outline-danger btn-sm">*/}
                                                                                         {/*    <i className="material-icons-outlined"*/}
@@ -254,4 +290,4 @@ class ManageUsers extends Component {
 const mapStateToProps = (state) => ({
     users: state.admin.users
 })
-export default connect(mapStateToProps, {getAllUsers, disableUser})(ManageUsers);
+export default connect(mapStateToProps, {getAllUsers, disableUser, manageAdmin})(ManageUsers);
