@@ -26,7 +26,8 @@ class NoLabelTextfield extends Component {
             placeholder,
             className,
             value,
-            autoFocus
+            autoFocus,
+            autocomplete,
         } = this.props;
         return (
             <>
@@ -66,6 +67,7 @@ class NoLabelTextfield extends Component {
                            type={type} aria-label="Label" name={name}
                            autoFocus={autoFocus}
                            onChange={onChange}
+                           autoComplete={autocomplete}
                            onBlur={(e) => {
                                this.onBlur(e)
                            }}
