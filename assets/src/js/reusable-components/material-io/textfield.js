@@ -20,7 +20,6 @@ class LabelTextfield extends Component {
 
     render() {
         const {onChange, error, label, name, type, isHidden, autoFocus, onClick, value} = this.props;
-        console.log(value)
         return (
             <div className="mb2">
                 <div

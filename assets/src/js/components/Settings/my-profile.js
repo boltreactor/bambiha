@@ -45,7 +45,7 @@ class MyProfile extends Form {
             return {message: "Last Name is required"};
         }),
         account_type: Joi.allow("").optional(),
-        phone: Joi.string().trim().regex(/^$|^[0-9]{11}$/).required().error(errors => {
+        phone: Joi.string().trim().regex(/^$|^(\+92)|[0-9]{11}$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
                     case "any.required":

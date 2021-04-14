@@ -240,7 +240,7 @@ class ProductsBillings extends Component {
                                                 </div>}
                                         </div>
                                         {/* Taxes */}
-                                        <div className={this.state.Taxes ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div className={this.state.Taxes ? "" : "tab-no-data hide"}>
 
                                             {this.props.user_vat && this.props.user_vat.length > 0 ?
                                                 <div>

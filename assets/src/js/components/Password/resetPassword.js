@@ -46,8 +46,14 @@ class ResetPassword extends Form {
                                 </div>
                                 <div className="mb4 col">
                                     <form className="form-register">
-                                        <Textfield name="email" label="Enter your registered email" type="email" autoFocus={true} onChange={this.handleChange}
-                                               error={this.state.errors.email || this.props.error ? this.props.error_reset : null}/>
+                                        <Textfield
+                                            name="email"
+                                            label="Enter your registered email"
+                                            type="email"
+                                            onChange={this.handleChange}
+                                            value={this.state.data.email}
+                                            error={this.state.errors.email || this.props.error ? this.props.error_reset : null}
+                                            autoFocus={true}/>
                                         <div className="mv2 pt3">
                                             <button className="btn btn-xl btn-primary btn-block text-white btn-shadow"
                                                     onClick={this.handleSubmit}>SUBMIT
@@ -61,8 +67,8 @@ class ResetPassword extends Form {
                                 <span onClick={this.props.history.goBack}>
 
                                         <i
-                                        className="material-icons-outlined v-mid mr1"
-                                        style={{color: '#0258ff', fontSize: '15px'}}>arrow_back_ios</i>
+                                            className="material-icons-outlined v-mid mr1"
+                                            style={{color: '#0258ff', fontSize: '15px'}}>arrow_back_ios</i>
                                         <span>Back to Login</span>
 
                                 </span>
@@ -74,11 +80,11 @@ class ResetPassword extends Form {
                                     <span className="mr2" style={{fontSize: '.875rem'}}>2021</span>
                                     <span className="dot"/>
                                     <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}}
-                                       title="Terms of Service" to="/terms-of-service" target="_blank">Terms of
+                                          title="Terms of Service" to="/terms-of-service" target="_blank">Terms of
                                         Service</Link>
                                     <span className="dot"/>
                                     <Link className="di mh2 fw4" style={{fontSize: '.875rem', color: '#576c77'}}
-                                       title="Terms of Service" to="/privacy-policy" target="_blank">Privacy
+                                          title="Terms of Service" to="/privacy-policy" target="_blank">Privacy
                                         Policy</Link>
                                 </div>
                             </div>
