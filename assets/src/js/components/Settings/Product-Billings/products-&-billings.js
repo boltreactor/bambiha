@@ -98,7 +98,7 @@ class ProductsBillings extends Component {
                                         </Link>
                                     </header>
                                     <div className="tab-content">
-                                        <div className={this.state.Payments ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div className={this.state.Payments ? "" : "tab-no-data hide"}>
                                             {this.props.user_cards ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
@@ -165,7 +165,7 @@ class ProductsBillings extends Component {
 
 
                                         {/* Payouts */}
-                                        <div className={this.state.Payouts ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div className={this.state.Payouts ? "" : "tab-no-data hide"}>
                                             {this.props.user_banks ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">

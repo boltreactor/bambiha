@@ -7,9 +7,9 @@ import {connect} from "react-redux";
 import {getProduct} from "../actions/admin";
 
 class Favorites extends Component {
-       state = {
+    state = {
         Favorites: true,
-        HelpSupport:false
+        HelpSupport: false
 
 
     }
@@ -24,11 +24,11 @@ class Favorites extends Component {
     }
 
     componentDidMount() {
-     this.props.getFavorite();
+        this.props.getFavorite();
     }
 
     render() {
-           const {favorites} = this.props;
+        const {favorites} = this.props;
         return (
 
             <div className="page">
@@ -60,7 +60,8 @@ class Favorites extends Component {
                                               onClick={(e) => this.handleTab(e)}>
                                             Favorites
                                         </Link>
-                                        <Link to="#" className="tab-item link-mute" aria-selected={this.state.HelpSupport}
+                                        <Link to="#" className="tab-item link-mute"
+                                              aria-selected={this.state.HelpSupport}
                                               onClick={(e) => this.handleTab(e)}>
                                             Help &amp; Support
                                         </Link>
@@ -68,60 +69,73 @@ class Favorites extends Component {
                                     {/* */}
                                     <div className="tab-content">
                                         <div className="mb4">
-                                            <h3 className="bold">{this.state.Favorites===true ? "Favorites": "Help & Support"}</h3>
+                                            <h3 className="bold">{this.state.Favorites === true ? "Favorites" : "Help & Support"}</h3>
                                         </div>
 
                                         {/* Call to action - Favourites */}
                                         {this.state.Favorites &&
                                         <div>
-                                            {!favorites.length>0 ?
+                                            {!favorites.length > 0 ?
                                                 <div className="tc">
-                                                <header className="mt3 my-page">
-                                                    <h3 className="bold">My favourites</h3>
-                                                </header>
-                                                <p>
-                                                    Items added to your Favorites will be saved here.
-                                                </p>
-                                                <div className="mv3">
-                                                    <button className="btn btn-primary btn-lg">
-                                                        <i className="material-icons-outlined">shopping_cart</i> Continue
-                                                        Shopping
-                                                    </button>
-                                                </div>
-                                            </div> :
+                                                    <header className="mt3 my-page">
+                                                        <h3 className="bold">My favourites</h3>
+                                                    </header>
+                                                    <p>
+                                                        Items added to your Favorites will be saved here.
+                                                    </p>
+                                                    <div className="mv3">
+                                                        <Link to="/" className="link-mute">
+                                                            <button className="btn btn-primary btn-lg">
+                                                                <i className="material-icons-outlined">shopping_cart</i> Continue
+                                                                Shopping
+                                                            </button>
+                                                        </Link>
+                                                    </div>
+                                                </div> :
                                                 <div>
                                                     <section className="cart-or-bag mv4">
-                                                         {favorites && favorites.map((item, index) => {
-                                                               return <div key={index} className="cart-item ma0">
-                                                            <div className="flex mb3">
-                                                          <div className="mr2 mb3">
-                                                            <Link to="#" className="link-mute">
-                                                             <img src={item.image? item.image : "/static/img-noise.png"} alt="" />
-                                                            </Link>
-                                                          </div>
-                                                        <div className="flex-grow-1 pa2">
-                                                         <div className="description">
-                                                           <div className="flex flex-wrap mb2">
-                                                             <div className="flex-grow-1 mr2">
-                                                                <h4>{item.title}</h4>
-                                                             </div>
-                                                           <div>
-                                                             <h6>{item.price}</h6>
-                                                           </div>
-                                                         </div>
-                                                          {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
-                                                          {/*   Men's Shoe*/}
-                                                          {/*</p>*/}
-                                                     </div>
-                                                       <div className="actions">
-                                                          <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Cart</Link>
-                                                          <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>
-                                                     </div>
-                                                     </div>
-                                                 </div>
+                                                        {favorites && favorites.map((item, index) => {
+                                                            return <div key={index} className="cart-item ma0">
+                                                                <div className="flex mb3">
+                                                                    <div className="mr2 mb3">
+                                                                        <Link to="#" className="link-mute">
+                                                                            <img
+                                                                                src={item.image ? item.image : "/static/img-noise.png"}
+                                                                                alt=""/>
+                                                                        </Link>
+                                                                    </div>
+                                                                    <div className="flex-grow-1 pa2">
+                                                                        <div className="description">
+                                                                            <div className="flex flex-wrap mb2">
+                                                                                <div className="flex-grow-1 mr2">
+                                                                                    <h4>{item.title}</h4>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <h6>{item.price}</h6>
+                                                                                </div>
+                                                                            </div>
+                                                                            {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
+                                                                            {/*   Men's Shoe*/}
+                                                                            {/*</p>*/}
+                                                                        </div>
+                                                                        <div className="actions">
+                                                                            <Link to="#" className="link-dark mr3 fw4"
+                                                                                  style={{
+                                                                                      color: 'var(--space-gray)',
+                                                                                      fontSize: '16px'
+                                                                                  }}>Move to Cart</Link>
+                                                                            <Link to="#" className="link-dark fw4"
+                                                                                  style={{
+                                                                                      color: 'var(--space-gray)',
+                                                                                      fontSize: '16px'
+                                                                                  }}>Remove</Link>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                            </div>})}
-                                         </section>
+                                                            </div>
+                                                        })}
+                                                    </section>
                                                 </div>}
 
                                         </div>}
@@ -143,7 +157,8 @@ class Favorites extends Component {
                                         {/*    </div>*/}
                                         {/*</div>*/}
 
-                                          <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
+                                        <div
+                                            className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                             <div className="tc">
                                                 <header className="mt3 my-page">
                                                     <h3 className="bold">Help &amp; Support</h3>
