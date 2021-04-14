@@ -146,6 +146,7 @@ export const resendEmail = (email) => dispatch => {
 export const resetPassword = (email) => dispatch => {
     axios.post('/auth/forgot/', {email}, {headers: Header})
         .then(res => {
+            debugger
             if (res.status === 200) {
 
                 dispatch({

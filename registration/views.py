@@ -1,17 +1,16 @@
-from django.contrib.auth.hashers import make_password
-from rest_framework.decorators import api_view
-from bambiha.utils import to_json_ndb, get_token
-from .models import User, NotificationSettings
-from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
 import jwt
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
+from django.views.decorators.csrf import csrf_exempt
 from google.cloud import ndb
 from rest_framework import status
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.views import View
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from sendgrid import SendGridAPIClient
-from django.conf import settings
 from sendgrid.helpers.mail import Mail
+
+from bambiha.utils import to_json_ndb, get_token
+from .models import User, NotificationSettings
 
 
 @csrf_exempt
