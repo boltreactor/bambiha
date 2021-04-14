@@ -110,7 +110,7 @@ class App extends Component {
                     <Route path='/check-email' render={(props) => <CheckEmail {...props}/>}/>
                     <Route path='/verify-email/:uid/:token' render={(props) => <VerifyEmail {...props}/>}/>
                     <Route path='/resend/verify-email' render={(props) => <ResendEmail {...props}/>}/>
-                    <ProtectedRoute path='/logout' render={(props) => <Logout {...props}/>}/>
+                    <Route path='/logout' render={(props) => <Logout {...props}/>}/>
                     <Route exact path='/resend/new-password' render={(props) => <ResendPassword {...props}/>}/>
                     <Route exact path='/settings' render={(props) => <SettingHome{...props}/>}/>
                     <ProtectedRoute exact path='/settings/notifications'
