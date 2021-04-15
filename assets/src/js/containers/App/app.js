@@ -70,12 +70,16 @@ class App extends Component {
                 <Header loginStatus={this.props.loginStatus}/>
                 <Switch>
                     <AdminProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
-                    <AdminProtectedRoute path="/admin/categories" exact render={(props) => <ManageCategory {...props}/>}/>
-                    <AdminProtectedRoute path="/admin/categories/new" exact render={(props) => <NewCategory {...props}/>}/>
-                    <AdminProtectedRoute path="/admin/categories/:id" exact render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories" exact
+                                         render={(props) => <ManageCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/new" exact
+                                         render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/:id" exact
+                                         render={(props) => <NewCategory {...props}/>}/>
                     <AdminProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
                     <AdminProtectedRoute path="/admin/orders/:id" exact render={(props) => <OrderDetail {...props}/>}/>
-                    <AdminProtectedRoute path="/admin/brand-folder" exact render={(props) => <BrandFolder {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/brand-folder" exact
+                                         render={(props) => <BrandFolder {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
                     <AdminProtectedRoute path="/admin/products/:id" exact render={(props) => <NewProduct {...props}/>}/>
@@ -101,8 +105,10 @@ class App extends Component {
                     <Route path='/create-payout' render={(props) => <AddPayout {...props}/>}/>
                     <Route path='/create-vat' render={(props) => <AddVat {...props}/>}/>
                     <Route path='/edit-vat/:vat_id' exact render={(props) => <AddVat {...props}/>}/>
-                    <Route exact path='/account-settings/product-and-billings'
-                           render={(props) => <ProductsBillings {...props}/>}/>
+                    <ProtectedRoute exact path='/account-settings/product-and-billings/:tab'
+                                    render={(props) => <ProductsBillings {...props}/>}/>
+                    <ProtectedRoute exact path='/account-settings/product-and-billings'
+                                    render={(props) => <ProductsBillings {...props}/>}/>
                     <ProtectedRoute exact path='/settings/personal-info'
                                     render={(props) => <EditPersonalInfo {...props}/>}/>
                     <ProtectedRoute exact path='/checkout' render={(props) => <Checkout {...props}/>}/>

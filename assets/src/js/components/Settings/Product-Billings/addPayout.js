@@ -33,8 +33,9 @@ const AddBankAccount = (props) => {
             account_holder_type: 'individual',
         });
         console.log(token, error)
+        debugger
         const response = await props.addBank(token.id)
-        props.history.push('/account-settings/product-and-billings')
+        props.history.push('/account-settings/product-and-billings/payouts')
     }
 
     return (

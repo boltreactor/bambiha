@@ -26,7 +26,7 @@ class SettingsDrawer extends Component {
                             </NavLink>
                         </li>
                         <li className="item">
-                            <NavLink className="db text-decoration-none" exact activeClassName="item-active" to="/account-settings/product-and-billings">
+                            <NavLink className="db text-decoration-none" activeClassName="item-active" to="/account-settings/product-and-billings">
                                 <i className="material-icons-outlined v-mid mr2">monetization_on</i>
                                 <span>Products & Billing</span>
                             </NavLink>
