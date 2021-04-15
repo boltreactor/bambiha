@@ -143,6 +143,7 @@ class Order(ndb.Model):
                 all_items.append({
                     "price": item.price,
                     "title": item.product_key.get().title,
+                    "product_key": item.product_key,
                     "quantity": item.quantity,
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
