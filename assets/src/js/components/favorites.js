@@ -42,7 +42,7 @@ class Favorites extends Component {
                                 {/* */}
                                 <header className="mb4 db flex items-center flex-wrap">
                                     <div className="mb4 mb0-m mb0-l my-page">
-                                        <h1 className="bold">My Orders</h1>
+                                        <h1 className="bold">My Favourites</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
                                         {/*

@@ -38,12 +38,14 @@ class Cart(ndb.Model):
         cart_products = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
         products = []
         for p in cart_products:
+            item = p.product_key.get()
             products.append({
-                'title': p.product_key.get().title,
-                'price': p.product_key.get().price,
+                'title': item.title,
+                'price': item.price,
                 'quantity': p.quantity,
-                'image': p.product_key.get().images[0] if p.product_key.get().images else None,
-                'store_user_key': p.product_key.get().user_key
+                'product_key': p.product_key.urlsafe().decode(),
+                'image': item.images[0] if item.images else None,
+                'store_user_key': item.user_key
             })
 
         return products
@@ -252,7 +254,7 @@ class Favorites(ndb.Model):
             item = p.product_key.get()
             products.append({
                 'title': item.title,
-                'product_key': item,
+                'product_key': item.key.urlsafe().decode(),
                 'price': item.price,
                 'image': item.images[0] if item.images else None,
             })
