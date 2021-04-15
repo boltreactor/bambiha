@@ -93,7 +93,7 @@ class Order(ndb.Model):
                     "price": item.price,
                     "title": item.product_key.get().title,
                     "quantity": item.quantity,
-                    "product_key": item.product_key,
+                    "product_key": item.product_key.urlsafe().decode(),
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
 
@@ -145,7 +145,7 @@ class Order(ndb.Model):
                 all_items.append({
                     "price": item.price,
                     "title": item.product_key.get().title,
-                    "product_key": item.product_key,
+                    "product_key": item.product_key.urlsafe().decode(),
                     "quantity": item.quantity,
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
@@ -213,7 +213,7 @@ class OrderItems(ndb.Model):
             all_items.append({
                 "price": item.price,
                 "title": product.title,
-                "product_key": item.product_key,
+                "product_key": item.product_key.urlsafe().decode(),
                 "quantity": item.quantity,
                 "image": product.images[0] if product.images else None
             })
