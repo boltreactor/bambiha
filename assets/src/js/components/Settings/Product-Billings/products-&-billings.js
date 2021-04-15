@@ -72,7 +72,13 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined &&
+                                        {this.props.match.params.tab === "payments" &&
+                                        <Link to="/create-payment">
+                                            <button className="btn btn-primary btn-lg">
+                                                Add Payment Method
+                                            </button>
+                                        </Link>}
+                                        {this.props.match.params.tab === undefined &&
                                         <Link to="/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method

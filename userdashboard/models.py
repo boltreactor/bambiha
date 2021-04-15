@@ -91,6 +91,7 @@ class Order(ndb.Model):
                     "price": item.price,
                     "title": item.product_key.get().title,
                     "quantity": item.quantity,
+                    "product_key": item.product_key,
                     "image": item.product_key.get().images[0] if item.product_key.get().images else None
                 })
 
@@ -205,11 +206,13 @@ class OrderItems(ndb.Model):
             OrderItems.order_key == OrderItems.get_with_key(request.POST.get('order_key')).key)
         all_items = []
         for item in order_items:
+            product = item.product_key.get()
             all_items.append({
                 "price": item.price,
-                "title": item.product_key.get().title,
+                "title": product.title,
+                "product_key": item.product_key,
                 "quantity": item.quantity,
-                "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                "image": product.images[0] if product.images else None
             })
 
         return all_items
@@ -245,10 +248,12 @@ class Favorites(ndb.Model):
         favorites_products = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
         products = []
         for p in favorites_products:
+            item = p.product_key.get()
             products.append({
-                'title': p.product_key.get().title,
-                'price': p.product_key.get().price,
-                'image': p.product_key.get().images[0] if p.product_key.get().images else None,
+                'title': item.title,
+                'product_key': item,
+                'price': item.price,
+                'image': item.images[0] if item.images else None,
             })
 
         return products
