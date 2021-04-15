@@ -9,6 +9,7 @@ class ProductsBillings extends Component {
         this.props.getBanks();
         this.props.getCards();
         this.props.getVAT();
+        debugger
         let name = this.props.match.params.tab
         if (name === undefined)
             name = "payments"
@@ -71,19 +72,19 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.state.Payments === true &&
+                                        {this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined &&
                                         <Link to="/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.state.Payouts === true &&
+                                        {this.props.match.params.tab === "payouts" &&
                                         <Link to="/create-payout">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payout Method
                                             </button>
                                         </Link>}
-                                        {this.state.Taxes === true &&
+                                        {this.props.match.params.tab === "taxes" &&
                                         <Link to="/create-vat">
                                             <button className="btn btn-primary btn-lg">
                                                 Add VAT ID Number
@@ -95,22 +96,23 @@ class ProductsBillings extends Component {
                                     <header className="tab-header">
                                         <Link to="/account-settings/product-and-billings/payments"
                                               className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                              aria-selected={this.state.Payments}>
+                                              aria-selected={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined}>
                                             Payments
                                         </Link>
                                         <Link to="/account-settings/product-and-billings/payouts"
                                               className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                              aria-selected={this.state.Payouts}>
+                                              aria-selected={this.props.match.params.tab === "payouts"}>
                                             Payouts
                                         </Link>
                                         <Link to="/account-settings/product-and-billings/taxes"
                                               className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                              aria-selected={this.state.Taxes}>
+                                              aria-selected={this.props.match.params.tab === "taxes"}>
                                             Taxes
                                         </Link>
                                     </header>
                                     <div className="tab-content">
-                                        <div className={this.state.Payments ? "" : "tab-no-data hide"}>
+                                        <div
+                                            className={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined ? "" : "tab-no-data hide"}>
                                             {this.props.user_cards ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
@@ -177,7 +179,8 @@ class ProductsBillings extends Component {
 
 
                                         {/* Payouts */}
-                                        <div className={this.state.Payouts ? "" : "tab-no-data hide"}>
+                                        <div
+                                            className={this.props.match.params.tab === "payouts" ? "" : "tab-no-data hide"}>
                                             {this.props.user_banks ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
@@ -252,7 +255,8 @@ class ProductsBillings extends Component {
                                                 </div>}
                                         </div>
                                         {/* Taxes */}
-                                        <div className={this.state.Taxes ? "" : "tab-no-data hide"}>
+                                        <div
+                                            className={this.props.match.params.tab === "taxes" ? "" : "tab-no-data hide"}>
 
                                             {this.props.user_vat && this.props.user_vat.length > 0 ?
                                                 <div>

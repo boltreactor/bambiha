@@ -178,7 +178,7 @@ def add_bank_account(request):
                     }
                 },
                 tos_acceptance={
-                    "date": datetime.now(),
+                    "date": datetime.datetime.now(),
                     "ip": "119.156.76.23"
                     # "ip": self.request.remote_addr
                 },
