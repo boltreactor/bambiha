@@ -9,6 +9,16 @@ class ProductsBillings extends Component {
         this.props.getBanks();
         this.props.getCards();
         this.props.getVAT();
+        let name = this.props.match.params.tab
+        if (name === undefined)
+            name = "payments"
+        if (name === "payments") {
+            this.setState({Payouts: false, Taxes: false})
+        } else if (name === "payouts") {
+            this.setState({Payments: false, Taxes: false})
+        } else {
+            this.setState({Payouts: false, Payments: false})
+        }
     }
 
     handleDeleteCard(event, card) {
@@ -50,7 +60,6 @@ class ProductsBillings extends Component {
 
     render() {
         return (
-
             <div className="page my-page">
                 <div className="page__content">
                     <div className="main-wrapper">
@@ -84,21 +93,24 @@ class ProductsBillings extends Component {
                                 </header>
                                 <div className="tab-wrapper">
                                     <header className="tab-header">
-                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Payments}>
+                                        <Link to="/account-settings/product-and-billings/payments"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.state.Payments}>
                                             Payments
                                         </Link>
-                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Payouts}>
+                                        <Link to="/account-settings/product-and-billings/payouts"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.state.Payouts}>
                                             Payouts
                                         </Link>
-                                        <Link to="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Taxes}>
+                                        <Link to="/account-settings/product-and-billings/taxes"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.state.Taxes}>
                                             Taxes
                                         </Link>
                                     </header>
                                     <div className="tab-content">
-                                        <div className={this.state.Payments ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div className={this.state.Payments ? "" : "tab-no-data hide"}>
                                             {this.props.user_cards ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
@@ -165,7 +177,7 @@ class ProductsBillings extends Component {
 
 
                                         {/* Payouts */}
-                                        <div className={this.state.Payouts ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div className={this.state.Payouts ? "" : "tab-no-data hide"}>
                                             {this.props.user_banks ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
