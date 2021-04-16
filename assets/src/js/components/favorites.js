@@ -27,6 +27,15 @@ class Favorites extends Component {
         this.props.getFavorite();
     }
 
+    addItemToCart = (e, product_key) => {
+        e.preventDefault();
+        this.props.addToCart(1, product_key, this.props)
+    }
+    addFavorite = (e, product_key) => {
+        e.preventDefault();
+        this.props.manageFavorite(product_key, this.props)
+    }
+
     render() {
         const {favorites} = this.props;
         return (
@@ -119,16 +128,26 @@ class Favorites extends Component {
                                                                             {/*</p>*/}
                                                                         </div>
                                                                         <div className="actions">
-                                                                            <Link to="#" className="link-dark mr3 fw4"
-                                                                                  style={{
-                                                                                      color: 'var(--space-gray)',
-                                                                                      fontSize: '16px'
-                                                                                  }}>Move to Cart</Link>
-                                                                            <Link to="#" className="link-dark fw4"
-                                                                                  style={{
-                                                                                      color: 'var(--space-gray)',
-                                                                                      fontSize: '16px'
-                                                                                  }}>Remove</Link>
+                                                                            <Link to="#" className="link-dark mr3 fw4">
+                                                                                <button
+                                                                                    style={{
+                                                                                        color: 'var(--space-gray)',
+                                                                                        fontSize: '16px'
+                                                                                    }}
+                                                                                    onClick={(e) => this.addItemToCart(e, item.product_key)}>Move
+                                                                                    to Cart
+                                                                                </button>
+                                                                            </Link>
+                                                                            <Link to="#" className="link-dark fw4">
+                                                                                <button
+                                                                                    style={{
+                                                                                        color: 'var(--space-gray)',
+                                                                                        fontSize: '16px'
+                                                                                    }}
+                                                                                    onClick={(e) => this.addFavorite(e, item.product_key)}>
+                                                                                    Remove
+                                                                                </button>
+                                                                            </Link>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -394,4 +413,4 @@ const mapStateToProps = (state) => ({
     favorites: state.user.favorites
 })
 
-export default withRouter(connect(mapStateToProps, {getFavorite})(Favorites));
+export default withRouter(connect(mapStateToProps, {getFavorite, manageFavorite, addToCart})(Favorites));

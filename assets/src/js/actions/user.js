@@ -1,5 +1,13 @@
 import axios from "axios";
-import {CART, FAVORITES, HEADER_CATEGORIES, USER_ORDERS, USER_PRODUCTS} from "./types";
+import {
+    ADD_ITEM_TO_CART,
+    CART,
+    FAVORITES,
+    HEADER_CATEGORIES, QUANTITY_CHANGED,
+    REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES,
+    USER_ORDERS,
+    USER_PRODUCTS
+} from "./types";
 import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
@@ -18,11 +26,39 @@ export const addToCart = (quantity, id, props) => dispatch => {
     bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-            // props.history.push('/cart')
+            props.history.push('/cart')
 
         }).catch(err => {
 
     })
+};
+
+export const addToCartFromCart = (quantity, product, addOrRemove) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    let bodyFormData = new FormData();
+    bodyFormData.append('product_key', product.product_key);
+    bodyFormData.append('quantity', quantity);
+    axios.post('/user/addtocart/', bodyFormData, {headers: Header})
+        .then(res => {
+            addOrRemove && addOrRemove === "remove" && dispatch({
+                type: REMOVED_ITEM_FROM_CART,
+                product_key: product.product_key
+            })
+            addOrRemove && addOrRemove === "add" && dispatch({
+                type: ADD_ITEM_TO_CART,
+                product: product
+            })
+
+        }).catch(err => {
+
+    })
+};
+export const changeQuantity = (item) => dispatch => {
+    dispatch({
+        type: QUANTITY_CHANGED,
+        item: item
+    })
+
 };
 
 
@@ -94,7 +130,10 @@ export const manageFavorite = (id, props) => dispatch => {
     bodyFormData.append('product_key', id);
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
-            // props.history.push('/favorites')
+            dispatch({
+                type: REMOVED_ITEM_FROM_FAVORITES,
+                product_key: id
+            })
 
         }).catch(err => {
 

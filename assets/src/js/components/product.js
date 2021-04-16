@@ -3,12 +3,16 @@ import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
 import {getProduct} from "../actions/admin";
 import {connect} from "react-redux";
-import {addToCart, manageFavorite} from "../actions/user";
+import {addToCart, manageFavorite, getFavorite} from "../actions/user";
 
 class Product extends Component {
+    // state = {
+    //     fav_color: "#000"
+    // }
 
     componentDidMount() {
         this.props.getProduct(this.props.match.params.id)
+        this.props.getFavorite()
     }
 
     addItemToCart = (e) => {
@@ -19,6 +23,18 @@ class Product extends Component {
     addFavorite = (e) => {
         e.preventDefault();
         this.props.manageFavorite(this.props.match.params.id, this.props)
+    }
+    checkFavorite = (product_key) => {
+        debugger
+        let fav = "favorite_border";
+        if (this.props.loginStatus === true) {
+            for (let i = 0; i < this.props.favorites.length; i++) {
+                if (this.props.favorites[i].product_key === product_key) {
+                    fav = "favorite"
+                }
+            }
+        }
+        return fav
     }
 
     render() {
@@ -115,87 +131,89 @@ class Product extends Component {
                                     </div>
                                 </div>
                                 {/* */}
-                                <div className="size-guide pt3">
-                                    <div className="flex">
-                                        <div className="flex-grow-1 mr2">
-                                            <h6>Select Size</h6>
-                                        </div>
-                                        <div>
-                                            <Link to="#" className="link-mute">
-                                                <h6>Size Guide</h6>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <form className="mv3">
-                                    <div className="ph2">
-                                        <div className="size-grid">
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
+                                {product.size && <div>
+                                    <div className="size-guide pt3">
+                                        <div className="flex">
+                                            <div className="flex-grow-1 mr2">
+                                                <h6>Select Size</h6>
                                             </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio"
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
-                                            </div>
-                                            <div className="relative">
-                                                <input id="product-size" name="size" type="radio" disabled
-                                                       className="visually-hidden" defaultValue="3.5"/>
-                                                <label htmlFor="product-size">
-                                                    3.5
-                                                </label>
+                                            <div>
+                                                <Link to="#" className="link-mute">
+                                                    <h6>Size Guide</h6>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                    <form className="mv3">
+                                        <div className="ph2">
+                                            <div className="size-grid">
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio"
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                                <div className="relative">
+                                                    <input id="product-size" name="size" type="radio" disabled
+                                                           className="visually-hidden" defaultValue="3.5"/>
+                                                    <label htmlFor="product-size">
+                                                        3.5
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>}
                                 {/* */}
                                 <div className="mv5">
                                     <div className="mb3">
@@ -212,7 +230,9 @@ class Product extends Component {
                                                 onClick={e => {
                                                     this.addFavorite(e)
                                                 }}>
-                                            Favourite <i className="material-icons-outlined v-mid">favorite_border</i>
+                                            Favourite <i
+                                            className="material-icons-outlined v-mid"
+                                            style={{color: "#ff4136"}}>{this.checkFavorite(product.id)}</i>
                                         </button>
                                     </div>
                                 </div>
@@ -264,7 +284,9 @@ class Product extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    product: state.admin.product
+    product: state.admin.product,
+    favorites: state.user.favorites,
+    loginStatus: state.authentication.loginStatus
 })
 
-export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite})(Product));
+export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite, getFavorite})(Product));
