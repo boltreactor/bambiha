@@ -170,6 +170,7 @@ class Products(ndb.Model):
             #     "name": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
             # },
             "category": cls.get_with_key(product.category_key).name if cls.get_with_key(product.category_key) else None,
+            "category_key": product.category_key,
             "date": product.date,
             "description": product.description,
             "images": product.images,
