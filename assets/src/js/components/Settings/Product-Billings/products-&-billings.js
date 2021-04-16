@@ -73,25 +73,25 @@ class ProductsBillings extends Component {
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
                                         {this.props.match.params.tab === "payments" &&
-                                        <Link to="/create-payment">
+                                        <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
                                         {this.props.match.params.tab === undefined &&
-                                        <Link to="/create-payment">
+                                        <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
                                         {this.props.match.params.tab === "payouts" &&
-                                        <Link to="/create-payout">
+                                        <Link to="/account-settings/product-and-billings/create-payout">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payout Method
                                             </button>
                                         </Link>}
                                         {this.props.match.params.tab === "taxes" &&
-                                        <Link to="/create-vat">
+                                        <Link to="/account-settings/product-and-billings/create-vat">
                                             <button className="btn btn-primary btn-lg">
                                                 Add VAT ID Number
                                             </button>
@@ -174,7 +174,7 @@ class ProductsBillings extends Component {
                                                         Add a payment method using our secure payment system.
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-payment">
+                                                        <Link to="/account-settings/product-and-billings/create-payment">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add Payment Method
                                                             </button>
@@ -252,7 +252,7 @@ class ProductsBillings extends Component {
                                                         to you a "payout."
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-payout">
+                                                        <Link to="/account-settings/product-and-billings/create-payout">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add Payout Method
                                                             </button>
@@ -327,7 +327,7 @@ class ProductsBillings extends Component {
                                                         If you are registered for VAT, enter your VAT ID Number.
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-vat">
+                                                        <Link to="/account-settings/product-and-billings/create-vat">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add VAT ID Number
                                                             </button>
