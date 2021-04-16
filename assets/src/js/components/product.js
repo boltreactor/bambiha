@@ -3,16 +3,21 @@ import {withRouter, Link} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
 import {getProduct} from "../actions/admin";
 import {connect} from "react-redux";
-import {addToCart, manageFavorite, getFavorite} from "../actions/user";
+import {addToCart, manageFavorite, getUserProducts, getFavorite} from "../actions/user";
 
 class Product extends Component {
-    // state = {
-    //     fav_color: "#000"
-    // }
 
     componentDidMount() {
         this.props.getProduct(this.props.match.params.id)
         this.props.getFavorite()
+
+
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger
+        if(this.props.product !== prevProps.product) {
+            this.props.getUserProducts(this.props.product.category_key)
+        }
     }
 
     addItemToCart = (e) => {
@@ -252,27 +257,14 @@ class Product extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col s12 m12 l4 mb3">
-                                <Link to="/product" className="link-mute">
+                           {this.props.products &&this.props.products.length>0&&this.props.products.slice(0, 3).map(product=>{ return <div key={product.id} className="col s12 m12 l4 mb3">
+                                <Link to={`/product/${product.id}`} className="link-mute">
                                     <div className="img-wrapper">
-                                        <img className="w-100 h-100" src="/static/dumy-pics8.jpg" alt=""/>
+                                        <img className="w-100 h-100" src={product.images.length !== 0 ? product.images[0] : "/static/show-1.jpeg"} alt=""/>
                                     </div>
                                 </Link>
-                            </div>
-                            <div className="col s12 m12 l4 mb3">
-                                <Link to="/product" className="link-mute">
-                                    <div className="img-wrapper">
-                                        <img className="w-100 h-100" src="/static/dumy-pics3.jpg" alt=""/>
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="col s12 m12 l4 mb3">
-                                <Link to="/product" className="link-mute">
-                                    <div className="img-wrapper">
-                                        <img className="w-100 h-100" src="/static/dumy-pics4.jpg" alt=""/>
-                                    </div>
-                                </Link>
-                            </div>
+                            </div>})}
+
                         </div>
                         <div className="mv5"/>
                     </section>
@@ -287,6 +279,7 @@ const mapStateToProps = (state) => ({
     product: state.admin.product,
     favorites: state.user.favorites,
     loginStatus: state.authentication.loginStatus
+    products:state.user.products
 })
 
-export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite, getFavorite})(Product));
+export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite,getFavorite, getUserProducts})(Product));
