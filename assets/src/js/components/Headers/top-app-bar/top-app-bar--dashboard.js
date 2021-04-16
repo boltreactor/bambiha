@@ -1,8 +1,10 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {addProfile, getUser, setUserInfo} from "../../../actions/profile";
-import {addProfilePicture} from "../../../actions/authentication";
+import {getUser, toggleDrawers} from "../../../actions/profile";
+import DrawerDashboard from "../../../reusable-components/Drawers/drawer--dashboard";
+import DrawerSettings from "../../../reusable-components/Drawers/drawer--settings";
+import DrawerHome from "../../../reusable-components/Drawers/drawer--home";
 
 class TopAppBarDashboard extends Component {
     componentDidMount() {
@@ -10,6 +12,20 @@ class TopAppBarDashboard extends Component {
             this.props.getUser();
         }
     }
+
+    selectDrawer = () => {
+        if (this.props.location.pathname.startsWith("/account-settings")) {
+            return <DrawerSettings/>
+        } else if (this.props.location.pathname === ("/dashboard")) {
+            return <DrawerDashboard/>
+        } else if (this.props.location.pathname === ("/orders")) {
+            return <DrawerDashboard/>
+        } else if (this.props.location.pathname === ("/favorites")) {
+            return <DrawerDashboard/>
+        } else {
+            return <DrawerHome/>
+        }
+    };
 
     render() {
         return (
@@ -22,7 +38,9 @@ class TopAppBarDashboard extends Component {
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                             <button
                                 className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button hide-lg js-trigger-mdc-drawer"
-                                aria-label="Open navigation menu">menu
+                                aria-label="Open navigation menu" onClick={() => {
+                                this.props.toggleDrawers(true)
+                            }}>menu
                             </button>
                             <Link to="/" className="mdc-top-app-bar__title"><span
                                 className="tracked-m tracked-l">BAMBIHA</span></Link>
@@ -114,6 +132,7 @@ class TopAppBarDashboard extends Component {
                         </section>
                     </div>
                 </header>
+                {this.selectDrawer()}
             </div>
         );
     }
@@ -123,4 +142,4 @@ const mapStateToProps = state => ({
     user: state.user.user
 });
 
-export default withRouter(connect(mapStateToProps, {getUser})(TopAppBarDashboard))
+export default withRouter(connect(mapStateToProps, {getUser,toggleDrawers})(TopAppBarDashboard))

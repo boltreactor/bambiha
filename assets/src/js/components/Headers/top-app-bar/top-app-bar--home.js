@@ -1,8 +1,9 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../../../actions/profile";
+import {getUser, toggleDrawers} from "../../../actions/profile";
 import {getUserCategories} from "../../../actions/user";
+import DrawerHome from "../../../reusable-components/Drawers/drawer--home";
 
 
 class TopAppBarHome extends Component {
@@ -27,7 +28,9 @@ class TopAppBarHome extends Component {
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                             <button
                                 className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button dn-l js-trigger-mdc-drawer"
-                                aria-label="Open navigation menu">menu
+                                aria-label="Open navigation menu" onClick={() => {
+                                this.props.toggleDrawers(true)
+                            }}>menu
                             </button>
                             <Link to="/" className="mdc-top-app-bar__title"><span
                                 className="tracked">BAMBIHA</span></Link>
@@ -171,6 +174,7 @@ class TopAppBarHome extends Component {
                         </section>
                     </div>
                 </header>
+                <DrawerHome user={this.props.user} categories={this.props.header_categories}/>
             </div>
         );
     }
@@ -181,4 +185,4 @@ const mapStateToProps = state => ({
     header_categories: state.user.header_categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser, getUserCategories})(TopAppBarHome))
+export default withRouter(connect(mapStateToProps, {getUser, getUserCategories,toggleDrawers})(TopAppBarHome))

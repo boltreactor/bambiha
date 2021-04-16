@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../../../actions/profile";
+import {getUser, toggleDrawers} from "../../../actions/profile";
 import {getUserCategories} from "../../../actions/user";
+import DrawerIndex from "../../../reusable-components/Drawers/drawer--index";
 
 class TopAppBarIndex extends Component {
 
@@ -24,7 +25,10 @@ class TopAppBarIndex extends Component {
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                             <button
                                 className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button dn-l js-trigger-mdc-drawer"
-                                aria-label="Open navigation menu">menu
+                                aria-label="Open navigation menu"
+                                onClick={() => {
+                                    this.props.toggleDrawers(true)
+                                }}>menu
                             </button>
                             <Link to="/" className="mdc-top-app-bar__title"><span
                                 className="tracked">BAMBIHA</span></Link>
@@ -40,13 +44,13 @@ class TopAppBarIndex extends Component {
 
                             {this.props.categories && this.props.categories.map(category => {
                                 return <div key={category.id}>
-                                        <Link to={`/category/${category.id}`} className="show-lg link-mute">
-                                           <button className="mdc-button mdc-top-app-bar__action-item round">
-                                               <span className="mdc-button__ripple"/>
-                                               <span className="mdc-button__label">{category.name}</span>
-                                           </button>
-                                        </Link>
-                                       </div>
+                                    <Link to={`/category/${category.id}`} className="show-lg link-mute">
+                                        <button className="mdc-button mdc-top-app-bar__action-item round">
+                                            <span className="mdc-button__ripple"/>
+                                            <span className="mdc-button__label">{category.name}</span>
+                                        </button>
+                                    </Link>
+                                </div>
                             })}
 
                             {/*<Link to="/sale" className="show-lg link-mute">*/}
@@ -135,6 +139,7 @@ class TopAppBarIndex extends Component {
                         </section>
                     </div>
                 </header>
+                <DrawerIndex categories={this.props.categories}/>
             </div>
         );
     }
@@ -145,4 +150,4 @@ const mapStateToProps = state => ({
     categories: state.user.header_categories
 });
 
-export default withRouter(connect(mapStateToProps, {getUser, getUserCategories})(TopAppBarIndex))
+export default withRouter(connect(mapStateToProps, {getUser, getUserCategories,toggleDrawers})(TopAppBarIndex))

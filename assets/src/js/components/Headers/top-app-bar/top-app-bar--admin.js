@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {getUser} from "../../../actions/profile";
+import {getUser, toggleDrawers} from "../../../actions/profile";
+import DrawerAdmin from "../../../reusable-components/Drawers/drawer--admin";
 
 
 class TopAppBarAdmin extends Component {
@@ -24,7 +25,9 @@ class TopAppBarAdmin extends Component {
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                             <button
                                 className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button hide-lg js-trigger-mdc-drawer"
-                                aria-label="Open navigation menu">menu
+                                aria-label="Open navigation menu" onClick={() => {
+                                this.props.toggleDrawers(true)
+                            }}>menu
                             </button>
                             <Link to="/admin" className="mdc-top-app-bar__title">
                                 <span className="tracked-m tracked-l">BAMBIHA</span>
@@ -71,7 +74,7 @@ class TopAppBarAdmin extends Component {
                                         <div className="mdc-menu mdc-menu-surface" tabIndex={0}>
                                             <div className="content" style={{width: '15.25rem'}}>
                                                 <h4 className="dropdown-header dropdown-menu-item text-secondary"
-                                                   >{this.props.user.first_name} {this.props.user.last_name }</h4>
+                                                >{this.props.user.first_name} {this.props.user.last_name}</h4>
                                                 <div className="dropdown-divider"/>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
@@ -123,6 +126,7 @@ class TopAppBarAdmin extends Component {
                         </section>
                     </div>
                 </header>
+                <DrawerAdmin/>
             </div>
         );
     }
@@ -132,5 +136,5 @@ const mapStateToProps = state => ({
     user: state.user.user
 });
 
-export default withRouter(connect(mapStateToProps, {getUser})(TopAppBarAdmin))
+export default withRouter(connect(mapStateToProps, {getUser,toggleDrawers})(TopAppBarAdmin))
 
