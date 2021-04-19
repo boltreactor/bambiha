@@ -278,7 +278,7 @@ class Product extends Component {
 const mapStateToProps = (state) => ({
     product: state.admin.product,
     favorites: state.user.favorites,
-    loginStatus: state.authentication.loginStatus
+    loginStatus: state.authentication.loginStatus,
     products:state.user.products
 })
 

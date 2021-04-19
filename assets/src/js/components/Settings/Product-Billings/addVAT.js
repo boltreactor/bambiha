@@ -190,7 +190,7 @@ class AddVat extends Form {
                                         </button>}
 
                                     <button className="btn btn-outline-primary btn-lg ml3"
-                                            onClick={event => this.props.history.push('/account-settings/product-and-billings')}>
+                                            onClick={event => this.props.history.push('/account-settings/product-and-billings/taxes')}>
                                         CANCEL
                                     </button>
                                 </div>

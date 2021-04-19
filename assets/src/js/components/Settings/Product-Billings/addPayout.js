@@ -14,6 +14,11 @@ const AddBankAccount = (props) => {
 
     const stripe = useStripe();
     const elements = useElements();
+    const handleCancel = (event)=>{
+        event.preventDefault()
+        debugger
+      props.history.push('/account-settings/product-and-billings/payouts')
+    }
 
     const handleSubmit = async (event) => {
 
@@ -33,7 +38,6 @@ const AddBankAccount = (props) => {
             account_holder_type: 'individual',
         });
         console.log(token, error)
-        debugger
         const response = await props.addBank(token.id)
         props.history.push('/account-settings/product-and-billings/payouts')
     }
@@ -51,9 +55,10 @@ const AddBankAccount = (props) => {
           </p>
           */}
                     </header>
-                    <form onSubmit={handleSubmit}>
+
                         <div className="mv4">
                             <div className="row">
+                                 <form>
                                 <div className="col s12 m6 mb3">
                                     <NoLabelTextfield
                                         type="text"
@@ -95,19 +100,20 @@ const AddBankAccount = (props) => {
                                         onChange={(e) => setAccountNumber(e.currentTarget.value)}
                                     />
                                 </div>
+                                 </form>
                                 <div className="col s12 mt3 mb3">
-                                    <button className="btn btn-primary btn-lg"
-                                            type="submit" disabled={!stripe}>
+                                    <button className="btn btn-primary btn-lg" onClick={handleSubmit}
+                                           disabled={!stripe}>
                                         <i className="v-mid material-icons mr1" style={{fontSize: '18px'}}>lock</i> DONE
                                     </button>
                                     <button className="btn btn-outline-primary btn-lg ml3"
-                                            onClick={event => this.props.history.push('/account-settings/product-and-billings')}>
+                                            onClick={event => handleCancel(event)}>
                                         CANCEL
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </section>
             </div>
         </div>
@@ -127,7 +133,7 @@ class AddPayout extends Component {
     }
 
     render() {
-        console.log(this.props.user_balance)
+
         return (
             <Elements stripe={stripePromise}>
                 <AddBankAccount {...this.props}/>
