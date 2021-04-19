@@ -39,7 +39,7 @@ class ProductsBillings extends Component {
 
     handleEditVAT(event, vat) {
         event.preventDefault();
-        this.props.history.push('/edit-vat/' + vat.id)
+        this.props.history.push('/account-settings/product-and-billings/edit-vat/' + vat.id)
     }
 
     state = {

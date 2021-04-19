@@ -104,7 +104,7 @@ class App extends Component {
                     <Route path='/account-settings/product-and-billings/create-payment' render={(props) => <AddPayment {...props}/>}/>
                     <Route path='/account-settings/product-and-billings/create-payout' render={(props) => <AddPayout {...props}/>}/>
                     <Route path='/account-settings/product-and-billings/create-vat' render={(props) => <AddVat {...props}/>}/>
-                    <Route path='/edit-vat/:vat_id' exact render={(props) => <AddVat {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/edit-vat/:vat_id' exact render={(props) => <AddVat {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/product-and-billings/:tab'
                                     render={(props) => <ProductsBillings {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/product-and-billings'
