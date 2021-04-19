@@ -12,7 +12,9 @@ import {
 
 export const initialState = {
   card: null,
-  user_cards: null
+  user_cards: [],
+  user_banks:[],
+  user_vat:[]
 };
 
 export default function (state = initialState, action) {

@@ -9,7 +9,6 @@ class ProductsBillings extends Component {
         this.props.getBanks();
         this.props.getCards();
         this.props.getVAT();
-        debugger
         let name = this.props.match.params.tab
         if (name === undefined)
             name = "payments"
@@ -21,6 +20,9 @@ class ProductsBillings extends Component {
             this.setState({Payouts: false, Payments: false})
         }
     }
+
+
+
 
     handleDeleteCard(event, card) {
         event.preventDefault();
@@ -72,25 +74,25 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.props.match.params.tab === "payments" &&
+                                        {this.props.match.params.tab === "payments" && this.props.user_cards.length>0&&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === undefined &&
+                                        {this.props.match.params.tab === undefined && this.props.user_cards.length>0&&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === "payouts" &&
+                                        {this.props.match.params.tab === "payouts" && this.props.user_banks.length>0&&
                                         <Link to="/account-settings/product-and-billings/create-payout">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payout Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === "taxes" &&
+                                        {this.props.match.params.tab === "taxes" && this.props.user_vat.length>0&&
                                         <Link to="/account-settings/product-and-billings/create-vat">
                                             <button className="btn btn-primary btn-lg">
                                                 Add VAT ID Number
@@ -119,7 +121,7 @@ class ProductsBillings extends Component {
                                     <div className="tab-content">
                                         <div
                                             className={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined ? "" : "tab-no-data hide"}>
-                                            {this.props.user_cards ? <div>
+                                            {this.props.user_cards.length>0 ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
                                                             <h3 className="bold">Payment methods</h3>
@@ -187,7 +189,7 @@ class ProductsBillings extends Component {
                                         {/* Payouts */}
                                         <div
                                             className={this.props.match.params.tab === "payouts" ? "" : "tab-no-data hide"}>
-                                            {this.props.user_banks ?
+                                            {this.props.user_banks.length>0 ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
