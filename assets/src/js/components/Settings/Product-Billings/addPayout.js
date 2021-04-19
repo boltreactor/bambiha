@@ -16,7 +16,7 @@ const AddBankAccount = (props) => {
     const elements = useElements();
     const handleCancel = (event)=>{
         event.preventDefault()
-        debugger
+
       props.history.push('/account-settings/product-and-billings/payouts')
     }
 
@@ -37,7 +37,6 @@ const AddBankAccount = (props) => {
             account_number: account_number,
             account_holder_type: 'individual',
         });
-        console.log(token, error)
         const response = await props.addBank(token.id)
         props.history.push('/account-settings/product-and-billings/payouts')
     }

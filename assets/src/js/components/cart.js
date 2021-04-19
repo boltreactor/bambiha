@@ -16,7 +16,7 @@ class Cart extends Component {
     }
     addItemToCart = (e, quantity, product, addOrRemove) => {
         e.preventDefault();
-        debugger
+
         this.props.addToCartFromCart(quantity, product, addOrRemove)
     }
     addFavorite = (e, product_key) => {

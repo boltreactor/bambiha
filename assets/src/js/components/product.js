@@ -14,7 +14,7 @@ class Product extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if(this.props.product !== prevProps.product) {
             this.props.getUserProducts(this.props.product.category_key)
         }
@@ -30,7 +30,7 @@ class Product extends Component {
         this.props.manageFavorite(this.props.match.params.id, this.props)
     }
     checkFavorite = (product_key) => {
-        debugger
+
         let fav = "favorite_border";
         if (this.props.loginStatus === true) {
             for (let i = 0; i < this.props.favorites.length; i++) {

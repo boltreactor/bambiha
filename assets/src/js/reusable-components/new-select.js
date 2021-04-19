@@ -16,7 +16,7 @@ class NewSelect extends Component {
                          value={value}>
                      {name === "category_key" && <option default>{placeholder}</option>}
                      {data.map((item, index) => {
-                         debugger
+
                          return <option  key={index || item.key} value={item.status ||  item.value}>{item.name || item.value}</option>
                      })}
 

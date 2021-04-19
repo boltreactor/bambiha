@@ -158,14 +158,14 @@ export default function (state = initialState, action) {
             }
         }
         case ADD_ITEM_TO_CART: {
-            debugger
+
             return {
                 ...state,
                 cart: [...state.cart, action.product]
             }
         }
         case QUANTITY_CHANGED: {
-            debugger
+
             return {
                 ...state,
                 cart: state.cart.map(item => item.product_key !== action.product_key ? item : action.item)

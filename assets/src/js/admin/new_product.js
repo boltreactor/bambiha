@@ -32,9 +32,9 @@ class NewProduct extends Form {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
-            debugger
+
             let data = {
                 title: this.props.product.title,
                 category_key: this.props.product.category,

@@ -6,7 +6,9 @@ import {connect} from "react-redux";
 
 class ProductsBillings extends Component {
     componentDidMount() {
+
         this.props.getBanks();
+
         this.props.getCards();
         this.props.getVAT();
         let name = this.props.match.params.tab

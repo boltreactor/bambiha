@@ -32,6 +32,7 @@ export const getCards = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/payment/get-methods/', {headers: Header})
         .then(res => {
+
             dispatch({
                 type: GET_CARDS,
                 user_cards: res.data.user_cards,
@@ -42,6 +43,7 @@ export const getBanks = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/payment/get-banks/', {headers: Header})
         .then(res => {
+
             dispatch({
                 type: GET_BANKS,
                 user_banks: res.data.acct,
