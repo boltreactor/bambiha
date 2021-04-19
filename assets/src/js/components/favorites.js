@@ -128,26 +128,15 @@ class Favorites extends Component {
                                                                             {/*</p>*/}
                                                                         </div>
                                                                         <div className="actions">
-                                                                            <Link to="#" className="link-dark mr3 fw4">
-                                                                                <button
-                                                                                    style={{
-                                                                                        color: 'var(--space-gray)',
-                                                                                        fontSize: '16px'
-                                                                                    }}
+                                                                            <button className="btn btn-primary mr2"
                                                                                     onClick={(e) => this.addItemToCart(e, item.product_key)}>Move
-                                                                                    to Cart
-                                                                                </button>
-                                                                            </Link>
-                                                                            <Link to="#" className="link-dark fw4">
-                                                                                <button
-                                                                                    style={{
-                                                                                        color: 'var(--space-gray)',
-                                                                                        fontSize: '16px'
-                                                                                    }}
-                                                                                    onClick={(e) => this.addFavorite(e, item.product_key)}>
-                                                                                    Remove
-                                                                                </button>
-                                                                            </Link>
+                                                                                to Cart
+                                                                            </button>
+                                                                            <button
+                                                                                className="btn btn-primary-outline mr2"
+                                                                                onClick={(e) => this.addFavorite(e, item.product_key)}>
+                                                                                Remove
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -188,7 +177,8 @@ class Favorites extends Component {
                                                 <div className="mv3">
                                                     <a href="tel:00923165953458" className="link-mute">
                                                         <button className="btn btn-primary btn-lg">
-                                                            <i className="material-icons-outlined">phone</i> Contact Us
+                                                            <i className="material-icons-outlined">phone</i> Contact
+                                                            Us
                                                         </button>
                                                     </a>
                                                 </div>

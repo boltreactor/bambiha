@@ -50,6 +50,7 @@ class Cart(ndb.Model):
                 'price': item.price,
                 "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
                     item.category_key) else None,
+                'product_key': p.product_key.urlsafe().decode(),
                 'quantity': p.quantity,
                 'favourite': is_fav,
                 'image': item.images[0] if item.images else None,

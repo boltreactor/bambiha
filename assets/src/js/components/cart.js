@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
-import {checkout, viewCart, getFavorite, addToCartFromCart, manageFavorite, changeQuantity} from "../actions/user";
+import {checkout, viewCart, getFavorite, addProductToCart, manageFavorite, changeQuantity} from "../actions/user";
 import {connect} from "react-redux";
 
 class Cart extends Component {
@@ -17,7 +17,7 @@ class Cart extends Component {
     addItemToCart = (e, quantity, product, addOrRemove) => {
         e.preventDefault();
         debugger
-        this.props.addToCartFromCart(quantity, product, addOrRemove)
+        this.props.addProductToCart(quantity, product, addOrRemove)
     }
     addFavorite = (e, product_key) => {
         e.preventDefault();
@@ -52,9 +52,9 @@ class Cart extends Component {
                                                     </Link>
                                                 </div>
                                             </div>
-                                            <div className="ml2">
-                                                <button className="mdc-icon-button material-icons">close</button>
-                                            </div>
+                                            {/*<div className="ml2">*/}
+                                            {/*    <button className="mdc-icon-button material-icons">close</button>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -120,14 +120,12 @@ class Cart extends Component {
                                                     </div>
                                                     <div className="actions">
                                                         <button
-                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
-                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
+                                                            className="btn btn-primary mr2"
                                                             onClick={(e) => this.addFavorite(e, item.product_key)}>Move
                                                             to Favourite
                                                         </button>
                                                         <button
-                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
-                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
+                                                            className="btn btn-primary-outline mr2"
                                                             onClick={(e) => this.addItemToCart(e, 0, item, "remove")}>Remove
                                                         </button>
                                                     </div>
@@ -265,7 +263,7 @@ export default withRouter(connect(mapStateToProps, {
     viewCart,
     checkout,
     getFavorite,
-    addToCartFromCart,
+    addProductToCart,
     manageFavorite,
     changeQuantity
 })(Cart));
