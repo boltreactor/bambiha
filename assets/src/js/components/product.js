@@ -13,9 +13,10 @@ class Product extends Component {
 
 
     }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         debugger
-        if(this.props.product !== prevProps.product) {
+        if (this.props.product !== prevProps.product) {
             this.props.getUserProducts(this.props.product.category_key)
         }
     }
@@ -43,8 +44,8 @@ class Product extends Component {
     }
 
     render() {
-        const {product} = this.props;
-
+        const {product,products} = this.props;
+        console.log(products)
         return (
             <div className="page">
                 <div className="page__content">
@@ -257,13 +258,18 @@ class Product extends Component {
                             </div>
                         </div>
                         <div className="row">
-                           {this.props.products &&this.props.products.length>0&&this.props.products.slice(0, 3).map(product=>{ return <div key={product.id} className="col s12 m12 l4 mb3">
-                                <Link to={`/product/${product.id}`} className="link-mute">
-                                    <div className="img-wrapper">
-                                        <img className="w-100 h-100" src={product.images.length !== 0 ? product.images[0] : "/static/show-1.jpeg"} alt=""/>
-                                    </div>
-                                </Link>
-                            </div>})}
+                            {this.props.products && this.props.products.length > 0 && this.props.products.slice(0, 3).map(product => {
+                               debugger
+                                return <div key={product.id} className="col s12 m12 l4 mb3">
+                                    <Link to={`/product/${product.id}`} className="link-mute">
+                                        <div className="img-wrapper">
+                                            <img className="w-100 h-100"
+                                                 src={product.images.length !== 0 ? product.images[0] : "/static/show-1.jpeg"}
+                                                 alt=""/>
+                                        </div>
+                                    </Link>
+                                </div>
+                            })}
 
                         </div>
                         <div className="mv5"/>
@@ -278,8 +284,14 @@ class Product extends Component {
 const mapStateToProps = (state) => ({
     product: state.admin.product,
     favorites: state.user.favorites,
-    loginStatus: state.authentication.loginStatus
-    products:state.user.products
+    loginStatus: state.authentication.loginStatus,
+    products: state.user.products,
 })
 
-export default withRouter(connect(mapStateToProps, {getProduct, addToCart, manageFavorite,getFavorite, getUserProducts})(Product));
+export default withRouter(connect(mapStateToProps, {
+    getProduct,
+    addToCart,
+    manageFavorite,
+    getFavorite,
+    getUserProducts
+})(Product));
