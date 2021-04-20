@@ -14,6 +14,7 @@ class NewSelect extends Component {
                          id={name}
                          onChange={onChange}
                          value={value}>
+
                      {name === "category_key" && <option default>{placeholder}</option>}
                      {data.map((item, index) => {
 
