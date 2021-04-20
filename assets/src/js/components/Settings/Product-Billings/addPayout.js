@@ -126,10 +126,6 @@ const AddBankAccount = (props) => {
 const stripePromise = loadStripe('pk_test_chHFTfxFbnEPCMMhmxS8nVkZ');
 
 class AddPayout extends Component {
-    componentDidMount() {
-        this.props.getBanks()
-        this.props.getBalance()
-    }
 
     render() {
 
@@ -142,8 +138,6 @@ class AddPayout extends Component {
 
 }
 
-const mapStateToProps = state => ({
-    user_banks: state.payment.user_banks,
-    user_balance: state.payment.user_balance,
-});
-export default withRouter(connect(mapStateToProps, {addBank, getBalance, getBanks})(AddPayout));
+
+
+export default withRouter(connect(null, {addBank, getBalance, getBanks})(AddPayout));

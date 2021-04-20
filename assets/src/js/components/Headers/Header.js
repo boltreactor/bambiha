@@ -1,16 +1,20 @@
 import React, {Component, Fragment} from 'react';
-import LoggedOutHeader from "./LoggedOutHeader";
 import {withRouter} from 'react-router-dom';
-import SettingsHeader from "./settings-header";
-import LoggedInHeader from "./loggedInHeader";
 import TopAppBarAdmin from "./top-app-bar/top-app-bar--admin";
-import TopAppBar from "./top-app-bar/top-app-bar";
 import TopAppBarDashboard from "./top-app-bar/top-app-bar--dashboard";
 import TopAppBarIndex from "./top-app-bar/top-app-bar--index";
 import TopAppBarHome from "./top-app-bar/top-app-bar--home";
+import {getUser, toggleDrawers} from "../../actions/profile";
+import {connect} from "react-redux";
+import {getUserCategories} from "../../actions/user";
 
 
 class Header extends Component {
+    componentDidMount() {
+          if (localStorage.getItem("token")) {
+            this.props.getUser();
+        }
+    }
 
 
     render() {
@@ -50,4 +54,6 @@ class Header extends Component {
 
 }
 
-export default withRouter(Header);
+
+export default withRouter(connect(null, {getUser})(Header))
+

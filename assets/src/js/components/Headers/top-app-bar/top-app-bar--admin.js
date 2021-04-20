@@ -7,11 +7,11 @@ import DrawerAdmin from "../../../reusable-components/Drawers/drawer--admin";
 
 class TopAppBarAdmin extends Component {
 
-    componentDidMount() {
-        if (localStorage.getItem("token")) {
-            this.props.getUser();
-        }
-    }
+    // componentDidMount() {
+    //     if (localStorage.getItem("token")) {
+    //         this.props.getUser();
+    //     }
+    // }
 
     render() {
         return (

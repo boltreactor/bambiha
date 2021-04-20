@@ -8,9 +8,7 @@ import DrawerIndex from "../../../reusable-components/Drawers/drawer--index";
 class TopAppBarIndex extends Component {
 
     componentDidMount() {
-        if (localStorage.getItem("token")) {
-            this.props.getUser();
-        }
+
         this.props.getUserCategories();
     }
 
