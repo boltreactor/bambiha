@@ -265,7 +265,7 @@ export default withRouter(connect(mapStateToProps, {
     viewCart,
     checkout,
     getFavorite,
-    addToCartFromCart,
+    addProductToCart,
     manageFavorite,
     changeQuantity
 })(Cart));
