@@ -174,7 +174,7 @@ class AdminHome extends Component {
                                                 </Link>
                                             </div>
                                             <div className="col s12 m4">
-                                                <Link to="#"
+                                                <Link to="admin/brand-folder"
                                                    className="link-mute">
                                                     <div className="shadow-0 rounded-sm db mb5 pa3">
                                                         <div className="flex">
@@ -182,11 +182,11 @@ class AdminHome extends Component {
                                                                 <i className="material-icons-outlined" style={{
                                                                     color: '#0258ff',
                                                                     fontSize: '36px'
-                                                                }}>live_help</i>
+                                                                }}>tune</i>
                                                             </div>
                                                             <div className="flex-grow-1" style={{minHeight: '136px'}}>
                                                                 <h4 className="bold mb3">
-                                                                    Help & Support
+                                                                    Brand Folder
                                                                 </h4>
                                                                 <p>
                                                                     Show us your own unique designs with #bambihabyyou
