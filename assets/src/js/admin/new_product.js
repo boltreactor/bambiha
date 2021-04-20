@@ -32,9 +32,9 @@ class NewProduct extends Form {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if (this.props.match.params.id && this.props.product.title !== undefined && prevProps !== this.props) {
-            debugger
+
             let data = {
                 title: this.props.product.title,
                 category_key: this.props.product.category,
@@ -214,17 +214,6 @@ class NewProduct extends Form {
                                         />
 
                                     </div>
-
-
-                                    {/*<Select*/}
-                                    {/*    id="category_key"*/}
-                                    {/*    type="text"*/}
-                                    {/*    name="category_key"*/}
-                                    {/*    options={this.getCategoriesList()}*/}
-                                    {/*    onChange={this.handleCategoryChange}*/}
-                                    {/*    value={this.state.data.title === "" ? product_id && this.props.product ? this.props.product.category : "" : this.state.data.category_key}*/}
-                                    {/*    error={this.state.errors.category_key}*/}
-                                    {/*/>*/}
 
 
                                     <div className="col s12 mb3">

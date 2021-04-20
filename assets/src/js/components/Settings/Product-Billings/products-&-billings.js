@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
 import {Link, withRouter} from "react-router-dom";
-import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT} from "../../../actions/payment";
+import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT, clearBankError} from "../../../actions/payment";
 import {connect} from "react-redux";
 
 class ProductsBillings extends Component {
     componentDidMount() {
+
         this.props.getBanks();
+
         this.props.getCards();
         this.props.getVAT();
         let name = this.props.match.params.tab
@@ -19,9 +21,8 @@ class ProductsBillings extends Component {
         } else {
             this.setState({Payouts: false, Payments: false})
         }
+        this.props.clearBankError()
     }
-
-
 
 
     handleDeleteCard(event, card) {
@@ -74,25 +75,25 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.props.match.params.tab === "payments" && this.props.user_cards.length>0&&
+                                        {this.props.match.params.tab === "payments" && this.props.user_cards.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === undefined && this.props.user_cards.length>0&&
+                                        {this.props.match.params.tab === undefined && this.props.user_cards.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === "payouts" && this.props.user_banks.length>0&&
+                                        {this.props.match.params.tab === "payouts" && this.props.user_banks.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-payout">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payout Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === "taxes" && this.props.user_vat.length>0&&
+                                        {this.props.match.params.tab === "taxes" && this.props.user_vat.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-vat">
                                             <button className="btn btn-primary btn-lg">
                                                 Add VAT ID Number
@@ -121,7 +122,7 @@ class ProductsBillings extends Component {
                                     <div className="tab-content">
                                         <div
                                             className={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined ? "" : "tab-no-data hide"}>
-                                            {this.props.user_cards.length>0 ? <div>
+                                            {this.props.user_cards.length > 0 ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
                                                             <h3 className="bold">Payment methods</h3>
@@ -176,7 +177,8 @@ class ProductsBillings extends Component {
                                                         Add a payment method using our secure payment system.
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/account-settings/product-and-billings/create-payment">
+                                                        <Link
+                                                            to="/account-settings/product-and-billings/create-payment">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add Payment Method
                                                             </button>
@@ -189,7 +191,7 @@ class ProductsBillings extends Component {
                                         {/* Payouts */}
                                         <div
                                             className={this.props.match.params.tab === "payouts" ? "" : "tab-no-data hide"}>
-                                            {this.props.user_banks.length>0 ?
+                                            {this.props.user_banks.length > 0 ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
@@ -202,6 +204,16 @@ class ProductsBillings extends Component {
                                                                 in your account depends on your payout method.
                                                             </p>
                                                         </div>
+                                                        {this.props.error_msg !== "" && <section className="app-alert">
+                                                <div className="ui-paper ui-alert ui-alert--error my2" role="alert"
+                                                     style={{marginBottom: "10px"}}>
+                                                    <div className="ui-alert__icon">
+                                                        <i className="material-icons-outlined">error</i>
+                                                    </div>
+                                                    <div className="ui-alert__message">{this.props.error_msg}
+                                                    </div>
+                                                </div>
+                                            </section>}
                                                     </div>
                                                     <div className="payment-methods flex flex-wrap">
                                                         {(this.props.user_banks).map(bank => <div key={bank.id}
@@ -351,7 +363,8 @@ class ProductsBillings extends Component {
 const mapStateToProps = state => ({
     user_cards: state.payment.user_cards,
     user_banks: state.payment.user_banks,
-    user_vat: state.payment.user_vat
+    user_vat: state.payment.user_vat,
+    error_msg: state.payment.error_msg
 });
 
 
@@ -361,5 +374,6 @@ export default withRouter(connect(mapStateToProps, {
     getBanks,
     deleteBank,
     getVAT,
-    deleteVAT
+    deleteVAT,
+    clearBankError
 })(ProductsBillings));

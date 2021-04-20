@@ -212,7 +212,7 @@ export const manageAdmin = (id, status, props) => dispatch => {
     bodyFormData.append('user_role', status);
     axios.post(`/admin/manage-admin/`, bodyFormData, {headers: Header})
         .then(res => {
-            debugger
+
             getAllUsers()
             // props.history.push("/admin/users")
         })

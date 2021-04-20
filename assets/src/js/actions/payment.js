@@ -1,5 +1,15 @@
 import axios from "axios";
-import {ADD_CARD, DELETE_BANK, DELETE_CARD, GET_BALANCE, GET_BANKS, GET_CARDS, PAYMENT_INTENT, VAT} from "./types";
+import {
+    ADD_CARD,
+    DELETE_BANK,
+    DELETE_BANK_ERROR,
+    DELETE_CARD, ERROR,
+    GET_BALANCE,
+    GET_BANKS,
+    GET_CARDS,
+    PAYMENT_INTENT,
+    VAT
+} from "./types";
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -32,6 +42,7 @@ export const getCards = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/payment/get-methods/', {headers: Header})
         .then(res => {
+
             dispatch({
                 type: GET_CARDS,
                 user_cards: res.data.user_cards,
@@ -42,6 +53,7 @@ export const getBanks = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/payment/get-banks/', {headers: Header})
         .then(res => {
+
             dispatch({
                 type: GET_BANKS,
                 user_banks: res.data.acct,
@@ -74,17 +86,27 @@ export const deleteCard = (source_id) => dispatch => {
         });
 }
 export const deleteBank = (source_id, bank_id) => dispatch => {
+    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('acc_id', source_id);
     bodyFormData.append('bank_id', bank_id);
     axios.post('/payment/delete-payout-method/', bodyFormData, {headers: Header})
         .then(res => {
+            debugger
             dispatch({
                 type: DELETE_BANK,
                 user_banks: res.data.acct,
             });
-        });
+        }).catch(error=>{
+            error["message"]==="Request failed with status code 500" &&
+                dispatch({
+                    type:DELETE_BANK_ERROR,
+                    error_msg:" You cannot delete the default external account for your default currency. Please add another before deleting this."
+                })
+            debugger
+
+    })
 }
 
 export const paymentIntent = (amount, currency) => dispatch => {
@@ -94,8 +116,6 @@ export const paymentIntent = (amount, currency) => dispatch => {
     bodyFormData.append('currency', currency);
     axios.post('/payment/create-payment-intent/', bodyFormData, {headers: Header})
         .then(res => {
-            console.log(res);
-
             dispatch({
                 type: PAYMENT_INTENT,
                 intent_id: res.data.intent_id,
@@ -116,14 +136,8 @@ export const addVAT = (data, props) => dispatch => {
     bodyFormData.append('zip_code', data.zip_code);
     axios.post('/payment/add-vat/', bodyFormData, {headers: Header})
         .then(res => {
-            console.log(res);
             if (res.status === 200)
                 props.history.goBack()
-
-            // dispatch({
-            //     type: ADD_VAT,
-            //
-            // });
         });
 }
 
@@ -141,14 +155,9 @@ export const updateVAT = (data, props) => dispatch => {
     bodyFormData.append('zip_code', data.zip_code);
     axios.post('/payment/edit-vat/', bodyFormData, {headers: Header})
         .then(res => {
-            console.log(res);
             if (res.status === 200)
                 props.history.goBack()
 
-            // dispatch({
-            //     type: ADD_VAT,
-            //
-            // });
         });
 }
 
@@ -175,6 +184,13 @@ export const deleteVAT = (id) => dispatch => {
                 user_vat: res.data.vat,
             });
         });
+}
+export const clearBankError = () => dispatch => {
+    debugger
+    dispatch({
+        type: DELETE_BANK_ERROR,
+        error_msg: ""
+    });
 }
 
 

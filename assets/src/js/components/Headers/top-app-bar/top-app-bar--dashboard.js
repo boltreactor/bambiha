@@ -8,9 +8,9 @@ import DrawerHome from "../../../reusable-components/Drawers/drawer--home";
 
 class TopAppBarDashboard extends Component {
     componentDidMount() {
-        if (localStorage.getItem("token")) {
-            this.props.getUser();
-        }
+        // if (localStorage.getItem("token")) {
+        //     this.props.getUser();
+        // }
     }
 
     selectDrawer = () => {

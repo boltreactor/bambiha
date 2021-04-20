@@ -52,9 +52,9 @@ class Cart extends Component {
                                                     </Link>
                                                 </div>
                                             </div>
-                                            {/*<div className="ml2">*/}
-                                            {/*    <button className="mdc-icon-button material-icons">close</button>*/}
-                                            {/*</div>*/}
+                                            <div className="ml2">
+                                                <button className="mdc-icon-button material-icons">close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,12 +120,14 @@ class Cart extends Component {
                                                     </div>
                                                     <div className="actions">
                                                         <button
-                                                            className="btn btn-primary mr2"
+                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
+                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
                                                             onClick={(e) => this.addFavorite(e, item.product_key)}>Move
                                                             to Favourite
                                                         </button>
                                                         <button
-                                                            className="btn btn-primary-outline mr2"
+                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
+                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
                                                             onClick={(e) => this.addItemToCart(e, 0, item, "remove")}>Remove
                                                         </button>
                                                     </div>
@@ -263,7 +265,7 @@ export default withRouter(connect(mapStateToProps, {
     viewCart,
     checkout,
     getFavorite,
-    addProductToCart,
+    addToCartFromCart,
     manageFavorite,
     changeQuantity
 })(Cart));
