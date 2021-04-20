@@ -93,6 +93,7 @@ class App extends Component {
                     <Route exact path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>
                     <Route exact path='/login' render={(props) => <Login {...props}/>}/>
                     <Route path='/reset-password' render={(props) => <ResetPassword {...props}/>}/>
+                    <Route path='/reset-password' render={(props) => <ResetPassord {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/change-password'
                                     render={(props) => <ChangePassword {...props}/>}/>
                     <Route path='/new-password/:token' render={(props) => <NewPassword {...props}/>}/>

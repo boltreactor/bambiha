@@ -17,7 +17,7 @@ class NewProduct extends Form {
             errors: {},
             data: {
                 title: "",
-                category_key: "",
+                category_key: '',
                 desc: "",
                 quantity: "",
                 price: "",
@@ -117,6 +117,7 @@ class NewProduct extends Form {
             })
         }),
         category_key: Joi.string().required().error(errors => {
+            debugger
             return errors.map(error => {
                 switch (error.type) {
                     case "any.empty":
