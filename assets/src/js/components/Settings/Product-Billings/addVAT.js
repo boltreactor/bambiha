@@ -181,10 +181,12 @@ class AddVat extends Form {
                                 <div className="col s12 mt3 mb3">
                                     {this.props.match.params.vat_id ?
                                         <button className="btn btn-primary btn-lg"
+                                                 disabled={this.validateProduct()}
                                                 onClick={event => this.update_vat(event)}>
                                             UPDATE
                                         </button> :
                                         <button className="btn btn-primary btn-lg"
+                                                 disabled={this.validateProduct()}
                                                 onClick={event => this.add_vat(event)}>
                                             ADD
                                         </button>}

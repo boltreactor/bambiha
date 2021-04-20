@@ -217,6 +217,10 @@ export const changePassword = (re_new_password, new_password, current_password, 
                     });
                     const user = {email: email, password: new_password}
                     axios.post("/auth/login/", user, {headers: Header}).then(res => {
+                        if (res.data.user.user_role === 2)
+                            localStorage.setItem("admin", true)
+                        else
+                            localStorage.setItem('admin', false)
                         localStorage.setItem("loginStatus", true)
                         localStorage.setItem("token", res.data.user.token);
                         dispatch({
@@ -261,6 +265,11 @@ export const logout = () => dispatch => {
 export const socialLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login/', user, {headers: Header})
         .then(res => {
+            debugger
+            if (res.data.user_role === 2)
+                localStorage.setItem("admin", true)
+            else
+                localStorage.setItem('admin', false)
             localStorage.setItem("loginStatus", true)
             localStorage.setItem("token", res.data.token);
             dispatch({
@@ -268,7 +277,10 @@ export const socialLogin = (user, props) => dispatch => {
                 loginStatus: true
             });
             const {state} = props.location;
-            window.location = state ? state.from.pathname : "/";
+            if (localStorage.getItem('admin') === 'true')
+                window.location = state ? state.from.pathname : "/admin";
+            else
+                window.location = state ? state.from.pathname : "/dashboard";
         });
 };
 
@@ -358,6 +370,10 @@ export const getLinkedinToken = (client_id, secret, code, redirect_url) => async
 export const createLinkedInLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login-linkedin/', user, {headers: Header})
         .then(res => {
+            if (res.data.user_role === 2)
+                localStorage.setItem("admin", true)
+            else
+                localStorage.setItem('admin', false)
             localStorage.setItem("loginStatus", true)
             localStorage.setItem("token", res.data.token);
             dispatch({
@@ -365,7 +381,10 @@ export const createLinkedInLogin = (user, props) => dispatch => {
                 loginStatus: true
             });
             const {state} = props.location;
-            window.location = state ? state.from.pathname : "/";
+            if (localStorage.getItem('admin') === 'true')
+                window.location = state ? state.from.pathname : "/admin";
+            else
+                window.location = state ? state.from.pathname : "/dashboard";
         });
 };
 

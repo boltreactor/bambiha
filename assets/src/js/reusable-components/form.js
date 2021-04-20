@@ -113,7 +113,7 @@ class Form extends Component {
 
         const options = {abortEarly: false};
         console.log(this.state.data)
-        
+        debugger
         const {error} = Joi.validate(this.state.data, this.schema, options);
         if (!error) return null;
         const errors = {};
@@ -123,7 +123,7 @@ class Form extends Component {
             } else {
                 errors[item.path[0]] = item.message;
             }
-        console.log("validateUser", errors)
+        console.log("validateProduct", errors)
         return errors;
     }
 
