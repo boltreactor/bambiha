@@ -95,20 +95,22 @@ class Products(ndb.Model):
         all_products = []
         products = cls.query().fetch()
         for p in products:
-            all_products.append({
-                # "category": {
-                #     "key": p.category_key,
-                #     "name": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None
-                # },
-                "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
-                "date": p.date,
-                "description": p.description,
-                "images": p.images,
-                "price": p.price,
-                "quantity": p.quantity,
-                "title": p.title,
-                "id": p.key.urlsafe()
-            })
+            category = cls.get_with_key(p.category_key)
+            if category.status != 0:
+                all_products.append({
+                    # "category": {
+                    #     "key": p.category_key,
+                    #     "name": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None
+                    # },
+                    "category": cls.get_with_key(p.category_key).name if cls.get_with_key(p.category_key) else None,
+                    "date": p.date,
+                    "description": p.description,
+                    "images": p.images,
+                    "price": p.price,
+                    "quantity": p.quantity,
+                    "title": p.title,
+                    "id": p.key.urlsafe()
+                })
         return all_products
 
     @classmethod
@@ -125,7 +127,6 @@ class Products(ndb.Model):
             images_to_delete = delete_images.split(",")
             for image in images_to_delete:
                 product.images.remove(image)
-
 
         files = request.FILES.getlist('images')
         if files:
