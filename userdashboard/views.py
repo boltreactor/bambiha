@@ -13,10 +13,10 @@ from bambiha.utils import to_json_ndb, get_token
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def AddToCart(request):
-    cart = Cart.add_to_cart(request)
-    if cart:
+    products = Cart.add_to_cart(request)
+    if products:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Cart Updated"
+            'status': status.HTTP_200_OK, 'message': "Cart Updated", 'products': products
         }, status.HTTP_200_OK)
 
 

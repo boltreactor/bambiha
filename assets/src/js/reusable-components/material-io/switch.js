@@ -23,7 +23,6 @@ class Switch extends Component {
 
     render() {
         const {handleChange, label, id, checked} = this.props
-        console.log("checked_state", this.state.checked)
         return (
             <div>
                 <div className={this.state.classes} data-mdc-auto-init="MDCSwitch">

@@ -69,7 +69,6 @@ const AddBankAccount = (props) => {
             } else {
                 errors[item.path[0]] = item.message;
             }
-        console.log("validatePayout", errors)
         return errors;
     }
 
@@ -83,7 +82,6 @@ const AddBankAccount = (props) => {
 
     const validateProperty = ({name, value}) => {
         const obj = {[name]: value};
-        debugger
         const schema = {[name]: schema[name]};
         const {error} = Joi.validate(obj, schema);
         return error ? error.details[0].message : null;
@@ -115,7 +113,6 @@ const AddBankAccount = (props) => {
             account_number: account_number,
             account_holder_type: 'individual',
         });
-        console.log(token, error)
         const response = await props.addBank(token.id)
         props.history.push('/account-settings/product-and-billings/payouts')
     }

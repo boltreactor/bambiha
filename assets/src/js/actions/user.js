@@ -26,7 +26,10 @@ export const addToCart = (quantity, id, props) => dispatch => {
     bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/cart')
+            dispatch({
+                type: CART,
+                cart: res.data.products,
+            });
 
         }).catch(err => {
 
@@ -34,7 +37,6 @@ export const addToCart = (quantity, id, props) => dispatch => {
 };
 
 export const addProductToCart = (quantity, product, addOrRemove) => dispatch => {
-    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('product_key', product.product_key);
@@ -131,7 +133,6 @@ export const manageFavorite = (id, props) => dispatch => {
     bodyFormData.append('product_key', id);
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
-            debugger
             axios.get('/user/getfavorites/', {headers: Header})
                 .then(res => {
                     dispatch({

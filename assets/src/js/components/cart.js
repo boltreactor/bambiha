@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, NavLink, withRouter} from 'react-router-dom';
 import Footer from "./Footers/estore-footer";
 import {checkout, viewCart, getFavorite, addProductToCart, manageFavorite, changeQuantity} from "../actions/user";
 import {connect} from "react-redux";
@@ -16,7 +16,6 @@ class Cart extends Component {
     }
     addItemToCart = (e, quantity, product, addOrRemove) => {
         e.preventDefault();
-        debugger
         this.props.addProductToCart(quantity, product, addOrRemove)
     }
     addFavorite = (e, product_key) => {
@@ -52,9 +51,9 @@ class Cart extends Component {
                                                     </Link>
                                                 </div>
                                             </div>
-                                            <div className="ml2">
-                                                <button className="mdc-icon-button material-icons">close</button>
-                                            </div>
+                                            {/*<div className="ml2">*/}
+                                            {/*    <button className="mdc-icon-button material-icons">close</button>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -245,6 +244,7 @@ class Cart extends Component {
                                             Checkout
                                         </button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

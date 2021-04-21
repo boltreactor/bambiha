@@ -53,11 +53,13 @@ class AddVat extends Form {
         else delete errors[input.name];
 
 
-        this.setState({errors}, () => {
-            if (Object.keys(this.state.errors).length > 0) {
-                // console.log(this.state.errors)
-            }
-        });
+        this.setState({errors})
+        //     ,
+        //     () => {
+        //     if (Object.keys(this.state.errors).length > 0) {
+        //         // console.log(this.state.errors)
+        //     }
+        // });
         this.setState({...this.state, data: {...this.state.data, [input.name]: input.value}})
     };
 

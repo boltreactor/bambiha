@@ -37,14 +37,6 @@ const CheckoutForm = () => {
         const source_token = await stripe.createSource(cardElement, {
             type: 'card',
         });
-        if (source_token.source)
-            console.log(source_token.source)
-
-        if (error) {
-            console.log('[error]', error);
-        } else {
-            console.log('[PaymentMethod]', paymentMethod);
-        }
     };
 
     return (

@@ -11,7 +11,7 @@ import {getUserCategories} from "../../actions/user";
 
 class Header extends Component {
     componentDidMount() {
-          if (localStorage.getItem("token")) {
+        if (localStorage.getItem("token")) {
             this.props.getUser();
         }
     }
@@ -27,7 +27,8 @@ class Header extends Component {
                             window.location.pathname.startsWith("/dashboard") ? <TopAppBarDashboard/> :
                                 window.location.pathname.startsWith("/orders") ? <TopAppBarDashboard/> :
                                     window.location.pathname.startsWith("/favorites") ? <TopAppBarDashboard/> :
-                                        <TopAppBarHome/> :
+                                        window.location.pathname.startsWith("/cart") ? <TopAppBarDashboard/> :
+                                            <TopAppBarHome/> :
                     !this.props.loginStatus ?
                         window.location.pathname.startsWith("/login") ? null :
                             window.location.pathname.startsWith("/signup") ? null :

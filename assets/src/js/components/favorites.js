@@ -72,7 +72,7 @@ class Favorites extends Component {
                                         <Link to="#" className="tab-item link-mute"
                                               aria-selected={this.state.HelpSupport}
                                               onClick={(e) => this.handleTab(e)}>
-                                            Help &amp; Support
+                                            Help & Support
                                         </Link>
                                     </header>
                                     {/* */}

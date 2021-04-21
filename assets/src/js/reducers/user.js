@@ -146,7 +146,6 @@ export default function (state = initialState, action) {
             }
         }
         case REMOVED_ITEM_FROM_CART: {
-            debugger
             return {
                 ...state,
                 cart: state.cart.filter(item => item.product_key !== action.product_key && item)
