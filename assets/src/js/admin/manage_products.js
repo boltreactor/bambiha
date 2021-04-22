@@ -5,6 +5,7 @@ import SmartFooter from "../components/Footers/smart-footer";
 import {getAllProducts, delProduct} from "../actions/admin";
 import {connect} from "react-redux";
 import product from "../components/product";
+import DataTable from "../components/Skeleton/skeleton";
 
 class ManageProducts extends Component {
     state = {
@@ -100,7 +101,8 @@ class ManageProducts extends Component {
                                             {this.state.Products &&
                                             <div>
                                                 <div className="tc">
-                                                    {!products.length > 0 ? <div>
+                                                    {!products.length > 0 ?
+                                                        <div>
                                                             <header className="mt3 my-page">
                                                                 <h3 className="bold">Products</h3>
                                                             </header>
@@ -108,7 +110,10 @@ class ManageProducts extends Component {
                                                                 Products management made easy. <br/>
                                                                 All products at the store will be shown here.
                                                             </p>
-                                                        </div> :
+                                                            <DataTable/>
+                                                        </div>
+
+                                                        :
                                                         <div>
                                                             <div
                                                                 className="custom-datatable overflow-x-auto overflow-y-hidden">
@@ -120,12 +125,12 @@ class ManageProducts extends Component {
                                                                             <thead>
                                                                             <tr className="mdc-data-table__header-row">
                                                                                 {headers.map((h, index) => {
-                                                                                return <th key={index}
-                                                                                           className="mdc-data-table__header-cell"
-                                                                                           role="columnheader"
-                                                                                           scope="col">{h.name}
-                                                                                </th>
-                                                                            })}
+                                                                                    return <th key={index}
+                                                                                               className="mdc-data-table__header-cell"
+                                                                                               role="columnheader"
+                                                                                               scope="col">{h.name}
+                                                                                    </th>
+                                                                                })}
 
 
                                                                             </tr>
@@ -178,6 +183,8 @@ class ManageProducts extends Component {
                                                         </div>}
                                                 </div>
                                             </div>}
+
+
                                             <div
                                                 className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">
