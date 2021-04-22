@@ -1,13 +1,14 @@
 import axios from "axios";
 import {
-    ADMIN_PRODUCTS,
+    ADMIN_ORDERS,
     ADMIN_PRODUCT,
+    ADMIN_PRODUCTS,
     CATEGORIES,
     CATEGORY,
-    DEL_PRODUCT,
-    ADMIN_ORDERS,
-    USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS, SHOW_LOADER
+    DELETE_PRODUCT_IMAGES,
+    EDIT_CATEGORY,
+    EMPTY_DELETED_PRODUCTS,
+    USERS
 } from "./types";
 // import {loadProgressBar} from 'axios-progress-bar';
 import {showLoader} from "./user";
@@ -55,7 +56,6 @@ export const editCategory = (id, category, status, props) => dispatch => {
 
 export const getAllCategories = () => dispatch => {
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    showLoader(true)
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
@@ -63,7 +63,7 @@ export const getAllCategories = () => dispatch => {
                 categories: res.data.category
             });
         }).finally(() => {
-        showLoader(false)
+
     });
 };
 
@@ -184,8 +184,6 @@ export const getAllOrders = () => dispatch => {
         });
 };
 export const getAllUsers = () => dispatch => {
-    dispatch(showLoader(true))
-    console.log("user_called")
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/auth/all-users/', {headers: Header})
         .then(res => {
@@ -195,7 +193,6 @@ export const getAllUsers = () => dispatch => {
                 users: res.data.users,
             });
         }).finally(() => {
-        dispatch(showLoader(false))
     });
 };
 
