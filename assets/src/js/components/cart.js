@@ -25,8 +25,11 @@ class Cart extends Component {
     selectQuantity = (e, item) => {
         e.preventDefault()
         item.quantity = e.target.value
-        console.log(item)
-        this.props.changeQuantity(item)
+        let fd = new FormData();
+        fd.append("product_key", item.product_key)
+        fd.append("quantity", item.quantity)
+        debugger
+        this.props.changeQuantity(fd)
     }
 
 
@@ -108,9 +111,6 @@ class Cart extends Component {
                                                                           {numbers.map(quantity => <option
                                                                               key={quantity}
                                                                           >{quantity}</option>)}
-                                                                          {/*<option value={1}>1</option>*/}
-                                                                          {/*<option value={2}>2</option>*/}
-                                                                          {/*<option value={3}>3</option>*/}
                                                                       </select>
                                                                     </span>
                                                                 </p>

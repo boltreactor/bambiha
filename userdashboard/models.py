@@ -80,6 +80,14 @@ class Cart(ndb.Model):
 
         return products
 
+    @classmethod
+    def update_product_quantity(cls, request):
+        cart_products = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')),
+                                  cls.product_key == request.POST.get('product_key'))
+        cart_check = cls.query(cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
+        product_key = ndb.Key(urlsafe=request.POST.get('product_key')).get()
+        quantity = request.POST.get('quantity')
+
 
 class Order(ndb.Model):
     store_user_key = ndb.KeyProperty()

@@ -56,18 +56,20 @@ export const addProductToCart = (quantity, product, addOrRemove) => dispatch => 
 
     })
 };
-export const changeQuantity = (item) => dispatch => {
-    dispatch({
-        type: QUANTITY_CHANGED,
-        item: item
-    })
-
+export const changeQuantity = (fd) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.post('/user/updateproductquantity/', fd, {headers: Header})
+        .then(res => {
+            dispatch({
+                // type: QUANTITY_CHANGED,
+                // item: item
+            })
+        })
 };
 
 
 export const viewCart = () => dispatch => {
     showLoader(true)
-    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/user/viewcart/', {headers: Header})
         .then(res => {

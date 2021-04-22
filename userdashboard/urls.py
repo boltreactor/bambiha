@@ -2,7 +2,7 @@ from django.urls import path
 
 from bambiha.middlewares import ndb_context_middleware, auth_middleware
 from userdashboard.views import AddToCart, ViewCart, CheckOut, ViewOrders, FavUnfav, GetFavorites, getProducts, \
-    getCategoriesHeaders
+    getCategoriesHeaders, updateProductQuantity
 
 urlpatterns = [
     path('addtocart/', ndb_context_middleware(AddToCart)),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('getfavorites/', ndb_context_middleware(GetFavorites)),
     path('getproducts/', ndb_context_middleware(getProducts)),
     path('getcategories/', ndb_context_middleware(getCategoriesHeaders)),
+    path('updateproductquantity/', ndb_context_middleware(updateProductQuantity)),
 
 ]

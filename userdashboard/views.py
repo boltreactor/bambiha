@@ -105,3 +105,11 @@ def getCategoriesHeaders(request):
         return Response({
             'status': status.HTTP_200_OK, 'category': to_json_ndb(categories)
         }, status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def updateProductQuantity(request):
+    product = Cart.update_product_quantity(request)
+    return Response({
+        'status': status.HTTP_200_OK
+    }, status.HTTP_200_OK)
