@@ -68,7 +68,7 @@ class GeneralSettings extends Component {
 
     render() {
         const {settings} = this.props;
-        console.log(settings)
+
         return (
             <div>
                 <div className="page my-page">

@@ -13,7 +13,7 @@ class DrawerIndex extends Component {
 
     render() {
         const {categories} = this.props;
-        console.log(categories)
+
         if (this.props.toggleDrawer) {
             return (
                 <ClickAwayListener onClickAway={this.handleDrawerClose}>

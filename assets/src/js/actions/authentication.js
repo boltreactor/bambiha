@@ -265,7 +265,7 @@ export const logout = () => dispatch => {
 export const socialLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login/', user, {headers: Header})
         .then(res => {
-            debugger
+
             if (res.data.user_role === 2)
                 localStorage.setItem("admin", true)
             else
@@ -343,10 +343,10 @@ export const getLinkedinToken = (client_id, secret, code, redirect_url) => async
 
     axios(config)
         .then(function (response) {
-            console.log(JSON.stringify(response.data));
+
         })
         .catch(function (error) {
-            console.log(error);
+
         });
 };
 //

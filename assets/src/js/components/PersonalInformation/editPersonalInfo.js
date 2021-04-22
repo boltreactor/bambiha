@@ -81,7 +81,7 @@ class EditPersonalInfo extends Form {
         else delete errors[input.name];
         this.setState({errors}, () => {
             if (Object.keys(this.state.errors).length > 0) {
-                console.log(this.state.errors)
+
             }
         });
         const user = {...this.props.user, [input.name]: input.value};
@@ -104,7 +104,7 @@ class EditPersonalInfo extends Form {
         else delete errors["date_of_birth"];
         this.setState({errors}, () => {
             if (Object.keys(this.state.errors).length > 0) {
-                console.log(this.state.errors)
+
             }
         });
         if (date !== null) {

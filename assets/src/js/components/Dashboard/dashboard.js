@@ -32,7 +32,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.props.categories)
+
         return (
             <div className="page my-page">
                 <div className="page__content">

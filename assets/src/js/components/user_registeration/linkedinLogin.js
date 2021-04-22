@@ -11,7 +11,6 @@ class LinkedInPage extends Component {
 
 
   handleSuccess =  (data) => {
-    console.log(data)
     this.setState({
       code: data.code,
       errorMessage: '',
@@ -21,7 +20,6 @@ class LinkedInPage extends Component {
       'client_id': '77gr3ejlwri2v8',
       'code': data.code,
     },this.props)
-    console.log(response)
 
 
   }

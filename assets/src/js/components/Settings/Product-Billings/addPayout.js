@@ -73,14 +73,14 @@ const AddBankAccount = (props) => {
     };
 
     const validatePayout = () => {
-        debugger
+
         const data = {
             "username": state.username,
             "shortCode": state.shortCode,
             "account_number": state.account_number,
             "routingNumber": state.routingNumber
         }
-        debugger
+
         const options = {abortEarly: false};
         const {error} = Joi.validate(data, schema, options);
         if (!error) return null;
@@ -104,14 +104,14 @@ const AddBankAccount = (props) => {
 
     const validateProperty = ({name, value}) => {
         const obj = {[name]: value};
-        debugger
+
         const check_schema = {[name]: schema[name]};
         const {error} = Joi.validate(obj, check_schema);
         return error ? error.details[0].message : null;
     };
 
     const handleChange = ({currentTarget: input}) => {
-        debugger
+
         const clone_errors = errors;
         const errorMessage = validateProperty(input);
         if (errorMessage) clone_errors[input.name] = errorMessage;
@@ -137,7 +137,7 @@ const AddBankAccount = (props) => {
             account_number: state.account_number,
             account_holder_type: 'individual',
         });
-        console.log(token, error)
+
         const response = await props.addBank(token.id)
         props.history.push('/account-settings/product-and-billings/payouts')
     }

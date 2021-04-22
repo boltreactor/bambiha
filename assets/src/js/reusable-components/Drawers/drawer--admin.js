@@ -14,7 +14,7 @@ class DrawerAdmin extends Component {
     render() {
         if (this.props.toggleDrawer) {
             const {toggleDrawer} = this.props;
-            console.log("Toggle", toggleDrawer);
+
             return (
                 <ClickAwayListener onClickAway={this.handleDrawerClose}>
                     <Drawer style={{zIndex: "9999"}} modal open={this.props.toggleDrawer}>

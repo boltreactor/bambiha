@@ -6,7 +6,7 @@ class NewSelect extends Component {
 
     render() {
         const {onChange, data, value, name, placeholder} = this.props
-        console.log(data)
+
         return (
              <span>
                  <select className="select-css"

@@ -38,7 +38,7 @@ const CheckoutForm = () => {
             type: 'card',
         });
         if (source_token.source)
-            console.log(source_token.source)
+
 
         if (error) {
             console.log('[error]', error);

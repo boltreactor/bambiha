@@ -15,7 +15,7 @@ import LinkedInPage from "./linkedinLogin";
 class Signup extends Form {
 
     linkedinSuccess = (response) => {
-        console.log(response)
+
         // this.props.socialLogin({
         //   'platform': 'facebook',
         //   'name': response.name,
@@ -26,7 +26,7 @@ class Signup extends Form {
     }
 
     linkedinFailure = (response) => {
-        console.log(response)
+
 
         // this.props.socialLogin({
         //   'platform': 'facebook',

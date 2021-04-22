@@ -161,7 +161,7 @@ export const deleteCategory = (category_key) => dispatch => {
         },
     })
         .then(res => {
-            console.log(res)
+
         });
 };
 export const getAllOrders = () => dispatch => {
