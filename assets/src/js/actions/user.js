@@ -3,7 +3,7 @@ import {
     ADD_ITEM_TO_CART,
     CART,
     FAVORITES,
-    HEADER_CATEGORIES, QUANTITY_CHANGED,
+    HEADER_CATEGORIES, SHOW_LOADER, QUANTITY_CHANGED,
     REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES,
     USER_ORDERS,
     USER_PRODUCTS
@@ -11,7 +11,7 @@ import {
 import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
-loadProgressBar();
+// loadProgressBar();
 const Header = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': "*",
@@ -66,6 +66,8 @@ export const changeQuantity = (item) => dispatch => {
 
 
 export const viewCart = () => dispatch => {
+    showLoader(true)
+    debugger
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/user/viewcart/', {headers: Header})
         .then(res => {
@@ -147,7 +149,7 @@ export const manageFavorite = (id, props) => dispatch => {
 };
 
 export const getFavorite = () => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`
     axios.get('/user/getfavorites/', {headers: Header})
         .then(res => {
             dispatch({
@@ -156,3 +158,10 @@ export const getFavorite = () => dispatch => {
             });
         });
 };
+
+export const showLoader = (show) => {
+    return {
+        type: SHOW_LOADER,
+        loader: show
+    }
+}

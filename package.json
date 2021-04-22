@@ -73,6 +73,7 @@
     "node-polyglot": "^2.4.0",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
+    "react-content-loader": "^6.0.3",
     "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",

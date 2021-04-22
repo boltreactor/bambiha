@@ -14,7 +14,7 @@ import {
     CURRENT_LISTING,
     CART,
     USER_ORDERS, HEADER_CATEGORIES, USER_PRODUCTS,
-    FAVORITES, REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES, ADD_ITEM_TO_CART, QUANTITY_CHANGED
+    FAVORITES, REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES, ADD_ITEM_TO_CART, QUANTITY_CHANGED, SHOW_LOADER
     // STATE_IMAGES,
 } from '../actions/types';
 import React from 'react';
@@ -52,8 +52,8 @@ export const initialState = {
     loginStatus: false,
     notification_settings: null,
     msg: null,
-    show: false
-
+    show: false,
+    loading: false
 };
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -169,6 +169,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 cart: state.cart.map(item => item.product_key !== action.product_key ? item : action.item)
+            }
+        }
+        case SHOW_LOADER: {
+            return {
+                ...state,
+                loading: action.loader
             }
         }
 
