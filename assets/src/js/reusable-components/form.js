@@ -112,7 +112,6 @@ class Form extends Component {
     validateProduct = () => {
 
         const options = {abortEarly: false};
-        console.log(this.state.data)
         debugger
         const {error} = Joi.validate(this.state.data, this.schema, options);
         if (!error) return null;
@@ -219,7 +218,7 @@ class Form extends Component {
         this.doSubmit(event);
     };
     handleChange = ({currentTarget: input}) => {
-        
+        debugger
         const errors = {...this.state.errors};
         const errorMessage = this.validateProperty(input);
         if (errorMessage) errors[input.name] = errorMessage;

@@ -48,7 +48,7 @@ class NoLabelTextfield extends Component {
                     </span>}
                     {error && error.includes("Invalid") &&
                     <span className="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-                      Invalid {name === "email" ? "Email" : name==="price"? "":"Number"}
+                      Invalid
                     </span>}
                     {error && error.includes("8") && <span className="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
                       Too Short

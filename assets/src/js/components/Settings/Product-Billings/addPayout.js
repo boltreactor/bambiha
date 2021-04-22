@@ -9,42 +9,63 @@ import NoLabelTextfield from "../../../reusable-components/material-io/no-label-
 import Joi from "joi-browser";
 
 const AddBankAccount = (props) => {
-    const [username, setUsername] = useState('');
-    const [shortCode, setCode] = useState('');
-    const [account_number, setAccountNumber] = useState('');
-    const [routingNumber, setRoutingNumber] = useState('');
-    const [error, setError] = useState({});
-
+    const [errors, setError] = useState({});
+    const [state, setState] = useState({username: "", shortCode:"",
+        account_number:"", routingNumber:"" });
     var schema = {
-        username: Joi.string().required().error(errors => {
+        username: Joi.string().regex(/^[a-zA-Z][a-zA-Z\s]*$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
                     case "any.empty":
-                        return {message: "Username is required"};
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
         }),
-        shortCode: Joi.string().required().error(errors => {
+        shortCode: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
                     case "any.empty":
-                        return {message: "Short code is required"};
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
         }),
-        account_number: Joi.string().required().error(errors => {
+        account_number:Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
                     case "any.empty":
-                        return {message: "Account number is required"};
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
         }),
-        routingNumber: Joi.string().required().error(errors => {
+        routingNumber: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
                     case "any.empty":
-                        return {message: "Routing number is required"};
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
                 }
             })
         }),
@@ -52,13 +73,14 @@ const AddBankAccount = (props) => {
     };
 
     const validatePayout = () => {
+        debugger
         const data = {
-            "username": username,
-            "shortCode": shortCode,
-            "account_number": account_number,
-            "routingNumber": routingNumber
+            "username": state.username,
+            "shortCode": state.shortCode,
+            "account_number": state.account_number,
+            "routingNumber": state.routingNumber
         }
-
+        debugger
         const options = {abortEarly: false};
         const {error} = Joi.validate(data, schema, options);
         if (!error) return null;
@@ -69,7 +91,6 @@ const AddBankAccount = (props) => {
             } else {
                 errors[item.path[0]] = item.message;
             }
-        console.log("validatePayout", errors)
         return errors;
     }
 
@@ -84,18 +105,19 @@ const AddBankAccount = (props) => {
     const validateProperty = ({name, value}) => {
         const obj = {[name]: value};
         debugger
-        const schema = {[name]: schema[name]};
-        const {error} = Joi.validate(obj, schema);
+        const check_schema = {[name]: schema[name]};
+        const {error} = Joi.validate(obj, check_schema);
         return error ? error.details[0].message : null;
     };
 
-    const handleUsernameChange = ({currentTarget: input}) => {
-        const errors = {...error};
+    const handleChange = ({currentTarget: input}) => {
+        debugger
+        const clone_errors = errors;
         const errorMessage = validateProperty(input);
-        if (errorMessage) errors[input.name] = errorMessage;
-        else delete errors[input.name];
-        setUsername(input.value);
-        setError({errors})
+        if (errorMessage) clone_errors[input.name] = errorMessage;
+        else delete clone_errors[input.name];
+        setState({...state, [input.name]: input.value });
+        setError(clone_errors)
     }
 
     const handleSubmit = async (event) => {
@@ -110,9 +132,9 @@ const AddBankAccount = (props) => {
             country: 'GB',
             currency: 'GBP',
             // routing_number: document.getElementsByName('routingNumber')[0].value, routing number is for prod and for test sort code is used
-            sort_code: shortCode,
-            account_holder_name: username,
-            account_number: account_number,
+            sort_code: state.shortCode,
+            account_holder_name: state.username,
+            account_number: state.account_number,
             account_holder_type: 'individual',
         });
         console.log(token, error)
@@ -141,20 +163,22 @@ const AddBankAccount = (props) => {
                                     <NoLabelTextfield
                                         type="text"
                                         name="username"
-                                        value={username}
+                                        value={state.username}
                                         label="ACCOUNT HOLDER NAME"
                                         placeholder="Enter account holder name"
-                                        onChange={(e) => handleUsernameChange(e)}
+                                        error={errors["username"]}
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
                                 <div className="col s12 m6 mb3">
                                     <NoLabelTextfield
                                         type="text"
-                                        value={routingNumber}
+                                        value={state.routingNumber}
                                         name="routingNumber"
                                         label="ROUTING NUMBER"
+                                        error={errors["routingNumber"]}
                                         placeholder="Enter routing number"
-                                        onChange={(e) => setRoutingNumber(e.currentTarget.value)}
+                                        onChange={(e) => handleChange(e)}
                                     />
 
                                 </div>
@@ -162,20 +186,22 @@ const AddBankAccount = (props) => {
                                     <NoLabelTextfield
                                         type="text"
                                         name="shortCode"
-                                        value={shortCode}
+                                        value={state.shortCode}
                                         label="SHORT CODE"
                                         placeholder="Enter short code"
-                                        onChange={(e) => setCode(e.currentTarget.value)}
+                                        error={errors["shortCode"]}
+                                      onChange={(e) => handleChange(e)}
                                     />
                                 </div>
                                 <div className="col s12 m6 mb3">
                                     <NoLabelTextfield
                                         type="text"
                                         name="account_number"
-                                        value={account_number}
+                                        value={state.account_number}
                                         label="ACCOUNT NUMBER"
                                         placeholder="Enter account number"
-                                        onChange={(e) => setAccountNumber(e.currentTarget.value)}
+                                        error={errors["account_number"]}
+                                        onChange={(e) =>handleChange(e)}
                                     />
                                 </div>
                             </form>
