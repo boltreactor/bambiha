@@ -60,9 +60,10 @@ export const changeQuantity = (fd) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post('/user/updateproductquantity/', fd, {headers: Header})
         .then(res => {
+            debugger
             dispatch({
-                // type: QUANTITY_CHANGED,
-                // item: item
+                type: QUANTITY_CHANGED,
+                item: res.data.cart_product
             })
         })
 };

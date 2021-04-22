@@ -198,7 +198,7 @@ class Order(ndb.Model):
             all_items = []
             total = 0
             for item in order_items:
-                total = total + item.price
+                total = total + ((item.price * item.quantity) if item.quantity else item.price)
                 all_items.append({
                     "price": item.price,
                     "title": item.product_key.get().title,

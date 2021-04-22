@@ -6,11 +6,11 @@ import {checkout, viewCart} from "../actions/user";
 
 class Checkout extends Component {
     state = {
-        first_name: '',
-        last_name: '',
-        address: '',
-        email: '',
-        phone: '',
+        first_name: this.props.user.first_name,
+        last_name: this.props.user.last_name,
+        address: this.props.user.location,
+        email: this.props.user.email,
+        phone: this.props.user.phone,
     }
 
     componentDidMount() {
