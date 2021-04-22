@@ -113,5 +113,5 @@ def updateProductQuantity(request):
     if product:
         return Response({
             'status': status.HTTP_200_OK, "message": "Product updated successfully",
-            "cart_product": to_json_ndb(product)
+            "cart_product": product
         }, status.HTTP_200_OK)

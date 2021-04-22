@@ -35,7 +35,7 @@ class Cart(ndb.Model):
 
                 products.append({
                     'title': item.title,
-                    'price': item.price,
+                    'price': item.price * p.quantity,
                     "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
                         item.category_key) else None,
                     'product_key': p.product_key.urlsafe().decode(),
@@ -68,7 +68,7 @@ class Cart(ndb.Model):
 
             products.append({
                 'title': item.title,
-                'price': item.price,
+                'price': item.price * p.quantity,
                 "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
                     item.category_key) else None,
                 'product_key': p.product_key.urlsafe().decode(),
@@ -86,7 +86,26 @@ class Cart(ndb.Model):
                                  cls.product_key == cls.get_with_key(request.POST.get('product_key')).key).get()
         cart_product.quantity = int(request.POST.get('quantity'))
         cart_product.put()
-        return cart_product
+
+        item = cart_product.product_key.get()
+        fav = Favorites.query(Favorites.user_key == ndb.Key(urlsafe=request.session.get('user')),
+                              Favorites.product_key == cart_product.product_key).get()
+        is_fav = False
+        if fav:
+            is_fav = True
+
+        product = {
+            'title': item.title,
+            'price': item.price * cart_product.quantity,
+            "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
+                item.category_key) else None,
+            'product_key': cart_product.product_key.urlsafe().decode(),
+            'quantity': cart_product.quantity,
+            'favourite': is_fav,
+            'image': item.images[0] if item.images else None,
+            'store_user_key': item.user_key
+        }
+        return product
 
 
 class Order(ndb.Model):
