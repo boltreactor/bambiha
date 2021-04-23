@@ -10,7 +10,7 @@ import {
     SET_PROFILE,
     SIGNUP,
     TOGGLE_DRAWER,
-    VERIFICATION,CHANGE_PASSWORD_MSG
+    VERIFICATION, CHANGE_PASSWORD_MSG
 } from '../actions/types';
 import React from 'react';
 
@@ -23,7 +23,7 @@ export const initialState = {
     error: "",
     error_current: "",
     error_new: "",
-    change_pass:""
+    change_pass: ""
 
 };
 export default function (state = initialState, action) {
@@ -39,7 +39,8 @@ export default function (state = initialState, action) {
                 error: action.error,
                 error_new: action.error_new,
                 error_current: action.error_current,
-                error_reset:false
+                error_reset: false,
+                change_pass: undefined
             }
         }
         case LOGIN_FAILED: {
@@ -91,6 +92,7 @@ export default function (state = initialState, action) {
                 ...state,
                 message: action.message,
                 snackMsg: action.snackMsg,
+                error_current: undefined
             }
         }
         case PROFILE: {
