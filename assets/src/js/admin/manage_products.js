@@ -150,7 +150,7 @@ class ManageProducts extends Component {
                                                                                     </td>
                                                                                     <td className="mdc-data-table__cell mdc-data-table__cell--numeric">{product.quantity}</td>
                                                                                     <td className="mdc-data-table__cell">{product.category}</td>
-                                                                                    <td className="mdc-data-table__cell">{product.description}</td>
+                                                                                    <td className="mdc-data-table__cell mdc-data-table__cell--">{product.description}</td>
                                                                                     <td className="mdc-data-table__cell">{product.images.length}</td>
                                                                                     <td className="mdc-data-table__cell">
                                                                                         <button

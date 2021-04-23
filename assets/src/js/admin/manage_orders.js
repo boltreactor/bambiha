@@ -4,11 +4,8 @@ import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
 import {deleteOrder, getAllOrders, updateOrderStatus} from "../actions/admin";
 import {connect} from "react-redux";
-// import CustomTable from "../reusable-components/custom-table";
-// import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import OrderSelect from "../components/order_select";
 import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
-import DataTable from "../components/Skeleton/skeleton";
 
 class ManageOrders extends Component {
 
