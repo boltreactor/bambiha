@@ -142,12 +142,12 @@ class User(ndb.Model):
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
-                aws_access_key_id='AKIARXUVHB5JQZ2AQ6HM',
-                aws_secret_access_key='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'
+                aws_access_key_id='AKIAS7EVJ2DJLKQNBTZC',
+                aws_secret_access_key='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'
             )
-            bucket = s3.Bucket('test-bucket-ndb')
+            bucket = s3.Bucket('kompass')
             details = bucket.put_object(Key=file.name, Body=file)
-            url = "https://test-bucket-ndb.s3.us-east-2.amazonaws.com/" + details.key
+            url = "https://kompass.s3.us-east-2.amazonaws.com/" + details.key
             user.profile_image = url
             user.put()
             return user
@@ -156,12 +156,12 @@ class User(ndb.Model):
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
-                aws_access_key_id='AKIARXUVHB5JQZ2AQ6HM',
-                aws_secret_access_key='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'
+                aws_access_key_id='AKIAS7EVJ2DJLKQNBTZC',
+                aws_secret_access_key='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'
             )
-            bucket = s3.Bucket('test-bucket-ndb')
+            bucket = s3.Bucket('kompass')
             details = bucket.put_object(Key=file.name, Body=file)
-            url = "https://test-bucket-ndb.s3.us-east-2.amazonaws.com/" + details.key
+            url = "https://kompass.s3.us-east-2.amazonaws.com/" + details.key
             user.cover_image = url
             user.put()
             return user
