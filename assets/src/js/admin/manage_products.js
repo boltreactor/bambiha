@@ -6,6 +6,7 @@ import {getAllProducts, delProduct} from "../actions/admin";
 import {connect} from "react-redux";
 import product from "../components/product";
 import DataTable from "../components/Skeleton/skeleton";
+import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
 
 class ManageProducts extends Component {
     state = {
@@ -110,7 +111,7 @@ class ManageProducts extends Component {
                                                                 Products management made easy. <br/>
                                                                 All products at the store will be shown here.
                                                             </p>
-                                                            <DataTable/>
+                                                            <SkeletonTableLoader/>
                                                         </div>
 
                                                         :

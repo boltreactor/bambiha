@@ -1,5 +1,4 @@
 import axios from "axios";
-import {loadProgressBar} from 'axios-progress-bar';
 import {
     CHANGE_PASSWORD_MSG,
     ERROR,
@@ -13,7 +12,7 @@ import {
 } from "./types";
 
 const qs = require('query-string');
-loadProgressBar();
+
 
 const Header = {
     'Access-Control-Allow-Origin': '*',

@@ -3,15 +3,14 @@ import {
     ADD_ITEM_TO_CART,
     CART,
     FAVORITES,
-    HEADER_CATEGORIES, SHOW_LOADER, QUANTITY_CHANGED,
-    REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES,
+    HEADER_CATEGORIES,
+    REMOVED_ITEM_FROM_CART,
+    SHOW_LOADER,
     USER_ORDERS,
     USER_PRODUCTS
 } from "./types";
-import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
-// loadProgressBar();
 const Header = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': "*",

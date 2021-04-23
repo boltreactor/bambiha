@@ -4,6 +4,8 @@ import Navigation from "./navigation";
 import {getAllCategories, editCategory} from "../actions/admin";
 import {connect} from 'react-redux';
 import SmartFooter from "../components/Footers/smart-footer";
+import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
+import DataTable from "../components/Skeleton/skeleton";
 
 class ManageCategory extends Component {
     state = {
@@ -114,6 +116,7 @@ class ManageCategory extends Component {
                                                             Categories management made easy. <br/>
                                                             All Categories at the store will be shown here.
                                                         </p>
+                                                        <SkeletonTableLoader/>
                                                     </div> : <div>
                                                         <div
                                                             className="custom-datatable overflow-x-auto overflow-y-hidden">
@@ -192,7 +195,6 @@ class ManageCategory extends Component {
 
                                                 </div>
                                             </div>}
-
 
                                             <div
                                                 className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>

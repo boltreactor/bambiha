@@ -1,19 +1,17 @@
 import axios from "axios";
 import {
-    ADMIN_PRODUCTS,
+    ADMIN_ORDERS,
     ADMIN_PRODUCT,
+    ADMIN_PRODUCTS,
     CATEGORIES,
     CATEGORY,
-    DEL_PRODUCT,
-    ADMIN_ORDERS,
-    USERS,
-    HEADER_CATEGORIES, EDIT_CATEGORY, DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS, SHOW_LOADER
+    DELETE_PRODUCT_IMAGES,
+    EDIT_CATEGORY,
+    EMPTY_DELETED_PRODUCTS,
+    USERS
 } from "./types";
-// import {loadProgressBar} from 'axios-progress-bar';
 import {showLoader} from "./user";
 
-const qs = require('query-string');
-// loadProgressBar();
 const Header = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': "*",
@@ -55,7 +53,6 @@ export const editCategory = (id, category, status, props) => dispatch => {
 
 export const getAllCategories = () => dispatch => {
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    showLoader(true)
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
@@ -63,12 +60,13 @@ export const getAllCategories = () => dispatch => {
                 categories: res.data.category
             });
         }).finally(() => {
-        showLoader(false)
+
     });
 };
 
 
 export const getCategory = (id) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -82,10 +80,13 @@ export const getCategory = (id) => dispatch => {
                 type: CATEGORY,
                 category: res.data.category
             });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const getProduct = (id) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -99,10 +100,13 @@ export const getProduct = (id) => dispatch => {
                 type: ADMIN_PRODUCT,
                 product: res.data.product
             });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const delProduct = (id) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -116,13 +120,16 @@ export const delProduct = (id) => dispatch => {
             //     type: DEL_PRODUCT
             //
             // });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 
 export const addProduct = (product, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`
     Header['Content-Type'] = 'multipart/form-data'
+    dispatch(showLoader(true))
 
     axios.post("/admin/addproduct/", product, {headers: Header})
         .then(res => {
@@ -131,20 +138,23 @@ export const addProduct = (product, props) => dispatch => {
             }
         ).catch(err => {
 
-
-        }
-    )
+    }).finally(() => {
+        dispatch(showLoader(true))
+    })
 };
 
 export const editProduct = (fd, props) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    dispatch(showLoader(true))
     axios.post(`/admin/editproduct/`, fd, {headers: Header})
         .then(res => {
             dispatch({
                 type: EMPTY_DELETED_PRODUCTS,
             });
             props.history.push("/admin/products")
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 export const getAllProducts = (id) => dispatch => {
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -164,6 +174,7 @@ export const getAllProducts = (id) => dispatch => {
 };
 
 export const deleteCategory = (category_key) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/deletecategory/', {
         headers: Header, params: {
@@ -171,7 +182,9 @@ export const deleteCategory = (category_key) => dispatch => {
         },
     })
         .then(res => {
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 export const getAllOrders = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -184,8 +197,6 @@ export const getAllOrders = () => dispatch => {
         });
 };
 export const getAllUsers = () => dispatch => {
-    dispatch(showLoader(true))
-    console.log("user_called")
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/auth/all-users/', {headers: Header})
         .then(res => {
@@ -194,9 +205,7 @@ export const getAllUsers = () => dispatch => {
                 type: USERS,
                 users: res.data.users,
             });
-        }).finally(() => {
-        dispatch(showLoader(false))
-    });
+        });
 };
 
 export const imagesToDelete = (imageToDelete) => dispatch => {
@@ -207,6 +216,7 @@ export const imagesToDelete = (imageToDelete) => dispatch => {
 };
 
 export const disableUser = (id, status, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('user_key', id);
@@ -216,10 +226,14 @@ export const disableUser = (id, status, props) => dispatch => {
 
             getAllUsers()
             // props.history.push("/admin/users")
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+
+    })
 };
 
 export const manageAdmin = (id, status, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('user_key', id);
@@ -229,10 +243,13 @@ export const manageAdmin = (id, status, props) => dispatch => {
 
             getAllUsers()
             // props.history.push("/admin/users")
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    })
 };
 
 export const deleteOrder = (id, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('order_key', id);
@@ -240,11 +257,14 @@ export const deleteOrder = (id, props) => dispatch => {
     axios.post(`/admin/deleteorder/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/orders")
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    })
 };
 
 
 export const updateOrderStatus = (id, status, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('order_key', id);
@@ -252,7 +272,8 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
     axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/orders")
-        })
-
+        }).finally(() => {
+        dispatch(showLoader(false))
+    })
 };
 
