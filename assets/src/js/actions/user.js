@@ -3,15 +3,14 @@ import {
     ADD_ITEM_TO_CART,
     CART,
     FAVORITES,
-    HEADER_CATEGORIES, QUANTITY_CHANGED,
-    REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES,
+    HEADER_CATEGORIES,
+    REMOVED_ITEM_FROM_CART,
+    SHOW_LOADER,
     USER_ORDERS,
     USER_PRODUCTS
 } from "./types";
-import {loadProgressBar} from "axios-progress-bar";
 
 const qs = require('query-string');
-loadProgressBar();
 const Header = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': "*",
@@ -26,7 +25,10 @@ export const addToCart = (quantity, id, props) => dispatch => {
     bodyFormData.append('quantity', quantity);
     axios.post('/user/addtocart/', bodyFormData, {headers: Header})
         .then(res => {
-            props.history.push('/cart')
+            dispatch({
+                type: CART,
+                cart: res.data.products,
+            });
 
         }).catch(err => {
 
@@ -34,7 +36,6 @@ export const addToCart = (quantity, id, props) => dispatch => {
 };
 
 export const addProductToCart = (quantity, product, addOrRemove) => dispatch => {
-
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('product_key', product.product_key);
@@ -54,16 +55,20 @@ export const addProductToCart = (quantity, product, addOrRemove) => dispatch => 
 
     })
 };
-export const changeQuantity = (item) => dispatch => {
-    dispatch({
-        type: QUANTITY_CHANGED,
-        item: item
-    })
-
+export const changeQuantity = (fd) => dispatch => {
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    axios.post('/user/updateproductquantity/', fd, {headers: Header})
+        .then(res => {
+            dispatch({
+                // type: QUANTITY_CHANGED,
+                // item: item
+            })
+        })
 };
 
 
 export const viewCart = () => dispatch => {
+    showLoader(true)
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/user/viewcart/', {headers: Header})
         .then(res => {
@@ -131,7 +136,6 @@ export const manageFavorite = (id, props) => dispatch => {
     bodyFormData.append('product_key', id);
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
-
             axios.get('/user/getfavorites/', {headers: Header})
                 .then(res => {
                     dispatch({
@@ -146,7 +150,7 @@ export const manageFavorite = (id, props) => dispatch => {
 };
 
 export const getFavorite = () => dispatch => {
-    Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    Header["Authorization"] = `Token ${localStorage.getItem("token")}`
     axios.get('/user/getfavorites/', {headers: Header})
         .then(res => {
             dispatch({
@@ -155,3 +159,10 @@ export const getFavorite = () => dispatch => {
             });
         });
 };
+
+export const showLoader = (show) => {
+    return {
+        type: SHOW_LOADER,
+        loader: show
+    }
+}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getUser, toggleDrawers} from "../../../actions/profile";
+import {viewCart} from "../../../actions/user";
 import DrawerDashboard from "../../../reusable-components/Drawers/drawer--dashboard";
 import DrawerSettings from "../../../reusable-components/Drawers/drawer--settings";
 import DrawerHome from "../../../reusable-components/Drawers/drawer--home";
@@ -11,6 +12,7 @@ class TopAppBarDashboard extends Component {
         // if (localStorage.getItem("token")) {
         //     this.props.getUser();
         // }
+        this.props.viewCart();
     }
 
     selectDrawer = () => {
@@ -76,13 +78,16 @@ class TopAppBarDashboard extends Component {
                                         aria-label="Favorite">favorite_border
                                 </button>
                             </Link>
-                            <Link className="mr2" to="/cart">
-                                <div className="pri-dropdown right">
-                                    <button
-                                        className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
-                                        aria-label="Favorite">shopping_cart
-                                    </button>
-                                </div>
+                            <Link to='/cart'
+                                  className="mr2 active cart-link">
+                                {/*shopping_cart*/}
+                                <button className="mdc-top-app-bar__action-item mdc-icon-button">
+                                    {this.props.cart && this.props.cart.length > 0 ?
+                                        <span className=" badge badge--header material-icons"
+                                              data-badge={this.props.cart.length}>shopping_cart</span> :
+                                        <span>shopping_cart</span>
+                                    }
+                                </button>
                             </Link>
                             <div className="mr3">
                                 <div className="default-dropdown">
@@ -139,7 +144,8 @@ class TopAppBarDashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.user
+    user: state.user.user,
+    cart: state.user.cart
 });
 
-export default withRouter(connect(mapStateToProps, {getUser,toggleDrawers})(TopAppBarDashboard))
+export default withRouter(connect(mapStateToProps, {getUser, toggleDrawers, viewCart})(TopAppBarDashboard))

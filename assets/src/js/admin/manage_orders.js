@@ -7,6 +7,8 @@ import {connect} from "react-redux";
 // import CustomTable from "../reusable-components/custom-table";
 // import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import OrderSelect from "../components/order_select";
+import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
+import DataTable from "../components/Skeleton/skeleton";
 
 class ManageOrders extends Component {
 
@@ -129,7 +131,9 @@ class ManageOrders extends Component {
                                             {this.state.Orders &&
                                             <div>
                                                 <div className="tc">
-                                                    {!orders.length > 0 ? <div>
+
+                                                    {!orders.length > 0 ?
+                                                        <div>
                                                             <header className="mt3 my-page">
                                                                 <h3 className="bold">Orders</h3>
                                                             </header>
@@ -137,13 +141,9 @@ class ManageOrders extends Component {
                                                                 Orders management made easy. <br/>
                                                                 All Orders at the store will be shown here.
                                                             </p>
-                                                        </div> :
-                                                        // <CustomTable headers={headers}
-                                                        //                   data={orders}
-                                                        //                   onEdit={this.onEdit}
-                                                        //                   onChange={this.handleRadioButton}
-                                                        //                   id={this.state.id}/>
-
+                                                            <SkeletonTableLoader/>
+                                                        </div>
+                                                        :
                                                         <div
                                                             className="custom-datatable overflow-x-auto overflow-y-hidden">
                                                             <div className="mdc-data-table hide-scrollbar"
@@ -282,6 +282,7 @@ class ManageOrders extends Component {
 
                                                 </div>
                                             </div>}
+
                                             <div
                                                 className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                                 <div className="tc">

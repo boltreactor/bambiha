@@ -13,7 +13,6 @@ class DrawerHome extends Component {
 
     render() {
         const {categories} = this.props;
-
         if (this.props.toggleDrawer) {
             return (
                 <ClickAwayListener onClickAway={this.handleDrawerClose}>

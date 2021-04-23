@@ -8,6 +8,7 @@ import CustomTable from "../reusable-components/custom-table";
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import equal from "fast-deep-equal";
 import OrderSelect from "../components/order_select";
+import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
 
 
 class ManageUsers extends Component {
@@ -133,11 +134,8 @@ class ManageUsers extends Component {
                                                                 <br/>
                                                                 All Users at the store will be shown here.
                                                             </p>
+                                                            <SkeletonTableLoader/>
                                                         </div> :
-                                                        // <CustomTable headers={headers}
-                                                        //                   data={users}
-                                                        //                   onChange={this.handleRadioButton}
-                                                        //                   id={this.state.id}/>
                                                         <div>
                                                             <div
                                                                 className="custom-datatable overflow-x-auto overflow-y-hidden">

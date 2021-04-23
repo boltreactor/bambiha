@@ -86,14 +86,12 @@ export const deleteCard = (source_id) => dispatch => {
         });
 }
 export const deleteBank = (source_id, bank_id) => dispatch => {
-
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('acc_id', source_id);
     bodyFormData.append('bank_id', bank_id);
     axios.post('/payment/delete-payout-method/', bodyFormData, {headers: Header})
         .then(res => {
-
             dispatch({
                 type: DELETE_BANK,
                 user_banks: res.data.acct,
@@ -104,7 +102,6 @@ export const deleteBank = (source_id, bank_id) => dispatch => {
                     type:DELETE_BANK_ERROR,
                     error_msg:" You cannot delete the default external account for your default currency. Please add another before deleting this."
                 })
-
 
     })
 }
@@ -186,7 +183,6 @@ export const deleteVAT = (id) => dispatch => {
         });
 }
 export const clearBankError = () => dispatch => {
-
     dispatch({
         type: DELETE_BANK_ERROR,
         error_msg: ""

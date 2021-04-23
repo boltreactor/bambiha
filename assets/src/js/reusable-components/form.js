@@ -106,13 +106,11 @@ class Form extends Component {
             } else {
                 errors[item.path[0]] = item.message;
             }
-
         return errors;
     }
     validateProduct = () => {
 
         const options = {abortEarly: false};
-
         const {error} = Joi.validate(this.state.data, this.schema, options);
         if (!error) return null;
         const errors = {};
@@ -122,7 +120,6 @@ class Form extends Component {
             } else {
                 errors[item.path[0]] = item.message;
             }
-
         return errors;
     }
 
@@ -143,7 +140,6 @@ class Form extends Component {
             } else {
                 errors[item.path[0]] = item.message;
             }
-
         return errors;
     }
 
@@ -195,7 +191,7 @@ class Form extends Component {
 
 
     validateProperty = ({name, value}) => {
-        
+
         const obj = {[name]: value};
         const schema = {[name]: this.schema[name]};
         const {error} = Joi.validate(obj, schema);
@@ -240,7 +236,6 @@ class Form extends Component {
         else delete errors[input.name];
         this.setState({errors}, () => {
             if (Object.keys(this.state.errors).length > 0) {
-
             }
         });
 

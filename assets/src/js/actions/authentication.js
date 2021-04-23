@@ -1,5 +1,4 @@
 import axios from "axios";
-import {loadProgressBar} from 'axios-progress-bar';
 import {
     CHANGE_PASSWORD_MSG,
     ERROR,
@@ -13,7 +12,7 @@ import {
 } from "./types";
 
 const qs = require('query-string');
-loadProgressBar();
+
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -265,7 +264,6 @@ export const logout = () => dispatch => {
 export const socialLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login/', user, {headers: Header})
         .then(res => {
-
             if (res.data.user_role === 2)
                 localStorage.setItem("admin", true)
             else
@@ -343,10 +341,8 @@ export const getLinkedinToken = (client_id, secret, code, redirect_url) => async
 
     axios(config)
         .then(function (response) {
-
         })
         .catch(function (error) {
-
         });
 };
 //

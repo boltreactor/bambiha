@@ -486,6 +486,7 @@ template {
     .main-wrapper .main {
         margin-left: 280px;
     }
+
     .main-wrapper .main.s {
         margin-left: 250px;
     }
@@ -1037,10 +1038,10 @@ template {
 
 /* Client Layout */
 .p-workspace-layout {
-	display: grid;
-	grid-template-rows: auto;
-	overflow: hidden;
-	position: relative
+    display: grid;
+    grid-template-rows: auto;
+    overflow: hidden;
+    position: relative
 }
 
 .p-workspace-layout {
@@ -1097,7 +1098,7 @@ template {
         "p-workspace__secondary_view_header"
         "p-workspace__secondary_view_contents";
     overflow: hidden;
-    border-left: 1px solid rgba(var(--sk_foreground_low,29,28,29),.13);
+    border-left: 1px solid rgba(var(--sk_foreground_low, 29, 28, 29), .13);
 }
 
 .p-workspace, .p-workspace__primary_view, .p-workspace__primary_view_contents, .p-workspace__secondary_view {
@@ -1117,13 +1118,31 @@ template {
 }
 
 .p-workspace__primary_view_header {
-	grid-area: p-workspace__primary_view_header;
-	display: flex;
-	height: 36px;
-	min-width: 0
+    grid-area: p-workspace__primary_view_header;
+    display: flex;
+    height: 36px;
+    min-width: 0
 }
+
 .p-workspace__primary_view_contents {
-	display: flex;
-	flex-direction: column;
-	grid-area: p-workspace__primary_view_contents
+    display: flex;
+    flex-direction: column;
+    grid-area: p-workspace__primary_view_contents
+}
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8ad;
+    z-index: 100;
+}
+
+.loader {
+    left: 50%;
+    top: 30%;
+    z-index: 9999;
+    position: absolute;
 }

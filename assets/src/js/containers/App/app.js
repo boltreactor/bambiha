@@ -52,6 +52,8 @@ import NewProduct from "../../admin/new_product";
 import Checkout from "../../components/checkout";
 import AdminProtectedRoute from "../../components/adminProtectedRoutes";
 import BrandFolder from "../../admin/brand_folder";
+import FullPageLoader from "../../components/full-page-loader";
+import SkeletonTableLoader from "../../components/Skeleton/table_skeleton";
 
 
 class App extends Component {
@@ -68,6 +70,7 @@ class App extends Component {
         return (
             <Fragment>
                 <Header loginStatus={this.props.loginStatus}/>
+                <FullPageLoader/>
                 <Switch>
                     <AdminProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
                     <AdminProtectedRoute path="/admin/categories" exact
@@ -98,16 +101,22 @@ class App extends Component {
                                     render={(props) => <ChangePassword {...props}/>}/>
                     <Route path='/new-password/:token' render={(props) => <NewPassword {...props}/>}/>
                     <Route path='/welcome-back' render={(props) => <WelcomeBack {...props}/>}/>
+                    <Route path='/skeleton' render={(props) => <SkeletonTableLoader {...props}/>}/>
                     <Route exact path='/account-settings' render={(props) => <MyProfile{...props}/>}/>
                     <Route exact path='/account-settings/general-settings'
                            render={(props) => <GeneralSettings {...props}/>}/>
                     <Route exact path='/account-settings/social-logins' render={(props) => <SocialLogins {...props}/>}/>
-                    <Route path='/account-settings/product-and-billings/create-payment' render={(props) => <AddPayment {...props}/>}/>
-                    <Route path='/account-settings/product-and-billings/create-payout' render={(props) => <AddPayout {...props}/>}/>
-                    <Route path='/account-settings/product-and-billings/create-vat' render={(props) => <AddVat {...props}/>}/>
-                    <Route path='/account-settings/product-and-billings/edit-vat/:vat_id' exact render={(props) => <AddVat {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-payment'
+                           render={(props) => <AddPayment {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-payout'
+                           render={(props) => <AddPayout {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-vat'
+                           render={(props) => <AddVat {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/edit-vat/:vat_id' exact
+                           render={(props) => <AddVat {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/product-and-billings/:tab'
                                     render={(props) => <ProductsBillings {...props}/>}/>
+
                     <ProtectedRoute exact path='/account-settings/product-and-billings'
                                     render={(props) => <ProductsBillings {...props}/>}/>
                     <ProtectedRoute exact path='/settings/personal-info'
