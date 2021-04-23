@@ -34,7 +34,6 @@ class Cart extends Component {
 
 
     render() {
-        // const Fav = this.props.favorites[0]
         const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         return (
             <div className="page">
@@ -240,7 +239,9 @@ class Cart extends Component {
                                     <div className="mv2" style={{borderBottom: '1px solid #e5e5e5'}}/>
                                     <div className="mv5">
                                         <button className="btn btn-dark btn-lg btn-block btn-pill"
-                                                onClick={this.handleCheckout}>
+                                                onClick={this.handleCheckout}
+                                                disabled={this.props.cart.length < 1}
+                                        >
                                             Checkout
                                         </button>
                                     </div>

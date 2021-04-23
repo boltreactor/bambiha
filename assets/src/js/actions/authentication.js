@@ -10,6 +10,7 @@ import {
     SIGNUP,
     VERIFICATION
 } from "./types";
+import {showLoader} from "./user";
 
 const qs = require('query-string');
 
@@ -20,7 +21,7 @@ const Header = {
     'Accept': 'application/json, text/plain'
 };
 export const signup = (user, props) => dispatch => {
-
+    dispatch(showLoader(true))
     axios.post("/auth/register/", user, {headers: Header})
         .then(res => {
                 if (res.data.status === 1) {
@@ -62,8 +63,9 @@ export const signup = (user, props) => dispatch => {
         ).catch(err => {
 
 
-        }
-    )
+    }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 export const clearAuthErrors = (props) => dispatch => {
     dispatch({
@@ -72,6 +74,7 @@ export const clearAuthErrors = (props) => dispatch => {
     });
 }
 export const login = (user, props) => dispatch => {
+    dispatch(showLoader(true))
     axios.post("/auth/login/", user, {headers: Header}).then(res => {
         if (res.data.user.user_role === 2)
             localStorage.setItem("admin", true)
@@ -105,7 +108,9 @@ export const login = (user, props) => dispatch => {
             type: LOGIN_FAILED,
             loginStatus: false
         });
-    })
+    }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const verifyEmail = (uid, token) => dispatch => {
@@ -143,6 +148,7 @@ export const resendEmail = (email) => dispatch => {
 };
 
 export const resetPassword = (email) => dispatch => {
+    dispatch(showLoader(true))
     axios.post('/auth/forgot/', {email}, {headers: Header})
         .then(res => {
 
@@ -172,7 +178,9 @@ export const resetPassword = (email) => dispatch => {
                     error: err.response.data.message
                 })
             }
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const newPassword = (token, new_password, re_new_password, props) => dispatch => {
@@ -197,6 +205,8 @@ export const newPassword = (token, new_password, re_new_password, props) => disp
 };
 
 export const changePassword = (re_new_password, new_password, current_password, email) => dispatch => {
+        dispatch(showLoader(true))
+
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
 
     axios.post('/auth/set_password/', {re_new_password, new_password, current_password}, {headers: Header})
@@ -247,7 +257,9 @@ export const changePassword = (re_new_password, new_password, current_password, 
             )
 
         }
-    )
+    ).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const logout = () => dispatch => {

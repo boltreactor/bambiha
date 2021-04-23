@@ -133,7 +133,7 @@ class TopAppBarHome extends Component {
                                     {this.props.cart && this.props.cart.length > 0 ?
                                         <span className=" badge badge--header material-icons"
                                               data-badge={this.props.cart.length}>shopping_cart</span> :
-                                        <span>shopping_cart</span>
+                                        <span className=" badge badge--header material-icons">shopping_cart</span>
                                     }
                                 </button>
                             </Link>

@@ -59,9 +59,10 @@ export const changeQuantity = (fd) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post('/user/updateproductquantity/', fd, {headers: Header})
         .then(res => {
+            debugger
             dispatch({
-                // type: QUANTITY_CHANGED,
-                // item: item
+                type: QUANTITY_CHANGED,
+                item: res.data.cart_product
             })
         })
 };
@@ -91,6 +92,7 @@ export const viewOrders = () => dispatch => {
         });
 };
 export const checkout = (props, address, phone) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('address', address);
@@ -101,6 +103,8 @@ export const checkout = (props, address, phone) => dispatch => {
 
         }).catch(err => {
 
+    }).finally(() => {
+        dispatch(showLoader(false))
     });
 };
 
