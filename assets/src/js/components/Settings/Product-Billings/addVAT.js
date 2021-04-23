@@ -49,7 +49,7 @@ class AddVat extends Form {
                 }
             })
         }),
-        name_vat_registration: Joi.string().trim().regex(/^[a-zA-Z][a-zA-Z]*$/).required().error(errors => {
+        name_vat_registration: Joi.string().regex(/^[a-zA-Z][a-zA-Z\s]*$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
                     case "string.base":
