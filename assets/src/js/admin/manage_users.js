@@ -136,10 +136,6 @@ class ManageUsers extends Component {
                                                             </p>
                                                             <SkeletonTableLoader/>
                                                         </div> :
-                                                        // <CustomTable headers={headers}
-                                                        //                   data={users}
-                                                        //                   onChange={this.handleRadioButton}
-                                                        //                   id={this.state.id}/>
                                                         <div>
                                                             <div
                                                                 className="custom-datatable overflow-x-auto overflow-y-hidden">

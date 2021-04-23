@@ -139,7 +139,7 @@ export const addProduct = (product, props) => dispatch => {
         ).catch(err => {
 
     }).finally(() => {
-        dispatch(showLoader(true))
+        dispatch(showLoader(false))
     })
 };
 

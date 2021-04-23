@@ -131,6 +131,7 @@ class ManageOrders extends Component {
                                             {this.state.Orders &&
                                             <div>
                                                 <div className="tc">
+
                                                     {!orders.length > 0 ?
                                                         <div>
                                                             <header className="mt3 my-page">

@@ -101,97 +101,109 @@ class ManageCategory extends Component {
                                                         Categories<span className="ml2"
                                                                         style={{color: '#0258ff'}}>{categories.length}</span>
                                                     </div>
-                                                    : "Catagories Management" : "Help & Support"}</h3>
+                                                    : "Categories Management" : "Help & Support"}</h3>
                                             </div>
 
                                             {/*{/ Table /}*/}
                                             {this.state.Categories &&
                                             <div>
                                                 <div className="tc">
-                                                    {!categories.length > 0 ? <div>
-                                                        <header className="mt3 my-page">
-                                                            <h3 className="bold">Categories</h3>
-                                                        </header>
-                                                        <p>
-                                                            Categories management made easy. <br/>
-                                                            All Categories at the store will be shown here.
-                                                        </p>
-                                                        <SkeletonTableLoader/>
-                                                    </div> : <div>
-                                                        <div
-                                                            className="custom-datatable overflow-x-auto overflow-y-hidden">
-                                                            <div className="mdc-data-table hide-scrollbar"
-                                                                 data-mdc-auto-init="MDCDataTable">
-                                                                <div className="mdc-data-table__table-container">
-                                                                    <table className="mdc-data-table__table"
-                                                                           aria-label="Dessert calories">
-                                                                        <thead>
-                                                                        <tr className="mdc-data-table__header-row">
-                                                                            <th className="mdc-data-table__header-cell tl"
-                                                                                role="columnheader" scope="col">Sr. No.
-                                                                            </th>
-                                                                            <th className="mdc-data-table__header-cell tl"
-                                                                                role="columnheader" scope="col">Category
-                                                                                name
-                                                                            </th>
-                                                                            <th className="mdc-data-table__header-cell tl mdc-data-table__header-cell--numeric"
-                                                                                role="columnheader" scope="col">Date
-                                                                            </th>
-                                                                            <th className="mdc-data-table__header-cell tl mdc-data-table__header-cell--numeric"
-                                                                                role="columnheader" scope="col">Status
-                                                                            </th>
-                                                                            <th className="mdc-data-table__header-cell tl"
-                                                                                role="columnheader" scope="col">Actions
-                                                                            </th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody className="mdc-data-table__content">
-                                                                        {categories.map((category, index) => <tr
-                                                                            key={index}
-                                                                            data-row-id="u0"
-                                                                            className="mdc-data-table__row">
-                                                                            <th className="mdc-data-table__cell tl">{index + 1}</th>
-                                                                            <th className="mdc-data-table__cell tl"
-                                                                                scope="row" id="u0">{category.name}
-                                                                            </th>
-                                                                            <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.date}</td>
-                                                                            <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.status === 1 ?
-                                                                                <td className="mdc-data-table__cell tl"
-                                                                                    scope="row"
-                                                                                    id="u0">Enabled</td> :
-                                                                                <td className="mdc-data-table__cell tl"
-                                                                                    scope="row"
-                                                                                    style={{color: "#FF0000"}}
-                                                                                    id="u0">Disabled</td>}</td>
-                                                                            <td className="mdc-data-table__cell tl">
-                                                                                <button
-                                                                                    className="btn btn-outline-primary btn-sm mr3"
-                                                                                    onClick={(e) => this.onEdit(e, category.id)}>
-                                                                                    <i className="material-icons-outlined"
-                                                                                       style={{fontSize: '16px'}}>edit</i>
-                                                                                    Edit
-                                                                                </button>
-                                                                                <button
-                                                                                    className="btn btn-outline-danger btn-sm"
-                                                                                    onClick={(e) => this.handleDisable(e, category)}>
-                                                                                    <i className="material-icons-outlined"
-                                                                                       style={{fontSize: "16px"}}>block</i>ENABLE/DISABLE
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>)}
+                                                    {!categories.length > 0 ?
+                                                        <div>
+                                                            <header className="mt3 my-page">
+                                                                <h3 className="bold">Categories</h3>
+                                                            </header>
+                                                            <p>
+                                                                Categories management made easy. <br/>
+                                                                All Categories at the store will be shown here.
+                                                            </p>
+                                                            <SkeletonTableLoader/>
+                                                        </div> :
+                                                        <div>
+                                                            <div
+                                                                className="custom-datatable overflow-x-auto overflow-y-hidden">
+                                                                <div className="mdc-data-table hide-scrollbar"
+                                                                     data-mdc-auto-init="MDCDataTable">
+                                                                    <div
+                                                                        className="mdc-data-table__table-container">
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                        <table className="mdc-data-table__table"
+                                                                               aria-label="Dessert calories">
+                                                                            <thead>
+                                                                            <tr className="mdc-data-table__header-row">
+                                                                                <th className="mdc-data-table__header-cell tl"
+                                                                                    role="columnheader"
+                                                                                    scope="col">Sr.
+                                                                                    No.
+                                                                                </th>
+                                                                                <th className="mdc-data-table__header-cell tl"
+                                                                                    role="columnheader"
+                                                                                    scope="col">Category
+                                                                                    name
+                                                                                </th>
+                                                                                <th className="mdc-data-table__header-cell tl mdc-data-table__header-cell--numeric"
+                                                                                    role="columnheader"
+                                                                                    scope="col">Date
+                                                                                </th>
+                                                                                <th className="mdc-data-table__header-cell tl mdc-data-table__header-cell--numeric"
+                                                                                    role="columnheader"
+                                                                                    scope="col">Status
+                                                                                </th>
+                                                                                <th className="mdc-data-table__header-cell tl"
+                                                                                    role="columnheader"
+                                                                                    scope="col">Actions
+                                                                                </th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody
+                                                                                className="mdc-data-table__content">
+                                                                            {categories.map((category, index) => <tr
+                                                                                key={index}
+                                                                                data-row-id="u0"
+                                                                                className="mdc-data-table__row">
+                                                                                <th className="mdc-data-table__cell tl">{index + 1}</th>
+                                                                                <th className="mdc-data-table__cell tl"
+                                                                                    scope="row"
+                                                                                    id="u0">{category.name}
+                                                                                </th>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.date}</td>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.status === 1 ?
+                                                                                    <td className="mdc-data-table__cell tl"
+                                                                                        scope="row"
+                                                                                        id="u0">Enabled</td> :
+                                                                                    <td className="mdc-data-table__cell tl"
+                                                                                        scope="row"
+                                                                                        style={{color: "#FF0000"}}
+                                                                                        id="u0">Disabled</td>}</td>
+                                                                                <td className="mdc-data-table__cell tl">
+                                                                                    <button
+                                                                                        className="btn btn-outline-primary btn-sm mr3"
+                                                                                        onClick={(e) => this.onEdit(e, category.id)}>
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{fontSize: '16px'}}>edit</i>
+                                                                                        Edit
+                                                                                    </button>
+                                                                                    <button
+                                                                                        className="btn btn-outline-danger btn-sm"
+                                                                                        onClick={(e) => this.handleDisable(e, category)}>
+                                                                                        <i className="material-icons-outlined"
+                                                                                           style={{fontSize: "16px"}}>block</i>ENABLE/DISABLE
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tr>)}
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                    </div>}
+                                                        </div>}
                                                     {/*<CustomTable headers={headers}*/}
-                                                    {/*                  data={categories} onEdit={this.onEdit}*/}
-                                                    {/*                  onChange={this.handleRadioButton}*/}
-                                                    {/*                  onDisable={this.handleDisable}*/}
-                                                    {/*                  id={this.state.id}/>*/}
+                                                    {/*             data={categories} onEdit={this.onEdit}*/}
+                                                    {/*             onChange={this.handleRadioButton}*/}
+                                                    {/*             onDisable={this.handleDisable}*/}
+                                                    {/*             id={this.state.id}/>*/}
 
                                                 </div>
                                             </div>}

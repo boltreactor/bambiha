@@ -97,8 +97,6 @@ class ManageProducts extends Component {
                                                     </div>
                                                     : "Products Management" : "Help & Support"}</h3>
                                             </div>
-                                            {/* Table */}
-                                            {/*<div className={this.state.Products === true ? "tab-no-data" : "tab-no-data hide"}>*/}
                                             {this.state.Products &&
                                             <div>
                                                 <div className="tc">
