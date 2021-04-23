@@ -10,6 +10,7 @@ import {
     PAYMENT_INTENT,
     VAT
 } from "./types";
+import {showLoader} from "./user";
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -19,6 +20,7 @@ const Header = {
 
 
 export const addCard = (card_token) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('card_token', card_token);
@@ -29,10 +31,14 @@ export const addCard = (card_token) => dispatch => {
                 type: ADD_CARD,
                 card: res.data.user
             });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
+
 };
 
 export const addBank = (bank_token) => async dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('bank_token', bank_token);
@@ -47,7 +53,9 @@ export const getCards = () => dispatch => {
                 type: GET_CARDS,
                 user_cards: res.data.user_cards,
             });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 }
 export const getBanks = () => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
@@ -96,12 +104,12 @@ export const deleteBank = (source_id, bank_id) => dispatch => {
                 type: DELETE_BANK,
                 user_banks: res.data.acct,
             });
-        }).catch(error=>{
-            error["message"]==="Request failed with status code 500" &&
-                dispatch({
-                    type:DELETE_BANK_ERROR,
-                    error_msg:" You cannot delete the default external account for your default currency. Please add another before deleting this."
-                })
+        }).catch(error => {
+        error["message"] === "Request failed with status code 500" &&
+        dispatch({
+            type: DELETE_BANK_ERROR,
+            error_msg: " You cannot delete the default external account for your default currency. Please add another before deleting this."
+        })
 
     })
 }
@@ -122,6 +130,7 @@ export const paymentIntent = (amount, currency) => dispatch => {
 }
 
 export const addVAT = (data, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('country', data.country);
@@ -135,11 +144,14 @@ export const addVAT = (data, props) => dispatch => {
         .then(res => {
             if (res.status === 200)
                 props.history.goBack()
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });;
 }
 
 
 export const updateVAT = (data, props) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('id', data.id);
@@ -155,7 +167,9 @@ export const updateVAT = (data, props) => dispatch => {
             if (res.status === 200)
                 props.history.goBack()
 
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });;
 }
 
 export const getVAT = () => dispatch => {

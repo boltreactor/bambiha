@@ -92,6 +92,7 @@ export const viewOrders = () => dispatch => {
         });
 };
 export const checkout = (props, address, phone) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let bodyFormData = new FormData();
     bodyFormData.append('address', address);
@@ -102,6 +103,8 @@ export const checkout = (props, address, phone) => dispatch => {
 
         }).catch(err => {
 
+    }).finally(() => {
+        dispatch(showLoader(false))
     });
 };
 
