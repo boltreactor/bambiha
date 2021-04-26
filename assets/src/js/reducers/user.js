@@ -165,7 +165,6 @@ export default function (state = initialState, action) {
             }
         }
         case QUANTITY_CHANGED: {
-            debugger
             return {
                 ...state,
                 cart: state.cart.map(item => item.product_key !== action.item.product_key ? item : action.item)

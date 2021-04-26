@@ -86,7 +86,8 @@ def getProducts(request):
             "price": p.price,
             "quantity": p.quantity,
             "title": p.title,
-            "id": p.key.urlsafe()
+            "id": p.key.urlsafe(),
+            "status": p.product_status
         })
     if all_products:
         return Response({

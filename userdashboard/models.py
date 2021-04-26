@@ -51,8 +51,27 @@ class Cart(ndb.Model):
                         user_key=cls.get_with_key(request.session.get('user')).key,
                         quantity=int(request.POST.get('quantity')))
             cart.put()
+            cart_products = cls.query(cls.user_key == ndb.Key(urlsafe=request.session.get('user')))
+            for p in cart_products:
+                item = p.product_key.get()
+                fav = Favorites.query(Favorites.user_key == ndb.Key(urlsafe=request.session.get('user')),
+                                      Favorites.product_key == p.product_key).get()
+                is_fav = False
+                if fav:
+                    is_fav = True
 
-        return products
+                products.append({
+                    'title': item.title,
+                    'price': item.price * p.quantity,
+                    "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
+                        item.category_key) else None,
+                    'product_key': p.product_key.urlsafe().decode(),
+                    'quantity': p.quantity,
+                    'favourite': is_fav,
+                    'image': item.images[0] if item.images else None,
+                    'store_user_key': item.user_key
+                })
+                return products
 
     @classmethod
     def get_cart_details(cls, request):

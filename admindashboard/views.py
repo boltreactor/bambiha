@@ -121,6 +121,15 @@ def GetProduct(request):
         'status': status.HTTP_200_OK, 'message': "Product Added", 'product': product
     }, status.HTTP_200_OK)
 
+
+# @api_view(['GET', 'POST'])
+# def DisableProduct(request):
+#     product = Products.disable_product(request)
+#     return Response({
+#         'status': status.HTTP_200_OK, 'message': "Product disabled/enabled",
+#     }, status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def DeleteProduct(request):
     product = Products.delete_product(request)

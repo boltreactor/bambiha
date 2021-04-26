@@ -12,8 +12,7 @@ class Product extends Component {
 
     componentDidMount() {
         this.props.getProduct(this.props.match.params.id)
-        this.props.getFavorite()
-
+        this.props.loginStatus === true && this.props.getFavorite()
 
     }
 
@@ -31,11 +30,13 @@ class Product extends Component {
     addItemToCart = (e) => {
         e.preventDefault();
         this.props.addToCart(1, this.props.match.params.id, this.props)
+        // this.props.loginStatus === true ? this.props.addToCart(1, this.props.match.params.id, this.props) : this.props.history.push('/login')
+
     }
 
     addFavorite = (e) => {
         e.preventDefault();
-        this.props.manageFavorite(this.props.match.params.id, this.props)
+        this.props.loginStatus === true ? this.props.manageFavorite(this.props.match.params.id, this.props) : this.props.history.push('/login')
     }
     checkFavorite = (product_key) => {
 

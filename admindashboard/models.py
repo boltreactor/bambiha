@@ -39,6 +39,14 @@ class Category(ndb.Model):
         category.put()
         return category
 
+    # @classmethod
+    # def edit_product(cls, request):
+    #     product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
+    #     category.name = request.POST.get('category')
+    #     category.status = int(request.POST.get('status'))
+    #     category.put()
+    #     return category
+
     @classmethod
     def delete_category(cls, request):
         category = ndb.Key(urlsafe=request.query_params.get('category_key')).get()
@@ -111,7 +119,8 @@ class Products(ndb.Model):
                     "price": p.price,
                     "quantity": p.quantity,
                     "title": p.title,
-                    "id": p.key.urlsafe()
+                    "id": p.key.urlsafe(),
+                    "status": p.product_status
                 })
         return all_products
 
@@ -163,6 +172,12 @@ class Products(ndb.Model):
             "id": product.key.urlsafe()
         }]
         return all_products
+
+    # @classmethod
+    # def disable_product(cls, request):
+    #     product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
+    #     product.product_status = int(request.POST.get('status'))
+    #     product.put()
 
     @classmethod
     def get_product(cls, request):
