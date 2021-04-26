@@ -116,6 +116,7 @@ export const delProduct = (id) => dispatch => {
     }
     axios.get('/admin/deleteproduct/', config)
         .then(res => {
+            debugger
             // dispatch({
             //     type: DEL_PRODUCT
             //
