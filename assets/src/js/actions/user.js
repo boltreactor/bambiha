@@ -3,7 +3,7 @@ import {
     ADD_ITEM_TO_CART,
     CART,
     FAVORITES,
-    HEADER_CATEGORIES,
+    HEADER_CATEGORIES, QUANTITY_CHANGED,
     REMOVED_ITEM_FROM_CART,
     SHOW_LOADER,
     USER_ORDERS,
@@ -59,7 +59,6 @@ export const changeQuantity = (fd) => dispatch => {
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post('/user/updateproductquantity/', fd, {headers: Header})
         .then(res => {
-            debugger
             dispatch({
                 type: QUANTITY_CHANGED,
                 item: res.data.cart_product
@@ -69,7 +68,6 @@ export const changeQuantity = (fd) => dispatch => {
 
 
 export const viewCart = () => dispatch => {
-    showLoader(true)
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/user/viewcart/', {headers: Header})
         .then(res => {

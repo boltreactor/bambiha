@@ -1,7 +1,8 @@
 from django.urls import path
 
 from admindashboard.views import AddCategory, EditCategory, GetCategory, DeleteCategory, AllCategories, AddProduct, \
-    EditProduct, ViewOrders, ViewOrderItems, UpdateOrderStatus, HeaderCategories, NewProducts, DeleteOrder, UpdateOrder
+    EditProduct, ViewOrders, ViewOrderItems, UpdateOrderStatus, HeaderCategories, NewProducts, DeleteOrder, UpdateOrder, \
+    DisableProduct
 from admindashboard.views import GetProduct, DeleteProduct, AllProducts
 from bambiha.middlewares import ndb_context_middleware, admin_auth_middleware
 from registration.views import account_status, manage_admin_status
@@ -26,5 +27,6 @@ urlpatterns = [
     path('updatestatus/', ndb_context_middleware(admin_auth_middleware(UpdateOrderStatus))),
     path('manage_status/', ndb_context_middleware(admin_auth_middleware(account_status))),
     path('manage-admin/', ndb_context_middleware(admin_auth_middleware(manage_admin_status))),
+    # path('disable-product/', ndb_context_middleware(admin_auth_middleware(DisableProduct))),
 
 ]

@@ -160,16 +160,16 @@ class ManageProducts extends Component {
                                                                                                style={{fontSize: '16px'}}>edit</i>
                                                                                             Edit
                                                                                         </button>
-                                                                                        {/*<button*/}
-                                                                                        {/*    className="btn btn-outline-danger btn-sm"*/}
-                                                                                        {/*    onClick={(e) => this.handleDeleteProduct(e, product.id)}>*/}
-                                                                                        {/*    <i className="material-icons-outlined"*/}
-                                                                                        {/*       style={{*/}
-                                                                                        {/*           fontSize: '16px',*/}
-                                                                                        {/*           color: 'var(--danger)'*/}
-                                                                                        {/*       }}>delete</i>*/}
-                                                                                        {/*    DELETE*/}
-                                                                                        {/*</button>*/}
+                                                                                        <button
+                                                                                            className="btn btn-outline-danger btn-sm"
+                                                                                            onClick={(e) => this.handleDeleteProduct(e, product.id)}>
+                                                                                            <i className="material-icons-outlined"
+                                                                                               style={{
+                                                                                                   fontSize: '16px',
+                                                                                                   color: 'var(--danger)'
+                                                                                               }}>delete</i>
+                                                                                            DELETE
+                                                                                        </button>
                                                                                     </td>
                                                                                 </tr>
                                                                             )}

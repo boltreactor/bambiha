@@ -12,8 +12,9 @@ class TopAppBarHome extends Component {
         // if (localStorage.getItem("token")) {
         //     this.props.getUser();
         // }
+        debugger
         this.props.getUserCategories();
-        this.props.viewCart();
+        this.props.user !==undefined && this.props.viewCart();
     }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {

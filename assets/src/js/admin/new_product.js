@@ -21,7 +21,7 @@ class NewProduct extends Form {
                 desc: "",
                 quantity: "",
                 price: "",
-                status: 1,
+                status: 0,
                 images: []
             },
             state_images: [],
@@ -90,7 +90,7 @@ class NewProduct extends Form {
         fd.append("description", this.state.data.desc);
         fd.append("quantity", this.state.data.quantity);
         fd.append("price", this.state.data.price);
-        fd.append("status", this.state.data.status);
+        fd.append("status", '0');
         fd.append("category_key", `${this.props.categories.find(function (category) {
             return category.name === category_key;
         }).id}`);
