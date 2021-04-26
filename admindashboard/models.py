@@ -3,6 +3,8 @@ from google.cloud import ndb
 from algoliasearch import index, client, algoliasearch
 import boto3
 
+from userdashboard.models import Favorites, Cart, OrderItems
+
 
 class Category(ndb.Model):
     user_key = ndb.StringProperty()
@@ -223,3 +225,22 @@ class Products(ndb.Model):
                 'key': r['objectID']
             })
         return all_products
+
+    @classmethod
+    def _pre_delete_hook(cls, key):
+        favorites = Favorites.query(Favorites.product_key == key).fetch(keys_only=True)
+        ndb.delete_multi(favorites)
+
+        cart= Cart.query(Cart.product_key == key).fetch()
+        if cart:
+            for detail in cart:
+                detail.product_key.remove(key)
+                ndb.put_multi(cart)
+        orders = OrderItems.query(OrderItems.product_key == key).fetch()
+        if orders:
+            for detail in orders:
+                detail.product_key.remove(key)
+            ndb.put_multi(orders)
+
+
+
