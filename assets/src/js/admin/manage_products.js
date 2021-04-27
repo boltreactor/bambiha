@@ -2,10 +2,8 @@ import React, {Component, Fragment} from "react";
 import {Link, withRouter} from 'react-router-dom';
 import Navigation from "./navigation";
 import SmartFooter from "../components/Footers/smart-footer";
-import {getAllProducts, delProduct} from "../actions/admin";
+import {getAllProducts, delProduct, editProduct, getAllCategories} from "../actions/admin";
 import {connect} from "react-redux";
-import product from "../components/product";
-import DataTable from "../components/Skeleton/skeleton";
 import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
 
 class ManageProducts extends Component {
@@ -25,6 +23,7 @@ class ManageProducts extends Component {
 
     componentDidMount() {
         this.props.getAllProducts()
+        this.props.getAllCategories()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -43,10 +42,25 @@ class ManageProducts extends Component {
         this.props.delProduct(productId)
         this.setState({id: productId})
     }
+    handleDisable = (event, product) => {
+        event.preventDefault()
+        let fd = new FormData();
+        let category_key = product.category
+        fd.append("title", product.title);
+        fd.append("description", product.description);
+        fd.append("quantity", product.quantity);
+        fd.append("price", product.price);
+        product.status === 0 ? fd.append("status", '1') : fd.append("status", '0');
+        fd.append("category_key", `${this.props.categories.find(function (category) {
+            return category.name === category_key;
+        }).id}`);
+        fd.append("product_key", product.id);
+        this.props.editProduct(fd, this.props)
+    }
 
     render() {
         const headers = [{name: 'Sr. No.'}, {name: 'Avatar'}, {name: 'Product Title'}, {name: 'Price'}, {name: 'Quantity'},
-            {name: 'Category'}, {name: 'Description'}, {name: 'No. of Images'}, {name: 'Action'}];
+            {name: 'Category'}, {name: 'Description'}, {name: 'No. of Images'}, {name: 'Status'}, {name: 'Action'}];
         const {products} = this.props;
         return (
             <Fragment>
@@ -152,6 +166,7 @@ class ManageProducts extends Component {
                                                                                     <td className="mdc-data-table__cell">{product.category}</td>
                                                                                     <td className="mdc-data-table__cell mdc-data-table__cell--">{product.description}</td>
                                                                                     <td className="mdc-data-table__cell">{product.images.length}</td>
+                                                                                    <td className="mdc-data-table__cell">{product.status === 0 ? "Disabled" : "Enabled"}</td>
                                                                                     <td className="mdc-data-table__cell">
                                                                                         <button
                                                                                             onClick={(e) => this.onEdit(e, product.id)}
@@ -169,6 +184,12 @@ class ManageProducts extends Component {
                                                                                                    color: 'var(--danger)'
                                                                                                }}>delete</i>
                                                                                             DELETE
+                                                                                        </button>
+                                                                                        <button
+                                                                                            className="btn btn-outline-danger btn-sm"
+                                                                                            onClick={(e) => this.handleDisable(e, product)}>
+                                                                                            <i className="material-icons-outlined"
+                                                                                               style={{fontSize: "16px"}}>block</i>ENABLE/DISABLE
                                                                                         </button>
                                                                                     </td>
                                                                                 </tr>
@@ -220,4 +241,9 @@ const mapStateToProps = state => ({
     products: state.admin.products,
     categories: state.admin.categories
 })
-export default withRouter(connect(mapStateToProps, {getAllProducts, delProduct})(ManageProducts));
+export default withRouter(connect(mapStateToProps, {
+    getAllProducts,
+    delProduct,
+    editProduct,
+    getAllCategories
+})(ManageProducts));

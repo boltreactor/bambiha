@@ -117,17 +117,19 @@ class Cart extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="actions">
-                                                        {item.favourite === true ? <button
+                                                        {item.favourite === true &&
+                                                        <button
                                                             className="btn btn-outline-dark btn-lg btn-pill mr2"
-                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
-                                                            onClick={(e) => this.addFavorite(e, item.product_key)}>Remove
-                                                            from Favourites
-                                                        </button> : <button
-                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
-                                                            // style={{color: 'var(--space-gray)', fontSize: '14px'}}
-                                                            onClick={(e) => this.addFavorite(e, item.product_key)}>Move
-                                                            to Favourite
+                                                            onClick={(e) => this.addFavorite(e, item.product_key)}>
+                                                            Remove from Favourites
                                                         </button>}
+
+                                                        {item.favourite === false && <button
+                                                            className="btn btn-outline-dark btn-lg btn-pill mr2"
+                                                            onClick={(e) => this.addFavorite(e, item.product_key)}>
+                                                            Move to Favourite
+                                                        </button>
+                                                        }
                                                         <button
                                                             className="btn btn-outline-dark btn-lg btn-pill mr2"
                                                             // style={{color: 'var(--space-gray)', fontSize: '14px'}}
@@ -178,12 +180,12 @@ class Cart extends Component {
                                                             <p className="ma0" style={{fontSize: '16px'}}>
                                                                 <span>Size</span>
                                                                 <span>
-                                                        <select name="size" id="size">
-                                                        <option value={10}>10</option>
-                                                        <option value={11}>11</option>
-                                                        <option value={12}>12</option>
-                                                        </select>
-                                                        </span>
+                                                            <select name="size" id="size">
+                                                            <option value={10}>10</option>
+                                                            <option value={11}>11</option>
+                                                            <option value={12}>12</option>
+                                                            </select>
+                                                            </span>
                                                             </p>
                                                         </div>
                                                     </div>}
