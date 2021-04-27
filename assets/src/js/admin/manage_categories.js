@@ -166,7 +166,7 @@ class ManageCategory extends Component {
                                                                                     scope="row"
                                                                                     id="u0">{category.name}
                                                                                 </th>
-                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.date}</td>
+                                                                                <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{new Date(category.date).toLocaleString()}</td>
                                                                                 <td className="mdc-data-table__cell mdc-data-table__cell--numeric tl">{category.status === 1 ?
                                                                                     <td className="mdc-data-table__cell tl"
                                                                                         scope="row"

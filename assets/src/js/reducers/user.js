@@ -13,8 +13,16 @@ import {
     IMAGES_VIEW,
     CURRENT_LISTING,
     CART,
-    USER_ORDERS, HEADER_CATEGORIES, USER_PRODUCTS,
-    FAVORITES, REMOVED_ITEM_FROM_CART, REMOVED_ITEM_FROM_FAVORITES, ADD_ITEM_TO_CART, QUANTITY_CHANGED, SHOW_LOADER
+    USER_ORDERS,
+    HEADER_CATEGORIES,
+    USER_PRODUCTS,
+    FAVORITES,
+    REMOVED_ITEM_FROM_CART,
+    REMOVED_ITEM_FROM_FAVORITES,
+    ADD_ITEM_TO_CART,
+    QUANTITY_CHANGED,
+    SHOW_LOADER,
+    SHOW_SKELETON
     // STATE_IMAGES,
 } from '../actions/types';
 import React from 'react';
@@ -53,7 +61,8 @@ export const initialState = {
     notification_settings: null,
     msg: null,
     show: false,
-    loading: false
+    loading: false,
+    skeleton: false
 };
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -174,6 +183,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: action.loader
+            }
+        }
+        case SHOW_SKELETON: {
+            return {
+                ...state,
+                skeleton: action.skeleton
             }
         }
 
