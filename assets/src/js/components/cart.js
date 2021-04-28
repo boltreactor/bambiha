@@ -35,6 +35,7 @@ class Cart extends Component {
 
     render() {
         const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        debugger
         return (
             <div className="page">
                 <div className="page__content">
@@ -79,7 +80,7 @@ class Cart extends Component {
                                                             <div className="flex-grow-1 mr2">
                                                                 <Link to={`/product/${item.product_key}`}>
                                                                     <h4>{item.title}</h4></Link>
-                                                                {item.product_status &&
+                                                                {item.product_status!==1 &&
                                                                 <p style={{color: "red"}}>Item Not Available</p>}
                                                             </div>
                                                             <div>
@@ -153,14 +154,15 @@ class Cart extends Component {
                                 </div>
                                 {/* */}
                                 {this.props.favorites !== undefined && this.props.favorites.length > 0 &&
-                                <div className="cart-or-bag mv4">
+                                    this.props.favorites.filter(item=>item.title!==null).slice(0,1).map(item=>{
+                                return <div className="cart-or-bag mv4">
                                     <h3 className="mb3">Favourites</h3>
                                     <div className="cart-item ma0">
                                         <div className="flex mb3">
                                             <div className="mr2 mb3">
                                                 <Link to="#" className="link-mute">
                                                     <img
-                                                        src={this.props.favorites[0].image ? this.props.favorites[0].image : "/static/img-noise.png"}
+                                                        src={item.image ? item.image : "/static/img-noise.png"}
                                                         alt=""/>
                                                 </Link>
                                             </div>
@@ -168,16 +170,16 @@ class Cart extends Component {
                                                 <div className="description">
                                                     <div className="flex mb2">
                                                         <div className="flex-grow-1 mr2">
-                                                            <h4>{this.props.favorites[0].title}</h4>
+                                                            <h4>{item.title}</h4>
                                                         </div>
                                                         <div>
-                                                            <h6>{this.props.favorites[0].price}</h6>
+                                                            <h6>{item.price}</h6>
                                                         </div>
                                                     </div>
                                                     <p className="ma0" style={{fontSize: '16px'}}>
                                                         Men's Shoe
                                                     </p>
-                                                    {this.props.favorites[0].size && <div className="mv2">
+                                                    {item.size && <div className="mv2">
                                                         <div className="dib mr3">
                                                             <p className="ma0" style={{fontSize: '16px'}}>
                                                                 <span>Size</span>
@@ -194,7 +196,7 @@ class Cart extends Component {
                                                 </div>
                                                 <div className="actions">
                                                     <button className="btn btn-outline-dark btn-lg btn-pill"
-                                                            onClick={(e) => this.addItemToCart(e, 1, this.props.favorites[0], "add")}>
+                                                            onClick={(e) => this.addItemToCart(e, 1, item, "add")}>
                                                         Add to Bag
                                                     </button>
                                                 </div>
@@ -202,10 +204,10 @@ class Cart extends Component {
                                         </div>
                                     </div>
                                     <div className="mv3">
-                                        <Link to="/favorites" className="fw4 link-mute link-dark">View all
+                                        <Link to="/dashboard/favorites" className="fw4 link-mute link-dark">View all
                                             Favourites</Link>
                                     </div>
-                                </div>}
+                                </div>})}
 
                             </div>
                             <div className="col s12 m4 l4">

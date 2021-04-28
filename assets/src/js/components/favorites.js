@@ -105,7 +105,17 @@ class Favorites extends Component {
                                                 <div>
                                                     <section className="cart-or-bag mv4">
                                                         {favorites && favorites.map((item, index) => {
-                                                            return <div key={index} className="cart-item ma0">
+                                                            return item.title===null?
+                                                                <div key={index} className="cart-item ma0">
+                                                                <div className="flex mb3">
+                                                                    <div className="flex-grow-1 pa2">
+                                                                        <div className="description">
+                                                                            This product is removed from the store
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>:<div key={index} className="cart-item ma0">
                                                                 <div className="flex mb3">
                                                                     <div className="mr2 mb3">
                                                                         <Link to="#" className="link-mute">

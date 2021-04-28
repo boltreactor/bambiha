@@ -139,22 +139,13 @@ export const manageFavorite = (id, props) => dispatch => {
 
     let bodyFormData = new FormData();
     bodyFormData.append('product_key', id);
+    debugger
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
-            axios.get('/user/getfavorites/', {headers: Header})
-                .then(res => {
-                    dispatch({
-                        type: FAVORITES,
-                        favorites: res.data.favorites
-                    });
-                });
-            axios.get('/user/viewcart/', {headers: Header})
-                .then(res => {
-                    dispatch({
-                        type: CART,
-                        cart: res.data.products,
-                    });
-                });
+            dispatch({
+                type: FAVORITES,
+                favorites: res.data.favorites
+            });
         }).catch(err => {
 
     })
