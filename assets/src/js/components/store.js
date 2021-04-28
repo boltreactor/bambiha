@@ -24,6 +24,9 @@ class Store extends Component {
             this.props.getUserProducts(this.props.match.params.id)
         }
     }
+    handleDisabledClick = (e,item)=>{
+        item.status===0? e.preventDefault():null
+    }
 
     render() {
         debugger
@@ -41,7 +44,7 @@ class Store extends Component {
                                         this.props.products.map(item => {
                                             return (
                                                 <div key={item.id} className="col s12 m6 l4 mb3">
-                                                    <Link to={`/product/${item.id}`} className="link-mute">
+                                                     <Link to={`/product/${item.id}`}  onClick={e=>this.handleDisabledClick(e, item)} className="link-mute">
                                                         <div className="img-wrapper s">
                                                             <img className="w-100 h-100"
                                                                  src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
@@ -51,7 +54,8 @@ class Store extends Component {
                                                             <div><h4>{item.title}</h4></div>
                                                             <div><h6>{item.price}</h6></div>
                                                         </div>
-                                                    </Link>
+                                                        <div className="mv3"><div style={{float:"right"}}>{item.status===0&&<p style={{color: "red"}}>Product Not Available</p>}</div>
+                                                       </div></Link>
                                                 </div>
                                             )
                                         })

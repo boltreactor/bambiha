@@ -12,6 +12,7 @@ class Cart extends Component {
     }
 
     handleCheckout = () => {
+        debugger
         this.props.history.push('/checkout')
     }
     addItemToCart = (e, quantity, product, addOrRemove) => {
@@ -80,7 +81,7 @@ class Cart extends Component {
                                                             <div className="flex-grow-1 mr2">
                                                                 <Link to={`/product/${item.product_key}`}>
                                                                     <h4>{item.title}</h4></Link>
-                                                                {item.product_status!==1 &&
+                                                                {item.product_status===0 &&
                                                                 <p style={{color: "red"}}>Item Not Available</p>}
                                                             </div>
                                                             <div>

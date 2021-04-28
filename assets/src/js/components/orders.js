@@ -10,7 +10,7 @@ import {viewOrders} from "../actions/user";
 class Orders extends Component {
     state = {
         Orders: true,
-        HelpSupport:false
+        HelpSupport: false
 
 
     }
@@ -26,15 +26,14 @@ class Orders extends Component {
 
 
     componentDidMount() {
-     this.props.viewOrders();
+        this.props.viewOrders();
     }
-
 
 
     render() {
         // const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
         const {orders} = this.props;
-
+        debugger
         return (
             <div className="page">
                 <div className="page__content">
@@ -60,92 +59,87 @@ class Orders extends Component {
                                               onClick={(e) => this.handleTab(e)}>
                                             Orders
                                         </Link>
-                                        <Link to="#" className="tab-item link-mute" aria-selected={this.state.HelpSupport} onClick={(e) => this.handleTab(e)}>
+                                        <Link to="#" className="tab-item link-mute"
+                                              aria-selected={this.state.HelpSupport} onClick={(e) => this.handleTab(e)}>
                                             Help & Support
                                         </Link>
                                     </header>
 
-                                     {/* Orders */}
+                                    {/* Orders */}
                                     <div className="tab-content">
                                         <div className="mb4">
-                                            <h3 className="bold"> {this.state.Orders===true ?
-                                                "Orders": "Help & Support"}</h3>
+                                            <h3 className="bold"> {this.state.Orders === true ?
+                                                "Orders" : "Help & Support"}</h3>
                                         </div>
 
                                         {/* Table-- My orders */}
 
                                         {this.state.Orders &&
                                         <div>
-                                                 {!orders.length>0 ?
-                                                   <section className="tab-no-data">
-                                                     <div className="tc">
+                                            {!orders.length > 0 ?
+                                                <section className="tab-no-data">
+                                                    <div className="tc">
                                                         <header className="mt3 my-page">
                                                             <h3 className="bold">My orders</h3>
                                                         </header>
                                                         <p>
-                                                           You don't have any orders yet
+                                                            You don't have any orders yet
                                                         </p>
-                                                       <div className="mv3">
-                                                       <Link to="/" className="link-mute">
-                                                         <button className="btn btn-primary btn-lg">
-                                                          <i className="material-icons-outlined">shopping_cart</i> Continue Shopping
-                                                         </button>
-                                                       </Link>
-                                                       </div>
-                                                     </div>
-                                                   </section>:
-
-                                                     <div>
-
-                                                     <section className="cart-or-bag mv4">
-                                                         {orders && orders.map(item => {
-                                                               return <div key={item.order_key} className="cart-item ma0">
-                                                            <div  className="flex mb3">
-                                                          <div className="mr2 mb3">
-                                                            <Link to="#" className="link-mute">
-                                                             <img src={item.products[0]? item.products[0].image : "/static/img-noise.png"} alt="" />
+                                                        <div className="mv3">
+                                                            <Link to="/" className="link-mute">
+                                                                <button className="btn btn-primary btn-lg">
+                                                                    <i className="material-icons-outlined">shopping_cart</i> Continue
+                                                                    Shopping
+                                                                </button>
                                                             </Link>
-                                                          </div>
-                                                        <div className="flex-grow-1 pa2">
-                                                         <div className="description">
-                                                           <div className="flex flex-wrap mb2">
-                                                             <div className="flex-grow-1 mr2">
-                                                                <h4>{item.products[0].title}</h4>
-                                                             </div>
-                                                           <div>
-                                                             <h6>{item.total_price}</h6>
-                                                           </div>
-                                                         </div>
-                                                          {/*<p className="ma0" style={{fontSize: '16px'}}>*/}
-                                                          {/*   Men's Shoe*/}
-                                                          {/*</p>*/}
-                                                     </div>
-                                                     {/*  <div className="actions">*/}
-                                                     {/*     <Link to="#" className="link-dark mr3 fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Move to Favourite</Link>*/}
-                                                     {/*     <Link to="#" className="link-dark fw4" style={{color: 'var(--space-gray)', fontSize: '16px'}}>Remove</Link>*/}
-                                                     {/*</div>*/}
-                                                     </div>
-                                                 </div>
+                                                        </div>
+                                                    </div>
+                                                </section> :
+
+                                                <div>
+
+                                                    <section className="cart-or-bag mv4">
+                                                        {orders && orders.map(item => {
+                                                            return <div key={item.order_key} className="cart-item ma0">
+                                                                <div className="flex mb3">
+                                                                    <div className="mr2 mb3">
+                                                                        <Link to="#" className="link-mute">
+                                                                            <img
+                                                                                src={item.products[0] ? item.products[0].image : "/static/img-noise.png"}
+                                                                                alt=""/>
+                                                                        </Link>
+                                                                    </div>
+                                                                    <div className="flex-grow-1 pa2">
+                                                                        <div className="description">
+                                                                            <div className="flex flex-wrap mb2">
+                                                                                <div className="flex-grow-1 mr2">
+                                                                                    <h4>{item.products[0].title===null?"This product has been deleted":item.products[0].title}</h4>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <h6>{item.total_price}</h6>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
 
-                                                 <div className="mv3">
-                                                     <h6>Shipping</h6>
-                                                      <p style={{color: '#082244', fontSize: '16px', paddingBottom: '16px'}}>Arrives within 10 days</p>
-                                                 </div>
-                                            </div>})}
-                                         </section>
-                                                         </div> }
-
-                                                {/*<div className="mv3">*/}
-                                                {/*    <button className="btn btn-primary btn-lg">*/}
-                                                {/*        <i className="material-icons-outlined">shopping_cart</i> Continue*/}
-                                                {/*        Shopping*/}
-                                                {/*    </button>*/}
-                                                {/*</div>*/}
-
+                                                                <div className="mv3">
+                                                                    <h6>Shipping</h6>
+                                                                    <p style={{
+                                                                        color: '#082244',
+                                                                        fontSize: '16px',
+                                                                        paddingBottom: '16px'
+                                                                    }}>Arrives within 10 days</p>
+                                                                </div>
+                                                            </div>
+                                                        })}
+                                                    </section>
+                                                </div>}
                                         </div>}
 
-                                        <div className={this.state.HelpSupport===true ? "tab-no-data": "tab-no-data hide"}>
+                                        <div
+                                            className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                             <div className="tc">
                                                 <header className="mt3 my-page">
                                                     <h3 className="bold">Help & Support</h3>
@@ -304,7 +298,7 @@ class Orders extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   orders : state.user.orders
+    orders: state.user.orders
 })
 
-export default withRouter(connect(mapStateToProps,{viewOrders})(Orders));
+export default withRouter(connect(mapStateToProps, {viewOrders})(Orders));
