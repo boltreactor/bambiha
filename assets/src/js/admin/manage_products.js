@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import product from "../components/product";
 import DataTable from "../components/Skeleton/skeleton";
 import SkeletonTableLoader from "../components/Skeleton/table_skeleton";
+import MessageSnackbar from "../reusable-components/messageSnackbar";
 
 class ManageProducts extends Component {
     state = {
@@ -45,6 +46,7 @@ class ManageProducts extends Component {
     }
 
     render() {
+
         const headers = [{name: 'Sr. No.'}, {name: 'Avatar'}, {name: 'Product Title'}, {name: 'Price'}, {name: 'Quantity'},
             {name: 'Category'}, {name: 'Description'}, {name: 'No. of Images'}, {name: 'Action'}];
         const {products} = this.props;
@@ -92,14 +94,18 @@ class ManageProducts extends Component {
                                             <div className="mb4">
                                                 <h3 className="bold"> {this.state.Products === true ? products.length > 0 ?
                                                     <div>
+                                                        <div>
                                                         Products<span className="ml2"
                                                                       style={{color: '#0258ff'}}>{products.length}</span>
+                                                            </div>
                                                     </div>
                                                     : "Products Management" : "Help & Support"}</h3>
                                             </div>
                                             {this.state.Products &&
                                             <div>
                                                 <div className="tc">
+                                                    {this.props.msg!==null && <MessageSnackbar msg={this.props.msg} show={this.props.show}/>}
+                                                            {this.props.msg!==null && this.props.msg}
                                                     {!products.length > 0 ?
                                                         <div>
                                                             <header className="mt3 my-page">
@@ -136,6 +142,7 @@ class ManageProducts extends Component {
                                                                             </thead>
                                                                             <tbody className="mdc-data-table__content">
                                                                             {products.map((product, index) =>
+
                                                                                 <tr key={index} data-row-id="u0"
                                                                                     className="mdc-data-table__row transparent">
                                                                                     <th className="mdc-data-table__cell tl">{index + 1}</th>
@@ -218,6 +225,8 @@ class ManageProducts extends Component {
 
 const mapStateToProps = state => ({
     products: state.admin.products,
-    categories: state.admin.categories
+    categories: state.admin.categories,
+    msg:state.user.msg,
+    show:state.user.show
 })
 export default withRouter(connect(mapStateToProps, {getAllProducts, delProduct})(ManageProducts));

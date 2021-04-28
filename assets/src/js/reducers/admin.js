@@ -9,7 +9,7 @@ import {
     USERS,
     HEADER_CATEGORIES,
     EDIT_CATEGORY,
-    DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS
+    DELETE_PRODUCT_IMAGES, EMPTY_DELETED_PRODUCTS, DEL_PRODUCT_MESSAGE
 } from "../actions/types";
 
 export const initialState = {
@@ -30,7 +30,8 @@ export const initialState = {
     show: false,
     users: {},
     delete_product_images: [],
-    product_images: []
+    product_images: [],
+    del_product_msg:null
 };
 
 export default function (state = initialState, action) {
@@ -98,6 +99,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 delete_product_images: []
+            }
+        }
+        case DEL_PRODUCT_MESSAGE: {
+            return {
+                ...state,
+                del_product_msg: action.del_product_msg
             }
         }
 

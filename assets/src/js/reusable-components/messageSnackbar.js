@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 class MessageSnackbar extends Component {
   constructor(props) {
     super(props);
+
     this.state = {open: this.props.show};
   }
 
@@ -24,6 +25,7 @@ class MessageSnackbar extends Component {
   };
 
   render() {
+
     return (
       <Snackbar
         anchorOrigin={{

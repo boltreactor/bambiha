@@ -4,10 +4,10 @@ import {
     ADMIN_PRODUCT,
     ADMIN_PRODUCTS,
     CATEGORIES,
-    CATEGORY,
+    CATEGORY, DEL_PRODUCT_MESSAGE,
     DELETE_PRODUCT_IMAGES,
     EDIT_CATEGORY,
-    EMPTY_DELETED_PRODUCTS,
+    EMPTY_DELETED_PRODUCTS, SNACKBAR,
     USERS
 } from "./types";
 import {showLoader} from "./user";
@@ -116,11 +116,11 @@ export const delProduct = (id) => dispatch => {
     }
     axios.get('/admin/deleteproduct/', config)
         .then(res => {
-            debugger
-            // dispatch({
-            //     type: DEL_PRODUCT
-            //
-            // });
+            dispatch({
+                type: SNACKBAR,
+                msg: res.data.message,
+                show: true
+            });
         }).finally(() => {
         dispatch(showLoader(false))
     });

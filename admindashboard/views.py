@@ -138,7 +138,7 @@ def DeleteProduct(request):
             'status': status.HTTP_200_OK, 'message': "Product Deleted",
         }, status.HTTP_200_OK)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Product not found",
+        'status': status.HTTP_200_OK, 'message': "You cannot delete this product for now as it is yet in some incomplete orders.",
     }, status.HTTP_200_OK)
 
 

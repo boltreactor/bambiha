@@ -3,7 +3,7 @@ from google.cloud import ndb
 from algoliasearch import index, client, algoliasearch
 import boto3
 
-from userdashboard.models import Favorites, Cart, OrderItems
+from userdashboard.models import Favorites, Cart, OrderItems, Order
 
 
 class Category(ndb.Model):
@@ -173,11 +173,11 @@ class Products(ndb.Model):
         }]
         return all_products
 
-    # @classmethod
-    # def disable_product(cls, request):
-    #     product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
-    #     product.product_status = int(request.POST.get('status'))
-    #     product.put()
+    @classmethod
+    def disable_product(cls, request):
+        product = ndb.Key(urlsafe=request.POST.get('product_key')).get()
+        product.product_status = int(request.POST.get('status'))
+        product.put()
 
     @classmethod
     def get_product(cls, request):
@@ -204,10 +204,18 @@ class Products(ndb.Model):
     @classmethod
     def delete_product(cls, request):
         product = ndb.Key(urlsafe=request.query_params.get('product_key')).get()
-        if product:
+        for item in OrderItems.query(OrderItems.product_key == product.key).fetch():
+            if item is not []:
+                 for order in Order.query(Order.order_key== item.order_key.get().order_key).fetch():
+                     if order.status in [0, 2]:
+                         return False
+                     else:
+                         product.key.delete()
+                         return True
+        else:
             product.key.delete()
             return True
-        return False
+
 
     @classmethod
     def get_all_products(cls):
@@ -240,22 +248,22 @@ class Products(ndb.Model):
                 'key': r['objectID']
             })
         return all_products
+    #
+    # @classmethod
+    # def _pre_delete_hook(cls, key):
+    #     favorites = Favorites.query(Favorites.product_key == key).fetch(keys_only=True)
+    #     ndb.delete_multi(favorites)
+    #     cart_products = Cart.query(Cart.product_key == key).fetch(keys_only=True)
+    #     ndb.delete_multi(cart_products)
+        # category_products = Category.query(Category.product_key == key).fetch(keys_only=True)
+        # ndb.delete_multi(category_products)
 
-    @classmethod
-    def _pre_delete_hook(cls, key):
-        favorites = Favorites.query(Favorites.product_key == key).fetch(keys_only=True)
-        ndb.delete_multi(favorites)
 
-        cart= Cart.query(Cart.product_key == key).fetch()
-        if cart:
-            for detail in cart:
-                detail.product_key.remove(key)
-                ndb.put_multi(cart)
-        orders = OrderItems.query(OrderItems.product_key == key).fetch()
-        if orders:
-            for detail in orders:
-                detail.product_key.remove(key)
-            ndb.put_multi(orders)
+        # orders = OrderItems.query(OrderItems.product_key == key).fetch()
+        # if orders:
+        #     for detail in orders:
+        #         detail.product_key.remove(key)
+        #     ndb.put_multi(orders)
 
 
 

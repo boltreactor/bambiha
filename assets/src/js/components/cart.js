@@ -28,7 +28,7 @@ class Cart extends Component {
         let fd = new FormData();
         fd.append("product_key", item.product_key)
         fd.append("quantity", item.quantity)
-        debugger
+
         this.props.changeQuantity(fd)
     }
 

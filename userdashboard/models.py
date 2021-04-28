@@ -24,7 +24,6 @@ class Cart(ndb.Model):
         if cart_check:
             cart_check.quantity = int(request.POST.get('quantity'))
             cart_check.put()
-
             for p in cart_products:
                 item = p.product_key.get()
                 fav = Favorites.query(Favorites.user_key == ndb.Key(urlsafe=request.session.get('user')),
@@ -32,7 +31,6 @@ class Cart(ndb.Model):
                 is_fav = False
                 if fav:
                     is_fav = True
-
                 products.append({
                     'title': item.title,
                     'price': item.price * p.quantity,
@@ -59,7 +57,6 @@ class Cart(ndb.Model):
                 is_fav = False
                 if fav:
                     is_fav = True
-
                 products.append({
                     'title': item.title,
                     'price': item.price * p.quantity,

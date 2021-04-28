@@ -22,7 +22,7 @@ class Product extends Component {
             this.props.getUserProducts(this.props.product.category_key)
         }
         if (this.props.match.params.id !== prevProps.match.params.id) {
-            debugger
+
             this.props.getProduct(this.props.match.params.id)
         }
     }
@@ -53,7 +53,6 @@ class Product extends Component {
 
     render() {
         const {product} = this.props;
-
         return (
             <div className="page">
                 <div className="page__content">

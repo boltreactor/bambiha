@@ -100,6 +100,7 @@ export default function (state = initialState, action) {
             }
         }
         case SNACKBAR: {
+
             return {
                 ...state,
                 show: action.show,
