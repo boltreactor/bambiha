@@ -53,7 +53,7 @@ class DrawerDashboard extends Component {
                                         Orders
                                     </Link>
                                     <Link className="mdc-list-item mdc-ripple-surface"
-                                          data-mdc-auto-init="MDCRipple" to="/favorites">
+                                          data-mdc-auto-init="MDCRipple" to="/dashboard/favorites">
                                         <i className="material-icons-outlined v-mid mr2"
                                            aria-hidden="true">favorite_border</i>
                                         Favorites

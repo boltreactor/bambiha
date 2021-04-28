@@ -85,7 +85,7 @@ class TopAppBarIndex extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <Link className="mr2" to="/favorites">
+                            <Link className="mr2" to="/dashboard/favorites">
                                 <button className="material-icons-outlined mdc-top-app-bar__action-item mdc-icon-button"
                                         aria-label="Favorite">favorite_border
                                 </button>

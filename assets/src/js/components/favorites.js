@@ -161,24 +161,6 @@ class Favorites extends Component {
                                                 </div>}
 
                                         </div>}
-
-                                        {/* <div className={this.state.Favorites===true ? "tab-no-data": "tab-no-data hide"}>*/}
-                                        {/*    <div className="tc">*/}
-                                        {/*        <header className="mt3 my-page">*/}
-                                        {/*            <h3 className="bold">My favourites</h3>*/}
-                                        {/*        </header>*/}
-                                        {/*        <p>*/}
-                                        {/*            Items added to your Favorites will be saved here.*/}
-                                        {/*        </p>*/}
-                                        {/*        <div className="mv3">*/}
-                                        {/*            <button className="btn btn-primary btn-lg">*/}
-                                        {/*                <i className="material-icons-outlined">shopping_cart</i> Continue*/}
-                                        {/*                Shopping*/}
-                                        {/*            </button>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-
                                         <div
                                             className={this.state.HelpSupport === true ? "tab-no-data" : "tab-no-data hide"}>
                                             <div className="tc">
