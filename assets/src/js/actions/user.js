@@ -5,7 +5,7 @@ import {
     FAVORITES,
     HEADER_CATEGORIES, QUANTITY_CHANGED,
     REMOVED_ITEM_FROM_CART,
-    SHOW_LOADER,
+    SHOW_LOADER, SHOW_SKELETON,
     USER_ORDERS,
     USER_PRODUCTS
 } from "./types";
@@ -117,6 +117,7 @@ export const getUserCategories = () => dispatch => {
 };
 
 export const getUserProducts = (id) => dispatch => {
+    dispatch(showSkeleton(true));
     let config = {
         headers: Header,
         params: {
@@ -129,7 +130,9 @@ export const getUserProducts = (id) => dispatch => {
                 type: USER_PRODUCTS,
                 products: res.data.products
             });
-        });
+        }).finally(() => {
+        dispatch(showSkeleton(false));
+    });
 };
 
 export const manageFavorite = (id, props) => dispatch => {
@@ -145,7 +148,13 @@ export const manageFavorite = (id, props) => dispatch => {
                         favorites: res.data.favorites
                     });
                 });
-
+            axios.get('/user/viewcart/', {headers: Header})
+                .then(res => {
+                    dispatch({
+                        type: CART,
+                        cart: res.data.products,
+                    });
+                });
         }).catch(err => {
 
     })
@@ -168,3 +177,13 @@ export const showLoader = (show) => {
         loader: show
     }
 }
+
+export const showSkeleton = (show) => {
+    return {
+        type: SHOW_SKELETON,
+        skeleton: show
+    }
+}
+
+
+

@@ -3,6 +3,8 @@ import {withRouter, Link} from 'react-router-dom';
 import StoreDrawer from "../reusable-components/Drawers/Static/store-drawer";
 import {connect} from "react-redux";
 import {getUserProducts} from "../actions/user";
+import SkeletonShopLoader from "./Skeleton/shop_skeleton";
+import SkeletonTableLoader from "./Skeleton/table_skeleton";
 
 class Store extends Component {
 
@@ -24,6 +26,7 @@ class Store extends Component {
     }
 
     render() {
+        debugger
         return (
             <div className="page">
                 <div className="page__content">
@@ -32,21 +35,27 @@ class Store extends Component {
                         <main className="main" style={{backgroundColor: 'var(--dark-mode-gray)', minHeight: '100vh'}}>
                             <div className="container l">
                                 <div className="row mt6">
-                                    {this.props.products && this.props.products.length !== 0 ? this.props.products.map(item => {
-                                        return <div key={item.id} className="col s12 m6 l4 mb3">
-                                            <Link to={`/product/${item.id}`} className="link-mute">
-                                                <div className="img-wrapper s">
-                                                    <img className="w-100 h-100"
-                                                         src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
-                                                         alt=""/>
+                                    <SkeletonShopLoader/>
+                                    {this.props.products && this.props.products.length !== 0 ?
+
+                                        this.props.products.map(item => {
+                                            return (
+                                                <div key={item.id} className="col s12 m6 l4 mb3">
+                                                    <Link to={`/product/${item.id}`} className="link-mute">
+                                                        <div className="img-wrapper s">
+                                                            <img className="w-100 h-100"
+                                                                 src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
+                                                                 alt=""/>
+                                                        </div>
+                                                        <div className="mv3">
+                                                            <div><h4>{item.title}</h4></div>
+                                                            <div><h6>{item.price}</h6></div>
+                                                        </div>
+                                                    </Link>
                                                 </div>
-                                                <div className="mv3">
-                                                    <div><h4>{item.title}</h4></div>
-                                                    <div><h6>{item.price}</h6></div>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    }) : <h3>No product found</h3>}
+                                            )
+                                        })
+                                        : <h3>No product found</h3>}
                                 </div>
                                 <div className="row">
                                     <div className="col s12">

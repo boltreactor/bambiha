@@ -20,13 +20,13 @@ class ManageOrders extends Component {
         this.props.getAllOrders();
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-        if (this.state.id !== prevState.id) {
-            this.props.getAllOrders();
-            this.setState({id: null})
-        }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     debugger
+    //     if (this.state.id !== prevState.id) {
+    //         this.props.getAllOrders();
+    //         this.setState({id: null})
+    //     }
+    // }
 
     handleTab = (e) => {
         let name = e.target.text
@@ -55,7 +55,8 @@ class ManageOrders extends Component {
     handleChangeOption = (event, id) => {
         event.preventDefault();
         this.props.updateOrderStatus(id, event.target.value, this.props);
-        this.setState({id})
+        // debugger
+        // this.setState({id})
 
     }
 

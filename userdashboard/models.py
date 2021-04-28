@@ -89,6 +89,7 @@ class Cart(ndb.Model):
                     item.category_key) else None,
                 'product_key': p.product_key.urlsafe().decode(),
                 'quantity': p.quantity,
+                "product_status": item.product_status,
                 'favourite': is_fav,
                 'image': item.images[0] if item.images else None,
                 'store_user_key': item.user_key
@@ -286,6 +287,7 @@ class OrderItems(ndb.Model):
             all_items.append({
                 "price": item.price,
                 "title": product.title,
+                "product_status": product.product_status,
                 "product_key": item.product_key.urlsafe().decode(),
                 "quantity": item.quantity,
                 "image": product.images[0] if product.images else None
@@ -328,6 +330,7 @@ class Favorites(ndb.Model):
             products.append({
                 'title': item.title,
                 'product_key': p.product_key.urlsafe().decode(),
+                "product_status": item.product_status,
                 "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
                     item.category_key) else None,
                 'price': item.price,

@@ -168,7 +168,7 @@ class TopAppBarHome extends Component {
                                                 </Link>
                                                 <Link
                                                     className="dropdown-item dropdown-menu-item header_dropdown-item db link-mute"
-                                                    to="/orders">
+                                                    to="/dashboard/orders">
                                                     <i className="material-icons-outlined v-mid">shopping_basket</i>
                                                     Manage My Orders
                                                 </Link>
