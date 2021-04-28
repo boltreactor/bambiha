@@ -146,8 +146,8 @@ class App extends Component {
                     <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/dashboard' render={(props) => <Dashboard {...props}/>}/>
                     <ProtectedRoute exact path='/cart' render={(props) => <Cart {...props}/>}/>
-                    <ProtectedRoute exact path='/orders' render={(props) => <Orders{...props}/>}/>
-                    <ProtectedRoute exact path='/favorites' render={(props) => <Favorites{...props}/>}/>
+                    <ProtectedRoute exact path='/dashboard/orders' render={(props) => <Orders{...props}/>}/>
+                    <ProtectedRoute exact path='/dashboard/favorites' render={(props) => <Favorites{...props}/>}/>
                     <ProtectedRoute exact path='/help&Support' render={(props) => <HelpSupport{...props}/>}/>
                     <Route path='/not-found' component={NotFound}/>
                     <Redirect to='/not-found'/>

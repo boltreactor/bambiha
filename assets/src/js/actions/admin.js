@@ -152,6 +152,13 @@ export const editProduct = (fd, props) => dispatch => {
             dispatch({
                 type: EMPTY_DELETED_PRODUCTS,
             });
+            axios.get('/admin/allproducts/', {headers: Header})
+                .then(res => {
+                    dispatch({
+                        type: ADMIN_PRODUCTS,
+                        products: res.data.products,
+                    });
+                });
             props.history.push("/admin/products")
         }).finally(() => {
         dispatch(showLoader(false))
@@ -273,6 +280,13 @@ export const updateOrderStatus = (id, status, props) => dispatch => {
     axios.post(`/admin/updatestatus/`, bodyFormData, {headers: Header})
         .then(res => {
             props.history.push("/admin/orders")
+            axios.get('/admin/vieworders/', {headers: Header})
+                .then(res => {
+                    dispatch({
+                        type: ADMIN_ORDERS,
+                        orders: res.data.orders,
+                    });
+                });
         }).finally(() => {
         dispatch(showLoader(false))
     })
