@@ -51,8 +51,9 @@ def ViewOrders(request):
 @api_view(['GET', 'POST'])
 def FavUnfav(request):
     Favorites.fav_unfav(request)
+    fav = Favorites.get_favorites(request)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Favorites Updated"
+        'status': status.HTTP_200_OK, 'message': "Favorites Updated", 'favorites': fav
     }, status.HTTP_200_OK)
 
 
