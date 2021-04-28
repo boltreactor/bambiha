@@ -135,7 +135,7 @@ class Order(ndb.Model):
     address = ndb.StringProperty()
     phone_number = ndb.StringProperty()
     status = ndb.IntegerProperty(default=0)
-    date = ndb.DateTimeProperty(auto_now=True)
+    date = ndb.DateTimeProperty(auto_now_add=True)
 
     @classmethod
     def get_with_key(cls, key):
@@ -160,8 +160,7 @@ class Order(ndb.Model):
         orders = cls.query().fetch()
         all_orders = []
         for order in orders:
-            order_items = OrderItems.query(
-                OrderItems.order_key == order.key)
+            order_items = OrderItems.query(OrderItems.order_key == order.key)
             all_items = []
             total = 0
             for item in order_items:
@@ -330,14 +329,24 @@ class Favorites(ndb.Model):
         products = []
         for p in favorites_products:
             item = p.product_key.get()
-            products.append({
-                'title': item.title,
-                'product_key': p.product_key.urlsafe().decode(),
-                "product_status": item.product_status,
-                "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
-                    item.category_key) else None,
-                'price': item.price,
-                'image': item.images[0] if item.images else None,
-            })
+            if item is not None:
+                products.append({
+                    'title': item.title if item.title else None,
+                    'product_key': p.product_key.urlsafe().decode(),
+                    "product_status": item.product_status,
+                    "category": cls.get_with_key(item.category_key).name if cls.get_with_key(
+                        item.category_key) else None,
+                    'price': item.price,
+                    'image': item.images[0] if item.images else None,
+                })
+            else:
+                products.append({
+                    'title': None,
+                    'product_key': p.product_key.urlsafe().decode(),
+                    "product_status": None,
+                    "category": None,
+                    'price': None,
+                    'image': None,
+                })
 
         return products
