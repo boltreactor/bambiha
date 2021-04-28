@@ -79,6 +79,8 @@ class Cart extends Component {
                                                             <div className="flex-grow-1 mr2">
                                                                 <Link to={`/product/${item.product_key}`}>
                                                                     <h4>{item.title}</h4></Link>
+                                                                {item.product_status &&
+                                                                <p style={{color: "red"}}>Item Not Available</p>}
                                                             </div>
                                                             <div>
                                                                 <h6>{item.price}</h6>

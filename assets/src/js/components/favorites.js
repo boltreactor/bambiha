@@ -118,7 +118,10 @@ class Favorites extends Component {
                                                                             <div className="flex flex-wrap mb2">
                                                                                 <div className="flex-grow-1 mr2">
                                                                                     <h4>{item.title}</h4>
+                                                                                    {item.product_status === 0 &&
+                                                                                    <p style={{color: "red"}}>Product Not Available</p>}
                                                                                 </div>
+
                                                                                 <div>
                                                                                     <h6>{item.price}</h6>
                                                                                 </div>
