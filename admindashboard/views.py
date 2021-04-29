@@ -109,8 +109,9 @@ def AddProduct(request):
 def EditProduct(request):
     product = Products.edit_product(request)
     if product:
+        products = Products.get_product(request)
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': product
+            'status': status.HTTP_200_OK, 'message': "Product updated", 'product': products,
         }, status.HTTP_200_OK)
 
 
@@ -133,12 +134,17 @@ def GetProduct(request):
 @api_view(['GET'])
 def DeleteProduct(request):
     product = Products.delete_product(request)
+    products = Products.get_product(request)
     if product:
         return Response({
-            'status': status.HTTP_200_OK, 'message': "Product Deleted",
+            'status': status.HTTP_200_OK,
+            'message': "Product Deleted",
+            'products': products,
         }, status.HTTP_200_OK)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "You cannot delete this product for now as it is yet in some incomplete orders.",
+        'status': status.HTTP_200_OK,
+        'message': "You cannot delete this product for now as it is yet in some incomplete orders.",
+        'products': products,
     }, status.HTTP_200_OK)
 
 
