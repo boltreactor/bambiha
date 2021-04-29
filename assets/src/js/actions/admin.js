@@ -151,14 +151,18 @@ export const editProduct = (fd, props) => dispatch => {
         .then(res => {
             dispatch({
                 type: EMPTY_DELETED_PRODUCTS,
-            });
-            axios.get('/admin/allproducts/', {headers: Header})
-                .then(res => {
-                    dispatch({
+            })
+            dispatch({
                         type: ADMIN_PRODUCTS,
                         products: res.data.products,
                     });
-                });
+            // axios.get('/admin/allproducts/', {headers: Header})
+            //     .then(res => {
+            //         dispatch({
+            //             type: ADMIN_PRODUCTS,
+            //             products: res.data.products,
+            //         });
+            //     });
             props.history.push("/admin/products")
         }).finally(() => {
         dispatch(showLoader(false))

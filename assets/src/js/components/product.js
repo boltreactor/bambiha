@@ -274,6 +274,11 @@ class Product extends Component {
                                                  alt=""/>
                                         </div>
                                     </Link>
+                                    <div style={{
+                                        color: "#808080",
+                                        fontWeight: 'bold',
+                                        fontSize: '20px'
+                                    }}>{product.status === 0 && 'Item not available'}</div>
                                 </div>
                             })}
 
