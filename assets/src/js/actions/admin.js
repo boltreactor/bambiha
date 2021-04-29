@@ -10,7 +10,7 @@ import {
     EMPTY_DELETED_PRODUCTS, SNACKBAR,
     USERS
 } from "./types";
-import {showLoader} from "./user";
+import {showLoader, showSkeleton} from "./user";
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -53,6 +53,7 @@ export const editCategory = (id, category, status, props) => dispatch => {
 
 export const getAllCategories = () => dispatch => {
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
+    dispatch(showSkeleton(true))
     axios.get('/admin/allcategories/', {headers: Header})
         .then(res => {
             dispatch({
@@ -60,7 +61,7 @@ export const getAllCategories = () => dispatch => {
                 categories: res.data.category
             });
         }).finally(() => {
-
+        dispatch(showSkeleton(false))
     });
 };
 
@@ -165,6 +166,7 @@ export const editProduct = (fd, props) => dispatch => {
     });
 };
 export const getAllProducts = (id) => dispatch => {
+    dispatch(showSkeleton(true))
     // Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     let config = {
         headers: Header,
@@ -178,7 +180,10 @@ export const getAllProducts = (id) => dispatch => {
                 type: ADMIN_PRODUCTS,
                 products: res.data.products,
             });
-        });
+        }).finally(() => {
+        dispatch(showSkeleton(false))
+
+    });
 };
 
 export const deleteCategory = (category_key) => dispatch => {
@@ -195,6 +200,7 @@ export const deleteCategory = (category_key) => dispatch => {
     });
 };
 export const getAllOrders = () => dispatch => {
+    dispatch(showSkeleton(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/admin/vieworders/', {headers: Header})
         .then(res => {
@@ -202,9 +208,12 @@ export const getAllOrders = () => dispatch => {
                 type: ADMIN_ORDERS,
                 orders: res.data.orders,
             });
-        });
+        }).finally(() => {
+        dispatch(showSkeleton(false))
+    });
 };
 export const getAllUsers = () => dispatch => {
+    dispatch(showSkeleton(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/auth/all-users/', {headers: Header})
         .then(res => {
@@ -213,7 +222,9 @@ export const getAllUsers = () => dispatch => {
                 type: USERS,
                 users: res.data.users,
             });
-        });
+        }).finally(() => {
+        dispatch(showSkeleton(false))
+    });
 };
 
 export const imagesToDelete = (imageToDelete) => dispatch => {

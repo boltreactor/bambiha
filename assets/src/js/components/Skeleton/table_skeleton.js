@@ -1,23 +1,33 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ContentLoader from 'react-content-loader'
+import {connect} from "react-redux";
 
-const SkeletonTableLoader = props => (
-    <ContentLoader
-        width={"100%"}
-        height={"100%"}
-        backgroundColor="#eaeced"
-        foregroundColor="#ffffff"
+class SkeletonTableLoader extends Component {
+    render() {
+        const {skeleton} = this.props;
+        if (!skeleton) return null;
+        return (
+            <ContentLoader
+                width={"100%"}
+                height={"100%"}
+                backgroundColor="#eaeced"
+                foregroundColor="#ffffff"
 
-        {...props}>
+                {...this.props}>
 
-        <rect x="0" y="0" rx="3" ry="3" width="100%" height="50"/>
-        <rect x="0" y="70" rx="3" ry="3" width="100%" height="20"/>
-        <rect x="0" y="110" rx="3" ry="3" width="100%" height="20"/>
-        <rect x="0" y="150" rx="3" ry="3" width="100%" height="20"/>
-        <rect x="0" y="190" rx="3" ry="3" width="100%" height="20"/>
+                <rect x="0" y="0" rx="3" ry="3" width="100%" height="50"/>
+                <rect x="0" y="70" rx="3" ry="3" width="100%" height="20"/>
+                <rect x="0" y="110" rx="3" ry="3" width="100%" height="20"/>
+                <rect x="0" y="150" rx="3" ry="3" width="100%" height="20"/>
+                <rect x="0" y="190" rx="3" ry="3" width="100%" height="20"/>
 
-    </ContentLoader>
-)
+            </ContentLoader>
+        )
+    }
+}
 
+const mapStateToProps = (state) => ({
+    skeleton: state.user.skeleton,
+})
 
-export default SkeletonTableLoader
+export default connect(mapStateToProps)(SkeletonTableLoader);
