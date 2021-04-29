@@ -115,6 +115,10 @@ class Product extends Component {
                                             <h6>{product.price}</h6>
                                         </div>
                                     </div>
+                                    <div className="mb2">
+                                        {product.product_status === 0 &&
+                                        <p style={{color: "red"}}>Product Not Available</p>}
+                                    </div>
                                 </div>
                                 {/* */}
                                 <div className="color-way db">

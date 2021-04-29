@@ -168,8 +168,9 @@ def ViewOrderItems(request):
 @api_view(['GET', 'POST'])
 def UpdateOrderStatus(request):
     Order.update_status(request)
+    orders = Order.get_orders(request)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Order Status Updated"
+        'status': status.HTTP_200_OK, 'message': "Order Status Updated", 'orders': orders
     }, status.HTTP_200_OK)
 
 

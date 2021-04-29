@@ -6,46 +6,45 @@ import {connect} from 'react-redux';
 
 
 class MessageSnackbar extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {open: this.props.show};
-  }
-
-  handleClose = () => {
-    this.setState({open: false});
-
-  };
-  handleRequestClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+        this.state = {open: this.props.show};
     }
 
-    this.setState({open: false});
-  };
+    handleClose = () => {
+        this.props.removeSnackbar(null, false);
 
-  render() {
+    };
+    handleRequestClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
-    return (
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right"
-        }}
-        open={this.state.open}
-        autoHideDuration={3000}
-        onRequestClose={this.handleRequestClose}
-        variant="success"
-        message={this.props.msg}
-        onClose={this.handleClose}
-      >
-        <MuiAlert onClose={this.handleClose} severity="success" variant="filled" elevation={6}>
-          {this.props.msg}
-        </MuiAlert>
-      </Snackbar>
+        this.props.removeSnackbar(null, false);
+    };
 
-    );
-  }
+    render() {
+
+        return (
+            <Snackbar
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right"
+                }}
+                open={this.props.show}
+                autoHideDuration={3000}
+                onRequestClose={this.handleRequestClose}
+                variant={"success"}
+                message={this.props.msg}
+                onClose={this.handleClose}>
+                <MuiAlert onClose={this.handleClose} severity="error" variant="filled" elevation={6}>
+                    {this.props.msg}
+                </MuiAlert>
+            </Snackbar>
+
+        );
+    }
 }
 
 export default connect(null, {removeSnackbar})(MessageSnackbar);
