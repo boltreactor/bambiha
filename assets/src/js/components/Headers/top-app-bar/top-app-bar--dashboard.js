@@ -81,9 +81,9 @@ class TopAppBarDashboard extends Component {
                                 {/*shopping_cart*/}
                                 <button className="mdc-top-app-bar__action-item mdc-icon-button">
                                     {this.props.cart && this.props.cart.length > 0 ?
-                                        <span className=" badge badge--header material-icons"
+                                        <span className=" badge badge--header material-icons-outlined"
                                               data-badge={this.props.cart.length}>shopping_cart</span> :
-                                        <span className=" badge badge--header material-icons">shopping_cart</span>
+                                        <span className=" badge badge--header material-icons-outlined">shopping_cart</span>
                                     }
                                 </button>
                             </Link>
