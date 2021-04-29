@@ -109,7 +109,7 @@ def AddProduct(request):
 def EditProduct(request):
     product = Products.edit_product(request)
     if product:
-        products = Products.get_product(request)
+        products = Products.get_products(request)
         return Response({
             'status': status.HTTP_200_OK, 'message': "Product updated", 'product': products,
         }, status.HTTP_200_OK)
