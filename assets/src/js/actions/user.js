@@ -80,6 +80,7 @@ export const viewCart = () => dispatch => {
 
 
 export const viewOrders = () => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.get('/user/vieworders/', {headers: Header})
         .then(res => {
@@ -87,7 +88,9 @@ export const viewOrders = () => dispatch => {
                 type: USER_ORDERS,
                 orders: res.data.orders,
             });
-        });
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 export const checkout = (props, address, phone) => dispatch => {
     dispatch(showLoader(true))
