@@ -25,8 +25,6 @@ class Header extends Component {
                     window.location.pathname.startsWith("/admin") ? <TopAppBarAdmin/> :
                         window.location.pathname.startsWith("/account-settings") ? <TopAppBarDashboard/> :
                             window.location.pathname.startsWith("/dashboard") ? <TopAppBarDashboard/> :
-                                window.location.pathname.startsWith("/orders") ? <TopAppBarDashboard/> :
-                                  window.location.pathname.startsWith("/cart") ? <TopAppBarDashboard/> :
                                             <TopAppBarHome/> :
                     !this.props.loginStatus ?
                         window.location.pathname.startsWith("/login") ? null :

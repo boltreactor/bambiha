@@ -21,7 +21,7 @@ class ManageOrders extends Component {
     }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     debugger
+    //
     //     if (this.state.id !== prevState.id) {
     //         this.props.getAllOrders();
     //         this.setState({id: null})

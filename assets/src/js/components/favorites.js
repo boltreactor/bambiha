@@ -37,7 +37,7 @@ class Favorites extends Component {
     }
 
     render() {
-        debugger
+
         const {favorites} = this.props;
         return (
 

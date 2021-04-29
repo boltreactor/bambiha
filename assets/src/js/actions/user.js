@@ -146,7 +146,7 @@ export const manageFavorite = (id, props) => dispatch => {
 
     let bodyFormData = new FormData();
     bodyFormData.append('product_key', id);
-    debugger
+
     axios.post('/user/managefavorites/', bodyFormData, {headers: Header})
         .then(res => {
             dispatch({

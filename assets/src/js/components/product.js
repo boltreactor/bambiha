@@ -54,7 +54,7 @@ class Product extends Component {
     }
 
     render() {
-        debugger
+
         const {product} = this.props;
         return (
             <div className="page">

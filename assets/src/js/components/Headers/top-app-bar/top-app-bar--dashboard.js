@@ -18,9 +18,7 @@ class TopAppBarDashboard extends Component {
     selectDrawer = () => {
         if (this.props.location.pathname.startsWith("/account-settings")) {
             return <DrawerSettings/>
-        } else if (this.props.location.pathname === ("/dashboard")) {
-            return <DrawerDashboard/>
-        } else if (this.props.location.pathname === ("/orders")) {
+        } else if (this.props.location.pathname.startsWith ("/dashboard")) {
             return <DrawerDashboard/>
         } else {
             return <DrawerHome/>
@@ -81,9 +79,9 @@ class TopAppBarDashboard extends Component {
                                 {/*shopping_cart*/}
                                 <button className="mdc-top-app-bar__action-item mdc-icon-button">
                                     {this.props.cart && this.props.cart.length > 0 ?
-                                        <span className=" badge badge--header material-icons"
+                                        <span className=" badge badge--header material-icons-outlined"
                                               data-badge={this.props.cart.length}>shopping_cart</span> :
-                                        <span className=" badge badge--header material-icons">shopping_cart</span>
+                                        <span className=" badge badge--header material-icons-outlined">shopping_cart</span>
                                     }
                                 </button>
                             </Link>

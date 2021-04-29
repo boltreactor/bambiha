@@ -33,7 +33,7 @@ class Orders extends Component {
     render() {
         // const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
         const {orders} = this.props;
-        debugger
+
         return (
             <div className="page">
                 <div className="page__content">

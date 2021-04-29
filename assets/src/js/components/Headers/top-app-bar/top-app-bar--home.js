@@ -113,7 +113,7 @@ class TopAppBarHome extends Component {
                                             </div>
                                             <div className="mb1">
                                                 <h6 className="white"
-                                                    style={{fontSize: '.86562rem'}}>Help &amp; Support</h6>
+                                                    style={{fontSize: '.86562rem'}}>Help & Support</h6>
                                                 <p className="white pa0 ma0" style={{fontSize: '.825rem'}}>
                                                     Email us at help@bambiha.com
                                                 </p>
@@ -132,9 +132,9 @@ class TopAppBarHome extends Component {
                                 {/*shopping_cart*/}
                                 <button className="mdc-top-app-bar__action-item mdc-icon-button">
                                     {this.props.cart && this.props.cart.length > 0 ?
-                                        <span className=" badge badge--header material-icons"
+                                        <span className=" badge badge--header material-icons-outlined"
                                               data-badge={this.props.cart.length}>shopping_cart</span> :
-                                        <span className=" badge badge--header material-icons">shopping_cart</span>
+                                        <span className=" badge badge--header material-icons-outlined">shopping_cart</span>
                                     }
                                 </button>
                             </Link>

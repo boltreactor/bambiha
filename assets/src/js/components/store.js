@@ -30,7 +30,7 @@ class Store extends Component {
     }
 
     render() {
-        debugger
+
         return (
             <div className="page">
                 <div className="page__content">
