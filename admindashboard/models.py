@@ -1,9 +1,9 @@
-from django.db import models
 from google.cloud import ndb
-from algoliasearch import index, client, algoliasearch
 import boto3
+from algoliasearch import algoliasearch
+from google.cloud import ndb
 
-from userdashboard.models import Favorites, Cart, OrderItems, Order
+from userdashboard.models import OrderItems, Order
 
 
 class Category(ndb.Model):

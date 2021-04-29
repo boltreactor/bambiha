@@ -121,6 +121,10 @@ export const getUserCategories = () => dispatch => {
 
 export const getUserProducts = (id) => dispatch => {
     dispatch(showSkeleton(true));
+    dispatch({
+        type: USER_PRODUCTS,
+        products: null
+    });
     let config = {
         headers: Header,
         params: {
