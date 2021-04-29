@@ -92,11 +92,11 @@ class ManageOrders extends Component {
                                         <div className="mb4 mb0-m mb0-l">
                                             <h1 className="bold">Orders</h1>
                                         </div>
-                                        <div className="flex-grow-1 ml3 tr">
-                                            <button className="btn btn-primary btn-lg">
-                                                Manage Orders
-                                            </button>
-                                        </div>
+                                        {/*<div className="flex-grow-1 ml3 tr">*/}
+                                        {/*    <button className="btn btn-primary btn-lg">*/}
+                                        {/*        Manage Orders*/}
+                                        {/*    </button>*/}
+                                        {/*</div>*/}
                                     </header>
                                     {/* */}
                                     <div className="tab-wrapper">

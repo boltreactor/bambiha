@@ -109,17 +109,29 @@ class ManageProducts extends Component {
                                                 <h3 className="bold"> {this.state.Products === true ? products.length > 0 ?
                                                     <div>
                                                         <div>
-                                                        Products<span className="ml2"
-                                                                      style={{color: '#0258ff'}}>{products.length}</span>
-                                                            </div>
+                                                            Products<span className="ml2"
+                                                                          style={{color: '#0258ff'}}>{products.length}</span>
+                                                        </div>
                                                     </div>
                                                     : "Products Management" : "Help & Support"}</h3>
                                             </div>
                                             {this.state.Products &&
                                             <div>
                                                 <div className="tc">
-                                                    {this.props.msg!==null && <MessageSnackbar msg={this.props.msg} show={this.props.show}/>}
-                                                            {this.props.msg!==null && this.props.msg}
+                                                    {this.props.msg !== null &&
+                                                    <MessageSnackbar msg={this.props.msg} show={this.props.show} variant={"error"}/>}
+                                                    {/*{this.props.msg !== null && this.props.msg}*/}
+                                                    {/*{this.props.show && <section className="app-alert">*/}
+                                                    {/*    <div className="ui-paper ui-alert ui-alert--error my2"*/}
+                                                    {/*         role="alert"*/}
+                                                    {/*         style={{marginBottom: "10px"}}>*/}
+                                                    {/*        <div className="ui-alert__icon">*/}
+                                                    {/*            <i className="material-icons-outlined">error</i>*/}
+                                                    {/*        </div>*/}
+                                                    {/*        <div className="ui-alert__message">{this.props.msg}*/}
+                                                    {/*        </div>*/}
+                                                    {/*    </div>*/}
+                                                    {/*</section>}*/}
                                                     {!products.length > 0 ?
                                                         <div>
                                                             <header className="mt3 my-page">
@@ -247,8 +259,8 @@ class ManageProducts extends Component {
 const mapStateToProps = state => ({
     products: state.admin.products,
     categories: state.admin.categories,
-    msg:state.user.msg,
-    show:state.user.show
+    msg: state.user.msg,
+    show: state.user.show
 })
 export default withRouter(connect(mapStateToProps, {
     getAllProducts,
