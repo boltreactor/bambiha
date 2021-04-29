@@ -103,7 +103,7 @@ class Orders extends Component {
                                                             return <div key={item.order_key} className="cart-item ma0">
                                                                 <div className="flex mb3">
                                                                     {item.products.map(product=>{
-                                                                    <div className="mr2 mb3">
+                                                                    return <div className="mr2 mb3">
                                                                         <Link to="#" className="link-mute">
                                                                             <img
                                                                                 src={product && product.image!==null? product.image[0] : "/static/img-noise.png"}
@@ -114,7 +114,7 @@ class Orders extends Component {
                                                                         <div className="description">
                                                                             <div className="flex flex-wrap mb2">
                                                                                  {item.products.map(product=>{
-                                                                                <div className="flex-grow-1 mr2">
+                                                                               return <div className="flex-grow-1 mr2">
                                                                                     <h4>{product.title===null?"This product has been deleted":product.title}</h4>
                                                                                 </div>})}
                                                                                 <div>
