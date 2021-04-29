@@ -164,10 +164,10 @@ class Order(ndb.Model):
                 total = total + item.price
                 all_items.append({
                     "price": item.price if item.price!=None else None,
-                    "title": item.product_key.get().title,
+                    "title": item.product_key.get().title if item.product_key.get()is not None else None,
                     "quantity": item.quantity,
                     "product_key": item.product_key.urlsafe().decode(),
-                    "image": item.product_key.get().images[0] if item.product_key.get().images else None
+                    "image": item.product_key.get().images[0] if item.product_key.get() and item.product_key.get().images else None
                 })
 
             user = order.user_key.get()

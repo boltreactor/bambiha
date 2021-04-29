@@ -102,19 +102,21 @@ class Orders extends Component {
                                                         {orders && orders.map(item => {
                                                             return <div key={item.order_key} className="cart-item ma0">
                                                                 <div className="flex mb3">
+                                                                    {item.products.map(product=>{
                                                                     <div className="mr2 mb3">
                                                                         <Link to="#" className="link-mute">
                                                                             <img
-                                                                                src={item.products[0] ? item.products[0].image : "/static/img-noise.png"}
+                                                                                src={product && product.image!==null? product.image[0] : "/static/img-noise.png"}
                                                                                 alt=""/>
                                                                         </Link>
-                                                                    </div>
+                                                                    </div>})}
                                                                     <div className="flex-grow-1 pa2">
                                                                         <div className="description">
                                                                             <div className="flex flex-wrap mb2">
+                                                                                 {item.products.map(product=>{
                                                                                 <div className="flex-grow-1 mr2">
-                                                                                    <h4>{item.products[0].title===null?"This product has been deleted":item.products[0].title}</h4>
-                                                                                </div>
+                                                                                    <h4>{product.title===null?"This product has been deleted":product.title}</h4>
+                                                                                </div>})}
                                                                                 <div>
                                                                                     <h6>{item.total_price}</h6>
                                                                                 </div>
