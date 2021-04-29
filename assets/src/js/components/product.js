@@ -289,6 +289,10 @@ class Product extends Component {
                                                  alt=""/>
                                         </div>
                                     </Link>
+                                    <div className="mv3">
+                                        <div style={{float: "right"}}>{item.status === 0 &&
+                                        <p style={{color: "red"}}>Product Not Available</p>}</div>
+                                    </div>
                                 </div>
                             })}
 

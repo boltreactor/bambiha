@@ -221,7 +221,8 @@ class Order(ndb.Model):
                     "title": item.product_key.get().title if item.product_key.get() is not None else None,
                     "product_key": item.product_key.urlsafe().decode(),
                     "quantity": item.quantity,
-                    "image": item.product_key.get().images[0] if item.product_key.get() and item.product_key.get().images else None
+                    "image": item.product_key.get().images[
+                        0] if item.product_key.get() and item.product_key.get().images else None
                 })
 
             user = order.user_key.get()
