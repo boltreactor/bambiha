@@ -53,7 +53,7 @@ class Store extends Component {
                                                               className="link-mute">
                                                             <div className="img-wrapper s">
                                                                 <img className="w-100 h-100"
-                                                                     src={item.images.length !== 0 ? item.images[0] : "/static/show-1.jpeg"}
+                                                                     src={item.images.length !== 0 ? item.images[0] : "/static/img-noise.jpeg"}
                                                                      alt=""/>
                                                             </div>
                                                             <div className="mv3">

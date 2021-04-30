@@ -21,7 +21,8 @@ class Cart extends Component {
     }
     addFavorite = (e, product_key) => {
         e.preventDefault();
-        this.props.manageFavorite(product_key, this.props)
+        let component='cart'
+        this.props.manageFavorite(product_key, this.props, component)
     }
     selectQuantity = (e, item) => {
         e.preventDefault()
@@ -71,7 +72,7 @@ class Cart extends Component {
                                             return <div key={index} className="flex mb3" key={item.product_key}>
                                                 <div className="mr2 mb3">
                                                     <Link to={`/product/${item.product_key}`} className="link-mute">
-                                                        <img src={item.image ? item.image : "/static/show-1.jpeg"}
+                                                        <img src={item.image ? item.image : "/static/img-noise.jpeg"}
                                                              alt=""/>
                                                     </Link>
                                                 </div>
@@ -174,7 +175,7 @@ class Cart extends Component {
                                                                 <h4>{item.title}</h4>
                                                             </div>
                                                             <div>
-                                                                <h6>{item.price}</h6>
+                                                                <h6>PKR. {item.price}</h6>
                                                             </div>
                                                         </div>
                                                         <p className="ma0" style={{fontSize: '16px'}}>

@@ -31,6 +31,7 @@ class Product extends Component {
 
     addItemToCart = (e) => {
         e.preventDefault();
+        debugger
         this.props.addToCart(1, this.props.match.params.id, this.props)
         // this.props.loginStatus === true ? this.props.addToCart(1, this.props.match.params.id, this.props) : this.props.history.push('/login')
 
@@ -104,7 +105,7 @@ class Product extends Component {
                                         <div className="col s12 m6 l6 mb3">
                                             <Link to={'#'}>
                                                 <div className="img-wrapper">
-                                                    <img className="w-100 h-100" src={"/static/show-1.jpeg"} alt=""/>
+                                                    <img className="w-100 h-100" src={"/static/img-noise.jpeg"} alt=""/>
                                                 </div>
                                             </Link>
                                         </div>}
@@ -122,7 +123,7 @@ class Product extends Component {
                                             <h4>{product.title}</h4>
                                         </div>
                                         <div>
-                                            <h6>{product.price}</h6>
+                                            <h6>PKR. {product.price}</h6>
                                         </div>
                                     </div>
                                     <div className="mb2">
@@ -135,21 +136,19 @@ class Product extends Component {
                                         <div className="color-way__image-wrapper mb3 hide-scrollbar">
                                             <div className="list">
                                                 {product.images !== undefined && product.images.length > 0 ? product.images.map((img, index) => {
-                                                        return <div key={index}>
-                                                            <Link to="#" className="link-mute dib relative">
-                                                                <div className="relative">
-                                                                    <div className="mr2 mb1">
-                                                                        <img src={img} className="color-images" alt=""/>
-                                                                    </div>
+                                                        return <Link key={index} to="#" className="link-mute dib relative">
+                                                            <div className="relative">
+                                                                <div className="mr2 mb1">
+                                                                    <img src={img} className="color-images" alt=""/>
                                                                 </div>
-                                                            </Link>
-                                                        </div>
+                                                            </div>
+                                                        </Link>
                                                     }) :
                                                     <div>
                                                         <Link to="#" className="link-mute dib relative">
                                                             <div className="relative">
                                                                 <div className="mr2 mb1">
-                                                                    <img src={"/static/show-1.jpeg"}
+                                                                    <img src={"/static/img-noise.jpeg"}
                                                                          className="color-images" alt=""/>
                                                                 </div>
                                                             </div>
@@ -287,7 +286,7 @@ class Product extends Component {
                                     <Link to={`/product/${product.id}`} className="link-mute">
                                         <div className="img-wrapper">
                                             <img className="w-100 h-100"
-                                                 src={product.images.length !== 0 ? product.images[0] : "/static/show-1.jpeg"}
+                                                 src={product.images.length !== 0 ? product.images[0] : "/static/img-noise.jpeg"}
                                                  alt=""/>
                                         </div>
                                     </Link>
