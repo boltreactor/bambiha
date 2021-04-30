@@ -134,7 +134,7 @@ class Favorites extends Component {
                                                                                 </div>
 
                                                                                 <div>
-                                                                                    <h6>{item.price}</h6>
+                                                                                    <h6>PKR. {item.price}</h6>
                                                                                 </div>
                                                                             </div>
                                                                             {/*<p className="ma0" style={{fontSize: '16px'}}>*/}

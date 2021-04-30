@@ -58,7 +58,7 @@ class Store extends Component {
                                                             </div>
                                                             <div className="mv3">
                                                                 <div><h4>{item.title}</h4></div>
-                                                                <div><h6>{item.price}</h6></div>
+                                                                <div><h6>PKR. {item.price}</h6></div>
                                                             </div>
 
                                                         </Link>

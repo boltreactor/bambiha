@@ -68,7 +68,7 @@ class Cart extends Component {
 
                                         {/*action call*/}
                                         {this.props.cart && this.props.cart.map((item, index) => {
-                                            return <div key={index} className="flex mb3">
+                                            return <div key={index} className="flex mb3" key={item.product_key}>
                                                 <div className="mr2 mb3">
                                                     <Link to={`/product/${item.product_key}`} className="link-mute">
                                                         <img src={item.image ? item.image : "/static/show-1.jpeg"}
@@ -81,11 +81,11 @@ class Cart extends Component {
                                                             <div className="flex-grow-1 mr2">
                                                                 <Link to={`/product/${item.product_key}`}>
                                                                     <h4>{item.title}</h4></Link>
-                                                                {item.product_status===0 &&
+                                                                {item.product_status === 0 &&
                                                                 <p style={{color: "red"}}>Item Not Available</p>}
                                                             </div>
                                                             <div>
-                                                                <h6>{item.price}</h6>
+                                                                <h6>PKR. {item.price}</h6>
                                                             </div>
                                                         </div>
                                                         <p className="ma0" style={{fontSize: '16px'}}>
@@ -155,60 +155,61 @@ class Cart extends Component {
                                 </div>
                                 {/* */}
                                 {this.props.favorites !== undefined && this.props.favorites.length > 0 &&
-                                    this.props.favorites.filter(item=>item.title!==null).slice(0,1).map(item=>{
-                                return <div className="cart-or-bag mv4">
-                                    <h3 className="mb3">Favourites</h3>
-                                    <div className="cart-item ma0">
-                                        <div className="flex mb3">
-                                            <div className="mr2 mb3">
-                                                <Link to="#" className="link-mute">
-                                                    <img
-                                                        src={item.image ? item.image : "/static/img-noise.png"}
-                                                        alt=""/>
-                                                </Link>
-                                            </div>
-                                            <div className="flex-grow-1 pa2">
-                                                <div className="description">
-                                                    <div className="flex mb2">
-                                                        <div className="flex-grow-1 mr2">
-                                                            <h4>{item.title}</h4>
+                                this.props.favorites.filter(item => item.title !== null).slice(0, 1).map(item => {
+                                    return <div className="cart-or-bag mv4">
+                                        <h3 className="mb3">Favourites</h3>
+                                        <div className="cart-item ma0">
+                                            <div className="flex mb3">
+                                                <div className="mr2 mb3">
+                                                    <Link to="#" className="link-mute">
+                                                        <img
+                                                            src={item.image ? item.image : "/static/img-noise.png"}
+                                                            alt=""/>
+                                                    </Link>
+                                                </div>
+                                                <div className="flex-grow-1 pa2">
+                                                    <div className="description">
+                                                        <div className="flex mb2">
+                                                            <div className="flex-grow-1 mr2">
+                                                                <h4>{item.title}</h4>
+                                                            </div>
+                                                            <div>
+                                                                <h6>{item.price}</h6>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <h6>{item.price}</h6>
-                                                        </div>
-                                                    </div>
-                                                    <p className="ma0" style={{fontSize: '16px'}}>
-                                                        Men's Shoe
-                                                    </p>
-                                                    {item.size && <div className="mv2">
-                                                        <div className="dib mr3">
-                                                            <p className="ma0" style={{fontSize: '16px'}}>
-                                                                <span>Size</span>
-                                                                <span>
+                                                        <p className="ma0" style={{fontSize: '16px'}}>
+                                                            {item.category}
+                                                        </p>
+                                                        {item.size && <div className="mv2">
+                                                            <div className="dib mr3">
+                                                                <p className="ma0" style={{fontSize: '16px'}}>
+                                                                    <span>Size</span>
+                                                                    <span>
                                                             <select name="size" id="size">
                                                             <option value={10}>10</option>
                                                             <option value={11}>11</option>
                                                             <option value={12}>12</option>
                                                             </select>
                                                             </span>
-                                                            </p>
-                                                        </div>
-                                                    </div>}
-                                                </div>
-                                                <div className="actions">
-                                                    <button className="btn btn-outline-dark btn-lg btn-pill"
-                                                            onClick={(e) => this.addItemToCart(e, 1, item, "add")}>
-                                                        Add to Bag
-                                                    </button>
+                                                                </p>
+                                                            </div>
+                                                        </div>}
+                                                    </div>
+                                                    <div className="actions">
+                                                        <button className="btn btn-outline-dark btn-lg btn-pill"
+                                                                onClick={(e) => this.addItemToCart(e, 1, item, "add")}>
+                                                            Add to Bag
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="mv3">
+                                            <Link to="/dashboard/favorites" className="fw4 link-mute link-dark">View all
+                                                Favourites</Link>
+                                        </div>
                                     </div>
-                                    <div className="mv3">
-                                        <Link to="/dashboard/favorites" className="fw4 link-mute link-dark">View all
-                                            Favourites</Link>
-                                    </div>
-                                </div>})}
+                                })}
 
                             </div>
                             <div className="col s12 m4 l4">

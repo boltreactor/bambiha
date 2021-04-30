@@ -124,7 +124,7 @@ class Orders extends Component {
                                                                                             </div>
                                                                                         })}
                                                                                         <div>
-                                                                                            <h6>{item.total_price}</h6>
+                                                                                            <h6>PKR. {item.total_price}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -283,7 +283,7 @@ class Orders extends Component {
                                                                 Women
                                                             </h4>
                                                             <p>
-                                                                Take control of your digital reputation &amp; online
+                                                                Take control of your digital reputation & online
                                                                 reviews.
                                                             </p>
                                                         </div>

@@ -153,6 +153,13 @@ export const manageFavorite = (id, props) => dispatch => {
                 type: FAVORITES,
                 favorites: res.data.favorites
             });
+            axios.get('/user/viewcart/', {headers: Header})
+                .then(res => {
+                    dispatch({
+                        type: CART,
+                        cart: res.data.products,
+                    });
+                });
         }).catch(err => {
 
     })

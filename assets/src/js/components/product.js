@@ -8,12 +8,12 @@ import {addToCart, manageFavorite, getUserProducts, getFavorite} from "../action
 class Product extends Component {
     state = {
         didFav: false,
-        product_id:null
+        product_id: null
     }
 
     componentDidMount() {
         this.props.getProduct(this.props.match.params.id)
-        this.setState({product_id:this.props.match.params.id})
+        this.setState({product_id: this.props.match.params.id})
         this.props.loginStatus === true && this.props.getFavorite()
 
     }
@@ -62,7 +62,7 @@ class Product extends Component {
                     {/* Banner */}
                     <section className="banner">
                         <div className="banner-wrapper gray tc my-page">
-                            <h5 className="bold">Free Shipping &amp; 60-Day Free Returns</h5>
+                            <h5 className="bold">Free Shipping & 60-Day Free Returns</h5>
                             <div className="mt1">
                                 <Link to="#" className="link-mute link-dark">
                                     <h5 className="bold">Join Now</h5>
@@ -79,29 +79,29 @@ class Product extends Component {
                                     <div className="col s12">
                                         <div className="show-sm mb3">
                                             <div className="mb2">
-                                                <h6>Men's Shoe</h6>
+                                                <h6>{product.category}</h6>
                                             </div>
                                             <div className="flex">
                                                 <div className="flex-grow-1 mr2">
                                                     <h4>{product.title}</h4>
                                                 </div>
                                                 <div>
-                                                    <h6>{product.price}</h6>
+                                                    <h6>PKR. {product.price}</h6>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {product.images !== undefined && product.images.length>0? product.images.map((img, index) => {
-                                        return <div key={index} className="col s12 m6 l6 mb3">
-                                            <Link to={`/product/detail/${this.props.match.params.id}`}>
-                                                <div className="img-wrapper">
-                                                    <img className="w-100 h-100" src={img} alt=""/>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    }):
-                                    <div  className="col s12 m6 l6 mb3">
+                                    {product.images !== undefined && product.images.length > 0 ? product.images.map((img, index) => {
+                                            return <div key={index} className="col s12 m6 l6 mb3">
+                                                <Link to={`/product/detail/${this.props.match.params.id}`}>
+                                                    <div className="img-wrapper">
+                                                        <img className="w-100 h-100" src={img} alt=""/>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        }) :
+                                        <div className="col s12 m6 l6 mb3">
                                             <Link to={'#'}>
                                                 <div className="img-wrapper">
                                                     <img className="w-100 h-100" src={"/static/show-1.jpeg"} alt=""/>
@@ -134,21 +134,23 @@ class Product extends Component {
                                     <div className="mb3 ph0 ">
                                         <div className="color-way__image-wrapper mb3 hide-scrollbar">
                                             <div className="list">
-                                                {product.images !== undefined && product.images.length>0? product.images.map((img, index) => {
-                                                    return <div key={index}>
-                                                        <Link to="#" className="link-mute dib relative">
-                                                            <div className="relative">
-                                                                <div className="mr2 mb1">
-                                                                    <img src={img} className="color-images" alt=""/>
+                                                {product.images !== undefined && product.images.length > 0 ? product.images.map((img, index) => {
+                                                        return <div key={index}>
+                                                            <Link to="#" className="link-mute dib relative">
+                                                                <div className="relative">
+                                                                    <div className="mr2 mb1">
+                                                                        <img src={img} className="color-images" alt=""/>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </Link>
-                                                    </div>}):
+                                                            </Link>
+                                                        </div>
+                                                    }) :
                                                     <div>
                                                         <Link to="#" className="link-mute dib relative">
                                                             <div className="relative">
                                                                 <div className="mr2 mb1">
-                                                                    <img src={"/static/show-1.jpeg"} className="color-images" alt=""/>
+                                                                    <img src={"/static/show-1.jpeg"}
+                                                                         className="color-images" alt=""/>
                                                                 </div>
                                                             </div>
                                                         </Link>
@@ -265,11 +267,11 @@ class Product extends Component {
                                     </div>
                                 </div>
                                 {/* */}
-                                <div className="mv4 mh4-m mh4-l">
-                                    <p className="m">
-                                        {product.description}
-                                    </p>
-                                </div>
+                                {/*<div className="mv4 mh4-m mh4-l">*/}
+                                {/*    <p className="m">*/}
+                                {/*        {product.description}*/}
+                                {/*    </p>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                         <div className="row">
@@ -280,7 +282,7 @@ class Product extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            {this.props.products && this.props.products.length > 0 && this.props.products.filter(product=>product.id!==this.state.product_id).slice(0, 3).map(product => {
+                            {this.props.products && this.props.products.length > 0 && this.props.products.filter(product => product.id !== this.state.product_id).slice(0, 3).map(product => {
                                 return <div key={product.id} className="col s12 m12 l4 mb3">
                                     <Link to={`/product/${product.id}`} className="link-mute">
                                         <div className="img-wrapper">
@@ -290,7 +292,7 @@ class Product extends Component {
                                         </div>
                                     </Link>
                                     <div className="mv3">
-                                        <div style={{float: "right"}}>{item.status === 0 &&
+                                        <div style={{float: "right"}}>{product.status === 0 &&
                                         <p style={{color: "red"}}>Product Not Available</p>}</div>
                                     </div>
                                 </div>

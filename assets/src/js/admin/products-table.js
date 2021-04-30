@@ -84,8 +84,7 @@ class ProductsTable extends Component {
                                     <th className="mdc-data-table__cell tl"
                                         scope="row" id="u0">{product.title}
                                     </th>
-                                    <td className="mdc-data-table__cell mdc-data-table__cell--numeric">PKR
-                                        {product.price}
+                                    <td className="mdc-data-table__cell mdc-data-table__cell--numeric">PKR. {product.price}
                                     </td>
                                     <td className="mdc-data-table__cell mdc-data-table__cell--numeric">{product.quantity}</td>
                                     <td className="mdc-data-table__cell">category</td>
