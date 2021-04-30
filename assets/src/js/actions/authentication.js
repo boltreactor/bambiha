@@ -29,10 +29,13 @@ export const signup = (user, props) => dispatch => {
                         email: user.email,
                         password: user.password
                     }, {headers: Header}).then(res => {
-                        if (res.data.user.user_role === 2)
+                        if (res.data.user.user_role === 2) {
                             localStorage.setItem("admin", true)
-                        else
+                            props.history.push('/admin')
+                        } else {
                             localStorage.setItem('admin', false)
+                            props.history.push('/')
+                        }
                         localStorage.setItem("loginStatus", true)
                         localStorage.setItem("token", res.data.user.token);
                         dispatch({
@@ -205,7 +208,7 @@ export const newPassword = (token, new_password, re_new_password, props) => disp
 };
 
 export const changePassword = (re_new_password, new_password, current_password, email) => dispatch => {
-        dispatch(showLoader(true))
+    dispatch(showLoader(true))
 
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
 
