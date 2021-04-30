@@ -47,7 +47,7 @@ class DrawerDashboard extends Component {
                                         Home
                                     </Link>
                                     <Link className="mdc-list-item mdc-ripple-surface"
-                                          data-mdc-auto-init="MDCRipple" to="/orders">
+                                          data-mdc-auto-init="MDCRipple" to="/dashboard/orders">
                                         <i className="material-icons-outlined v-mid mr2"
                                            aria-hidden="true">shopping_basket</i>
                                         Orders

@@ -7,11 +7,13 @@ import {addToCart, manageFavorite, getUserProducts, getFavorite} from "../action
 
 class Product extends Component {
     state = {
-        didFav: false
+        didFav: false,
+        product_id:null
     }
 
     componentDidMount() {
         this.props.getProduct(this.props.match.params.id)
+        this.setState({product_id:this.props.match.params.id})
         this.props.loginStatus === true && this.props.getFavorite()
 
     }
@@ -52,6 +54,7 @@ class Product extends Component {
     }
 
     render() {
+
         const {product} = this.props;
         return (
             <div className="page">
@@ -89,7 +92,7 @@ class Product extends Component {
                                         </div>
                                     </div>
 
-                                    {product.images !== undefined && product.images.map((img, index) => {
+                                    {product.images !== undefined && product.images.length>0? product.images.map((img, index) => {
                                         return <div key={index} className="col s12 m6 l6 mb3">
                                             <Link to={`/product/detail/${this.props.match.params.id}`}>
                                                 <div className="img-wrapper">
@@ -97,7 +100,14 @@ class Product extends Component {
                                                 </div>
                                             </Link>
                                         </div>
-                                    })}
+                                    }):
+                                    <div  className="col s12 m6 l6 mb3">
+                                            <Link to={'#'}>
+                                                <div className="img-wrapper">
+                                                    <img className="w-100 h-100" src={"/static/show-1.jpeg"} alt=""/>
+                                                </div>
+                                            </Link>
+                                        </div>}
 
                                 </div>
                             </div>
@@ -115,13 +125,16 @@ class Product extends Component {
                                             <h6>{product.price}</h6>
                                         </div>
                                     </div>
+                                    <div className="mb2">
+                                        {product.product_status === 0 &&
+                                        <p style={{color: "red"}}>Product Not Available</p>}
+                                    </div>
                                 </div>
-                                {/* */}
                                 <div className="color-way db">
                                     <div className="mb3 ph0 ">
                                         <div className="color-way__image-wrapper mb3 hide-scrollbar">
                                             <div className="list">
-                                                {product.images !== undefined && product.images.map((img, index) => {
+                                                {product.images !== undefined && product.images.length>0? product.images.map((img, index) => {
                                                     return <div key={index}>
                                                         <Link to="#" className="link-mute dib relative">
                                                             <div className="relative">
@@ -130,15 +143,17 @@ class Product extends Component {
                                                                 </div>
                                                             </div>
                                                         </Link>
-                                                        {/*<Link to="#" className="link-mute dib relative  active">*/}
-                                                        {/*  <div className="relative">*/}
-                                                        {/*    <div className="mr2 mb1">*/}
-                                                        {/*      <img src="/static/img-noise.png" className="color-images" alt="" />*/}
-                                                        {/*    </div>*/}
-                                                        {/*  </div>*/}
-                                                        {/*</Link>*/}
-                                                    </div>
-                                                })}
+                                                    </div>}):
+                                                    <div>
+                                                        <Link to="#" className="link-mute dib relative">
+                                                            <div className="relative">
+                                                                <div className="mr2 mb1">
+                                                                    <img src={"/static/show-1.jpeg"} className="color-images" alt=""/>
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                    </div>}
+
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +280,7 @@ class Product extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            {this.props.products && this.props.products.length > 0 && this.props.products.slice(0, 3).map(product => {
+                            {this.props.products && this.props.products.length > 0 && this.props.products.filter(product=>product.id!==this.state.product_id).slice(0, 3).map(product => {
                                 return <div key={product.id} className="col s12 m12 l4 mb3">
                                     <Link to={`/product/${product.id}`} className="link-mute">
                                         <div className="img-wrapper">

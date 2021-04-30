@@ -33,7 +33,7 @@ class Orders extends Component {
     render() {
         // const headers = [ {name: 'Order'}, {name: 'User'}, {name: 'Status'} ];
         const {orders} = this.props;
-        debugger
+
         return (
             <div className="page">
                 <div className="page__content">
@@ -99,41 +99,90 @@ class Orders extends Component {
                                                 <div>
 
                                                     <section className="cart-or-bag mv4">
-                                                        {orders && orders.map(item => {
-                                                            return <div key={item.order_key} className="cart-item ma0">
-                                                                <div className="flex mb3">
-                                                                    <div className="mr2 mb3">
-                                                                        <Link to="#" className="link-mute">
-                                                                            <img
-                                                                                src={item.products[0] ? item.products[0].image : "/static/img-noise.png"}
-                                                                                alt=""/>
-                                                                        </Link>
-                                                                    </div>
-                                                                    <div className="flex-grow-1 pa2">
-                                                                        <div className="description">
-                                                                            <div className="flex flex-wrap mb2">
-                                                                                <div className="flex-grow-1 mr2">
-                                                                                    <h4>{item.products[0].title===null?"This product has been deleted":item.products[0].title}</h4>
+                                                        <h4>Orders this Month</h4>
+                                                        {orders && orders.filter((order) => (new Date().getMonth === new Date(order.date_time).getMonth)).length > 0 ?
+                                                            orders.filter((order) => (new Date().getMonth === new Date(order.date_time).getMonth)).map(item => {
+                                                                return <div>
+                                                                    <div key={item.order_key} className="cart-item ma0">
+                                                                        <div className="flex mb3">
+                                                                            {item.products.map(product => {
+                                                                                return <div className="mr2 mb3">
+                                                                                    <Link to="#" className="link-mute">
+                                                                                        <img
+                                                                                            src={product && product.image !== null ? product.image : "/static/img-noise.png"}
+                                                                                            alt=""/>
+                                                                                    </Link>
                                                                                 </div>
-                                                                                <div>
-                                                                                    <h6>{item.total_price}</h6>
+                                                                            })}
+                                                                            <div className="flex-grow-1 pa2">
+                                                                                <div className="description">
+                                                                                    <div className="flex flex-wrap mb2">
+                                                                                        {item.products.map(product => {
+                                                                                            return <div
+                                                                                                className="flex-grow-1 mr2">
+                                                                                                <h4>{product.title === null ? "This product has been deleted" : product.title}</h4>
+                                                                                            </div>
+                                                                                        })}
+                                                                                        <div>
+                                                                                            <h6>{item.total_price}</h6>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div className="mv3">
+                                                                            <h6>Shipping</h6>
+                                                                            <p style={{
+                                                                                color: '#082244',
+                                                                                fontSize: '16px',
+                                                                                paddingBottom: '16px'
+                                                                            }}>Arrives within 10 days</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-
-
-                                                                <div className="mv3">
-                                                                    <h6>Shipping</h6>
-                                                                    <p style={{
-                                                                        color: '#082244',
-                                                                        fontSize: '16px',
-                                                                        paddingBottom: '16px'
-                                                                    }}>Arrives within 10 days</p>
+                                                            }) : <p>No Orders</p>}
+                                                        <h4 className="mt3">Previous Orders</h4>
+                                                        {orders && orders.filter((order) => (new Date().getMonth !== new Date(order.date_time).getMonth)).length > 0 ?
+                                                            orders.filter((order) => (new Date().getMonth !== new Date(order.date_time).getMonth)).map(item => {
+                                                                return <div>
+                                                                    <div key={item.order_key} className="cart-item ma0">
+                                                                        <div className="flex mb3">
+                                                                            {item.products.map(product => {
+                                                                                return <div className="mr2 mb3">
+                                                                                    <Link to="#" className="link-mute">
+                                                                                        <img
+                                                                                            src={product && product.image !== null ? product.image : "/static/img-noise.png"}
+                                                                                            alt=""/>
+                                                                                    </Link>
+                                                                                </div>
+                                                                            })}
+                                                                            <div className="flex-grow-1 pa2">
+                                                                                <div className="description">
+                                                                                    <div className="flex flex-wrap mb2">
+                                                                                        {item.products.map(product => {
+                                                                                            return <div
+                                                                                                className="flex-grow-1 mr2">
+                                                                                                <h4>{product.title === null ? "This product has been deleted" : product.title}</h4>
+                                                                                            </div>
+                                                                                        })}
+                                                                                        <div>
+                                                                                            <h6>{item.total_price}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="mv3">
+                                                                            <h6>Shipping</h6>
+                                                                            <p style={{
+                                                                                color: '#082244',
+                                                                                fontSize: '16px',
+                                                                                paddingBottom: '16px'
+                                                                            }}>Arrives within 10 days</p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        })}
+                                                            }) : <p>No Orders</p>}
                                                     </section>
                                                 </div>}
                                         </div>}

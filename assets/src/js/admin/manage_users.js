@@ -91,11 +91,11 @@ class ManageUsers extends Component {
                                         <div className="mb4 mb0-m mb0-l">
                                             <h1 className="bold">Users</h1>
                                         </div>
-                                        <div className="flex-grow-1 ml3 tr">
-                                            <button className="btn btn-primary btn-lg">
-                                                Manage Users
-                                            </button>
-                                        </div>
+                                        {/*<div className="flex-grow-1 ml3 tr">*/}
+                                        {/*    <button className="btn btn-primary btn-lg">*/}
+                                        {/*        Manage Users*/}
+                                        {/*    </button>*/}
+                                        {/*</div>*/}
                                     </header>
                                     {/* */}
                                     <div className="tab-wrapper">

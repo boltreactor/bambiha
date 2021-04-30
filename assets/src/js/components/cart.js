@@ -12,7 +12,7 @@ class Cart extends Component {
     }
 
     handleCheckout = () => {
-        debugger
+
         this.props.history.push('/checkout')
     }
     addItemToCart = (e, quantity, product, addOrRemove) => {
@@ -36,7 +36,7 @@ class Cart extends Component {
 
     render() {
         const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        debugger
+
         return (
             <div className="page">
                 <div className="page__content">

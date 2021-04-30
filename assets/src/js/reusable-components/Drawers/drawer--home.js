@@ -55,13 +55,13 @@ class DrawerHome extends Component {
                                         </Link>
                                     })}
                                     <Link className="mdc-list-item mdc-ripple-surface" data-mdc-auto-init="MDCRipple"
-                                          to="/favourites">
+                                          to="dashboard/favorites">
                                         {/*<i className="material-icons-outlined mdc-list-item__graphic"*/}
                                         {/*   aria-hidden="true">account_circle</i>*/}
                                         Favorites
                                     </Link>
                                     <Link className="mdc-list-item mdc-ripple-surface" data-mdc-auto-init="MDCRipple"
-                                          to="/orders">
+                                          to="dashboard/orders">
                                         {/*<i className="material-icons-outlined mdc-list-item__graphic"*/}
                                         {/*   aria-hidden="true">account_circle</i>*/}
                                         Orders

@@ -169,7 +169,7 @@ def ViewOrderItems(request):
 def UpdateOrderStatus(request):
     Order.update_status(request)
     return Response({
-        'status': status.HTTP_200_OK, 'message': "Order Status Updated"
+        'status': status.HTTP_200_OK, 'message': "Order Status Updated",
     }, status.HTTP_200_OK)
 
 

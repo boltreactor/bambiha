@@ -18,9 +18,7 @@ class TopAppBarDashboard extends Component {
     selectDrawer = () => {
         if (this.props.location.pathname.startsWith("/account-settings")) {
             return <DrawerSettings/>
-        } else if (this.props.location.pathname === ("/dashboard")) {
-            return <DrawerDashboard/>
-        } else if (this.props.location.pathname === ("/orders")) {
+        } else if (this.props.location.pathname.startsWith ("/dashboard")) {
             return <DrawerDashboard/>
         } else {
             return <DrawerHome/>
