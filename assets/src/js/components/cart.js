@@ -21,7 +21,8 @@ class Cart extends Component {
     }
     addFavorite = (e, product_key) => {
         e.preventDefault();
-        this.props.manageFavorite(product_key, this.props)
+        let component="cart"
+        this.props.manageFavorite(product_key, this.props, component)
     }
     selectQuantity = (e, item) => {
         e.preventDefault()

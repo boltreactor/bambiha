@@ -31,8 +31,7 @@ class Product extends Component {
 
     addItemToCart = (e) => {
         e.preventDefault();
-        this.props.addToCart(1, this.props.match.params.id, this.props)
-        // this.props.loginStatus === true ? this.props.addToCart(1, this.props.match.params.id, this.props) : this.props.history.push('/login')
+        this.props.loginStatus === true ? this.props.addToCart(1, this.props.match.params.id, this.props) : this.props.history.push('/login')
 
     }
 
@@ -247,13 +246,13 @@ class Product extends Component {
                                 {/* */}
                                 <div className="mv5">
                                     <div className="mb3">
-                                        <Link to="/cart" className="link-mute">
+                                        {/*<Link to="/cart" className="link-mute">*/}
                                             <button className="btn btn-dark btn-lg btn-block btn-pill" onClick={e => {
                                                 this.addItemToCart(e)
                                             }}>
                                                 Add to Bag
                                             </button>
-                                        </Link>
+                                        {/*</Link>*/}
                                     </div>
                                     <div>
                                         <button className="btn btn-outline-dark btn-lg btn-block btn-pill"

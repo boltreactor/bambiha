@@ -75,13 +75,13 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.props.match.params.tab === "payments" && this.props.user_cards.length > 0 &&
+                                        {this.props.match.params.tab === "payments" && this.props.user_cards!==null&& this.props.user_cards.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.props.match.params.tab === undefined && this.props.user_cards.length > 0 &&
+                                        {this.props.match.params.tab === undefined && this.props.user_cards!==null && this.props.user_cards.length > 0 &&
                                         <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
@@ -122,7 +122,7 @@ class ProductsBillings extends Component {
                                     <div className="tab-content">
                                         <div
                                             className={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined ? "" : "tab-no-data hide"}>
-                                            {this.props.user_cards.length > 0 ? <div>
+                                            {this.props.user_cards && this.props.user_cards.length > 0 ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
                                                             <h3 className="bold">Payment methods</h3>
