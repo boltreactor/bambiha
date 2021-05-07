@@ -79,7 +79,6 @@ class NewProduct extends Form {
 
 
     doSubmit = (event) => {
-        debugger
         event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
