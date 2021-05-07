@@ -24,6 +24,7 @@ export const signup = (user, props) => dispatch => {
     dispatch(showLoader(true))
     axios.post("/auth/register/", user, {headers: Header})
         .then(res => {
+            debugger
                 if (res.data.status === 1) {
                     axios.post("/auth/login/", {
                         email: user.email,
@@ -79,6 +80,7 @@ export const clearAuthErrors = (props) => dispatch => {
 export const login = (user, props) => dispatch => {
     dispatch(showLoader(true))
     axios.post("/auth/login/", user, {headers: Header}).then(res => {
+        debugger
         if (res.data.user.user_role === 2)
             localStorage.setItem("admin", true)
         else
@@ -105,7 +107,7 @@ export const login = (user, props) => dispatch => {
     }).catch(err => {
         dispatch({
             type: ERROR,
-            error: err.response.data.message
+            error: "Email doesn't exist"
         });
         dispatch({
             type: LOGIN_FAILED,

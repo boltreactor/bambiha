@@ -4079,31 +4079,39 @@ ul.store-categories a:hover {
     color: #fff;
     border: 2px solid transparent;
 }
+
 .cart-link.active .badge[data-badge]:after {
     background: #db4437;
     border-color: #fff;
 }
+
 .badge.badge--header:after {
     right: 2px;
     top: 4px;
 }
+
 .badge.badge--header {
     margin-right: 10px;
 }
+
 .badge.badge--overlap:after {
     right: 2px;
     top: -10px;
 }
+
 .badge.badge--overlap {
     margin-right: 12px;
 }
+
 .badge.badge--label:after {
     right: -7px;
     top: -10px;
 }
+
 .badge.badge--label {
     margin-right: 12px;
 }
+
 .badge-inline {
     background-color: rgb(219, 68, 55);
     display: inline-block;
@@ -4118,17 +4126,15 @@ ul.store-categories a:hover {
     border-radius: 50%;
 }
 
+.ui-alert__message {
+    padding: 8px 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ui-alert__message .title {
+    margin-top: -2px;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+}

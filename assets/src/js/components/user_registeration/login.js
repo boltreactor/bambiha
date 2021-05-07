@@ -88,6 +88,15 @@ class Login extends Form {
                             <header className="pb4">
                                 <Link to="/" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
+                            {this.props.error === "Email doesn't exist" &&
+                            <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
+                                <div className="ui-alert__icon">
+                                    <i className="material-icons-outlined">error_outline</i>
+                                </div>
+                                <div className="ui-alert__message">
+                                    Incorrect email or password.
+                                </div>
+                            </div>}
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
                                 {/* */}
@@ -190,14 +199,14 @@ class Login extends Form {
                                             </button>
                                         </div>
                                     </form>
-                                    {this.props.error && this.state.email_for_error &&
-                                    <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
-                                        <div className="ui-alert__icon">
-                                            <i className="material-icons-outlined">error_outline</i>
-                                        </div>
-                                        <div className="ui-alert__message">{this.props.error}.
-                                        </div>
-                                    </div>}
+                                    {/*{this.props.error && this.state.email_for_error &&*/}
+                                    {/*<div className="ui-paper ui-alert ui-alert--error my2" role="alert">*/}
+                                    {/*    <div className="ui-alert__icon">*/}
+                                    {/*        <i className="material-icons-outlined">error_outline</i>*/}
+                                    {/*    </div>*/}
+                                    {/*    <div className="ui-alert__message">{this.props.error}.*/}
+                                    {/*    </div>*/}
+                                    {/*</div>}*/}
                                 </div>
                             </div>
                             {/* */}
