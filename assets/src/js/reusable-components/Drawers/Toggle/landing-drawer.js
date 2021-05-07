@@ -22,9 +22,9 @@ class LandingDrawer extends Component {
             <header className="mdc-drawer__header">
                             <div className="flex">
                                 <div className="flex-grow-1">
-                                    <a href="#" className="mdc-drawer__title">
+                                    <Link href="#" className="mdc-drawer__title">
                                         <span className="tracked-l tracked-m">BAMBIHA</span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="mt1">
                                     <button className="mdc-icon-button material-icons js-close-drawer" onClick={() => {

@@ -1,16 +1,29 @@
 import React, {Component} from 'react';
 import SettingsDrawer from "../../../reusable-components/Drawers/Static/settings-drawer";
-
 import {Link, withRouter} from "react-router-dom";
-import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT} from "../../../actions/payment";
+import {deleteBank, deleteCard, deleteVAT, getBanks, getCards, getVAT, clearBankError} from "../../../actions/payment";
 import {connect} from "react-redux";
 
 class ProductsBillings extends Component {
     componentDidMount() {
+
         this.props.getBanks();
+
         this.props.getCards();
         this.props.getVAT();
+        let name = this.props.match.params.tab
+        if (name === undefined)
+            name = "payments"
+        if (name === "payments") {
+            this.setState({Payouts: false, Taxes: false})
+        } else if (name === "payouts") {
+            this.setState({Payments: false, Taxes: false})
+        } else {
+            this.setState({Payouts: false, Payments: false})
+        }
+        this.props.clearBankError()
     }
+
 
     handleDeleteCard(event, card) {
         event.preventDefault();
@@ -29,7 +42,7 @@ class ProductsBillings extends Component {
 
     handleEditVAT(event, vat) {
         event.preventDefault();
-        this.props.history.push('/edit-vat/' + vat.id)
+        this.props.history.push('/account-settings/product-and-billings/edit-vat/' + vat.id)
     }
 
     state = {
@@ -51,7 +64,6 @@ class ProductsBillings extends Component {
 
     render() {
         return (
-
             <div className="page my-page">
                 <div className="page__content">
                     <div className="main-wrapper">
@@ -63,20 +75,26 @@ class ProductsBillings extends Component {
                                         <h1 className="bold">Payments & Payouts</h1>
                                     </div>
                                     <div className="flex-grow-1 ml3 tr">
-                                        {this.state.Payments === true &&
-                                        <Link to="/create-payment">
+                                        {this.props.match.params.tab === "payments" && this.props.user_cards!==null&& this.props.user_cards.length > 0 &&
+                                        <Link to="/account-settings/product-and-billings/create-payment">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payment Method
                                             </button>
                                         </Link>}
-                                        {this.state.Payouts === true &&
-                                        <Link to="/create-payout">
+                                        {this.props.match.params.tab === undefined && this.props.user_cards!==null && this.props.user_cards.length > 0 &&
+                                        <Link to="/account-settings/product-and-billings/create-payment">
+                                            <button className="btn btn-primary btn-lg">
+                                                Add Payment Method
+                                            </button>
+                                        </Link>}
+                                        {this.props.match.params.tab === "payouts" && this.props.user_banks.length > 0 &&
+                                        <Link to="/account-settings/product-and-billings/create-payout">
                                             <button className="btn btn-primary btn-lg">
                                                 Add Payout Method
                                             </button>
                                         </Link>}
-                                        {this.state.Taxes === true &&
-                                        <Link to="/create-vat">
+                                        {this.props.match.params.tab === "taxes" && this.props.user_vat.length > 0 &&
+                                        <Link to="/account-settings/product-and-billings/create-vat">
                                             <button className="btn btn-primary btn-lg">
                                                 Add VAT ID Number
                                             </button>
@@ -85,22 +103,26 @@ class ProductsBillings extends Component {
                                 </header>
                                 <div className="tab-wrapper">
                                     <header className="tab-header">
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Payments}>
+                                        <Link to="/account-settings/product-and-billings/payments"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined}>
                                             Payments
-                                        </a>
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Payouts}>
+                                        </Link>
+                                        <Link to="/account-settings/product-and-billings/payouts"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.props.match.params.tab === "payouts"}>
                                             Payouts
-                                        </a>
-                                        <a href="#" className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
-                                           aria-selected={this.state.Taxes}>
+                                        </Link>
+                                        <Link to="/account-settings/product-and-billings/taxes"
+                                              className="tab-item link-mute" onClick={(e) => this.handleTab(e)}
+                                              aria-selected={this.props.match.params.tab === "taxes"}>
                                             Taxes
-                                        </a>
+                                        </Link>
                                     </header>
                                     <div className="tab-content">
-                                        <div className={this.state.Payments ? "tab-no-data" : "tab-no-data hide"}>
-                                            {this.props.user_cards ? <div>
+                                        <div
+                                            className={this.props.match.params.tab === "payments" || this.props.match.params.tab === undefined ? "" : "tab-no-data hide"}>
+                                            {this.props.user_cards && this.props.user_cards.length > 0 ? <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
                                                             <h3 className="bold">Payment methods</h3>
@@ -155,7 +177,8 @@ class ProductsBillings extends Component {
                                                         Add a payment method using our secure payment system.
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-payment">
+                                                        <Link
+                                                            to="/account-settings/product-and-billings/create-payment">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add Payment Method
                                                             </button>
@@ -166,8 +189,9 @@ class ProductsBillings extends Component {
 
 
                                         {/* Payouts */}
-                                        <div className={this.state.Payouts ? "tab-no-data" : "tab-no-data hide"}>
-                                            {this.props.user_banks ?
+                                        <div
+                                            className={this.props.match.params.tab === "payouts" ? "" : "tab-no-data hide"}>
+                                            {this.props.user_banks.length > 0 ?
                                                 <div>
                                                     <div className="flex items-center flex-wrap mb4">
                                                         <div>
@@ -180,6 +204,16 @@ class ProductsBillings extends Component {
                                                                 in your account depends on your payout method.
                                                             </p>
                                                         </div>
+                                                        {this.props.error_msg !== "" && <section className="app-alert">
+                                                <div className="ui-paper ui-alert ui-alert--error my2" role="alert"
+                                                     style={{marginBottom: "10px"}}>
+                                                    <div className="ui-alert__icon">
+                                                        <i className="material-icons-outlined">error</i>
+                                                    </div>
+                                                    <div className="ui-alert__message">{this.props.error_msg}
+                                                    </div>
+                                                </div>
+                                            </section>}
                                                     </div>
                                                     <div className="payment-methods flex flex-wrap">
                                                         {(this.props.user_banks).map(bank => <div key={bank.id}
@@ -232,7 +266,7 @@ class ProductsBillings extends Component {
                                                         to you a "payout."
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-payout">
+                                                        <Link to="/account-settings/product-and-billings/create-payout">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add Payout Method
                                                             </button>
@@ -241,7 +275,8 @@ class ProductsBillings extends Component {
                                                 </div>}
                                         </div>
                                         {/* Taxes */}
-                                        <div className={this.state.Taxes ? "tab-no-data" : "tab-no-data hide"}>
+                                        <div
+                                            className={this.props.match.params.tab === "taxes" ? "" : "tab-no-data hide"}>
 
                                             {this.props.user_vat && this.props.user_vat.length > 0 ?
                                                 <div>
@@ -306,7 +341,7 @@ class ProductsBillings extends Component {
                                                         If you are registered for VAT, enter your VAT ID Number.
                                                     </p>
                                                     <div className="mv3">
-                                                        <Link to="/create-vat">
+                                                        <Link to="/account-settings/product-and-billings/create-vat">
                                                             <button className="btn btn-primary btn-lg">
                                                                 Add VAT ID Number
                                                             </button>
@@ -328,7 +363,8 @@ class ProductsBillings extends Component {
 const mapStateToProps = state => ({
     user_cards: state.payment.user_cards,
     user_banks: state.payment.user_banks,
-    user_vat: state.payment.user_vat
+    user_vat: state.payment.user_vat,
+    error_msg: state.payment.error_msg
 });
 
 
@@ -338,5 +374,6 @@ export default withRouter(connect(mapStateToProps, {
     getBanks,
     deleteBank,
     getVAT,
-    deleteVAT
+    deleteVAT,
+    clearBankError
 })(ProductsBillings));

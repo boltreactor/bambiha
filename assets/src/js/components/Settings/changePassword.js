@@ -85,7 +85,7 @@ class ChangePassword extends Form {
     };
 
     render() {
-        debugger
+
         const {isHidden} = this.state;
         const {message, error_new, error_current} = this.props;
         return (
@@ -97,20 +97,7 @@ class ChangePassword extends Form {
                     <div className="page__content">
                         {/* */}
                         <div className="main-wrapper">
-                            {message &&
-                            <div className="ui-paper ui-alert ui-alert--info my2" role="alert"
-                                 style={{marginLeft: "7cm"}}>
-                                <div className="ui-alert__icon">
-                                    <i className="material-icons-outlined">info</i>
-                                </div>
-                                <div className="ui-alert__message">Your password has been changed successfully</div>
-                                {/*
-            <div class="ui-alert__action">
-              <button class="button2 button2--icon" type="button" aria-label="Close">
-                <i class="material-icons-outlined" style="color: #42444a;vertical-align: middle">close</i>
-              </button>
-            </div>
-            */}   </div>}
+
                             <SettingsDrawer/>
                             {/* */}
                             <main className="main"
@@ -118,6 +105,34 @@ class ChangePassword extends Form {
 
                                 <div className="container l">
                                     {/* */}
+                                    {message && <section className="app-alert">
+                                        <div className="ui-paper ui-alert ui-alert--success my2" role="alert"
+                                             style={{marginBottom: "10px"}}>
+                                            <div className="ui-alert__icon">
+                                                <i className="material-icons-outlined">done</i>
+                                            </div>
+                                            <div className="ui-alert__message">Your password has been changed
+                                                successfully
+                                            </div>
+                                        </div>
+                                    </section>}
+                                    {error_current && <section className="app-alert">
+                                        <div className="ui-paper ui-alert ui-alert--error my2" role="alert"
+                                             style={{marginBottom: "10px"}}>
+                                            <div className="ui-alert__icon">
+                                                <i className="material-icons-outlined">error</i>
+                                            </div>
+                                            <div className="ui-alert__message">Password Entered is incorrect
+                                            </div>
+                                        </div>
+                                    </section>}
+                                    {/*
+            <div class="ui-alert__action">
+              <button class="button2 button2--icon" type="button" aria-label="Close">
+                <i class="material-icons-outlined" style="color: #42444a;vertical-align: middle">close</i>
+              </button>
+            </div>
+            */}
                                     <header className="mb4 db">
                                         <h1 className="bold">My Account</h1>
                                     </header>

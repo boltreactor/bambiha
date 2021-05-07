@@ -24,10 +24,10 @@ const Card = (props) => {
             type: 'card',
         }).then(function (result) {
             if (result.source) {
-                console.log(result.source.id);
                 props.addCard(result.source.id)
-                props.history.push('/account-settings/product-and-billings')
+
             }
+             props.history.push('/account-settings/product-and-billings/payments')
         });
     }
 
@@ -110,7 +110,7 @@ const Card = (props) => {
                             <label className="label-text bold">Card Info <i className="material-icons red"
                                                                             style={{fontSize: '7px'}}>star</i>
                             </label>
-                            <form onSubmit={handleSubmit}>
+                            <form >
                                 <CardElement
                                     options={{
                                         style: {
@@ -127,17 +127,18 @@ const Card = (props) => {
                                             },
                                         },
                                     }}/>
+                            </form>
                                 <div className="mt4 mb4">
-                                    <button className="btn btn-primary btn-lg" type="submit" disabled={!stripe}
+                                    <button className="btn btn-primary btn-lg"  disabled={!stripe}
                                             onClick={handleSubmit}>
                                         <i className="v-mid material-icons mr1" style={{fontSize: '18px'}}>lock</i> DONE
                                     </button>
                                     <button className="btn btn-outline-primary btn-lg ml3"
-                                            onClick={event => props.history.push('/account-settings/product-and-billings')}>
+                                            onClick={event => props.history.push('/account-settings/product-and-billings/payments')}>
                                         CANCEL
                                     </button>
                                 </div>
-                            </form>
+
                         </div>
                     </div>
                 </section>

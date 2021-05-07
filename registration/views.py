@@ -1,17 +1,16 @@
-from django.contrib.auth.hashers import make_password
-from rest_framework.decorators import api_view
-from bambiha.utils import to_json_ndb, get_token
-from .models import User, NotificationSettings
-from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
 import jwt
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
+from django.views.decorators.csrf import csrf_exempt
 from google.cloud import ndb
 from rest_framework import status
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.views import View
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from sendgrid import SendGridAPIClient
-from django.conf import settings
 from sendgrid.helpers.mail import Mail
+
+from bambiha.utils import to_json_ndb, get_token
+from .models import User, NotificationSettings
 
 
 @csrf_exempt
@@ -61,11 +60,16 @@ def login(request):
     if request.method == 'POST':
         # with client.context():
         message, status, user = User.authenticate_user(request)
-        if user:
-            user = user.to_dict()
-        return Response({
-            'status': status, 'message': message, 'user': user
-        }, status)
+        if bool(user.account_status):
+            if user:
+                user = user.to_dict()
+            return Response({
+                'status': status, 'message': message, 'user': user
+            }, status)
+        else:
+            return Response({
+                'status': status.HTTP_200_OK, 'message': 'User is Disabled, Contact admin', 'user': []
+            })
 
 
 @api_view(['GET', 'POST'])
@@ -89,8 +93,12 @@ def refresh_token(request):
 def all_users(request):
     if request.method == 'GET':
         users = User.get_users(request)
-        serialized_results = to_json_ndb(users)
-        return Response(serialized_results)
+        # serialized_results = to_json_ndb(users)
+        if users:
+            return Response({
+                'status': status.HTTP_200_OK, 'users': to_json_ndb(users)
+            }, status.HTTP_200_OK)
+        # return Response(serialized_results)
 
 
 @csrf_exempt
@@ -99,8 +107,18 @@ def account_status(request):
     user = User.manage_status(request)
 
     return Response({
-        'status': status.HTTP_200_OK, 'message': 'Account status updated', 'token': to_json_ndb(user)
+        'status': status.HTTP_200_OK, 'message': 'Account status updated', 'user': to_json_ndb(user)
     })
+
+
+# make user role to admin and refreshes token.
+@api_view(['POST'])
+def manage_admin_status(request):
+    if request.method == 'POST':
+        user = User.manage_admin_status(request)
+        return Response({
+            'status': status.HTTP_200_OK, 'message': 'Status Changed', 'user': to_json_ndb(user)
+        })
 
 
 @api_view(['GET', 'POST'])
@@ -120,9 +138,9 @@ def add_social_connection(request):
 @api_view(['GET', 'POST'])
 def social_login_linkedin(request):
     if request.method == 'POST':
-        code =  request.data['code']
+        code = request.data['code']
         import requests
-        url = "https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=77gr3ejlwri2v8&client_secret=Tr8BHf3bXnWR1m7K&code="+code+"&redirect_uri=http://localhost:8000/linkedin"
+        url = "https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=77gr3ejlwri2v8&client_secret=Tr8BHf3bXnWR1m7K&code=" + code + "&redirect_uri=http://localhost:8000/linkedin"
 
         payload = {}
         headers = {
@@ -131,12 +149,10 @@ def social_login_linkedin(request):
 
         response = requests.request("POST", url, headers=headers, data=payload)
         import json
-        response_parsed=json.loads(response.text)
-        token =response_parsed['access_token']
+        response_parsed = json.loads(response.text)
+        token = response_parsed['access_token']
 
-
-
-        url = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token="+token
+        url = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token=" + token
 
         payload = {}
         headers = {
@@ -145,13 +161,10 @@ def social_login_linkedin(request):
 
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        response_parsed=json.loads(response.text)
+        response_parsed = json.loads(response.text)
         email = response_parsed['elements'][0]['handle~']['emailAddress']
 
-
-
-
-        url = "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token="+token
+        url = "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token=" + token
 
         payload = {}
         headers = {
@@ -160,16 +173,16 @@ def social_login_linkedin(request):
 
         response = requests.request("GET", url, headers=headers, data=payload)
         response_parsed = json.loads(response.text)
-        first_name=response_parsed['firstName']['localized']['en_US']
-        last_name=response_parsed['lastName']['localized']['en_US']
-        image=response_parsed['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier']
+        first_name = response_parsed['firstName']['localized']['en_US']
+        last_name = response_parsed['lastName']['localized']['en_US']
+        image = response_parsed['profilePicture']['displayImage~']['elements'][0]['identifiers'][0]['identifier']
 
-        user = User.query(User.email == email, ancestor= ndb.Key("User", "user")).get()
+        user = User.query(User.email == email, ancestor=ndb.Key("User", "user")).get()
         if user:
             return Response(to_json_ndb(user))
         else:
-            user = User(parent= ndb.Key("User", "user"))
-            user.first_name =first_name
+            user = User(parent=ndb.Key("User", "user"))
+            user.first_name = first_name
             user.last_name = last_name
             user.email = email
             user.password = make_password(email)

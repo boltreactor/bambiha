@@ -108,7 +108,7 @@ def get_payout_method(request):
                 user.stripe_connect_account_id,
             )
         return Response({
-            'status': status.HTTP_200_OK, 'acct': acct.external_accounts.data
+            'status': status.HTTP_200_OK, 'acct': acct.external_accounts.data if acct != None else []
         })
 
 
@@ -178,7 +178,7 @@ def add_bank_account(request):
                     }
                 },
                 tos_acceptance={
-                    "date": datetime.now(),
+                    "date": datetime.datetime.now(),
                     "ip": "119.156.76.23"
                     # "ip": self.request.remote_addr
                 },

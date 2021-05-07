@@ -1,11 +1,10 @@
-from google.cloud import ndb
-from django.contrib.auth.hashers import make_password, check_password
-from bambiha.utils import get_token
-from django.utils.crypto import get_random_string
-from rest_framework import status as http_status
 import boto3
-from dateutil import parser
-import datetime
+from django.contrib.auth.hashers import make_password, check_password
+from django.utils.crypto import get_random_string
+from google.cloud import ndb
+from rest_framework import status as http_status
+
+from bambiha.utils import get_token
 
 with ndb.Client().context():
     ancestor_key = ndb.Key("User", "user")
@@ -82,6 +81,7 @@ class User(ndb.Model):
     stripe_connect_account_id = ndb.StringProperty()
     stripe_connect_country = ndb.StringProperty()
     user_type = ndb.IntegerProperty(default=1)  # 2 google, 3 fb ,4 linkedin
+    user_role = ndb.IntegerProperty(default=1)  # 1-Normal user, 2-Admin
     google_connection_email = ndb.StringProperty()
     facebook_connection_email = ndb.StringProperty()
     account_status = ndb.BooleanProperty(default=True)
@@ -101,6 +101,7 @@ class User(ndb.Model):
                         last_name=request.data['last_name'],
                         email=request.data['email'],
                         password=make_password(request.data['password']))
+            user.user_role = 1
             token = get_token(user)
             user.token = token
             user.put()
@@ -115,6 +116,15 @@ class User(ndb.Model):
     def get_user(cls, key):
         if ndb.Key(urlsafe=key):
             return ndb.Key(urlsafe=key).get()
+
+    @classmethod
+    def manage_admin_status(cls, request):
+        user = ndb.Key(urlsafe=request.POST['user_key']).get()
+        user.user_role = int(request.POST['user_role'])
+        token = get_token(user)
+        user.token = token
+        user.put()
+        return user
 
     @classmethod
     def manage_status(cls, request):
@@ -132,12 +142,12 @@ class User(ndb.Model):
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
-                aws_access_key_id='AKIARXUVHB5JQZ2AQ6HM',
-                aws_secret_access_key='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'
+                aws_access_key_id='AKIAS7EVJ2DJLKQNBTZC',
+                aws_secret_access_key='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'
             )
-            bucket = s3.Bucket('test-bucket-ndb')
+            bucket = s3.Bucket('kompass')
             details = bucket.put_object(Key=file.name, Body=file)
-            url = "https://test-bucket-ndb.s3.us-east-2.amazonaws.com/" + details.key
+            url = "https://kompass.s3.us-east-2.amazonaws.com/" + details.key
             user.profile_image = url
             user.put()
             return user
@@ -146,12 +156,12 @@ class User(ndb.Model):
             s3 = boto3.resource(
                 service_name='s3',
                 region_name='us-east-2',
-                aws_access_key_id='AKIARXUVHB5JQZ2AQ6HM',
-                aws_secret_access_key='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'
+                aws_access_key_id='AKIAS7EVJ2DJLKQNBTZC',
+                aws_secret_access_key='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'
             )
-            bucket = s3.Bucket('test-bucket-ndb')
+            bucket = s3.Bucket('kompass')
             details = bucket.put_object(Key=file.name, Body=file)
-            url = "https://test-bucket-ndb.s3.us-east-2.amazonaws.com/" + details.key
+            url = "https://kompass.s3.us-east-2.amazonaws.com/" + details.key
             user.cover_image = url
             user.put()
             return user

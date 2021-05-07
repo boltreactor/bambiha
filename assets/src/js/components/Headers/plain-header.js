@@ -6,7 +6,7 @@ class PlainHeader extends Component {
             <header className="mdc-top-app-bar mdc-top-app-bar--fixed js-top-app-bar" data-mdc-auto-init="MDCTopAppBar">
                 <div className="mdc-top-app-bar__row l">
                     {/*
-    <a href="#" class="back-to-site link-mute">
+    <Link to="#" class="back-to-site link-mute">
       <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">arrow_back</button>
       <span class="mdc-top-app-bar__title hide-sm" style="font-size: 0.90rem;"><span class="tracked-m tracked-l">Save &amp; Exit</span></span>
     </a>

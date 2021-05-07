@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import Joi from 'joi-browser';
 
 class Form extends Component {
@@ -96,25 +96,40 @@ class Form extends Component {
 
 
     validateUser = () => {
-    const options = {abortEarly: false};
-    const {error} = Joi.validate(this.state.data, this.schema, options);
-    if (!error) return null;
-    const errors = {};
-    for (let item of error.details)
-        if (errors[item.path[0]] === 'profile') {
-            errors[item.path[1]] = item.message;
-        } else {
-            errors[item.path[0]] = item.message;
-        }
-    console.log("validateUser", errors)
-    return errors;
-}
+        const options = {abortEarly: false};
+        const {error} = Joi.validate(this.state.data, this.schema, options);
+        if (!error) return null;
+        const errors = {};
+        for (let item of error.details)
+            if (errors[item.path[0]] === 'profile') {
+                errors[item.path[1]] = item.message;
+            } else {
+                errors[item.path[0]] = item.message;
+            }
+        return errors;
+    }
+    validateProduct = () => {
 
-    validateUserProfile= () => {
-        const user={first_name:this.props.user.first_name,
-        last_name:this.props.user.last_name,
-        phone:this.props.user.phone,
-        email:this.props.user.email}
+        const options = {abortEarly: false};
+        const {error} = Joi.validate(this.state.data, this.schema, options);
+        if (!error) return null;
+        const errors = {};
+        for (let item of error.details)
+            if (errors[item.path[0]] === 'profile') {
+                errors[item.path[1]] = item.message;
+            } else {
+                errors[item.path[0]] = item.message;
+            }
+        return errors;
+    }
+
+    validateUserProfile = () => {
+        const user = {
+            first_name: this.props.user.first_name,
+            last_name: this.props.user.last_name,
+            phone: this.props.user.phone,
+            email: this.props.user.email
+        }
         const options = {abortEarly: false};
         const {error} = Joi.validate(user, this.schema, options);
         if (!error) return null;
@@ -125,7 +140,6 @@ class Form extends Component {
             } else {
                 errors[item.path[0]] = item.message;
             }
-        console.log("validateUser", errors)
         return errors;
     }
 
@@ -155,7 +169,8 @@ class Form extends Component {
                     errors[item.path[0]] = item.message;
                 }
             return errors;
-        };
+        }
+        ;
     }
 
 
@@ -176,6 +191,7 @@ class Form extends Component {
 
 
     validateProperty = ({name, value}) => {
+
         const obj = {[name]: value};
         const schema = {[name]: this.schema[name]};
         const {error} = Joi.validate(obj, schema);
@@ -189,7 +205,16 @@ class Form extends Component {
 
         this.doSubmit(event);
     };
+    handleSubmitProduct = event => {
+        event.preventDefault();
+        const errors = this.validateProduct();
+        this.setState({errors: errors || {}});
+        if (errors) return;
+
+        this.doSubmit(event);
+    };
     handleChange = ({currentTarget: input}) => {
+
         const errors = {...this.state.errors};
         const errorMessage = this.validateProperty(input);
         if (errorMessage) errors[input.name] = errorMessage;
@@ -204,20 +229,19 @@ class Form extends Component {
             isHidden: !this.state.isHidden
         })
     };
-     handleChangeUser = ({currentTarget: input}) => {
-    const errors = {...this.state.errors};
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
-    this.setState({errors}, () => {
-      if (Object.keys(this.state.errors).length > 0) {
-        console.log(this.state.errors)
-      }
-    });
+    handleChangeUser = ({currentTarget: input}) => {
+        const errors = {...this.state.errors};
+        const errorMessage = this.validateProperty(input);
+        if (errorMessage) errors[input.name] = errorMessage;
+        else delete errors[input.name];
+        this.setState({errors}, () => {
+            if (Object.keys(this.state.errors).length > 0) {
+            }
+        });
 
-    const user = {...this.props.user, [input.name]: input.value};
-    this.props.setUserInfo(user)
-  };
+        const user = {...this.props.user, [input.name]: input.value};
+        this.props.setUserInfo(user)
+    };
 
 }
 

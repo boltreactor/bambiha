@@ -20,9 +20,9 @@ class AccountDrawer extends Component {
                         <header className="mdc-drawer__header">
                             <div className="flex">
                                 <div className="flex-grow-1">
-                                    <a href="#" className="mdc-drawer__title">
+                                    <Link href="#" className="mdc-drawer__title">
                                         <span className="tracked-l tracked-m">BAMBIHA</span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="mt1">
                                     <button className="mdc-icon-button material-icons js-close-drawer" onClick={() => {
@@ -35,7 +35,7 @@ class AccountDrawer extends Component {
                     </DrawerHeader>
                     <DrawerContent>
                         <div className="mdc-drawer__content flex flex-column">
-                            <aside className="side-menu-panel hide-scrollbar">
+                            <Linkside className="side-menu-panel hide-scrollbar">
                                 <div className="ph3">
                                     <ul className="side-menu pl0 pb4">
 
@@ -87,7 +87,7 @@ class AccountDrawer extends Component {
 
                                     </ul>
                                 </div>
-                            </aside>
+                            </Linkside>
                         </div>
 
                         <div className="mdc-drawer-scrim js-close-drawer"/>

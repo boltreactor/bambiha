@@ -1,5 +1,4 @@
 import axios from "axios";
-import {loadProgressBar} from 'axios-progress-bar';
 import {
     CHANGE_PASSWORD_MSG,
     ERROR,
@@ -11,9 +10,10 @@ import {
     SIGNUP,
     VERIFICATION
 } from "./types";
+import {showLoader} from "./user";
 
 const qs = require('query-string');
-loadProgressBar();
+
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -21,14 +21,22 @@ const Header = {
     'Accept': 'application/json, text/plain'
 };
 export const signup = (user, props) => dispatch => {
-
+    dispatch(showLoader(true))
     axios.post("/auth/register/", user, {headers: Header})
         .then(res => {
+            debugger
                 if (res.data.status === 1) {
                     axios.post("/auth/login/", {
                         email: user.email,
                         password: user.password
                     }, {headers: Header}).then(res => {
+                        if (res.data.user.user_role === 2) {
+                            localStorage.setItem("admin", true)
+                            props.history.push('/admin')
+                        } else {
+                            localStorage.setItem('admin', false)
+                            props.history.push('/')
+                        }
                         localStorage.setItem("loginStatus", true)
                         localStorage.setItem("token", res.data.user.token);
                         dispatch({
@@ -59,8 +67,9 @@ export const signup = (user, props) => dispatch => {
         ).catch(err => {
 
 
-        }
-    )
+    }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 export const clearAuthErrors = (props) => dispatch => {
     dispatch({
@@ -69,7 +78,13 @@ export const clearAuthErrors = (props) => dispatch => {
     });
 }
 export const login = (user, props) => dispatch => {
+    dispatch(showLoader(true))
     axios.post("/auth/login/", user, {headers: Header}).then(res => {
+        debugger
+        if (res.data.user.user_role === 2)
+            localStorage.setItem("admin", true)
+        else
+            localStorage.setItem('admin', false)
         localStorage.setItem("loginStatus", true)
         localStorage.setItem("token", res.data.user.token);
         dispatch({
@@ -85,17 +100,22 @@ export const login = (user, props) => dispatch => {
             loginStatus: true
         });
         const {state} = props.location;
-        window.location = state ? state.from.pathname : "/dashboard";
+        if (localStorage.getItem('admin') === 'true')
+            window.location = state ? state.from.pathname : "/admin";
+        else
+            window.location = state ? state.from.pathname : "/dashboard";
     }).catch(err => {
         dispatch({
             type: ERROR,
-            error: err.response.data.message
+            error: "Email doesn't exist"
         });
         dispatch({
             type: LOGIN_FAILED,
             loginStatus: false
         });
-    })
+    }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const verifyEmail = (uid, token) => dispatch => {
@@ -133,8 +153,10 @@ export const resendEmail = (email) => dispatch => {
 };
 
 export const resetPassword = (email) => dispatch => {
+    dispatch(showLoader(true))
     axios.post('/auth/forgot/', {email}, {headers: Header})
         .then(res => {
+
             if (res.status === 200) {
 
                 dispatch({
@@ -161,7 +183,9 @@ export const resetPassword = (email) => dispatch => {
                     error: err.response.data.message
                 })
             }
-        })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const newPassword = (token, new_password, re_new_password, props) => dispatch => {
@@ -186,8 +210,10 @@ export const newPassword = (token, new_password, re_new_password, props) => disp
 };
 
 export const changePassword = (re_new_password, new_password, current_password, email) => dispatch => {
+    dispatch(showLoader(true))
+
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
-    debugger
+
     axios.post('/auth/set_password/', {re_new_password, new_password, current_password}, {headers: Header})
         .then(res => {
 
@@ -205,6 +231,10 @@ export const changePassword = (re_new_password, new_password, current_password, 
                     });
                     const user = {email: email, password: new_password}
                     axios.post("/auth/login/", user, {headers: Header}).then(res => {
+                        if (res.data.user.user_role === 2)
+                            localStorage.setItem("admin", true)
+                        else
+                            localStorage.setItem('admin', false)
                         localStorage.setItem("loginStatus", true)
                         localStorage.setItem("token", res.data.user.token);
                         dispatch({
@@ -232,7 +262,9 @@ export const changePassword = (re_new_password, new_password, current_password, 
             )
 
         }
-    )
+    ).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const logout = () => dispatch => {
@@ -249,6 +281,10 @@ export const logout = () => dispatch => {
 export const socialLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login/', user, {headers: Header})
         .then(res => {
+            if (res.data.user_role === 2)
+                localStorage.setItem("admin", true)
+            else
+                localStorage.setItem('admin', false)
             localStorage.setItem("loginStatus", true)
             localStorage.setItem("token", res.data.token);
             dispatch({
@@ -256,7 +292,10 @@ export const socialLogin = (user, props) => dispatch => {
                 loginStatus: true
             });
             const {state} = props.location;
-            window.location = state ? state.from.pathname : "/";
+            if (localStorage.getItem('admin') === 'true')
+                window.location = state ? state.from.pathname : "/admin";
+            else
+                window.location = state ? state.from.pathname : "/dashboard";
         });
 };
 
@@ -319,10 +358,8 @@ export const getLinkedinToken = (client_id, secret, code, redirect_url) => async
 
     axios(config)
         .then(function (response) {
-            console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
-            console.log(error);
         });
 };
 //
@@ -346,6 +383,10 @@ export const getLinkedinToken = (client_id, secret, code, redirect_url) => async
 export const createLinkedInLogin = (user, props) => dispatch => {
     axios.post('/auth/social-login-linkedin/', user, {headers: Header})
         .then(res => {
+            if (res.data.user_role === 2)
+                localStorage.setItem("admin", true)
+            else
+                localStorage.setItem('admin', false)
             localStorage.setItem("loginStatus", true)
             localStorage.setItem("token", res.data.token);
             dispatch({
@@ -353,7 +394,10 @@ export const createLinkedInLogin = (user, props) => dispatch => {
                 loginStatus: true
             });
             const {state} = props.location;
-            window.location = state ? state.from.pathname : "/";
+            if (localStorage.getItem('admin') === 'true')
+                window.location = state ? state.from.pathname : "/admin";
+            else
+                window.location = state ? state.from.pathname : "/dashboard";
         });
 };
 

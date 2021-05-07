@@ -21,47 +21,94 @@ class AddVat extends Form {
     }
 
     schema = {
-        country: Joi.string().trim().required().error(errors => {
-            return {message: "Country is required"};
+        country: Joi.string().trim().regex(/^[a-zA-Z][a-zA-Z]*$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
         }),
-        vat_id: Joi.string().trim().required().error(errors => {
-            return {message: "VAT ID is required"};
+        vat_id: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
         }),
-        name_vat_registration: Joi.string().trim().required().error(errors => {
-            return {message: "Name on registration is required"};
+        name_vat_registration: Joi.string().regex(/^[a-zA-Z][a-zA-Z\s]*$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
         }),
         address_line: Joi.string().trim().required().error(errors => {
             return {message: "Address Line is required"};
         }),
-        city: Joi.string().trim().required().error(errors => {
-            return {message: "City is required"};
+        city:  Joi.string().trim().regex(/^[a-zA-Z][a-zA-Z]*$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
         }),
-        province: Joi.string().trim().required().error(errors => {
-            return {message: "Province/Region is required"};
+        province: Joi.string().trim().regex(/^[a-zA-Z][a-zA-Z]*$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
         }),
-        zip_code: Joi.string().trim().required().error(errors => {
-            return {message: "Zip code is required"};
-        }),
+        zip_code: Joi.string().trim().regex(/^[0-9]+$/).required().error(errors => {
+            return errors.map(error => {
+                switch (error.type) {
+                    case "string.base":
+                        return {message: "required"};
+                    case "any.required":
+                        return {message: "required"};
+                    case "any.empty":
+                        return {message: "required"};
+                    case "string.regex.base":
+                        return {message: "Invalid"};
+                }
+            })
+        })
     }
-
-
-    handleChangeText = ({currentTarget: input}) => {
-        const errors = {...this.state.errors};
-        const errorMessage = this.validateProperty(input);
-
-        if (errorMessage) errors[input.name] = errorMessage;
-        else delete errors[input.name];
-        console.log("errorMessage", errorMessage)
-        console.log("error", errors)
-        debugger
-        this.setState({errors}, () => {
-            if (Object.keys(this.state.errors).length > 0) {
-                console.log(this.state.errors)
-            }
-        });
-        this.setState({...this.state, data: {...this.state.data, [input.name]: input.value}})
-    };
-
 
     add_vat = (event) => {
         event.preventDefault()
@@ -117,7 +164,7 @@ class AddVat extends Form {
                                         label={"COUNTRY/REGION"}
                                         error={this.state.errors.country}
                                         value={this.state.data.country}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"Enter country or region"}/>
                                 </div>
                                 <div className="col s12 m6 mb3">
@@ -126,7 +173,7 @@ class AddVat extends Form {
                                         label={"ADD VAT ID NUMBER"}
                                         error={this.state.errors.vat_id}
                                         value={this.state.data.vat_id}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"Enter VAT ID number"}/>
 
                                 </div>
@@ -135,7 +182,7 @@ class AddVat extends Form {
                                         name={"name_vat_registration"}
                                         value={this.state.data.name_vat_registration}
                                         label={"NAME ON REGISTRATION"}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         error={this.state.errors.name_vat_registration}
                                         placeholder={"Enter name on registration"}/>
                                 </div>
@@ -145,7 +192,7 @@ class AddVat extends Form {
                                         value={this.state.data.address_line}
                                         label={"ADDRESS LINE"}
                                         error={this.state.errors.address_line}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"E.g. Main St."}/>
                                 </div>
                                 <div className="col s12 m6 mb3">
@@ -154,7 +201,7 @@ class AddVat extends Form {
                                         value={this.state.data.city}
                                         label={"CITY"}
                                         error={this.state.errors.city}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"Enter city"}/>
 
                                 </div>
@@ -164,7 +211,7 @@ class AddVat extends Form {
                                         value={this.state.data.province}
                                         label={"PROVINCE/REGION"}
                                         error={this.state.errors.province}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"Enter province or region"}/>
 
                                 </div>
@@ -175,22 +222,24 @@ class AddVat extends Form {
                                         value={this.state.data.zip_code}
                                         error={this.state.errors.zip_code}
                                         label={"ZIP/POSTAL CODE"}
-                                        onChange={this.handleChangeText}
+                                        onChange={this.handleChange}
                                         placeholder={"Enter zip or postal code"}/>
                                 </div>
                                 <div className="col s12 mt3 mb3">
                                     {this.props.match.params.vat_id ?
                                         <button className="btn btn-primary btn-lg"
+                                                 disabled={this.validateProduct()}
                                                 onClick={event => this.update_vat(event)}>
                                             UPDATE
                                         </button> :
                                         <button className="btn btn-primary btn-lg"
+                                                 disabled={this.validateProduct()}
                                                 onClick={event => this.add_vat(event)}>
                                             ADD
                                         </button>}
 
                                     <button className="btn btn-outline-primary btn-lg ml3"
-                                            onClick={event => this.props.history.push('/account-settings/product-and-billings')}>
+                                            onClick={event => this.props.history.push('/account-settings/product-and-billings/taxes')}>
                                         CANCEL
                                     </button>
                                 </div>

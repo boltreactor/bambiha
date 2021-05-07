@@ -1,9 +1,6 @@
 import axios from "axios";
-import {loadProgressBar} from 'axios-progress-bar';
-import {IMAGES, NOTIFICATIONS_SETTINGS, SET_PROFILE, SET_USER, SNACKBAR, TOGGLE_DRAWER,} from "./types";
-
-const qs = require('query-string');
-loadProgressBar();
+import {IMAGES, NOTIFICATIONS_SETTINGS, SET_PROFILE, SET_USER, SNACKBAR, TOGGLE_DRAWER} from "./types";
+import {showLoader} from "./user";
 
 const Header = {
     'Access-Control-Allow-Origin': '*',
@@ -50,6 +47,7 @@ export const deleteImage = (id, new_images, profile_id) => dispatch => {
 };
 
 export const addProfile = (profile, props, component) => dispatch => {
+    dispatch(showLoader(true))
     Header["Authorization"] = `Token ${localStorage.getItem("token")}`;
     axios.post('/auth/profile/', profile, {headers: Header})
         .then(res => {
@@ -61,15 +59,20 @@ export const addProfile = (profile, props, component) => dispatch => {
                 type: SET_USER,
                 loginStatus: true,
                 user: res.data.user,
-            });
+            })
+        }).finally(() => {
+        dispatch(showLoader(false))
+    })
 
-            // dispatch({
-            //   type: SNACKBAR,
-            //   msg: component === "listing" ? "Your listing has been updated" : "Your personal Information has been updated",
-            //   show: true
-            // })
-        });
-    props.history.goBack()
+    // dispatch({
+    //   type: SNACKBAR,
+    //   msg: component === "listing" ? "Your listing has been updated" : "Your personal Information has been updated",
+    //   show: true
+    // })
+    // });
+    if (component !== "editProfile")
+        props.history.goBack()
+
     // if(component==='editProfile') {
     //     props.history.push('/settings')
     // }
@@ -136,10 +139,13 @@ export const setUserInfo = (userInformation) => dispatch => {
     })
 };
 export const setProfileInfo = (new_profile) => dispatch => {
+    dispatch(showLoader(true))
     dispatch({
         type: SET_PROFILE,
         new_profile: new_profile,
-    })
+    }).finally(() => {
+        dispatch(showLoader(false))
+    });
 };
 
 export const setNotificationSettings = (settings) => dispatch => {
@@ -175,7 +181,6 @@ export const getNotificationSettings = () => dispatch => {
 
 
 };
-
 export const addSocialConnection = (user) => dispatch => {
     axios.post('/auth/add-social-connection/', user, {headers: Header})
         .then(res => {
@@ -186,6 +191,3 @@ export const addSocialConnection = (user) => dispatch => {
             });
         });
 };
-
-
-

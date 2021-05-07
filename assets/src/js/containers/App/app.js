@@ -32,6 +32,28 @@ import ProductsBillings from "../../components/Settings/Product-Billings/product
 import AddPayment from "../../components/Settings/Product-Billings/addPayment";
 import AddPayout from "../../components/Settings/Product-Billings/addPayout";
 import AddVat from "../../components/Settings/Product-Billings/addVAT";
+import Product from "../../components/product";
+import ProductDetail from "../../components/product-detail";
+import Index from "../../components";
+import Store from "../../components/store";
+import Cart from "../../components/cart"
+import Orders from "../../components/orders";
+import {Favorite} from "@material-ui/icons";
+import Favorites from "../../components/favorites";
+import HelpSupport from "../../components/Help&Support";
+import AdminHome from "../../admin/admin_home";
+import ManageCategory from "../../admin/manage_categories";
+import ManageOrders from "../../admin/manage_orders";
+import OrderDetail from "../../admin/order-detail";
+import ManageProducts from "../../admin/manage_products";
+import ManageUsers from "../../admin/manage_users";
+import NewCategory from "../../admin/new_category";
+import NewProduct from "../../admin/new_product";
+import Checkout from "../../components/checkout";
+import AdminProtectedRoute from "../../components/adminProtectedRoutes";
+import BrandFolder from "../../admin/brand_folder";
+import FullPageLoader from "../../components/full-page-loader";
+import SkeletonTableLoader from "../../components/Skeleton/table_skeleton";
 
 
 class App extends Component {
@@ -48,30 +70,55 @@ class App extends Component {
         return (
             <Fragment>
                 <Header loginStatus={this.props.loginStatus}/>
+                <FullPageLoader/>
                 <Switch>
+                    <AdminProtectedRoute path="/admin" exact render={(props) => <AdminHome {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories" exact
+                                         render={(props) => <ManageCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/new" exact
+                                         render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/categories/:id" exact
+                                         render={(props) => <NewCategory {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/orders" exact render={(props) => <ManageOrders {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/orders/:id" exact render={(props) => <OrderDetail {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/brand-folder" exact
+                                         render={(props) => <BrandFolder {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products" exact render={(props) => <ManageProducts {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products/new" exact render={(props) => <NewProduct {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/products/:id" exact render={(props) => <NewProduct {...props}/>}/>
+                    <AdminProtectedRoute path="/admin/users" exact render={(props) => <ManageUsers {...props}/>}/>
                     {/*<Route path="/linkedin" exact component={LinkedInPopUp}/>*/}
                     {/*<Route path="/linked" exact component={LinkedInPage}/>*/}
                     <ProtectedRoute path='/stripe' render={(props) => <Stripe {...props}/>}/>
                     {/*<ProtectedRoute path='/allcards' render={(props) => <AllCards {...props}/>}/>*/}
                     <Route path='/signup' render={(props) => <Signup {...props}/>}/>
                     <Route exact path='/' render={(props) => <Home {...props}/>}/>
-                    <Route path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>
-                    <Route path='/login' render={(props) => <Login {...props}/>}/>
+                    <Route exact path='/:state/:code&scope' render={(props) => <Home {...props}/>}/>
+                    <Route exact path='/login' render={(props) => <Login {...props}/>}/>
                     <Route path='/reset-password' render={(props) => <ResetPassword {...props}/>}/>
+                    <Route path='/reset-password' render={(props) => <ResetPassord {...props}/>}/>
                     <ProtectedRoute exact path='/account-settings/change-password'
                                     render={(props) => <ChangePassword {...props}/>}/>
                     <Route path='/new-password/:token' render={(props) => <NewPassword {...props}/>}/>
                     <Route path='/welcome-back' render={(props) => <WelcomeBack {...props}/>}/>
+                    <Route path='/skeleton' render={(props) => <SkeletonTableLoader {...props}/>}/>
                     <Route exact path='/account-settings' render={(props) => <MyProfile{...props}/>}/>
                     <Route exact path='/account-settings/general-settings'
                            render={(props) => <GeneralSettings {...props}/>}/>
                     <Route exact path='/account-settings/social-logins' render={(props) => <SocialLogins {...props}/>}/>
-                    <Route path='/create-payment' render={(props) => <AddPayment {...props}/>}/>
-                    <Route path='/create-payout' render={(props) => <AddPayout {...props}/>}/>
-                    <Route path='/create-vat' render={(props) => <AddVat {...props}/>}/>
-                    <Route path='/edit-vat/:vat_id' exact render={(props) => <AddVat {...props}/>}/>
-                    <Route exact path='/account-settings/product-and-billings'
-                           render={(props) => <ProductsBillings {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-payment'
+                           render={(props) => <AddPayment {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-payout'
+                           render={(props) => <AddPayout {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/create-vat'
+                           render={(props) => <AddVat {...props}/>}/>
+                    <Route path='/account-settings/product-and-billings/edit-vat/:vat_id' exact
+                           render={(props) => <AddVat {...props}/>}/>
+                    <ProtectedRoute exact path='/account-settings/product-and-billings/:tab'
+                                    render={(props) => <ProductsBillings {...props}/>}/>
+
+                    <ProtectedRoute exact path='/account-settings/product-and-billings'
+                                    render={(props) => <ProductsBillings {...props}/>}/>
                     <ProtectedRoute exact path='/settings/personal-info'
                                     render={(props) => <EditPersonalInfo {...props}/>}/>
                     <ProtectedRoute exact path='/checkout' render={(props) => <Checkout {...props}/>}/>
@@ -79,12 +126,29 @@ class App extends Component {
                     <Route path='/check-email' render={(props) => <CheckEmail {...props}/>}/>
                     <Route path='/verify-email/:uid/:token' render={(props) => <VerifyEmail {...props}/>}/>
                     <Route path='/resend/verify-email' render={(props) => <ResendEmail {...props}/>}/>
-                    <ProtectedRoute path='/logout' render={(props) => <Logout {...props}/>}/>
+                    <Route path='/logout' render={(props) => <Logout {...props}/>}/>
                     <Route exact path='/resend/new-password' render={(props) => <ResendPassword {...props}/>}/>
                     <Route exact path='/settings' render={(props) => <SettingHome{...props}/>}/>
                     <ProtectedRoute exact path='/settings/notifications'
                                     render={(props) => <Notifications{...props}/>}/>
+                    <Route exact path='/product/:id' render={(props) => <Product {...props}/>}/>
+                    <Route exact path='/product/detail/:id' render={(props) => <ProductDetail {...props}/>}/>
+                    <Route exact path='/store' render={(props) => <Store {...props}/>}/>
+
+                    <Route exact path='/category/:id' render={(props) => <Store {...props}/>}/>
+
+                    {/*<Route exact path='/women' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/men' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/new' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/kids' render={(props) => <Store {...props}/>}/>*/}
+                    {/*<Route exact path='/custom' render={(props) => <Store {...props}/>}/>*/}
+                    <Route exact path='/sale' render={(props) => <Store {...props}/>}/>
+                    <ProtectedRoute exact path='/index' render={(props) => <Index {...props}/>}/>
                     <ProtectedRoute exact path='/dashboard' render={(props) => <Dashboard {...props}/>}/>
+                    <ProtectedRoute exact path='/cart' render={(props) => <Cart {...props}/>}/>
+                    <ProtectedRoute exact path='/dashboard/orders' render={(props) => <Orders{...props}/>}/>
+                    <ProtectedRoute exact path='/dashboard/favorites' render={(props) => <Favorites{...props}/>}/>
+                    <ProtectedRoute exact path='/help&Support' render={(props) => <HelpSupport{...props}/>}/>
                     <Route path='/not-found' component={NotFound}/>
                     <Redirect to='/not-found'/>
                 </Switch>

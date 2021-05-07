@@ -1,14 +1,11 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {socialLogin, login} from '../../actions/authentication';
-import TextField from '../../reusable-components/outlined-textfield';
+import {login, socialLogin} from '../../actions/authentication';
 import Form from '../../reusable-components/form';
 import GoogleLoginCustom from './googleLogin'
 import Joi from 'joi-browser';
-import {Button} from "@material-ui/core";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import LinkedInPage from "./linkedinLogin";
 import Textfield from "../../reusable-components/material-io/textfield";
 
 class Login extends Form {
@@ -71,7 +68,7 @@ class Login extends Form {
     };
 
     changeHidden = (event) => {
-        debugger
+
         event.preventDefault()
         this.setState({isHidden: !this.state.isHidden})
     }
@@ -84,13 +81,22 @@ class Login extends Form {
         const {isHidden} = this.state;
         return (
             <div>
-                <div className="page">
+                <div className="page ap-skin-blue">
                     <div className="page__content">
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
+                                <Link to="/" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
+                            {this.props.error === "Email doesn't exist" &&
+                            <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
+                                <div className="ui-alert__icon">
+                                    <i className="material-icons-outlined">error_outline</i>
+                                </div>
+                                <div className="ui-alert__message">
+                                    Incorrect email or password.
+                                </div>
+                            </div>}
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
                                 {/* */}
@@ -114,21 +120,21 @@ class Login extends Form {
                                 {/*</div>*/}
 
                                 {/* Facebook Login */}
-                                <div className="mb4">
-                                    <FacebookLogin
-                                        appId="214759983644946"
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        render={renderProps => (
-                                            <button type="button" onClick={renderProps.onClick}
-                                                    className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">
-                                                <img className="v-mid mr2" alt="" src="/static/facebook-login.svg"/>
-                                                <span className="relative white">SIGN IN WITH FACEBOOK</span>
-                                            </button>
+                                {/*<div className="mb4">*/}
+                                {/*    <FacebookLogin*/}
+                                {/*        appId="214759983644946"*/}
+                                {/*        autoLoad={false}*/}
+                                {/*        fields="name,email,picture"*/}
+                                {/*        render={renderProps => (*/}
+                                {/*            <button type="button" onClick={renderProps.onClick}*/}
+                                {/*                    className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">*/}
+                                {/*                <img className="v-mid mr2" alt="" src="/static/facebook-login.svg"/>*/}
+                                {/*                <span className="relative white">SIGN IN WITH FACEBOOK</span>*/}
+                                {/*            </button>*/}
 
-                                        )}
-                                        callback={this.responseFacebook}/>
-                                </div>
+                                {/*        )}*/}
+                                {/*        callback={this.responseFacebook}/>*/}
+                                {/*</div>*/}
 
                                 {/* */}
                                 <div className="mb4 relative auth_divider">
@@ -193,14 +199,14 @@ class Login extends Form {
                                             </button>
                                         </div>
                                     </form>
-                                    {this.props.error && this.state.email_for_error &&
-                                    <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
-                                        <div className="ui-alert__icon">
-                                            <i className="material-icons-outlined">error_outline</i>
-                                        </div>
-                                        <div className="ui-alert__message">{this.props.error}.
-                                        </div>
-                                    </div>}
+                                    {/*{this.props.error && this.state.email_for_error &&*/}
+                                    {/*<div className="ui-paper ui-alert ui-alert--error my2" role="alert">*/}
+                                    {/*    <div className="ui-alert__icon">*/}
+                                    {/*        <i className="material-icons-outlined">error_outline</i>*/}
+                                    {/*    </div>*/}
+                                    {/*    <div className="ui-alert__message">{this.props.error}.*/}
+                                    {/*    </div>*/}
+                                    {/*</div>}*/}
                                 </div>
                             </div>
                             {/* */}

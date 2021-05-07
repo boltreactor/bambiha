@@ -26,7 +26,8 @@ class NoLabelTextfield extends Component {
             placeholder,
             className,
             value,
-            autoFocus
+            autoFocus,
+            autocomplete,
         } = this.props;
         return (
             <>
@@ -47,7 +48,7 @@ class NoLabelTextfield extends Component {
                     </span>}
                     {error && error.includes("Invalid") &&
                     <span className="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
-                      Invalid {name === "email" ? "Email" : "Number"}
+                      Invalid
                     </span>}
                     {error && error.includes("8") && <span className="br2 pa1 ba error-msg mh1 text-caption fw6 dib">
                       Too Short
@@ -66,6 +67,7 @@ class NoLabelTextfield extends Component {
                            type={type} aria-label="Label" name={name}
                            autoFocus={autoFocus}
                            onChange={onChange}
+                           autoComplete={autocomplete}
                            onBlur={(e) => {
                                this.onBlur(e)
                            }}

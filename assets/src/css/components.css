@@ -1836,6 +1836,11 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     padding-right: 49px;
 }
 
+.blue-cta.contrast a {
+    background: #fff;
+    color: #0258ff;
+}
+
 a {
     text-decoration: none;
     outline: 0;
@@ -1928,6 +1933,17 @@ a {
 .inner-page-caption > span {
     padding-left: 15px;
     display: inline-block;
+}
+
+.dashboard-caption {
+    letter-spacing: 1.2px;
+    color: #0258ff;
+    padding-bottom: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    align-items: center;
+    font-size: 18px;
+    line-height: 24px;
 }
 
 /* Testimonial */
@@ -2588,7 +2604,13 @@ h4.accordion__tab:before {
 .my-page h3,
 .my-page h4,
 .my-page h5,
-.my-page h6 {
+.my-page h6,
+h1.adaptive,
+h2.adaptive,
+h3.adaptive,
+h4.adaptive,
+h5.adaptive,
+h6.adaptive {
     margin-top: 0;
     margin-bottom: .0315rem;
 }
@@ -2604,7 +2626,13 @@ h4.accordion__tab:before {
 .my-page h3,
 .my-page h4,
 .my-page h5,
-.my-page h6 {
+.my-page h6,
+h1.adaptive,
+h2.adaptive,
+h3.adaptive,
+h4.adaptive,
+h5.adaptive,
+h6.adaptive {
     margin-bottom: .0315rem;
     font-family: var(--font-family-montserrat);
     font-weight: 400;
@@ -2614,49 +2642,59 @@ h4.accordion__tab:before {
 
 .my-page .h1,
 .my-page h1,
+h1.adaptive,
 .title {
     font-size: 2.1875rem;
 }
 
-.my-page h1 {
+.my-page h1,
+h1.adaptive {
     font-size: 1.25rem;
 }
 
-.my-page h2 {
+.my-page h2,
+h2.adaptive {
     font-size: 1.25rem;
 }
 
-.my-page h3 {
+.my-page h3,
+h3.adaptive {
     font-size: 1.125rem;
     line-height: 1.5;
 }
 
-.my-page h4 {
+.my-page h4,
+h4.adaptive {
     font-size: 1rem;
 }
 
-.my-page h5 {
+.my-page h5,
+h5.adaptive {
     font-size: .8125rem;
 }
 
-.my-page h6 {
+.my-page h6,
+h6.adaptive {
     font-size: .75rem;
 }
 
 @media (min-width: 600px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 1.625rem;
     }
 }
 
 @media (min-width: 768px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 1.875rem;
     }
 }
 
 @media (min-width: 1024px) {
-    .my-page h1 {
+    .my-page h1,
+    h1.adaptive {
         font-size: 2rem;
     }
 }
@@ -2919,6 +2957,7 @@ h4.accordion__tab:before {
         padding-top: 10rem;
         padding-bottom: 5rem;
     }
+
     .hero.space-top-sm {
         padding-top: 7rem;
     }
@@ -3243,7 +3282,7 @@ aside.notify {
     text-align: center;
 }
 
-/* e-store */
+/* app--estore */
 .mdc-top-app-bar__section.app-shop button {
     padding-left: 16px;
     padding-right: 16px;
@@ -3603,7 +3642,7 @@ ul.store-categories a:hover {
 }
 
 .tab-content .tab-no-data {
-    /*display: flex;*/
+    display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -3654,7 +3693,7 @@ ul.store-categories a:hover {
 }
 
 .media-images-gallery {
-    min-height: 40vh;
+    /*min-height: 40vh;*/
     max-height: 60vh;
     overflow: auto;
     scrollbar-width: thin;
@@ -3944,4 +3983,158 @@ ul.store-categories a:hover {
     font-family: 'Montserrat', sans-serif;
     color: #fff;
     font-weight: 500;
+}
+
+/* Error Emoji */
+.error-emoji {
+    color: #dadce0;
+    font: 150px/1.25 "Montserrat", "Helvetica Neue", sans-serif;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 720px) {
+    .error-emoji {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 460px) {
+    .error-emoji {
+        font-size: 62px;
+    }
+}
+
+/* Custom MDC Datatable */
+.custom-datatable .mdc-data-table {
+    box-shadow: 0 1px 3px rgba(206, 211, 218, .2) !important;
+    border: .0625rem solid #dbe3eb !important;
+    width: 100% !important;
+}
+
+.custom-datatable .mdc-data-table__row {
+    border-top-color: #dbe3eb !important;
+}
+
+.custom-datatable .mdc-data-table__content .mdc-data-table__row:first-child {
+    border-top-color: transparent !important;
+}
+
+.custom-datatable .mdc-data-table__header-row {
+    background-color: #edf1f5 !important;
+}
+
+.custom-datatable .mdc-data-table__row--selected {
+    background-color: #fff !important;
+}
+
+.custom-datatable .mdc-data-table__row:not(.mdc-data-table__row--selected):hover {
+    background-color: #fbfdff !important;
+}
+
+.custom-datatable .mdc-data-table__header-cell {
+    font-family: var(--font-family-montserrat) !important;
+    font-weight: 700;
+}
+
+.custom-datatable .mdc-data-table__cell {
+    font-family: var(--font-family-montserrat) !important;
+}
+
+.custom-datatable .mdc-data-table__row.disabled,
+.custom-datatable .mdc-data-table__row.disabled:hover {
+    background-color: #e6e6e6 !important;
+}
+
+/* Component > Badge */
+.badge[data-badge]:after {
+    content: attr(data-badge);
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: -11px;
+    right: -24px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.cart-link.active .badge[data-badge]:after {
+    background: #db4437;
+    border-color: #fff;
+}
+
+.badge.badge--header:after {
+    right: 2px;
+    top: 4px;
+}
+
+.badge.badge--header {
+    margin-right: 10px;
+}
+
+.badge.badge--overlap:after {
+    right: 2px;
+    top: -10px;
+}
+
+.badge.badge--overlap {
+    margin-right: 12px;
+}
+
+.badge.badge--label:after {
+    right: -7px;
+    top: -10px;
+}
+
+.badge.badge--label {
+    margin-right: 12px;
+}
+
+.badge-inline {
+    background-color: rgb(219, 68, 55);
+    display: inline-block;
+    height: 8px;
+    left: 1px;
+    margin-right: -6px;
+    position: relative;
+    right: 6px;
+    top: 6px;
+    vertical-align: top;
+    width: 8px;
+    border-radius: 50%;
+}
+
+.ui-alert__message {
+    padding: 8px 0;
+}
+
+.ui-alert__message .title {
+    margin-top: -2px;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
 }

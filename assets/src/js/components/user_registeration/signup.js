@@ -15,7 +15,7 @@ import LinkedInPage from "./linkedinLogin";
 class Signup extends Form {
 
     linkedinSuccess = (response) => {
-        console.log(response)
+
         // this.props.socialLogin({
         //   'platform': 'facebook',
         //   'name': response.name,
@@ -26,7 +26,7 @@ class Signup extends Form {
     }
 
     linkedinFailure = (response) => {
-        console.log(response)
+
 
         // this.props.socialLogin({
         //   'platform': 'facebook',
@@ -131,13 +131,23 @@ class Signup extends Form {
         return (
             <div>
 
-                <div className="page">
+                <div className="page ap-skin-blue">
                     <div className="page__content">
                         <div className="auth_master-form tc center">
                             {/* */}
                             <header className="pb4">
-                                <Link to="#" className="link-mute"><h5>BAMBIHA</h5></Link>
+                                <Link to="/" className="link-mute"><h5>BAMBIHA</h5></Link>
                             </header>
+
+                            {this.props.error === "Account already exists" &&
+                            <div className="ui-paper ui-alert ui-alert--error my2" role="alert">
+                                <div className="ui-alert__icon">
+                                    <i className="material-icons-outlined">error_outline</i>
+                                </div>
+                                <div className="ui-alert__message">
+                                    Looks like you already have an account. Try login instead!
+                                </div>
+                            </div>}
                             {/* */}
                             <div className="shadow-0 pa3 auth_page-auth">
                                 <div className="mb4 mt3">
@@ -146,16 +156,18 @@ class Signup extends Form {
                                 <div className="mb4">
                                     <GoogleLoginCustom {...this.props} text={'SIGN UP WITH GOOGLE'}/>
                                 </div>
-                                <div className="mb4">
-                                    <LinkedInPage {...this.props}/>
-                                </div>
-                                <div className="mb4">
-                                    <FacebookLogin
-                                        appId="214759983644946"
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        callback={this.responseFacebook}/>
-                                </div>
+                                {/* Linked In */}
+                                {/*<div className="mb4">*/}
+                                {/*    <LinkedInPage {...this.props}/>*/}
+                                {/*</div>*/}
+                                {/* Facebook */}
+                                {/*<div className="mb4">*/}
+                                {/*    <FacebookLogin*/}
+                                {/*        appId="214759983644946"*/}
+                                {/*        autoLoad={false}*/}
+                                {/*        fields="name,email,picture"*/}
+                                {/*        callback={this.responseFacebook}/>*/}
+                                {/*</div>*/}
                                 <div className="mb4 relative auth_divider">
                   <span className="auth_divider-text relative"
                         style={{paddingLeft: '.63rem', paddingRight: '.63rem'}}>or</span>

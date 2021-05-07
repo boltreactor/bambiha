@@ -45,7 +45,7 @@ class MyProfile extends Form {
             return {message: "Last Name is required"};
         }),
         account_type: Joi.allow("").optional(),
-        phone: Joi.string().trim().regex(/^$|^[0-9]{11}$/).required().error(errors => {
+        phone: Joi.string().trim().regex(/^$|^(\+92)|[0-9]{11}$/).required().error(errors => {
             return errors.map(error => {
                 switch (error.type) {
                     case "any.required":
@@ -172,7 +172,7 @@ class MyProfile extends Form {
                                                         <NoLabelTextfield placeholder="Enter your first name"
                                                                           label="FIRST NAME"
                                                                           type="text"
-                                                                          onChange={this.handleChangeUser}
+                                                                          // onChange={this.handleChangeUser}
                                                                           name="first_name"
                                                                           value={this.props.user && this.props.user.first_name ? this.props.user.first_name : ""}
                                                                           error={this.state.errors.first_name}
@@ -182,7 +182,7 @@ class MyProfile extends Form {
                                                         <NoLabelTextfield placeholder="Enter your last name"
                                                                           label="LAST NAME"
                                                                           type="text"
-                                                                          onChange={this.handleChangeUser}
+                                                                          // onChange={this.handleChangeUser}
                                                                           name="last_name"
                                                                           value={this.props.user && this.props.user.last_name ? this.props.user.last_name : ""}
                                                                           error={this.state.errors.last_name}
@@ -193,7 +193,7 @@ class MyProfile extends Form {
                                                                           label="EMAIL"
                                                                           type="text"
                                                                           name="email"
-                                                                          onChange={this.handleChangeUser}
+                                                                          // onChange={this.handleChangeUser}
                                                                           value={this.props.user && this.props.user.email}
                                                                           error={this.state.errors.email}
                                                         />

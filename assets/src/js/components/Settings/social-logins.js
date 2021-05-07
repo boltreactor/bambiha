@@ -4,6 +4,7 @@ import SmartFooter from "../Footers/smart-footer";
 import {connect} from 'react-redux';
 import {addSocialConnection} from '../../actions/profile';
 import {GoogleLogin} from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 const clientId = '1094579720347-rd6b85nu5soe61pec046b6i6vanjobv5.apps.googleusercontent.com';
 
@@ -15,6 +16,13 @@ class SocialLogins extends Component {
             'email': res.profileObj.email
         })
     };
+
+    responseFacebook = (response) => {
+        this.props.addSocialConnection({
+            'platform': 'facebook',
+            'email': response.email
+        })
+    }
 
     onFailure = (res) => {
 
@@ -76,11 +84,30 @@ class SocialLogins extends Component {
                                                     isSignedIn={false}
                                                 />
                                             }
-                                            <button type="button"
-                                                    className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">
-                                                <img className="v-mid mr2" alt="" src="/static/facebook-login.svg"/>
-                                                <span className="relative white">CONNECT WITH FACEBOOK</span>
-                                            </button>
+                                            {this.props.user.facebook_connection_email ?
+                                                <button type="button"
+                                                        disabled={true}
+                                                        className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">
+                                                    <img className="v-mid mr2" alt="" src="/static/facebook-login.svg"/>
+                                                    <span className="relative white">CONNECTED WITH FACEBOOK</span>
+                                                </button> :
+                                                <FacebookLogin
+                                                    appId="214759983644946"
+                                                    autoLoad={false}
+                                                    fields="name,email,picture"
+                                                    render={renderProps => (
+                                                        <button type="button" onClick={renderProps.onClick}
+                                                                className="btn btn-xl btn-outline align-items-center justify-content-center btn-block d-flex btn-fb-custom">
+                                                            <img className="v-mid mr2" alt=""
+                                                                 src="/static/facebook-login.svg"/>
+                                                            <span
+                                                                className="relative white">CONNECT WITH FACEBOOK</span>
+                                                        </button>
+
+                                                    )}
+                                                    callback={this.responseFacebook}/>
+
+                                            }
                                         </div>
                                     </div>
                                 </div>

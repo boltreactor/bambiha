@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 
 class NotFound extends PureComponent {
     render() {
@@ -17,9 +17,9 @@ class NotFound extends PureComponent {
                                         <div className="col s12">
                                             <div className="header">
                                                 <h2 className="logo mdc-typography--title">
-                                                    <a href="/">
+                                                    <Link to="/">
                                                         Bambiha
-                                                    </a>
+                                                    </Link>
                                                 </h2>
                                                 <p>
                                                     Error Message: 404
@@ -39,9 +39,9 @@ class NotFound extends PureComponent {
                                         color: '#666',
                                         lineHeight: '24px'
                                     }}>
-                                        <a href="#">
+                                        <Link href="#">
                                             Home
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div style={{
                                         fontSize: '15px',
@@ -50,9 +50,9 @@ class NotFound extends PureComponent {
                                         color: '#666',
                                         lineHeight: '24px'
                                     }}>
-                                        <a href="#">
+                                        <Link href="#">
                                             Sign in
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div style={{
                                         fontSize: '15px',
@@ -61,9 +61,9 @@ class NotFound extends PureComponent {
                                         color: '#666',
                                         lineHeight: '24px'
                                     }}>
-                                        <a href="#">
+                                        <Link href="#">
                                             Register
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div style={{
                                         fontSize: '15px',
@@ -72,9 +72,9 @@ class NotFound extends PureComponent {
                                         color: '#666',
                                         lineHeight: '24px'
                                     }}>
-                                        <a href="#">
+                                        <Link href="#">
                                             Help Center
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
