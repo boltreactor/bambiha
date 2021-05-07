@@ -79,6 +79,7 @@ class NewProduct extends Form {
 
 
     doSubmit = (event) => {
+        debugger
         event.preventDefault()
         let fd = new FormData();
         let category_key = this.state.data.category_key
@@ -90,7 +91,7 @@ class NewProduct extends Form {
         fd.append("description", this.state.data.desc);
         fd.append("quantity", this.state.data.quantity);
         fd.append("price", this.state.data.price);
-        fd.append("status", '0');
+        fd.append("status", this.state.data.status);
         fd.append("category_key", `${this.props.categories.find(function (category) {
             return category.name === category_key;
         }).id}`);
